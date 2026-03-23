@@ -8,7 +8,7 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
-import { User2, Navigation, MessageCircle } from "lucide-react";
+import { User2, Navigation, MessageCircle, ShieldCheck, Star } from "lucide-react";
 
 export default function ExploreMentor() {
     return (
@@ -87,7 +87,15 @@ export default function ExploreMentor() {
                             </span>
                         </div>
                         <h3 className="text-2xl font-bold text-primary">Bapak Budi (68)</h3>
-                        <div className="flex items-center text-muted-foreground mt-2 space-x-4">
+                        <div className="flex flex-col gap-2 mt-3">
+                            <div className="flex items-center text-emerald-700 bg-emerald-50 w-fit px-2.5 py-1 border border-emerald-200 rounded-md text-xs font-bold shadow-sm">
+                                <ShieldCheck size={14} className="mr-1.5" /> Lulus Kurasi Pedagogi SOWAN
+                            </div>
+                            <div className="flex items-center text-amber-500 text-sm font-bold">
+                                <Star size={16} fill="currentColor" className="mr-1" /> 4.9 <span className="text-muted-foreground ml-1.5 font-medium">(120 Ulasan Internasional)</span>
+                            </div>
+                        </div>
+                        <div className="flex items-center text-muted-foreground mt-4 space-x-4">
                             <div className="flex items-center">
                                 <Navigation size={18} className="mr-1" />
                                 <span>Yogyakarta</span>
@@ -132,7 +140,15 @@ export default function ExploreMentor() {
                             </span>
                         </div>
                         <h3 className="text-2xl font-bold text-primary">Ibu Ratna (72)</h3>
-                        <div className="flex items-center text-muted-foreground mt-2 space-x-4">
+                        <div className="flex flex-col gap-2 mt-3">
+                            <div className="flex items-center text-emerald-700 bg-emerald-50 w-fit px-2.5 py-1 border border-emerald-200 rounded-md text-xs font-bold shadow-sm">
+                                <ShieldCheck size={14} className="mr-1.5" /> Lulus Kurasi Pedagogi SOWAN
+                            </div>
+                            <div className="flex items-center text-amber-500 text-sm font-bold">
+                                <Star size={16} fill="currentColor" className="mr-1" /> 5.0 <span className="text-muted-foreground ml-1.5 font-medium">(345 Ulasan Internasional)</span>
+                            </div>
+                        </div>
+                        <div className="flex items-center text-muted-foreground mt-4 space-x-4">
                             <div className="flex items-center">
                                 <Navigation size={18} className="mr-1" />
                                 <span>Jakarta</span>
@@ -177,7 +193,15 @@ export default function ExploreMentor() {
                             </span>
                         </div>
                         <h3 className="text-2xl font-bold text-primary">Bapak Dodi (65)</h3>
-                        <div className="flex items-center text-muted-foreground mt-2 space-x-4">
+                        <div className="flex flex-col gap-2 mt-3">
+                            <div className="flex items-center text-emerald-700 bg-emerald-50 w-fit px-2.5 py-1 border border-emerald-200 rounded-md text-xs font-bold shadow-sm">
+                                <ShieldCheck size={14} className="mr-1.5" /> Lulus Kurasi Pedagogi SOWAN
+                            </div>
+                            <div className="flex items-center text-amber-500 text-sm font-bold">
+                                <Star size={16} fill="currentColor" className="mr-1" /> 4.8 <span className="text-muted-foreground ml-1.5 font-medium">(89 Ulasan Internasional)</span>
+                            </div>
+                        </div>
+                        <div className="flex items-center text-muted-foreground mt-4 space-x-4">
                             <div className="flex items-center">
                                 <Navigation size={18} className="mr-1" />
                                 <span>Bandung</span>

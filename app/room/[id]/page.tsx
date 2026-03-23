@@ -1,11 +1,60 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { Mic, MicOff, Video, VideoOff, PhoneOff } from 'lucide-react';
 
 export default function RoomPage({ params }: { params: { id: string } }) {
     // Mock states for UI purposes
-    const isMuted = false;
-    const isVideoOff = false;
+    const [isMuted, setIsMuted] = useState(false);
+    const [isVideoOff, setIsVideoOff] = useState(false);
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const streamRef = useRef<MediaStream | null>(null);
+
+    useEffect(() => {
+        const startCamera = async () => {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: true,
+                    audio: true
+                });
+                streamRef.current = stream;
+                if (videoRef.current) {
+                    videoRef.current.srcObject = stream;
+                }
+            } catch (err) {
+                console.error("Error accessing media devices.", err);
+            }
+        };
+
+        if (!isVideoOff) {
+            startCamera();
+        }
+
+        return () => {
+            if (streamRef.current) {
+                streamRef.current.getTracks().forEach(track => track.stop());
+            }
+        };
+    }, [isVideoOff]);
+
+    const toggleMute = () => {
+        if (streamRef.current) {
+            streamRef.current.getAudioTracks().forEach(track => {
+                track.enabled = !track.enabled;
+            });
+            setIsMuted(!isMuted);
+        }
+    };
+
+    const toggleVideo = () => {
+        if (streamRef.current) {
+            streamRef.current.getVideoTracks().forEach(track => {
+                track.enabled = !track.enabled;
+            });
+            setIsVideoOff(!isVideoOff);
+        }
+    };
 
     return (
         <main className="min-h-screen w-full bg-[#FAF9F6] flex flex-col items-center justify-between p-4 md:p-8 font-sans">
@@ -26,9 +75,22 @@ export default function RoomPage({ params }: { params: { id: string } }) {
                     Video Customer (Lawan Bicara)
                 </div>
 
-                {/* Self Video Placeholder (Elderly) */}
-                <div className="absolute bottom-6 right-6 w-1/3 max-w-[240px] aspect-video bg-gray-800 rounded-2xl border-4 border-white shadow-xl flex items-center justify-center">
-                    <span className="text-gray-400 font-bold text-lg md:text-xl">Kamera Sendiri</span>
+                {/* Real Self Video Feed */}
+                <div className="absolute bottom-6 right-6 w-1/3 max-w-[280px] aspect-video bg-gray-800 rounded-2xl border-4 border-white shadow-xl overflow-hidden flex items-center justify-center">
+                    {isVideoOff ? (
+                        <div className="flex flex-col items-center gap-2">
+                            <VideoOff className="w-12 h-12 text-gray-500" />
+                            <span className="text-gray-400 font-bold text-lg md:text-xl">Kamera Mati</span>
+                        </div>
+                    ) : (
+                        <video
+                            ref={videoRef}
+                            autoPlay
+                            playsInline
+                            muted
+                            className="w-full h-full object-cover"
+                        />
+                    )}
                 </div>
             </div>
 
@@ -37,6 +99,7 @@ export default function RoomPage({ params }: { params: { id: string } }) {
 
                 {/* Audio Toggle */}
                 <button
+                    onClick={toggleMute}
                     className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gray-100 hover:bg-gray-200 border-4 border-gray-300 flex items-center justify-center shadow-lg transition-transform active:scale-95 focus:outline-none focus:ring-8 focus:ring-gray-300/50"
                     aria-label={isMuted ? "Hidupkan Suara" : "Matikan Suara"}
                 >
@@ -49,6 +112,7 @@ export default function RoomPage({ params }: { params: { id: string } }) {
 
                 {/* Video Toggle */}
                 <button
+                    onClick={toggleVideo}
                     className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-gray-100 hover:bg-gray-200 border-4 border-gray-300 flex items-center justify-center shadow-lg transition-transform active:scale-95 focus:outline-none focus:ring-8 focus:ring-gray-300/50"
                     aria-label={isVideoOff ? "Hidupkan Kamera" : "Matikan Kamera"}
                 >

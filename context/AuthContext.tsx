@@ -6,12 +6,15 @@ interface AuthContextType {
     user: { name: string } | null;
     login: (name: string) => void;
     logout: () => void;
+    showLoginModal: boolean;
+    setShowLoginModal: (show: boolean) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [user, setUser] = useState<{ name: string } | null>(null);
+    const [showLoginModal, setShowLoginModal] = useState(false);
 
     useEffect(() => {
         // Load state from local storage on initial render
@@ -37,7 +40,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, logout }}>
+        <AuthContext.Provider value={{ user, login, logout, showLoginModal, setShowLoginModal }}>
             {children}
         </AuthContext.Provider>
     );

@@ -16,7 +16,7 @@ export default function MentorDashboard() {
     return (
         <main className="min-h-screen w-full bg-[#FAF9F6] font-sans text-primary">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
-                
+
                 {/* ── Greeting Header ── */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
                     <div>
@@ -74,17 +74,20 @@ export default function MentorDashboard() {
                         </div>
                         {t.dashboard.upcoming}
                     </h2>
-                    
+
                     {/* Imeldya Session (Primary for Demo) */}
                     <Card className="rounded-[56px] overflow-hidden border-none shadow-2xl bg-white group/session">
                         <div className="flex flex-col lg:flex-row">
                             <div className="lg:w-[400px] relative h-80 lg:h-auto overflow-hidden bg-slate-100">
-                                <img 
-                                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=400&auto=format&fit=crop" 
+                                <img
+                                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=400&auto=format&fit=crop"
                                     alt="Student"
                                     className="w-full h-full object-cover transition-transform duration-1000 group-hover/session:scale-110"
                                 />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                                <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-primary via-primary/40 to-transparent z-10" />
+                                <div className="absolute bottom-4 right-4 bg-black/40 backdrop-blur-sm text-[8px] text-white/80 px-2 py-1 rounded-md uppercase tracking-widest pointer-events-none z-20">
+                                    Source: Unsplash
+                                </div>
                                 <div className="absolute bottom-8 left-8">
                                     <div className="inline-flex items-center gap-2 bg-accent text-white px-4 py-1.5 rounded-xl text-xs font-black uppercase tracking-wider mb-3 animate-pulse">
                                         <div className="w-2 h-2 bg-white rounded-full"></div>

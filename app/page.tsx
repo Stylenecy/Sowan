@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
-import { Users, Heart, Sparkles, User2 } from "lucide-react";
+import { Users, Heart, Sparkles, User2, ShieldCheck, Award } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { useState, useEffect } from "react";
@@ -29,26 +29,26 @@ export default function Home() {
       id: 3,
       name: "Bapak Dodi",
       title: "Pebisnis Kuliner & Budayawan",
-      image: "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?q=80&w=200&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1544168190-79c17527004f?q=80&w=200&auto=format&fit=crop",
     },
     {
       id: 4,
       name: "Opa Yohanes",
       title: "Musisi Kerocong",
-      image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=200&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1463453091185-61582044d556?q=80&w=200&auto=format&fit=crop",
     },
     {
       id: 5,
       name: "Ibu Sri",
       title: "Pengrajin Batik",
-      image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=200&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop",
     },
     {
       id: 6,
       name: "Bapak Hasan",
       title: "Pakar Pertanian",
-      image: "https://images.unsplash.com/photo-1552058544-f2b08422138a?q=80&w=200&auto=format&fit=crop",
-    }
+      image: "https://images.unsplash.com/photo-1566753323558-f4e0952af115?q=80&w=200&auto=format&fit=crop",
+    },
   ];
 
   return (
@@ -122,6 +122,11 @@ export default function Home() {
               priority
               sizes="(max-width: 768px) 100vw, 50vw"
             />
+            {/* Ultra-Deep Seamless Gradient Blend */}
+            <div className="absolute inset-x-0 bottom-0 h-80 bg-gradient-to-t from-[#FAF9F6] via-[#FAF9F6]/60 to-transparent z-10"></div>
+            <div className="absolute bottom-6 right-6 bg-black/40 backdrop-blur-sm text-[8px] text-white/80 px-2 py-1 rounded-md uppercase tracking-widest pointer-events-none z-20">
+                Source: Unsplash
+            </div>
           </div>
 
           {/* Floating Glassmorphism Card 1: Users */}
@@ -159,6 +164,66 @@ export default function Home() {
 
       </section>
 
+      {/* About Section - MasterClass Split Layout */}
+      <section className="relative w-full py-24 lg:py-32 overflow-hidden border-t border-black/5 bg-[#FAF9F6]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+
+            {/* Left Column (Typography Focus) */}
+            <div className="flex-1 space-y-8 z-10 w-full text-center lg:text-left">
+              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-primary leading-[1.15] tracking-tight font-serif relative inline-block">
+                {t.home.aboutTitle}
+                <div className="absolute -bottom-4 left-0 lg:left-0 right-0 lg:right-auto w-24 h-2 bg-accent rounded-full mx-auto lg:mx-0"></div>
+              </h2>
+              <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed font-light">
+                {t.home.aboutDesc}
+              </p>
+            </div>
+
+            {/* Right Column (Visual Overlapping) */}
+            <div className="flex-1 w-full max-w-xl mx-auto lg:max-w-none relative z-10 mt-10 lg:mt-0">
+
+              <div className="relative aspect-[4/5] sm:aspect-square lg:aspect-[3/4] rounded-[2.5rem] overflow-hidden border-8 border-white shadow-2xl z-0">
+                <Image
+                  src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800&auto=format&fit=crop"
+                  alt="Maestro Sowan"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                {/* Ultra-Deep Seamless Gradient Blend */}
+                <div className="absolute inset-x-0 bottom-0 h-80 bg-gradient-to-t from-[#FAF9F6] via-[#FAF9F6]/60 to-transparent z-[5]"></div>
+                <div className="absolute bottom-6 right-6 bg-black/40 backdrop-blur-sm text-[8px] text-white/80 px-2 py-1 rounded-md uppercase tracking-widest pointer-events-none z-10">
+                    Source: Unsplash
+                </div>
+              </div>
+
+              {/* Floating Card 1 (Top Left) */}
+              <div className="absolute -left-4 sm:-left-12 top-10 sm:top-20 bg-white/80 backdrop-blur-xl border border-white/50 p-4 sm:p-5 rounded-3xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.15)] z-20 flex items-center gap-4 animate-in slide-in-from-left-8 duration-1000 delay-100 max-w-[280px]">
+                <div className="flex-shrink-0 w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600">
+                  <ShieldCheck className="w-6 h-6" />
+                </div>
+                <p className="text-sm sm:text-base font-bold text-primary leading-tight">
+                  {t.home.badgeSecure}
+                </p>
+              </div>
+
+              {/* Floating Card 2 (Bottom Right) */}
+              <div className="absolute -right-4 sm:-right-10 bottom-10 sm:bottom-20 bg-white/80 backdrop-blur-xl border border-white/50 p-4 sm:p-5 rounded-3xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.15)] z-20 flex items-center gap-4 animate-in slide-in-from-right-8 duration-1000 delay-300 max-w-[300px]">
+                <div className="flex-shrink-0 w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center text-accent">
+                  <Award className="w-6 h-6" />
+                </div>
+                <p className="text-sm sm:text-base font-bold text-primary leading-tight">
+                  {t.home.badgeCurated}
+                </p>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </section>
+
       {/* Featured Mentors Section */}
       <section className="w-full bg-white py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -186,6 +251,9 @@ export default function Home() {
                     className="object-cover"
                     sizes="160px"
                   />
+                  <div className="absolute bottom-2 right-2 bg-black/40 backdrop-blur-sm text-[6px] text-white/80 px-1.5 py-0.5 rounded-sm uppercase tracking-widest pointer-events-none">
+                    Source
+                  </div>
                 </div>
                 <h3 className="text-2xl font-bold text-primary mb-2 text-center group-hover:text-accent transition-colors">{mentor.name}</h3>
                 <p className="text-[1.1rem] text-accent font-medium mb-8 text-center px-4">{mentor.title}</p>

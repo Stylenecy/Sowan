@@ -76,7 +76,7 @@ export default function MentorProfilePage({ params }: { params: Promise<{ id: st
             name: "Bapak Dodi",
             age: 65,
             title: "Pebisnis Kuliner & Budayawan",
-            image: "https://images.unsplash.com/photo-1544168190-79c17527004f?q=80&w=600&auto=format&fit=crop",
+            image: "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?q=80&w=400&auto=format&fit=crop",
             location: "Bandung",
             language: "Sunda, Indonesia",
             about: "Membangun bisnis dari nol adalah perjalanan spiritual. Saya telah melewati berbagai pasang surut di industri kuliner Bandung. Saya di sini untuk membantu Anda memicu ide bisnis kreatif atau sekadar mengenang resep-resep masakan sunda yang mulai terlupakan.",
@@ -106,7 +106,7 @@ export default function MentorProfilePage({ params }: { params: Promise<{ id: st
             name: "Ibu Sri",
             age: 63,
             title: "Pengrajin Batik",
-            image: "https://images.unsplash.com/photo-1509460913899-515f1df34fed?q=80&w=600&auto=format&fit=crop",
+            image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=400&auto=format&fit=crop",
             location: "Solo",
             language: "Jawa, Indonesia",
             about: "Membatik adalah meditasi. Saya telah menghabiskan ribuan jam dengan canting dan malam. Saya senang berbagi filosofi di balik setiap motif batik parang atau kawung, dan bagaimana kearifan lokal bisa menjadi penyeimbang hidup di era modern ini.",
@@ -136,7 +136,7 @@ export default function MentorProfilePage({ params }: { params: Promise<{ id: st
             name: "Om Bima",
             age: 66,
             title: "Seniman Kriya Kayu",
-            image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=600&auto=format&fit=crop",
+            image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=400&auto=format&fit=crop",
             location: "Yogyakarta",
             language: "Jawa, Indonesia",
             about: "Kayu memiliki serat yang seperti jalan hidup manusia—penuh liku tapi indah jika dipahat dengan sabar. Saya senang bercerita tentang filosofi kriya dan bagaimana hobi bisa menjadi pelipur lara di masa tua.",
@@ -151,7 +151,7 @@ export default function MentorProfilePage({ params }: { params: Promise<{ id: st
             name: "Ibu Dian",
             age: 61,
             title: "Mantan Penari Tradisional",
-            image: "https://images.unsplash.com/photo-1481214110143-bc63ca8150c6?q=80&w=600&auto=format&fit=crop",
+            image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop",
             location: "Bali",
             language: "Bali, Indonesia",
             about: "Menari bukan hanya tentang gerakan, tapi tentang rasa. Sebagai mantan penari istana, saya belajar banyak tentang disiplin dan spiritualitas. Saya siap mendampingi Anda yang ingin berbincang tentang ketenangan batin atau seni pertunjukan Bali.",
@@ -166,7 +166,7 @@ export default function MentorProfilePage({ params }: { params: Promise<{ id: st
             name: "Oma Lestari",
             age: 69,
             title: "Ahli Kuliner Sumatera",
-            image: "https://images.unsplash.com/photo-1567186937675-a5131c8a89ea?q=80&w=600&auto=format&fit=crop",
+            image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=400&auto=format&fit=crop",
             location: "Jakarta",
             language: "Indonesia, Minang",
             about: "Masakan adalah cara terbaik untuk menunjukkan kasih sayang. Saya ingin membagikan rahasia bumbu rendang otentik dan bagaimana masakan bisa menyatukan keluarga yang renggang. Sini, cerita sama Oma.",
@@ -196,7 +196,7 @@ export default function MentorProfilePage({ params }: { params: Promise<{ id: st
             name: "Ibu Ningsih",
             age: 64,
             title: "Pedagang Tangguh",
-            image: "https://images.unsplash.com/photo-1554151228-14d9def656ec?q=80&w=600&auto=format&fit=crop",
+            image: "https://images.unsplash.com/photo-1598550880863-4e8aa3d0edb4?q=80&w=400&auto=format&fit=crop",
             location: "Surabaya",
             language: "Indonesia, Madura",
             about: "Hidup di pasar mengajarkan saya tentang psikologi manusia. Saya mulai dari jualan keliling hingga punya toko sendiri. Saya ingin memotivasi Anda yang sedang berjuang dalam bisnis kecil atau butuh teman bicara yang lugas.",
@@ -241,7 +241,7 @@ export default function MentorProfilePage({ params }: { params: Promise<{ id: st
             name: "Ibu Salma",
             age: 62,
             title: "Pelaku Homeopati",
-            image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600&auto=format&fit=crop",
+            image: "https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=400&auto=format&fit=crop",
             location: "Jakarta",
             language: "Indonesia",
             about: "Kesehatan tubuh berawal dari kesehatan jiwa. Saya mendalami pengobatan alami dan terapi pendengaran aktif. Sesi saya adalah ruang aman bagi Anda yang ingin menuangkan beban pikiran tanpa dihakimi.",
@@ -286,20 +286,20 @@ export default function MentorProfilePage({ params }: { params: Promise<{ id: st
 
     return (
         <div className="min-h-screen bg-[#FAF9F6] text-foreground pb-20">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-16">
                 <button
                     onClick={() => router.back()}
-                    className="group mb-12 flex items-center gap-3 text-primary/60 hover:text-primary font-bold transition-all text-xl"
+                    className="group mb-8 lg:mb-12 flex items-center gap-2 sm:gap-3 text-primary/60 hover:text-primary font-bold transition-all text-lg sm:text-xl"
                 >
-                    <ArrowLeft size={28} className="group-hover:-translate-x-2 transition-transform" />
+                    <ArrowLeft size={24} className="sm:w-7 sm:h-7 group-hover:-translate-x-2 transition-transform" />
                     {t.shared.back}
                 </button>
 
                 <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
                     {/* LEFTSIDE: Profile Overview */}
                     <div className="w-full lg:w-[450px]">
-                        <div className="bg-white rounded-[48px] p-10 border border-black/5 shadow-xl shadow-primary/5 flex flex-col items-center text-center">
-                            <div className="relative w-64 h-64 mb-10 rounded-[40px] overflow-hidden border-8 border-[#FAF9F6] shadow-2xl">
+                        <div className="bg-white rounded-[32px] md:rounded-[48px] p-6 sm:p-10 border border-black/5 shadow-xl shadow-primary/5 flex flex-col items-center text-center">
+                            <div className="relative w-48 h-48 sm:w-64 sm:h-64 mb-6 sm:mb-10 rounded-[32px] sm:rounded-[40px] overflow-hidden border-4 sm:border-8 border-[#FAF9F6] shadow-2xl">
                                 <Image
                                     src={foundMentor.image}
                                     alt={foundMentor.name}
@@ -315,8 +315,8 @@ export default function MentorProfilePage({ params }: { params: Promise<{ id: st
                                 </div>
                             </div>
 
-                            <h1 className="text-4xl font-black text-primary mb-2">{foundMentor.name}, {foundMentor.age}</h1>
-                            <p className="text-xl text-muted-foreground font-bold mb-8">{foundMentor.title}</p>
+                            <h1 className="text-3xl sm:text-4xl font-black text-primary mb-2">{foundMentor.name}, {foundMentor.age}</h1>
+                            <p className="text-lg sm:text-xl text-muted-foreground font-bold mb-6 sm:mb-8">{foundMentor.title}</p>
 
                             <div className="grid grid-cols-1 gap-4 w-full text-left">
                                 <div className="flex items-center gap-4 bg-[#FAF9F6] p-4 rounded-3xl border border-black/5">
@@ -347,40 +347,40 @@ export default function MentorProfilePage({ params }: { params: Promise<{ id: st
                     {/* RIGHTSIDE: Content & Layout */}
                     <div className="flex-1 space-y-12">
                         {/* About Section */}
-                        <div className="bg-white rounded-[48px] p-10 md:p-12 border border-black/5 shadow-sm">
-                            <h2 className="text-3xl font-black text-primary mb-8 flex items-center gap-4">
-                                <ShieldCheck size={36} className="text-accent" />
+                        <div className="bg-white rounded-[32px] md:rounded-[48px] p-6 sm:p-12 border border-black/5 shadow-sm">
+                            <h2 className="text-2xl sm:text-3xl font-black text-primary mb-6 sm:mb-8 flex items-center gap-3 sm:gap-4">
+                                <ShieldCheck className="w-7 h-7 sm:w-9 sm:h-9 text-accent" />
                                 {t.mentor.about}
                             </h2>
-                            <p className="text-2xl text-muted-foreground leading-relaxed font-medium">
+                            <p className="text-lg sm:text-2xl text-muted-foreground leading-relaxed font-medium">
                                 {foundMentor.about}
                             </p>
                         </div>
 
                         {/* Experience and Interests Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                            <div className="bg-white rounded-[48px] p-10 border border-black/5 shadow-sm">
-                                <h3 className="text-2xl font-black text-primary mb-8 flex items-center gap-4">
-                                    <Clock size={28} className="text-accent" />
+                            <div className="bg-white rounded-[32px] md:rounded-[48px] p-6 sm:p-10 border border-black/5 shadow-sm">
+                                <h3 className="text-xl sm:text-2xl font-black text-primary mb-6 sm:mb-8 flex items-center gap-3 sm:gap-4">
+                                    <Clock className="w-6 h-6 sm:w-7 sm:h-7 text-accent" />
                                     {t.mentor.exp}
                                 </h3>
-                                <ul className="space-y-6">
+                                <ul className="space-y-4 sm:space-y-6">
                                     {foundMentor.experiences.map((exp: string, i: number) => (
-                                        <li key={i} className="flex gap-4">
-                                            <div className="w-3 h-3 rounded-full bg-accent mt-3 shrink-0" />
-                                            <p className="text-xl text-primary/80 font-bold">{exp}</p>
+                                        <li key={i} className="flex gap-3 sm:gap-4">
+                                            <div className="w-2.5 h-2.5 rounded-full bg-accent mt-2 sm:mt-3 shrink-0" />
+                                            <p className="text-lg sm:text-xl text-primary/80 font-bold">{exp}</p>
                                         </li>
                                     ))}
                                 </ul>
                             </div>
-                            <div className="bg-white rounded-[48px] p-10 border border-black/5 shadow-sm">
-                                <h3 className="text-2xl font-black text-primary mb-8 flex items-center gap-4">
-                                    <Heart size={28} className="text-accent" />
+                            <div className="bg-white rounded-[32px] md:rounded-[48px] p-6 sm:p-10 border border-black/5 shadow-sm">
+                                <h3 className="text-xl sm:text-2xl font-black text-primary mb-6 sm:mb-8 flex items-center gap-3 sm:gap-4">
+                                    <Heart className="w-6 h-6 sm:w-7 sm:h-7 text-accent" />
                                     {t.mentor.interests}
                                 </h3>
-                                <div className="flex flex-wrap gap-4">
+                                <div className="flex flex-wrap gap-3 sm:gap-4">
                                     {foundMentor.interests.map((tag: string) => (
-                                        <span key={tag} className="px-6 py-3 bg-[#FAF9F6] border-2 border-primary/5 rounded-2xl text-lg font-bold text-primary hover:border-accent hover:text-accent transition-all cursor-default">
+                                        <span key={tag} className="px-4 sm:px-6 py-2 sm:py-3 bg-[#FAF9F6] border-2 border-primary/5 rounded-xl sm:rounded-2xl text-base sm:text-lg font-bold text-primary hover:border-accent hover:text-accent transition-all cursor-default">
                                             {tag}
                                         </span>
                                     ))}
@@ -388,20 +388,19 @@ export default function MentorProfilePage({ params }: { params: Promise<{ id: st
                             </div>
                         </div>
 
-                        {/* Booking Card */}
-                        <div className="bg-primary rounded-[48px] p-10 md:p-14 text-white shadow-2xl shadow-primary/30 flex flex-col md:flex-row items-center justify-between gap-8 transform hover:scale-[1.01] transition-transform">
+                        <div className="bg-primary rounded-[32px] md:rounded-[48px] p-8 md:p-14 text-white shadow-2xl shadow-primary/30 flex flex-col md:flex-row items-center justify-between gap-8 transform hover:scale-[1.01] transition-transform text-center md:text-left">
                             <div>
-                                <h3 className="text-3xl font-black mb-2">{t.mentor.bookingTitle}</h3>
-                                <p className="text-xl text-white/60 font-bold italic">{t.mentor.bookingDesc}</p>
+                                <h3 className="text-2xl sm:text-3xl font-black mb-2">{t.mentor.bookingTitle}</h3>
+                                <p className="text-lg sm:text-xl text-white/60 font-bold italic">{t.mentor.bookingDesc}</p>
                             </div>
-                            <div className="flex flex-col items-center md:items-end">
+                            <div className="flex flex-col items-center md:items-end w-full md:w-auto">
                                 <div className="flex items-baseline gap-2 mb-6">
-                                    <span className="text-5xl font-black">{foundMentor.price}</span>
-                                    <span className="text-xl text-white/40 font-bold italic">/ {t.home.sessions}</span>
+                                    <span className="text-4xl sm:text-5xl font-black">{foundMentor.price}</span>
+                                    <span className="text-lg sm:text-xl text-white/40 font-bold italic">/ {t.home.sessions}</span>
                                 </div>
                                 <Button
                                     onClick={handleOpenModal}
-                                    className="h-20 px-12 rounded-[28px] bg-accent hover:bg-accent/90 text-white font-black text-2xl shadow-xl shadow-black/20 transition-all hover:-translate-y-2 active:translate-y-0"
+                                    className="h-16 sm:h-20 w-full sm:w-auto px-12 rounded-2xl sm:rounded-[28px] bg-accent hover:bg-accent/90 text-white font-black text-xl sm:text-2xl shadow-xl shadow-black/20 transition-all hover:-translate-y-2 active:translate-y-0"
                                 >
                                     {t.mentor.confirmBtn}
                                 </Button>
@@ -420,10 +419,10 @@ export default function MentorProfilePage({ params }: { params: Promise<{ id: st
                                 {/* Modal Header with Visual Image */}
                                 <div className="p-10 text-center space-y-4">
                                     <div className="relative w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-white shadow-2xl group">
-                                        <img 
-                                            src={foundMentor.image} 
-                                            alt={foundMentor.name} 
-                                            className="w-full h-full object-cover" 
+                                        <img
+                                            src={foundMentor.image}
+                                            alt={foundMentor.name}
+                                            className="w-full h-full object-cover"
                                         />
                                         <div className="absolute inset-0 bg-gradient-to-t from-white/40 to-transparent pointer-events-none" />
                                         <div className="absolute bottom-1 right-1 bg-black/40 backdrop-blur-sm text-[6px] text-white/80 px-1 py-0.5 rounded-sm uppercase tracking-widest pointer-events-none">

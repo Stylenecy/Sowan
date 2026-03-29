@@ -6,12 +6,20 @@ import { useRouter } from "next/navigation";
 import { Button } from "./ui/button";
 import { useAuth } from "@/context/AuthContext";
 import { useLanguage } from "@/context/LanguageContext";
-import { Sparkles, X, User2, LogIn, Globe, ChevronDown } from "lucide-react";
+import { Sparkles, X, User2, LogIn, Globe, ChevronDown, Menu, ChevronRight } from "lucide-react";
 
 // Demo accounts for one-click login
 const DEMO_ACCOUNTS = [
     { name: "Dex", emoji: "🧑‍💻", role: "Pengguna Baru" },
     { name: "Opa Adriel", emoji: "👴", role: "Teman Sowan" },
+];
+
+const LANGUAGES = [
+    { code: 'id', label: 'Indonesia', flag: '🇮🇩' },
+    { code: 'en', label: 'English', flag: '🇺🇸' },
+    { code: 'ja', label: '日本語', flag: '🇯🇵' },
+    { code: 'ko', label: '한국어', flag: '🇰🇷' },
+    { code: 'zh', label: '中文', flag: '🇨🇳' }
 ];
 
 export default function Navbar() {
@@ -20,6 +28,7 @@ export default function Navbar() {
     const router = useRouter();
     const isMentor = user?.name === "Opa Adriel";
 
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [name, setName] = useState("");
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -59,12 +68,12 @@ export default function Navbar() {
                     <div className="flex justify-between items-center h-20">
                         {/* Logo Sowan */}
                         <div className="flex-shrink-0 flex items-center">
-                            <Link href="/" className="text-3xl font-bold text-primary tracking-tighter">
+                            <Link href="/" className="text-2xl md:text-3xl font-bold text-primary tracking-tighter">
                                 Sowan.id
                             </Link>
                         </div>
 
-                        {/* Nav Links */}
+                        {/* Nav Links (Desktop Only) */}
                         <div className="hidden md:flex space-x-8 items-center">
                             {user && (
                                 <>
@@ -85,47 +94,43 @@ export default function Navbar() {
                         </div>
 
                         {/* Action Buttons */}
-                        <div className="flex items-center space-x-4">
-                            {/* Language Switcher - Premium Highlighted Version */}
+                        <div className="flex items-center space-x-3 md:space-x-4">
+                            {/* Language Switcher */}
                             <div className="relative group">
                                 <Button 
                                     variant="outline" 
-                                    className="h-12 px-4 rounded-2xl border-2 border-primary/10 hover:border-primary/30 hover:bg-primary/5 transition-all flex items-center gap-3 shadow-sm active:scale-95"
+                                    className="h-11 md:h-14 px-3 md:px-6 rounded-2xl md:rounded-3xl border-2 border-primary/5 hover:border-primary/20 bg-white/50 backdrop-blur-md hover:bg-white transition-all flex items-center gap-3 md:gap-4 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] active:scale-95 group/btn"
                                 >
-                                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                                        <Globe size={18} className="text-primary" />
+                                    <div className="w-7 h-7 md:w-9 md:h-9 rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center shrink-0 shadow-inner group-hover/btn:scale-110 transition-transform">
+                                        <span className="text-sm md:text-xl">{(LANGUAGES.find(l => l.code === language) || LANGUAGES[0]).flag}</span>
                                     </div>
                                     <div className="flex flex-col items-start translate-y-[1px]">
-                                        <span className="text-[10px] uppercase font-bold text-muted-foreground leading-none mb-1 tracking-wider">{t.shared.language}</span>
-                                        <span className="text-sm font-extrabold text-primary leading-none">
-                                            {language === 'id' ? 'Indonesia' : 
-                                             language === 'en' ? 'English' : 
-                                             language === 'ja' ? '日本語' : 
-                                             language === 'ko' ? '한국어' : '中文'}
+                                        <span className="text-[7px] md:text-[9px] uppercase font-black text-muted-foreground/60 leading-none mb-1.5 tracking-[0.15em]">{t.shared.language}</span>
+                                        <span className="text-[10px] md:text-sm font-black text-primary leading-none tracking-tight">
+                                            {(LANGUAGES.find(l => l.code === language) || LANGUAGES[0]).label}
                                         </span>
                                     </div>
-                                    <ChevronDown size={14} className="text-primary/40 transition-transform group-hover:rotate-180 ml-1" />
+                                    <ChevronDown size={14} className="text-primary/20 transition-transform duration-500 group-hover:rotate-180 group-hover:text-primary/40" />
                                 </Button>
                                 
-                                <div className="absolute top-full right-0 mt-3 w-48 bg-white/95 backdrop-blur-xl rounded-[24px] shadow-2xl shadow-black/10 border border-white/20 overflow-hidden opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-[60] transform origin-top-right translate-y-2 group-hover:translate-y-0 scale-95 group-hover:scale-100">
-                                    <div className="p-2 space-y-1">
-                                        {[
-                                            { code: 'id', label: 'Indonesia', flag: '🇮🇩' },
-                                            { code: 'en', label: 'English', flag: '🇺🇸' },
-                                            { code: 'ja', label: '日本語', flag: '🇯🇵' },
-                                            { code: 'ko', label: '한국어', flag: '🇰🇷' },
-                                            { code: 'zh', label: '中文', flag: '🇨🇳' }
-                                        ].map(lang => (
+                                <div className="absolute top-full right-0 mt-4 w-56 bg-white/90 backdrop-blur-2xl rounded-[32px] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)] border border-white p-2.5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-500 z-[60] transform origin-top-right translate-y-4 group-hover:translate-y-0 scale-90 group-hover:scale-100">
+                                    <div className="space-y-1.5">
+                                        {LANGUAGES.map(lang => (
                                             <button
                                                 key={lang.code}
                                                 onClick={() => setLanguage(lang.code as any)}
-                                                className={`w-full text-left px-4 py-3 rounded-xl transition-all flex items-center justify-between group/item ${language === lang.code ? 'bg-primary text-white font-bold shadow-lg shadow-primary/20' : 'hover:bg-primary/5 text-slate-700 font-semibold'}`}
+                                                className={`w-full text-left px-5 py-4 rounded-2xl transition-all duration-300 flex items-center justify-between group/item ${language === lang.code ? 'bg-primary text-white font-black shadow-xl shadow-primary/25 scale-[1.02]' : 'hover:bg-primary/5 text-slate-600 font-bold hover:translate-x-1'}`}
                                             >
-                                                <div className="flex items-center gap-3">
-                                                    <span className="text-lg">{lang.flag}</span>
-                                                    <span>{lang.label}</span>
+                                                <div className="flex items-center gap-4">
+                                                    <span className="text-2xl group-hover/item:scale-125 transition-transform duration-300">{lang.flag}</span>
+                                                    <span className="text-sm md:text-base">{lang.label}</span>
                                                 </div>
-                                                {language === lang.code && <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />}
+                                                {language === lang.code && (
+                                                    <div className="relative flex items-center justify-center">
+                                                        <div className="w-2 h-2 rounded-full bg-white animate-ping absolute" />
+                                                        <div className="w-2 h-2 rounded-full bg-white relative" />
+                                                    </div>
+                                                )}
                                             </button>
                                         ))}
                                     </div>
@@ -133,27 +138,91 @@ export default function Navbar() {
                             </div>
 
                             {user ? (
-                                <div className="flex items-center space-x-4">
-                                    <div className="hidden md:flex items-center gap-2 bg-primary/5 px-4 py-2 rounded-full border border-primary/10">
-                                        <User2 size={18} className="text-primary" />
-                                        <span className="font-semibold text-lg text-primary">{t.shared.hello}{user.name}</span>
+                                <div className="flex items-center space-x-3 md:space-x-4">
+                                    <div className="hidden lg:flex items-center gap-3 bg-white/50 backdrop-blur-md px-5 py-2.5 rounded-full border border-primary/5 shadow-sm">
+                                        <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                                            <User2 size={16} className="text-primary" />
+                                        </div>
+                                        <span className="font-bold text-base text-primary tracking-tight">{t.shared.hello}{user.name}</span>
                                     </div>
-                                    <Button onClick={() => { logout(); router.push('/'); }} variant="outline" className="h-12 text-lg font-bold text-red-600 border-red-200 hover:bg-red-50 hover:text-red-700 rounded-2xl">
+                                    <Button onClick={() => { logout(); router.push('/'); }} variant="outline" className="h-11 md:h-14 px-4 md:px-6 text-sm md:text-lg font-black text-red-500 border-red-100 hover:bg-red-500 hover:text-white rounded-2xl md:rounded-3xl transition-all shadow-sm">
                                         {t.shared.logout}
+                                    </Button>
+                                    <Button 
+                                        variant="ghost" 
+                                        size="icon"
+                                        className="md:hidden text-primary h-11 w-11 hover:bg-primary/5 rounded-2xl"
+                                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                                    >
+                                        {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                                     </Button>
                                 </div>
                             ) : (
                                 <>
-                                    <Button onClick={() => setShowModal(true)} variant="ghost" className="text-lg font-bold text-primary hover:bg-primary/5 px-6 h-12 rounded-2xl hidden md:flex">
+                                    <Button onClick={() => setShowModal(true)} variant="ghost" className="text-sm md:text-lg font-bold text-primary hover:bg-primary/5 px-4 md:px-6 h-10 md:h-12 rounded-xl md:rounded-2xl hidden sm:flex">
                                         {t.shared.login}
                                     </Button>
-                                    <Button onClick={() => setShowModal(true)} className="bg-accent hover:bg-accent/90 text-white text-lg font-extrabold px-8 h-12 shadow-lg shadow-accent/20 rounded-2xl transition-all hover:-translate-y-0.5 active:translate-y-0">
+                                    <Button onClick={() => setShowModal(true)} className="bg-accent hover:bg-accent/90 text-white text-xs md:text-lg font-extrabold px-3 md:px-8 h-10 md:h-12 shadow-lg shadow-accent/20 rounded-xl md:rounded-2xl transition-all hover:-translate-y-0.5 active:translate-y-0 text-nowrap">
                                         {t.shared.register}
+                                    </Button>
+                                    <Button 
+                                        variant="ghost" 
+                                        size="icon"
+                                        className="md:hidden text-primary h-10 w-10 ml-1"
+                                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                                    >
+                                        {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
                                     </Button>
                                 </>
                             )}
                         </div>
                     </div>
+                    
+                    {/* Mobile Menu Overlay */}
+                    {isMenuOpen && (
+                        <div className="md:hidden border-t border-border bg-white animate-in slide-in-from-top duration-300">
+                            <div className="px-4 py-6 space-y-4">
+                                {user ? (
+                                    <>
+                                        <div className="flex items-center gap-3 bg-primary/5 p-4 rounded-2xl mb-6">
+                                            <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary font-black text-xl">
+                                                {user.name[0]}
+                                            </div>
+                                            <div>
+                                                <p className="text-xs font-bold text-muted-foreground uppercase">{t.shared.hello.replace(',', '').trim()}</p>
+                                                <p className="text-lg font-black text-primary leading-none">{user.name}</p>
+                                            </div>
+                                        </div>
+                                        <Link
+                                            href="/explore"
+                                            onClick={() => setIsMenuOpen(false)}
+                                            className="flex items-center justify-between w-full p-4 rounded-2xl bg-[#FAF9F6] text-primary font-black text-lg border border-black/5"
+                                        >
+                                            {t.shared.explore}
+                                            <ChevronRight size={20} className="text-accent" />
+                                        </Link>
+                                        <Link
+                                            href={isMentor ? "/dashboard/mentor" : "/dashboard/customer"}
+                                            onClick={() => setIsMenuOpen(false)}
+                                            className="flex items-center justify-between w-full p-4 rounded-2xl bg-[#FAF9F6] text-primary font-black text-lg border border-black/5"
+                                        >
+                                            {t.shared.schedule}
+                                            <ChevronRight size={20} className="text-accent" />
+                                        </Link>
+                                    </>
+                                ) : (
+                                    <div className="grid grid-cols-2 gap-4">
+                                        <Button onClick={() => { setShowModal(true); setIsMenuOpen(false); }} variant="outline" className="h-14 rounded-2xl font-black text-lg">
+                                            {t.shared.login}
+                                        </Button>
+                                        <Button onClick={() => { setShowModal(true); setIsMenuOpen(false); }} className="h-14 rounded-2xl font-black text-lg bg-accent text-white">
+                                            {t.shared.register}
+                                        </Button>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    )}
                 </div>
             </nav>
 

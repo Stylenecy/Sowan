@@ -32,16 +32,7 @@ export default function ExplorePage() {
     const [isProcessing, setIsProcessing] = useState(false);
     const [selectedTime, setSelectedTime] = useState("");
 
-    // Scroll ref
-    const scrollContainerRef = useRef<HTMLDivElement>(null);
-
-    const scroll = (direction: 'left' | 'right') => {
-        if (scrollContainerRef.current) {
-            const { current } = scrollContainerRef;
-            const scrollAmount = current.clientWidth * 0.8;
-            current.scrollBy({ left: direction === 'left' ? -scrollAmount : scrollAmount, behavior: 'smooth' });
-        }
-    };
+    // No scroll ref needed for vertical grid
 
     const mentors = [
         {
@@ -97,7 +88,7 @@ export default function ExplorePage() {
             badge: "Seniman",
             badgeColor: "bg-blue-100 text-blue-800",
             titleColor: "bg-accent/10 text-accent border-accent/20",
-            image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop",
+            image: "https://images.unsplash.com/photo-1463453091185-61582044d556?q=80&w=200&auto=format&fit=crop",
             location: "Surabaya",
             language: "Jawa",
             desc: '"Musik adalah bahasa jiwa. Saya senang berbagi kisah tentang masa keemasan musik keroncong."',
@@ -298,14 +289,14 @@ export default function ExplorePage() {
 
     const handlePayment = () => {
         setIsProcessing(true);
-        
+
         // Save selected time to localStorage for dashboard sync
         let timeLabel = "";
         if (selectedTime === "Today1") timeLabel = `${t.dashboard.today}, ${getDynamicTimeRange(1)}`;
         else if (selectedTime === "Today2") timeLabel = `${t.dashboard.today}, ${getDynamicTimeRange(3)}`;
         else if (selectedTime === "Tomorrow1") timeLabel = `${t.dashboard.tomorrow}, 10:00 - 11:00 WIB`;
         else if (selectedTime === "Tomorrow2") timeLabel = `${t.dashboard.tomorrow}, 13:00 - 14:00 WIB`;
-        
+
         localStorage.setItem("sowan_selected_time", timeLabel);
         localStorage.setItem("sowan_booked_mentor", JSON.stringify(selectedMentor));
 
@@ -334,8 +325,8 @@ export default function ExplorePage() {
             {/* ── Filter Bar ── */}
             <div className="sticky top-20 z-40 bg-white/80 backdrop-blur-xl border-y border-black/5 shadow-sm">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-                    <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between">
-                        <div className="flex flex-wrap items-center gap-4 w-full lg:w-auto">
+                    <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 items-start lg:items-center justify-between">
+                        <div className="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto">
                             {/* City Filter */}
                             <div className="relative flex-1 sm:flex-none min-w-[200px]">
                                 <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-primary w-5 h-5 pointer-events-none" />
@@ -388,45 +379,20 @@ export default function ExplorePage() {
                             )}
                         </div>
 
-                        <div className="flex gap-3">
-                            <Button
-                                variant="outline"
-                                size="icon"
-                                onClick={() => scroll('left')}
-                                className="rounded-2xl h-14 w-14 border-2 border-primary/10 hover:border-primary text-primary hover:bg-primary/5 transition-all"
-                            >
-                                <ChevronLeft size={24} />
-                            </Button>
-                            <Button
-                                variant="outline"
-                                size="icon"
-                                onClick={() => scroll('right')}
-                                className="rounded-2xl h-14 w-14 border-2 border-primary/10 hover:border-primary text-primary hover:bg-primary/5 transition-all"
-                            >
-                                <ChevronRight size={24} />
-                            </Button>
-                        </div>
+                        {/* No scroll buttons in vertical grid */}
                     </div>
                 </div>
             </div>
 
-            {/* ── Mentor List ── */}
+            {/* ── Mentor List: Standard Vertical Grid ── */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                 <div
-                    ref={scrollContainerRef}
-                    className="grid grid-rows-2 grid-flow-col overflow-x-auto gap-8 pb-12 pt-4 scrollbar-hide scroll-smooth"
-                    style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 pb-20 pt-4"
                 >
-                    <style dangerouslySetInnerHTML={{
-                        __html: `
-                        .scrollbar-hide::-webkit-scrollbar {
-                            display: none;
-                        }
-                    `}} />
 
                     {sortedMentors.length > 0 ? (
                         sortedMentors.map((mentor) => (
-                            <Card key={mentor.id} className={`w-[320px] md:w-[380px] rounded-[40px] border border-black/5 shadow-sm hover:shadow-xl transition-all overflow-hidden flex flex-col group/card ${!mentor.isOnline && 'saturate-[0.7] opacity-80'}`}>
+                            <Card key={mentor.id} className={`w-full rounded-[32px] md:rounded-[40px] border border-black/5 shadow-sm hover:shadow-xl transition-all overflow-hidden flex flex-col group/card ${!mentor.isOnline && 'saturate-[0.7] opacity-80'}`}>
                                 <CardHeader className="p-0 relative h-72 sm:h-80 bg-white overflow-hidden pointer-events-none">
                                     <img
                                         src={mentor.image}

@@ -141,7 +141,7 @@ const dictionaries: Record<LanguageCode, Translations> = {
             welcomeModal: "Selamat Datang!", loginDesc: "Masuk ke Sowan.id untuk mulai bersapa", nameLabel: "Siapa nama Anda?", namePlaceholder: "Ketik nama Anda di sini...", viewProfile: "Lihat Profil", demoLabel: "atau coba akun demo"
         },
         home: {
-            sparkle: "Mari Berbagi Pengalaman", welcome: "di", welcomeHome: "Selamat Datang", pagi: "Selamat Pagi", siang: "Selamat Siang", sore: "Selamat Sore", malam: "Selamat Malam",
+            sparkle: "Belajar Langsung dari Para Maestro Lintas Generasi", welcome: "di", welcomeHome: "Selamat Datang", pagi: "Selamat Pagi", siang: "Selamat Siang", sore: "Selamat Sore", malam: "Selamat Malam",
             desc: "Wadah hangat untuk saling sapa, berbagi cerita, dan menyambung tali silaturahmi. Temukan teman baru dan bagikan pengalaman berharga Anda di sini.",
             findBtn: "Cari Teman Sowan", scheduleBtn: "Lihat Jadwal Saya", friendsJoined: "Teman Bergabung", sessions: "Sesi Sowan", bottomQuote: "Saling Sapa, Saling Bercerita",
             maestroTitle: "Kenalan dengan Maestro Kami", maestroDesc: "Para lansia berpengalaman dengan ragam cerita, keahlian, dan kearifan lokal yang siap menjadi Teman Sowan Anda.",
@@ -186,7 +186,7 @@ const dictionaries: Record<LanguageCode, Translations> = {
             welcomeModal: "Welcome Back!", loginDesc: "Login to Sowan.id to start connecting", nameLabel: "What is your name?", namePlaceholder: "Type your name here...", viewProfile: "View Profile", demoLabel: "or try a demo account"
         },
         home: {
-            sparkle: "Let's Share Experiences", welcome: "to", welcomeHome: "Welcome", pagi: "Good Morning", siang: "Good Afternoon", sore: "Good Evening", malam: "Good Night",
+            sparkle: "Learn Directly from Cross-Generational Maestros", welcome: "to", welcomeHome: "Welcome", pagi: "Good Morning", siang: "Good Afternoon", sore: "Good Evening", malam: "Good Night",
             desc: "A warm space to greet one another, share stories, and reconnect. Discover new friends and share your valuable experiences here.",
             findBtn: "Find a Sowan Friend", scheduleBtn: "My Schedule", friendsJoined: "Friends Joined", sessions: "Sowan Sessions", bottomQuote: "Greet Each Other, Share Stories",
             maestroTitle: "Meet Our Maestros", maestroDesc: "Experienced elders with diverse stories, skills, and local wisdom ready to be your Sowan Friend.",

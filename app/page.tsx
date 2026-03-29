@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
-import { Users, Heart, Sparkles, User2, ShieldCheck, Award } from "lucide-react";
+import { Users, Heart, Sparkles, User2, ShieldCheck, Award, Globe, Video, Calendar, HeartHandshake } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { useState, useEffect } from "react";
@@ -29,7 +29,7 @@ export default function Home() {
       id: 3,
       name: "Bapak Dodi",
       title: "Pebisnis Kuliner & Budayawan",
-      image: "https://images.unsplash.com/photo-1544168190-79c17527004f?q=80&w=200&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?q=80&w=400&auto=format&fit=crop",
     },
     {
       id: 4,
@@ -41,7 +41,7 @@ export default function Home() {
       id: 5,
       name: "Ibu Sri",
       title: "Pengrajin Batik",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=400&auto=format&fit=crop",
     },
     {
       id: 6,
@@ -69,7 +69,7 @@ export default function Home() {
             </span>
           </div>
 
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl text-primary leading-[1.1] tracking-tight transition-all">
+          <h1 className="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl text-primary leading-[1.2] lg:leading-[1.1] tracking-tight transition-all">
             <span className="opacity-90">{t.home.welcomeHome},</span><br />
             {t.home.welcome} <span className="text-accent relative inline-block mt-2 italic">
               Sowan.id
@@ -83,15 +83,15 @@ export default function Home() {
             {t.home.desc}
           </p>
 
-          <div className="pt-4 flex flex-col sm:flex-row gap-5 justify-center lg:justify-start items-center">
-            <Button asChild size="lg" className="bg-[#D97706] hover:bg-[#D97706]/90 text-white text-xl sm:text-2xl py-8 px-12 rounded-full shadow-[0_8px_30px_rgb(217,119,6,0.3)] hover:shadow-[0_8px_30px_rgb(217,119,6,0.5)] hover:-translate-y-1 transition-all duration-300 h-auto font-semibold min-h-[60px] min-w-[200px]">
+          <div className="pt-4 flex flex-col sm:flex-row gap-4 sm:gap-5 justify-center lg:justify-start items-center">
+            <Button asChild size="lg" className="bg-[#D97706] hover:bg-[#D97706]/90 text-white text-lg sm:text-2xl py-6 sm:py-8 px-8 sm:px-12 rounded-full shadow-[0_8px_30px_rgb(217,119,6,0.3)] hover:shadow-[0_8px_30px_rgb(217,119,6,0.5)] hover:-translate-y-1 transition-all duration-300 h-auto font-bold min-h-[50px] sm:min-h-[60px] w-full sm:w-auto">
               <Link href="/explore">
                 {t.home.findBtn}
               </Link>
             </Button>
 
             {user ? (
-              <Button asChild variant="ghost" size="lg" className="text-primary hover:bg-primary/5 text-xl sm:text-2xl py-8 px-8 rounded-full transition-all h-auto font-medium min-h-[60px]">
+              <Button asChild variant="ghost" size="lg" className="text-primary hover:bg-primary/5 text-lg sm:text-2xl py-4 sm:py-8 px-8 rounded-full transition-all h-auto font-medium min-h-[50px] sm:min-h-[60px]">
                 <Link href={user.name === "Opa Adriel" ? "/dashboard/mentor" : "/dashboard/customer"}>
                   {t.home.scheduleBtn}
                 </Link>
@@ -115,8 +115,8 @@ export default function Home() {
             <div className="absolute inset-0 bg-gradient-to-tr from-[#D97706]/20 to-[#1A365D]/10 mix-blend-multiply z-10"></div>
 
             <Image
-              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=800&auto=format&fit=crop"
-              alt="Potret lansia tersenyum hangat"
+              src="/wanita_cover_tua.png"
+              alt="Potret Maestro Sowan"
               fill
               className="object-cover"
               priority
@@ -124,33 +124,30 @@ export default function Home() {
             />
             {/* Ultra-Deep Seamless Gradient Blend */}
             <div className="absolute inset-x-0 bottom-0 h-80 bg-gradient-to-t from-[#FAF9F6] via-[#FAF9F6]/60 to-transparent z-10"></div>
-            <div className="absolute bottom-6 right-6 bg-black/40 backdrop-blur-sm text-[8px] text-white/80 px-2 py-1 rounded-md uppercase tracking-widest pointer-events-none z-20">
-                Source: Unsplash
-            </div>
           </div>
 
           {/* Floating Glassmorphism Card 1: Users */}
-          <div className="absolute -left-6 sm:-left-12 top-12 sm:top-24 bg-white/70 backdrop-blur-xl border border-white/50 p-5 rounded-3xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] z-20 flex items-center gap-4 animate-in slide-in-from-left-8 duration-1000">
-            <div className="flex-shrink-0 w-14 h-14 bg-accent/10 rounded-full flex items-center justify-center text-accent">
-              <Users className="w-7 h-7" />
+          <div className="absolute -left-2 sm:-left-12 top-12 sm:top-24 bg-white/70 backdrop-blur-xl border border-white/50 p-3 sm:p-5 rounded-3xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] z-20 flex items-center gap-3 sm:gap-4 animate-in slide-in-from-left-8 duration-1000">
+            <div className="flex-shrink-0 w-10 h-10 sm:w-14 sm:h-14 bg-accent/10 rounded-full flex items-center justify-center text-accent">
+              <Users className="w-5 h-5 sm:w-7 sm:h-7" />
             </div>
             <div>
-              <p className="text-3xl font-bold text-primary font-serif">500+</p>
-              <p className="text-sm font-medium text-muted-foreground whitespace-nowrap">{t.home.friendsJoined}</p>
+              <p className="text-xl sm:text-3xl font-bold text-primary font-serif">500+</p>
+              <p className="text-[10px] sm:text-sm font-medium text-muted-foreground whitespace-nowrap">{t.home.friendsJoined}</p>
             </div>
           </div>
 
           {/* Floating Glassmorphism Card 2: Emosional  */}
-          <div className="absolute -right-4 sm:-right-8 bottom-16 sm:bottom-28 bg-white/80 backdrop-blur-xl border border-white/50 p-6 rounded-3xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] z-20 max-w-[240px] animate-in slide-in-from-right-8 duration-1000 delay-300">
-            <div className="flex items-start gap-3">
-              <div className="text-3xl mt-1">👵</div>
+          <div className="absolute -right-2 sm:-right-8 bottom-10 sm:bottom-28 bg-white/80 backdrop-blur-xl border border-white/50 p-4 sm:p-6 rounded-3xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] z-20 max-w-[180px] sm:max-w-[240px] animate-in slide-in-from-right-8 duration-1000 delay-300">
+            <div className="flex items-start gap-2 sm:gap-3">
+              <div className="text-xl sm:text-3xl mt-1">👵</div>
               <div>
-                <div className="flex items-center gap-1.5 mb-1">
-                  <Heart className="w-4 h-4 text-destructive fill-destructive" />
-                  <Heart className="w-4 h-4 text-destructive fill-destructive" />
-                  <Heart className="w-4 h-4 text-destructive fill-destructive" />
+                <div className="flex items-center gap-1 mb-1">
+                  <Heart className="w-3 h-3 text-destructive fill-destructive" />
+                  <Heart className="w-3 h-3 text-destructive fill-destructive" />
+                  <Heart className="w-3 h-3 text-destructive fill-destructive" />
                 </div>
-                <p className="font-semibold text-primary leading-tight">
+                <p className="text-xs sm:text-base font-semibold text-primary leading-tight">
                   "{t.home.bottomQuote}."
                 </p>
               </div>
@@ -163,6 +160,48 @@ export default function Home() {
         </div>
 
       </section>
+
+      {/* Horizontal Trust Banner (HelloTalk Inspired) */}
+      <div className="w-full bg-primary py-8 sm:py-12 border-y border-white/5 relative z-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12">
+
+            {/* Trust Point 1 */}
+            <div className="flex items-center gap-5 justify-center md:justify-start group cursor-default">
+              <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-accent/20 group-hover:border-accent/30 transition-all duration-500">
+                <Globe className="w-8 h-8 text-accent animate-pulse" />
+              </div>
+              <div>
+                <p className="text-white font-extrabold text-lg sm:text-xl tracking-tight leading-tight">Berbagai Bahasa</p>
+                <p className="text-white/60 text-sm font-medium tracking-wide">& Keahlian</p>
+              </div>
+            </div>
+
+            {/* Trust Point 2 */}
+            <div className="flex items-center gap-5 justify-center md:justify-start group cursor-default">
+              <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-accent/20 group-hover:border-accent/30 transition-all duration-500">
+                <Users className="w-8 h-8 text-accent" />
+              </div>
+              <div>
+                <p className="text-white font-extrabold text-lg sm:text-xl tracking-tight leading-tight">Kurasi Maestro</p>
+                <p className="text-white/60 text-sm font-medium tracking-wide">Ketat & Profesional</p>
+              </div>
+            </div>
+
+            {/* Trust Point 3 */}
+            <div className="flex items-center gap-5 justify-center md:justify-start group cursor-default">
+              <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-accent/20 group-hover:border-accent/30 transition-all duration-500">
+                <ShieldCheck className="w-8 h-8 text-accent" />
+              </div>
+              <div>
+                <p className="text-white font-extrabold text-lg sm:text-xl tracking-tight leading-tight">Transaksi Escrow</p>
+                <p className="text-white/60 text-sm font-medium tracking-wide">100% Aman & Terjamin</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
 
       {/* About Section - MasterClass Split Layout */}
       <section className="relative w-full py-24 lg:py-32 overflow-hidden border-t border-black/5 bg-[#FAF9F6]">
@@ -178,6 +217,44 @@ export default function Home() {
               <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed font-light">
                 {t.home.aboutDesc}
               </p>
+
+              {/* Enhanced Feature List (Value Proposition) */}
+              <div className="mt-12 space-y-8">
+
+                {/* Feature 1: Video */}
+                <div className="flex items-start gap-5 group">
+                  <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center shrink-0 border border-accent/20 group-hover:bg-accent group-hover:text-white transition-all duration-500">
+                    <Video className="w-7 h-7 text-accent group-hover:text-white transition-colors" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-primary mb-1">Panggilan Video Eksklusif 1-on-1</h4>
+                    <p className="text-muted-foreground text-lg leading-snug">Belajar dan bercerita secara privat dan intensif.</p>
+                  </div>
+                </div>
+
+                {/* Feature 2: Schedule */}
+                <div className="flex items-start gap-5 group">
+                  <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center shrink-0 border border-accent/20 group-hover:bg-accent group-hover:text-white transition-all duration-500">
+                    <Calendar className="w-7 h-7 text-accent group-hover:text-white transition-colors" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-primary mb-1">Jadwal Sangat Fleksibel</h4>
+                    <p className="text-muted-foreground text-lg leading-snug">Pilih waktu Sowan yang paling pas untuk Anda.</p>
+                  </div>
+                </div>
+
+                {/* Feature 3: Social Impact */}
+                <div className="flex items-start gap-5 group">
+                  <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center shrink-0 border border-accent/20 group-hover:bg-accent group-hover:text-white transition-all duration-500">
+                    <HeartHandshake className="w-7 h-7 text-accent group-hover:text-white transition-colors" />
+                  </div>
+                  <div>
+                    <h4 className="text-xl font-bold text-primary mb-1">Dampak Sosial Nyata</h4>
+                    <p className="text-muted-foreground text-lg leading-snug">Mengurangi rasa kesepian pada lansia melalui Geronteknologi.</p>
+                  </div>
+                </div>
+
+              </div>
             </div>
 
             {/* Right Column (Visual Overlapping) */}
@@ -194,7 +271,7 @@ export default function Home() {
                 {/* Ultra-Deep Seamless Gradient Blend */}
                 <div className="absolute inset-x-0 bottom-0 h-80 bg-gradient-to-t from-[#FAF9F6] via-[#FAF9F6]/60 to-transparent z-[5]"></div>
                 <div className="absolute bottom-6 right-6 bg-black/40 backdrop-blur-sm text-[8px] text-white/80 px-2 py-1 rounded-md uppercase tracking-widest pointer-events-none z-10">
-                    Source: Unsplash
+                  Source: Unsplash
                 </div>
               </div>
 

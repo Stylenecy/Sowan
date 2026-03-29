@@ -11,6 +11,15 @@ export default function FeedbackPage() {
     const { t } = useLanguage();
     const [rating, setRating] = useState(0);
 
+    const [bookedMentor, setBookedMentor] = useState<any>(null);
+
+    React.useEffect(() => {
+        const storedMentor = localStorage.getItem("sowan_booked_mentor");
+        if (storedMentor) {
+            setBookedMentor(JSON.parse(storedMentor));
+        }
+    }, []);
+
     return (
         <main className="min-h-screen bg-[#FAF9F6] flex items-center justify-center py-20 px-4">
             <Card className="max-w-xl w-full rounded-[60px] p-12 text-center border-none shadow-2xl bg-white shadow-primary/5">
@@ -51,7 +60,7 @@ export default function FeedbackPage() {
                             </div>
                             <div>
                                 <h3 className="text-lg font-black text-primary">{t.feedback.gratitude}</h3>
-                                <p className="text-muted-foreground font-bold italic text-sm">Opa Adriel</p>
+                                <p className="text-muted-foreground font-bold italic text-sm">{bookedMentor?.name ?? "Maestro Sowan"}</p>
                             </div>
                         </div>
                         <textarea 

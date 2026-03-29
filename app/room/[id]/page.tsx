@@ -81,11 +81,31 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
     }, [isRemoteMuted]);
 
     const isMentor = user?.name === 'Opa Adriel';
-    const partnerName = isMentor ? "Imeldya" : "Opa Adriel";
-    const partnerLocation = isMentor ? "Jakarta" : "Yogyakarta";
-    const videoId = isMentor ? 'xUDcOBBF79o' : '9y3XCrhCbCw';
-    const ytSource = isMentor ? "Bailey Schildbach" : "Bernard Albertson";
-    const ytHandle = isMentor ? "@bailey.schildbach" : "@BernardAlbertson";
+
+    // Determine partner details based on room ID or user role
+    let partnerName = isMentor ? "Imeldya" : "Opa Adriel";
+    let videoId = isMentor ? 'xUDcOBBF79o' : '9y3XCrhCbCw';
+    let ytSource = isMentor ? "Bailey Schildbach" : "Bernard Albertson";
+    let ytHandle = isMentor ? "@bailey.schildbach" : "@BernardAlbertson";
+
+    // Custom overrides for specific female mentors
+    if (id === '5') {
+        partnerName = "Ibu Sri";
+        videoId = "N90UIXMuMMU";
+        ytSource = "Sandra Hart";
+        ytHandle = "@lifewithsandrahart";
+    } else if (id === '8') {
+        partnerName = "Ibu Dian";
+        videoId = "N90UIXMuMMU";
+        ytSource = "Sandra Hart";
+        ytHandle = "@lifewithsandrahart";
+    } else if (id === '11') {
+        partnerName = "Ibu Ningsih";
+        videoId = "N90UIXMuMMU";
+        ytSource = "Sandra Hart";
+        ytHandle = "@lifewithsandrahart";
+    }
+
     const ytUrl = `https://www.youtube.com/${ytHandle}`;
 
     return (
@@ -100,92 +120,91 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
                     className="absolute top-1/2 left-1/2 w-[115vw] h-[115vh] md:w-[120vw] md:h-[120vh] -translate-x-1/2 -translate-y-1/2 pointer-events-none object-cover transition-all duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/40 pointer-events-none" />
-                
+
                 {/* ── YouTube Source Credit (Premium Visibility) ── */}
-                <div className="absolute bottom-6 left-6 z-30 opacity-60 hover:opacity-100 transition-opacity">
-                    <a 
-                        href={ytUrl} 
-                        target="_blank" 
+                <div className="absolute top-28 left-4 sm:left-6 z-30 opacity-60 hover:opacity-100 transition-opacity max-w-[150px] sm:max-w-none">
+                    <a
+                        href={ytUrl}
+                        target="_blank"
                         rel="noopener noreferrer"
-                        className="flex flex-col bg-black/40 backdrop-blur-md border border-white/10 px-4 py-2 rounded-2xl text-xs sm:text-sm text-white/80 font-bold hover:text-white hover:bg-black/60 transition-all shadow-lg"
+                        className="flex flex-col bg-black/40 backdrop-blur-md border border-white/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl sm:rounded-2xl text-[10px] sm:text-sm text-white/80 font-bold hover:text-white hover:bg-black/60 transition-all shadow-lg"
                     >
-                        <span className="text-[10px] uppercase tracking-widest text-white/40 mb-0.5">Source: YouTube</span>
-                        <div className="flex items-center gap-2">
-                            <span>{ytSource}</span>
-                            <span className="text-white/40 font-medium">{ytHandle}</span>
+                        <span className="text-[8px] sm:text-[10px] uppercase tracking-widest text-white/40 mb-0.5">Source: YouTube</span>
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:gap-2">
+                            <span className="truncate">{ytSource}</span>
+                            <span className="text-white/40 font-medium truncate hidden sm:inline">{ytHandle}</span>
                         </div>
                     </a>
                 </div>
 
                 {/* ── Floating Remote Audio Toggle ── */}
-                <div className="absolute top-28 right-6 z-30">
-                    <button 
+                <div className="absolute top-28 right-4 sm:right-6 z-30">
+                    <button
                         onClick={toggleRemoteMute}
-                        className={`w-20 h-20 rounded-[32px] flex flex-col items-center justify-center gap-1 transition-all active:scale-90 shadow-2xl border backdrop-blur-xl group
-                            ${isRemoteMuted 
-                                ? 'bg-red-500/20 border-red-500/30 hover:bg-red-500/30' 
+                        className={`w-14 h-14 sm:w-20 sm:h-20 rounded-2xl sm:rounded-[32px] flex flex-col items-center justify-center gap-0.5 sm:gap-1 transition-all active:scale-90 shadow-2xl border backdrop-blur-xl group
+                            ${isRemoteMuted
+                                ? 'bg-red-500/20 border-red-500/30 hover:bg-red-500/30'
                                 : 'bg-emerald-500/20 border-emerald-500/30 hover:bg-emerald-500/30'}`}
                     >
                         {isRemoteMuted ? (
-                            <VolumeX className="w-8 h-8 text-red-400 group-hover:scale-110 transition-transform" />
+                            <VolumeX className="w-6 h-6 sm:w-8 sm:h-8 text-red-400 group-hover:scale-110 transition-transform" />
                         ) : (
-                            <Volume2 className="w-8 h-8 text-emerald-400 group-hover:scale-110 transition-transform" />
+                            <Volume2 className="w-6 h-6 sm:w-8 sm:h-8 text-emerald-400 group-hover:scale-110 transition-transform" />
                         )}
-                        <span className={`text-[10px] font-black uppercase tracking-widest 
+                        <span className={`text-[8px] sm:text-[10px] font-black uppercase tracking-widest 
                             ${isRemoteMuted ? 'text-red-300' : 'text-emerald-300'}`}>
                             {isRemoteMuted ? 'Unmute' : 'Mute'}
                         </span>
                     </button>
-                    <div className="mt-3 text-center">
+                    <div className="mt-2 text-center hidden sm:block">
                         <p className="text-[9px] text-white/40 font-black uppercase tracking-[0.2em]">Partner Audio</p>
                     </div>
                 </div>
             </div>
 
             {/* ── TOP HUD ── */}
-            <div className="relative z-20 flex items-center justify-between px-5 pt-5 pb-2">
-                <div className="flex items-center gap-2.5 bg-black/40 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full">
-                    <span className="text-white font-extrabold text-xl tracking-tight">Sowan.id</span>
+            <div className="relative z-20 flex flex-col sm:flex-row items-center justify-between px-4 sm:px-5 pt-4 sm:pt-5 gap-3">
+                <div className="flex items-center gap-2 bg-black/40 backdrop-blur-md border border-white/10 px-4 py-1.5 sm:py-2 rounded-full w-full sm:w-auto justify-center">
+                    <span className="text-white font-extrabold text-lg sm:text-xl tracking-tight">Sowan.id</span>
                     <span className="text-white/40 text-lg">|</span>
-                    <span className="text-white/70 text-base font-medium">{t.room.sessionLabel} #{id}</span>
+                    <span className="text-white/70 text-xs sm:text-base font-medium truncate">{t.room.sessionLabel} #{id}</span>
                 </div>
 
-                <div className="flex items-center gap-3">
-                    <div className="flex items-center gap-2 bg-black/40 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full text-emerald-400 font-bold text-sm">
-                        <Wifi size={16} />
+                <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto justify-center">
+                    <div className="flex items-center gap-1.5 sm:gap-2 bg-black/40 backdrop-blur-md border border-white/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-emerald-400 font-bold text-xs sm:text-sm">
+                        <Wifi className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                         <span>{t.room.stable}</span>
                     </div>
-                    <div className="flex items-center gap-2 bg-black/40 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full">
-                        <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                        <Clock size={14} className="text-white/70" />
-                        <span className="text-white font-mono font-bold text-sm">{formatDuration(elapsed)}</span>
+                    <div className="flex items-center gap-1.5 sm:gap-2 bg-black/40 backdrop-blur-md border border-white/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
+                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-red-500 animate-pulse" />
+                        <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/70" />
+                        <span className="text-white font-mono font-bold text-xs sm:text-sm">{formatDuration(elapsed)}</span>
                     </div>
                 </div>
             </div>
 
             {/* ── Partner Info ── */}
-            <div className="absolute bottom-28 left-5 z-20">
-                <div className="bg-black/50 backdrop-blur-md border border-white/10 px-4 py-2 rounded-2xl flex flex-col gap-1">
-                    <p className="text-white/40 text-[10px] uppercase font-black tracking-widest">{t.room.partner}</p>
-                    <div className="flex items-center gap-3">
-                        <div className="w-3 h-3 rounded-full bg-emerald-400 animate-pulse" />
-                        <span className="text-white font-bold text-lg">{partnerName}</span>
-                        <span className="text-white/50 text-base">· {partnerLocation}</span>
+            <div className="absolute bottom-32 sm:bottom-28 left-4 sm:left-5 z-20">
+                <div className="bg-black/50 backdrop-blur-md border border-white/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl sm:rounded-2xl flex flex-col gap-0.5 sm:gap-1 max-w-[150px] sm:max-w-none">
+                    <p className="text-white/40 text-[8px] sm:text-[10px] uppercase font-black tracking-widest">{t.room.partner}</p>
+                    <div className="flex items-center gap-2 sm:gap-3">
+                        <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+                        <span className="text-white font-bold text-sm sm:text-lg truncate">{partnerName}</span>
                     </div>
                 </div>
             </div>
 
             {/* ── Self PiP ── */}
-            <div className="absolute bottom-28 right-5 z-20 w-[180px] sm:w-[220px] aspect-video rounded-2xl overflow-hidden border-2 border-white/20 shadow-2xl bg-gray-900">
+            <div className="absolute bottom-32 sm:bottom-28 right-4 sm:right-5 z-20 w-[120px] sm:w-[220px] aspect-video rounded-xl sm:rounded-2xl overflow-hidden border-2 border-white/20 shadow-2xl bg-gray-900">
                 {isVideoOff ? (
-                    <div className="w-full h-full flex flex-col items-center justify-center gap-1">
-                        <VideoOff size={28} className="text-gray-500" />
-                        <span className="text-gray-400 text-xs font-bold uppercase tracking-tighter">{t.room.cameraOff}</span>
+                    <div className="w-full h-full flex flex-col items-center justify-center gap-0.5 sm:gap-1">
+                        <VideoOff className="w-5 h-5 sm:w-7 sm:h-7 text-gray-500" />
+                        <span className="text-gray-400 text-[8px] sm:text-xs font-bold uppercase tracking-tighter">{t.room.cameraOff}</span>
                     </div>
                 ) : cameraError ? (
-                    <div className="w-full h-full flex flex-col items-center justify-center gap-1">
-                        <VideoOff size={28} className="text-red-400" />
-                        <span className="text-red-300 text-xs font-bold text-center px-2">{t.room.cameraErr}</span>
+                    <div className="w-full h-full flex flex-col items-center justify-center gap-0.5 sm:gap-1">
+                        <VideoOff className="w-5 h-5 sm:w-7 sm:h-7 text-red-400" />
+                        <span className="text-red-300 text-[8px] sm:text-xs font-bold text-center px-1 sm:px-2">{t.room.cameraErr}</span>
                     </div>
                 ) : (
                     <video
@@ -195,38 +214,38 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
                         style={{ transform: 'scaleX(-1)' }}
                     />
                 )}
-                <div className="absolute bottom-1.5 left-1.5 bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded-lg flex items-center gap-1">
-                    <span className="text-white text-[10px] font-black uppercase tracking-widest">{t.room.self}: {myName}</span>
-                    {isMuted && <span className="text-red-400 text-xs">🔇</span>}
+                <div className="absolute bottom-1 sm:bottom-1.5 left-1 sm:left-1.5 bg-black/60 backdrop-blur-sm px-1.5 sm:px-2 py-0.5 rounded-md sm:rounded-lg flex items-center gap-1 max-w-[90%]">
+                    <span className="text-white text-[8px] sm:text-[10px] font-black uppercase tracking-widest truncate">{myName}</span>
+                    {isMuted && <span className="text-red-400 text-[10px]">🔇</span>}
                 </div>
             </div>
 
             {/* ── BOTTOM CONTROLS ── */}
-            <div className="absolute bottom-0 left-0 right-0 z-20 pb-8 pt-4 bg-gradient-to-t from-black via-black/40 to-transparent">
-                <div className="flex items-center justify-center gap-6 px-6">
+            <div className="absolute bottom-0 left-0 right-0 z-20 pb-6 sm:pb-8 pt-4 bg-gradient-to-t from-black via-black/40 to-transparent">
+                <div className="flex items-center justify-center gap-3 sm:gap-6 px-4 sm:px-6">
 
                     <button
                         onClick={toggleMute}
-                        className={`w-16 h-16 rounded-full flex items-center justify-center transition-all active:scale-90 shadow-xl
+                        className={`w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center transition-all active:scale-90 shadow-xl shrink-0
                             ${isMuted ? 'bg-red-600 ring-4 ring-red-500/20' : 'bg-white/10 hover:bg-white/20 border border-white/20'}`}
                     >
-                        {isMuted ? <MicOff className="w-7 h-7 text-white" /> : <Mic className="w-7 h-7 text-white" />}
+                        {isMuted ? <MicOff className="w-5 h-5 sm:w-7 sm:h-7 text-white" /> : <Mic className="w-5 h-5 sm:w-7 sm:h-7 text-white" />}
                     </button>
 
                     <button
                         onClick={toggleVideo}
-                        className={`w-16 h-16 rounded-full flex items-center justify-center transition-all active:scale-90 shadow-xl
+                        className={`w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center transition-all active:scale-90 shadow-xl shrink-0
                             ${isVideoOff ? 'bg-red-600 ring-4 ring-red-500/20' : 'bg-white/10 hover:bg-white/20 border border-white/20'}`}
                     >
-                        {isVideoOff ? <VideoOff className="w-7 h-7 text-white" /> : <Video className="w-7 h-7 text-white" />}
+                        {isVideoOff ? <VideoOff className="w-5 h-5 sm:w-7 sm:h-7 text-white" /> : <Video className="w-5 h-5 sm:w-7 sm:h-7 text-white" />}
                     </button>
 
                     <Link
                         href={isMentor ? "/feedback-mentor" : "/feedback"}
-                        className="flex items-center gap-3 bg-red-600 hover:bg-red-700 active:scale-95 text-white font-black text-xl px-12 py-5 rounded-[28px] shadow-2xl shadow-red-500/20 transition-all border-b-4 border-red-900"
+                        className="flex items-center justify-center gap-2 sm:gap-3 bg-red-600 hover:bg-red-700 active:scale-95 text-white font-black text-base sm:text-xl px-4 sm:px-12 py-3.5 sm:py-5 rounded-2xl sm:rounded-[28px] shadow-2xl shadow-red-500/20 transition-all border-b-4 border-red-900 flex-1 sm:flex-none"
                     >
-                        <PhoneOff className="w-6 h-6" strokeWidth={3} />
-                        {t.room.endCall}
+                        <PhoneOff className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={3} />
+                        <span className="whitespace-nowrap">{t.room.endCall}</span>
                     </Link>
 
                 </div>

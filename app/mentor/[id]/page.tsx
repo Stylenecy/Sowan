@@ -5,9 +5,16 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 import { useAuth } from "@/context/AuthContext";
 import { useLanguage } from "@/context/LanguageContext";
-import { MapPin, Globe, Star, Clock, Heart, ArrowLeft, Calendar, ShieldCheck, CheckCircle } from "lucide-react";
+import { MapPin, Globe, Star, Clock, Heart, ArrowLeft, Calendar, ShieldCheck, CheckCircle, User2, MessageCircle } from "lucide-react";
 import Link from "next/link";
 
 export default function MentorProfilePage({ params }: { params: Promise<{ id: string }> }) {
@@ -20,6 +27,18 @@ export default function MentorProfilePage({ params }: { params: Promise<{ id: st
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [isProcessing, setIsProcessing] = useState(false);
+    const [selectedTime, setSelectedTime] = useState("Today1");
+
+    const getDynamicTimeRange = (startOffset: number) => {
+        const d = new Date();
+        d.setHours(d.getHours() + startOffset);
+        d.setMinutes(0);
+        d.setSeconds(0);
+        const startStr = d.getHours().toString().padStart(2, '0') + ":00";
+        d.setHours(d.getHours() + 1);
+        const endStr = d.getHours().toString().padStart(2, '0') + ":00";
+        return `${startStr} - ${endStr} WIB`;
+    };
 
     const mentors = [
         {
@@ -27,7 +46,7 @@ export default function MentorProfilePage({ params }: { params: Promise<{ id: st
             name: "Opa Adriel",
             age: 68,
             title: "Pakar Sejarah Jawa",
-            image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=400&auto=format&fit=crop",
+            image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=600&auto=format&fit=crop",
             location: "Yogyakarta",
             language: "Bahasa Jawa",
             about: "Saya adalah pensiunan guru sejarah yang telah mengajar selama 40 tahun lebih. Bagi saya, masa pensiun bukanlah akhir untuk berhenti berbagi, namun adalah lembaran baru untuk lebih intim bercerita dengan generasi muda. Saya menantikan percakapan yang hangat, mulai dari filosofi kehidupan budaya Jawa hingga kisah-kisah kecil masa lampau yang mungkin sulit Anda temukan di buku.",
@@ -36,6 +55,201 @@ export default function MentorProfilePage({ params }: { params: Promise<{ id: st
             price: "Rp 100.000",
             rating: 4.9,
             reviewsCount: 120,
+        },
+        {
+            id: 2,
+            name: "Ibu Ratna",
+            age: 62,
+            title: "Mantan Diplomat Internasional",
+            image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop",
+            location: "Jakarta",
+            language: "Inggris, Mandarin",
+            about: "Setelah puluhan tahun bertugas di berbagai negara, saya ingin membagikan perspektif saya tentang dunia, diplomasi, dan bagaimana menjaga hubungan baik dengan sesama. Sesi saya cocok untuk Anda yang ingin belajar etiket internasional atau sekadar mendengar cerita unik dari balik layar meja perundingan global.",
+            experiences: ["30 Tahun Diplomat", "Atase Kebudayaan di Beijing", "Konsultan Hubungan Internasional"],
+            interests: ["Politik Dunia", "Budaya Global", "Bahasa Mandarin"],
+            price: "Rp 250.000",
+            rating: 4.8,
+            reviewsCount: 95,
+        },
+        {
+            id: 3,
+            name: "Bapak Dodi",
+            age: 65,
+            title: "Pebisnis Kuliner & Budayawan",
+            image: "https://images.unsplash.com/photo-1544168190-79c17527004f?q=80&w=600&auto=format&fit=crop",
+            location: "Bandung",
+            language: "Sunda, Indonesia",
+            about: "Membangun bisnis dari nol adalah perjalanan spiritual. Saya telah melewati berbagai pasang surut di industri kuliner Bandung. Saya di sini untuk membantu Anda memicu ide bisnis kreatif atau sekadar mengenang resep-resep masakan sunda yang mulai terlupakan.",
+            experiences: ["Founder Restoran Masakan Sunda", "Ketua Paguyuban Bisnis Bandung", "Pembicara Seminar Kewirausahaan"],
+            interests: ["Wirausaha", "Masakan Sunda", "Musik Kecapi"],
+            price: "Rp 350.000",
+            rating: 4.7,
+            reviewsCount: 88,
+        },
+        {
+            id: 4,
+            name: "Opa Yohanes",
+            age: 70,
+            title: "Musisi Kerocong",
+            image: "https://images.unsplash.com/photo-1463453091185-61582044d556?q=80&w=600&auto=format&fit=crop",
+            location: "Surabaya",
+            language: "Jawa, Indonesia",
+            about: "Musik Keroncong adalah detak jantung masa muda saya. Biarkan saya membawa Anda kembali ke era di mana setiap nada memiliki makna mendalam. Kita bisa belajar tentang harmoni musik atau sekadar menikmati obrolan tentang skena seni di Surabaya era 70-an.",
+            experiences: ["Pimpinan Orkes Keroncong Selaras", "Pencipta Lagu Tradisional", "Kurator Musik Etnik"],
+            interests: ["Keroncong", "Harmonika", "Surabaya Tempo Dulu"],
+            price: "Rp 150.000",
+            rating: 5.0,
+            reviewsCount: 42,
+        },
+        {
+            id: 5,
+            name: "Ibu Sri",
+            age: 63,
+            title: "Pengrajin Batik",
+            image: "https://images.unsplash.com/photo-1509460913899-515f1df34fed?q=80&w=600&auto=format&fit=crop",
+            location: "Solo",
+            language: "Jawa, Indonesia",
+            about: "Membatik adalah meditasi. Saya telah menghabiskan ribuan jam dengan canting dan malam. Saya senang berbagi filosofi di balik setiap motif batik parang atau kawung, dan bagaimana kearifan lokal bisa menjadi penyeimbang hidup di era modern ini.",
+            experiences: ["Pemilik Sanggar Batik Sri", "Instruktur Workshop Batik Internasional", "Pelestari Budaya Solo"],
+            interests: ["Batik Tulis", "Meditasi", "Budaya Keraton"],
+            price: "Rp 120.000",
+            rating: 4.9,
+            reviewsCount: 64,
+        },
+        {
+            id: 6,
+            name: "Bapak Hasan",
+            age: 75,
+            title: "Pakar Pertanian",
+            image: "https://images.unsplash.com/photo-1566753323558-f4e0952af115?q=80&w=600&auto=format&fit=crop",
+            location: "Malang",
+            language: "Indonesia",
+            about: "Tanah adalah guru yang paling jujur. Sebagai pensiunan dosen pertanian, saya percaya bahwa setiap orang bisa menanam kebahagiaannya sendiri. Mari berdiskusi tentang bagaimana mengelola kebun kecil di rumah atau sekadar berbagi pengalaman tentang kehidupan pedesaan yang tenang.",
+            experiences: ["Profesor Emeritus Pertanian", "Konsultan Ketahanan Pangan", "Penulis Jurnal Hortikultura"],
+            interests: ["Urban Farming", "Tanaman Obat", "Kehidupan Desa"],
+            price: "Rp 80.000",
+            rating: 4.8,
+            reviewsCount: 52,
+        },
+        {
+            id: 7,
+            name: "Om Bima",
+            age: 66,
+            title: "Seniman Kriya Kayu",
+            image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=600&auto=format&fit=crop",
+            location: "Yogyakarta",
+            language: "Jawa, Indonesia",
+            about: "Kayu memiliki serat yang seperti jalan hidup manusia—penuh liku tapi indah jika dipahat dengan sabar. Saya senang bercerita tentang filosofi kriya dan bagaimana hobi bisa menjadi pelipur lara di masa tua.",
+            experiences: ["Pematung Kayu Berprestasi", "Pengajar Seni Rupa", "Kolektor Antik"],
+            interests: ["Ukiran Kayu", "Restorasi Furnitur", "Filosofi Jawa"],
+            price: "Rp 110.000",
+            rating: 4.7,
+            reviewsCount: 38,
+        },
+        {
+            id: 8,
+            name: "Ibu Dian",
+            age: 61,
+            title: "Mantan Penari Tradisional",
+            image: "https://images.unsplash.com/photo-1481214110143-bc63ca8150c6?q=80&w=600&auto=format&fit=crop",
+            location: "Bali",
+            language: "Bali, Indonesia",
+            about: "Menari bukan hanya tentang gerakan, tapi tentang rasa. Sebagai mantan penari istana, saya belajar banyak tentang disiplin dan spiritualitas. Saya siap mendampingi Anda yang ingin berbincang tentang ketenangan batin atau seni pertunjukan Bali.",
+            experiences: ["Penari Utama di PKB Bali", "Pelatih Tari Internasional", "Pemandu Wisata Budaya"],
+            interests: ["Tari Bali", "Yoga", "Spiritualitas"],
+            price: "Rp 180.000",
+            rating: 4.9,
+            reviewsCount: 76,
+        },
+        {
+            id: 9,
+            name: "Oma Lestari",
+            age: 69,
+            title: "Ahli Kuliner Sumatera",
+            image: "https://images.unsplash.com/photo-1567186937675-a5131c8a89ea?q=80&w=600&auto=format&fit=crop",
+            location: "Jakarta",
+            language: "Indonesia, Minang",
+            about: "Masakan adalah cara terbaik untuk menunjukkan kasih sayang. Saya ingin membagikan rahasia bumbu rendang otentik dan bagaimana masakan bisa menyatukan keluarga yang renggang. Sini, cerita sama Oma.",
+            experiences: ["Pemilik Catering Legendaris", "Penulis Resep Masakan Nusantara", "Juri Lomba Masak Tradisional"],
+            interests: ["Masakan Padang", "Harmoni Keluarga", "Cerita Rakyat"],
+            price: "Rp 90.000",
+            rating: 5.0,
+            reviewsCount: 110,
+        },
+        {
+            id: 10,
+            name: "Bapak Ahmad",
+            age: 74,
+            title: "Pensiunan Pelaut",
+            image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=600&auto=format&fit=crop",
+            location: "Makassar",
+            language: "Indonesia, Bugis",
+            about: "Dunia ini luas, dan samudera adalah guru terbaik tentang keberanian. Saya telah mengelilingi dunia dan melihat berbagai budaya. Mari berbagi cerita tentang petualangan atau bagaimana menjaga semangat pantang menyerah di situasi sulit.",
+            experiences: ["Nakhoda Kapal Kargo Internasional", "Instruktur Navigasi", "Ketua Kerukunan Pelaut"],
+            interests: ["Navigasi", "Cerita Dunia", "Pancing Ikan"],
+            price: "Rp 100.000",
+            rating: 4.9,
+            reviewsCount: 48,
+        },
+        {
+            id: 11,
+            name: "Ibu Ningsih",
+            age: 64,
+            title: "Pedagang Tangguh",
+            image: "https://images.unsplash.com/photo-1554151228-14d9def656ec?q=80&w=600&auto=format&fit=crop",
+            location: "Surabaya",
+            language: "Indonesia, Madura",
+            about: "Hidup di pasar mengajarkan saya tentang psikologi manusia. Saya mulai dari jualan keliling hingga punya toko sendiri. Saya ingin memotivasi Anda yang sedang berjuang dalam bisnis kecil atau butuh teman bicara yang lugas.",
+            experiences: ["Wirausahawan Pasar Turi", "Mentor Bisnis UMKM", "Aktivis Sosial Surabaya"],
+            interests: ["Strategi Dagang", "Ketahanan Mental", "Kuliner Surabaya"],
+            price: "Rp 70.000",
+            rating: 4.6,
+            reviewsCount: 130,
+        },
+        {
+            id: 12,
+            name: "Om Tono",
+            age: 67,
+            title: "Akuntan Senior",
+            image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=600&auto=format&fit=crop",
+            location: "Semarang",
+            language: "Jawa, Indonesia",
+            about: "Angka tidak pernah bohong, tapi hidup bukan sekadar matematika. Sebagai akuntan senior, saya belajar bahwa kekayaan sesungguhnya adalah waktu. Mari berdiskusi tentang perencanaan masa depan atau bagaimana menikmati hidup sederhana yang bermakna.",
+            experiences: ["Partner di Firma Audit Ternama", "Konsultan Pajak Senior", "Dosen Keuangan"],
+            interests: ["Investasi Masa Tua", "Filateli", "Sejarah Semarang"],
+            price: "Rp 160.000",
+            rating: 4.8,
+            reviewsCount: 55,
+        },
+        {
+            id: 13,
+            name: "Bapak Eko",
+            age: 71,
+            title: "Dosen Sosiologi Pensiunan",
+            image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=600&auto=format&fit=crop",
+            location: "Bandung",
+            language: "Sunda, Indonesia",
+            about: "Memahami masyarakat adalah memahami diri sendiri. Saya senang mengajak anak muda berdialog kritis tentang fenomena sosial saat ini, sembari membagikan pengalaman saya selama puluhan tahun mengajar di kampus.",
+            experiences: ["Ketua Jurusan Sosiologi", "Peneliti Sosial Budaya", "Penulis Opini Media Nasional"],
+            interests: ["Sosiologi", "Literasi", "Klub Buku"],
+            price: "Rp 140.000",
+            rating: 4.9,
+            reviewsCount: 42,
+        },
+        {
+            id: 14,
+            name: "Ibu Salma",
+            age: 62,
+            title: "Pelaku Homeopati",
+            image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=600&auto=format&fit=crop",
+            location: "Jakarta",
+            language: "Indonesia",
+            about: "Kesehatan tubuh berawal dari kesehatan jiwa. Saya mendalami pengobatan alami dan terapi pendengaran aktif. Sesi saya adalah ruang aman bagi Anda yang ingin menuangkan beban pikiran tanpa dihakimi.",
+            experiences: ["Pakar Homeopati Sertifikasi", "Konselor Kesehatan Mental", "Pembuat Ramuan Herbal"],
+            interests: ["Herbalisme", "Kesehatan Jiwa", "Teh Tradisional"],
+            price: "Rp 100.000",
+            rating: 4.8,
+            reviewsCount: 33,
         }
     ];
 
@@ -53,6 +267,17 @@ export default function MentorProfilePage({ params }: { params: Promise<{ id: st
 
     const handlePayment = () => {
         setIsProcessing(true);
+
+        // Save selected time to localStorage for dashboard sync
+        let timeLabel = "";
+        if (selectedTime === "Today1") timeLabel = `${t.dashboard.today}, ${getDynamicTimeRange(1)}`;
+        else if (selectedTime === "Today2") timeLabel = `${t.dashboard.today}, ${getDynamicTimeRange(3)}`;
+        else if (selectedTime === "Tomorrow1") timeLabel = `${t.dashboard.tomorrow}, 10:00 - 11:00 WIB`;
+        else if (selectedTime === "Tomorrow2") timeLabel = `${t.dashboard.tomorrow}, 13:00 - 14:00 WIB`;
+
+        localStorage.setItem("sowan_selected_time", timeLabel);
+        localStorage.setItem("sowan_booked_mentor", JSON.stringify(foundMentor));
+
         setTimeout(() => {
             setIsSuccess(true);
             setTimeout(() => router.push("/dashboard/customer"), 2000);
@@ -62,8 +287,8 @@ export default function MentorProfilePage({ params }: { params: Promise<{ id: st
     return (
         <div className="min-h-screen bg-[#FAF9F6] text-foreground pb-20">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
-                <button 
-                    onClick={() => router.back()} 
+                <button
+                    onClick={() => router.back()}
                     className="group mb-12 flex items-center gap-3 text-primary/60 hover:text-primary font-bold transition-all text-xl"
                 >
                     <ArrowLeft size={28} className="group-hover:-translate-x-2 transition-transform" />
@@ -83,8 +308,13 @@ export default function MentorProfilePage({ params }: { params: Promise<{ id: st
                                     sizes="256px"
                                     priority
                                 />
+                                {/* Deep Seamless Gradient Blend */}
+                                <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white via-white/70 to-transparent z-10"></div>
+                                <div className="absolute bottom-4 right-4 bg-black/40 backdrop-blur-sm text-[8px] text-white/80 px-2 py-1 rounded-md uppercase tracking-widest pointer-events-none z-20">
+                                    Source: Unsplash
+                                </div>
                             </div>
-                            
+
                             <h1 className="text-4xl font-black text-primary mb-2">{foundMentor.name}, {foundMentor.age}</h1>
                             <p className="text-xl text-muted-foreground font-bold mb-8">{foundMentor.title}</p>
 
@@ -186,47 +416,79 @@ export default function MentorProfilePage({ params }: { params: Promise<{ id: st
                 <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/70 backdrop-blur-xl p-4 animate-in fade-in duration-300">
                     <div className="bg-white rounded-[48px] shadow-2xl max-w-lg w-full overflow-hidden animate-in zoom-in-95 duration-300">
                         {!isSuccess ? (
-                            <div className="p-10 space-y-10">
-                                <div className="text-center">
-                                    <div className="w-24 h-24 mx-auto mb-6 rounded-3xl overflow-hidden border-4 border-primary/5 shadow-xl">
-                                        <img src={foundMentor.image} alt={foundMentor.name} className="w-full h-full object-cover" />
-                                    </div>
-                                    <h2 className="text-4xl font-black text-primary">{t.payment.confirm}</h2>
-                                    <p className="text-xl text-muted-foreground font-bold mt-2">Maestro {foundMentor.name}</p>
-                                </div>
-
-                                <div className="bg-[#FAF9F6] p-8 rounded-[40px] space-y-4">
-                                    <div className="flex justify-between items-center text-xl font-bold text-primary/60 italic">
-                                        <span>{t.mentor.bookingTitle}</span>
-                                        <span>{foundMentor.price}</span>
-                                    </div>
-                                    <div className="flex justify-between items-center text-xl font-bold text-primary/60 italic">
-                                        <span>{t.payment.fee}</span>
-                                        <span>Rp 5.000</span>
-                                    </div>
-                                    <div className="h-px bg-primary/10 my-4"></div>
-                                    <div className="flex justify-between items-center">
-                                        <span className="text-2xl font-black text-primary">{t.payment.total}</span>
-                                        <span className="text-4xl font-black text-accent">
-                                            Rp {(parseInt(foundMentor.price.replace(/\D/g, '')) + 5000).toLocaleString('id-ID')}
-                                        </span>
-                                    </div>
-                                </div>
-
-                                <Button 
-                                    onClick={handlePayment}
-                                    disabled={isProcessing}
-                                    className="w-full h-20 bg-primary hover:bg-primary/95 text-white rounded-[28px] text-2xl font-black shadow-2xl shadow-primary/20 transition-all hover:scale-[1.02] active:scale-95"
-                                >
-                                    {isProcessing ? (
-                                        <div className="flex items-center gap-4">
-                                            <div className="w-6 h-6 border-4 border-white/30 border-t-white rounded-full animate-spin" />
-                                            {t.payment.processing}
+                            <div className="p-0 animate-in fade-in slide-in-from-bottom-5 duration-500">
+                                {/* Modal Header with Visual Image */}
+                                <div className="p-10 text-center space-y-4">
+                                    <div className="relative w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-white shadow-2xl group">
+                                        <img 
+                                            src={foundMentor.image} 
+                                            alt={foundMentor.name} 
+                                            className="w-full h-full object-cover" 
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-white/40 to-transparent pointer-events-none" />
+                                        <div className="absolute bottom-1 right-1 bg-black/40 backdrop-blur-sm text-[6px] text-white/80 px-1 py-0.5 rounded-sm uppercase tracking-widest pointer-events-none">
+                                            Source: Unsplash
                                         </div>
-                                    ) : (
-                                        t.payment.pay
-                                    )}
-                                </Button>
+                                        <div className="absolute -bottom-1 -left-1 w-10 h-10 bg-emerald-500 rounded-full border-4 border-white flex items-center justify-center shadow-lg">
+                                            <CheckCircle size={18} className="text-white" />
+                                        </div>
+                                    </div>
+                                    <h2 className="text-3xl font-black text-primary">{t.mentor.bookingTitle}</h2>
+                                    <p className="text-muted-foreground font-medium mt-1">{t.mentor.bookingSubtitle.replace('{name}', foundMentor.name)}</p>
+                                </div>
+
+                                <div className="px-8 pb-10 space-y-6">
+                                    <div className="space-y-2">
+                                        <label className="text-xs font-black uppercase tracking-wider text-primary/40 ml-1">{t.mentor.selectTime}</label>
+                                        <Select value={selectedTime} onValueChange={setSelectedTime}>
+                                            <SelectTrigger className="w-full h-14 bg-white border-2 border-primary/5 rounded-2xl px-4 text-lg font-bold text-primary focus:ring-accent transition-all">
+                                                <SelectValue placeholder={t.mentor.selectTime} />
+                                            </SelectTrigger>
+                                            <SelectContent className="bg-white border-2 border-primary/5 rounded-2xl shadow-2xl z-[150] text-primary font-bold">
+                                                <SelectItem value="Today1">{t.dashboard.today}, {getDynamicTimeRange(1)}</SelectItem>
+                                                <SelectItem value="Today2">{t.dashboard.today}, {getDynamicTimeRange(3)}</SelectItem>
+                                                <SelectItem value="Tomorrow1">{t.dashboard.tomorrow}, 10:00 - 11:00 WIB</SelectItem>
+                                                <SelectItem value="Tomorrow2">{t.dashboard.tomorrow}, 13:00 - 14:00 WIB</SelectItem>
+                                            </SelectContent>
+                                        </Select>
+                                    </div>
+
+                                    <div className="bg-[#FAF9F6] p-6 rounded-3xl space-y-3">
+                                        <div className="flex justify-between items-center text-primary/60 font-bold">
+                                            <span>{t.payment.fee}</span>
+                                            <span>{foundMentor.price}</span>
+                                        </div>
+                                        <div className="flex justify-between items-center text-primary/60 font-bold">
+                                            <span>{t.payment.appFee}</span>
+                                            <span>Rp 5.000</span>
+                                        </div>
+                                        <div className="h-px bg-primary/5 my-2"></div>
+                                        <div className="flex justify-between items-center">
+                                            <span className="text-xl font-black text-primary">Total</span>
+                                            <span className="text-3xl font-black text-accent">
+                                                Rp {(parseInt(foundMentor.price.replace(/\D/g, '')) + 5000).toLocaleString('id-ID')}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <Button
+                                        onClick={handlePayment}
+                                        disabled={isProcessing}
+                                        className="w-full h-16 bg-primary hover:bg-primary/95 text-white rounded-2xl text-xl font-black shadow-xl shadow-primary/20 transition-all hover:scale-[1.02] active:scale-95 group"
+                                    >
+                                        {isProcessing ? (
+                                            <div className="flex items-center gap-3">
+                                                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                                {t.payment.processing}
+                                            </div>
+                                        ) : (
+                                            <span className="flex items-center gap-2">
+                                                <ShieldCheck size={24} />
+                                                {t.payment.confirmPay}
+                                            </span>
+                                        )}
+                                    </Button>
+                                </div>
                             </div>
                         ) : (
                             <div className="p-16 text-center animate-in zoom-in duration-500">

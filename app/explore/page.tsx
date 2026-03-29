@@ -21,7 +21,7 @@ export default function ExplorePage() {
     const router = useRouter();
     const { user, setShowLoginModal } = useAuth();
     const { t } = useLanguage();
-    
+
     // Filter state
     const [selectedCity, setSelectedCity] = useState("All");
     const [selectedLang, setSelectedLang] = useState("All");
@@ -127,7 +127,7 @@ export default function ExplorePage() {
             badge: "Teman Sowan",
             badgeColor: "bg-slate-100 text-slate-700",
             titleColor: "bg-accent/10 text-accent border-accent/20",
-            image: "https://images.unsplash.com/photo-1552058544-f2b08422138a?q=80&w=400&auto=format&fit=crop",
+            image: "https://images.unsplash.com/photo-1566753323558-f4e0952af115?q=80&w=400&auto=format&fit=crop",
             location: "Malang",
             language: "Indonesia",
             desc: '"Anak muda sekarang harus tahu cara menanam walau di teras rumah. Ayo berdiskusi urban farming."',
@@ -187,7 +187,7 @@ export default function ExplorePage() {
             badge: "Teman Sowan",
             badgeColor: "bg-slate-100 text-slate-700",
             titleColor: "bg-accent/10 text-accent border-accent/20",
-            image: "https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=400&auto=format&fit=crop",
+            image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400&auto=format&fit=crop",
             location: "Makassar",
             language: "Indonesia",
             desc: '"Lautan telah mengajarkan saya arti keikhlasan. Mengarungi gelombang hidup tak sesulit yang kau kira."',
@@ -217,7 +217,7 @@ export default function ExplorePage() {
             badge: "Teman Sowan",
             badgeColor: "bg-slate-100 text-slate-700",
             titleColor: "bg-accent/10 text-accent border-accent/20",
-            image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=400&auto=format&fit=crop",
+            image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop",
             location: "Semarang",
             language: "Jawa",
             desc: '"Stabilitas finansial mulai dari usia dua puluhan. Mari kita diskusikan hidup nyaman di hari tua."',
@@ -232,7 +232,7 @@ export default function ExplorePage() {
             badge: "Tokoh Budaya",
             badgeColor: "bg-[#D97706]/10 text-[#D97706]",
             titleColor: "bg-accent/10 text-accent border-accent/20",
-            image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop",
+            image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop",
             location: "Bandung",
             language: "Sunda",
             desc: '"Mari bedah kegelisahanmu lewat kacamata bermasyarakat. Semua ada benang merahnya."',
@@ -262,6 +262,17 @@ export default function ExplorePage() {
         return matchCity && matchLanguage;
     });
 
+    const getDynamicTimeRange = (startOffset: number) => {
+        const d = new Date();
+        d.setHours(d.getHours() + startOffset);
+        d.setMinutes(0);
+        d.setSeconds(0);
+        const startStr = d.getHours().toString().padStart(2, '0') + ":00";
+        d.setHours(d.getHours() + 1);
+        const endStr = d.getHours().toString().padStart(2, '0') + ":00";
+        return `${startStr} - ${endStr} WIB`;
+    };
+
     const sortedMentors = [...filteredMentors].sort((a, b) => Number(b.isOnline) - Number(a.isOnline));
 
     const handleOpenModal = (mentor: any) => {
@@ -270,11 +281,9 @@ export default function ExplorePage() {
             return;
         }
         if (!mentor.isOnline) return;
-        
-        const nextHour = new Date().getHours() + 1;
-        const defaultTime = `Hari Ini, ${nextHour}.00 - ${nextHour + 1}.00 WIB`;
-        setSelectedTime(defaultTime);
-        
+
+        setSelectedTime("Today1");
+
         setSelectedMentor(mentor);
         setIsSuccess(false);
         setIsProcessing(false);
@@ -289,6 +298,17 @@ export default function ExplorePage() {
 
     const handlePayment = () => {
         setIsProcessing(true);
+        
+        // Save selected time to localStorage for dashboard sync
+        let timeLabel = "";
+        if (selectedTime === "Today1") timeLabel = `${t.dashboard.today}, ${getDynamicTimeRange(1)}`;
+        else if (selectedTime === "Today2") timeLabel = `${t.dashboard.today}, ${getDynamicTimeRange(3)}`;
+        else if (selectedTime === "Tomorrow1") timeLabel = `${t.dashboard.tomorrow}, 10:00 - 11:00 WIB`;
+        else if (selectedTime === "Tomorrow2") timeLabel = `${t.dashboard.tomorrow}, 13:00 - 14:00 WIB`;
+        
+        localStorage.setItem("sowan_selected_time", timeLabel);
+        localStorage.setItem("sowan_booked_mentor", JSON.stringify(selectedMentor));
+
         setTimeout(() => {
             setIsSuccess(true);
             setTimeout(() => {
@@ -323,7 +343,7 @@ export default function ExplorePage() {
                                     <SelectTrigger className="w-full pl-12 h-14 bg-[#FAF9F6] border-2 border-transparent hover:border-accent rounded-2xl text-lg font-bold text-primary transition-all">
                                         <SelectValue placeholder={t.explore.filterLocation} />
                                     </SelectTrigger>
-                                    <SelectContent>
+                                    <SelectContent className="bg-white border-2 border-primary/5 rounded-2xl shadow-2xl z-[100] text-primary">
                                         <SelectItem value="All">{t.explore.allCities}</SelectItem>
                                         <SelectItem value="Jakarta">Jakarta</SelectItem>
                                         <SelectItem value="Bandung">Bandung</SelectItem>
@@ -345,7 +365,7 @@ export default function ExplorePage() {
                                     <SelectTrigger className="w-full pl-12 h-14 bg-[#FAF9F6] border-2 border-transparent hover:border-accent rounded-2xl text-lg font-bold text-primary transition-all">
                                         <SelectValue placeholder={t.explore.filterLang} />
                                     </SelectTrigger>
-                                    <SelectContent>
+                                    <SelectContent className="bg-white border-2 border-primary/5 rounded-2xl shadow-2xl z-[100] text-primary">
                                         <SelectItem value="All">{t.explore.allLangs}</SelectItem>
                                         <SelectItem value="Indonesia">Indonesia</SelectItem>
                                         <SelectItem value="Jawa">Jawa</SelectItem>
@@ -367,19 +387,19 @@ export default function ExplorePage() {
                                 </button>
                             )}
                         </div>
-                        
+
                         <div className="flex gap-3">
-                            <Button 
-                                variant="outline" 
-                                size="icon" 
+                            <Button
+                                variant="outline"
+                                size="icon"
                                 onClick={() => scroll('left')}
                                 className="rounded-2xl h-14 w-14 border-2 border-primary/10 hover:border-primary text-primary hover:bg-primary/5 transition-all"
                             >
                                 <ChevronLeft size={24} />
                             </Button>
-                            <Button 
-                                variant="outline" 
-                                size="icon" 
+                            <Button
+                                variant="outline"
+                                size="icon"
                                 onClick={() => scroll('right')}
                                 className="rounded-2xl h-14 w-14 border-2 border-primary/10 hover:border-primary text-primary hover:bg-primary/5 transition-all"
                             >
@@ -392,39 +412,46 @@ export default function ExplorePage() {
 
             {/* ── Mentor List ── */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                <div 
+                <div
                     ref={scrollContainerRef}
                     className="grid grid-rows-2 grid-flow-col overflow-x-auto gap-8 pb-12 pt-4 scrollbar-hide scroll-smooth"
                     style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
                 >
-                    <style dangerouslySetInnerHTML={{__html: `
+                    <style dangerouslySetInnerHTML={{
+                        __html: `
                         .scrollbar-hide::-webkit-scrollbar {
                             display: none;
                         }
                     `}} />
-                    
+
                     {sortedMentors.length > 0 ? (
                         sortedMentors.map((mentor) => (
                             <Card key={mentor.id} className={`w-[320px] md:w-[380px] rounded-[40px] border border-black/5 shadow-sm hover:shadow-xl transition-all overflow-hidden flex flex-col group/card ${!mentor.isOnline && 'saturate-[0.7] opacity-80'}`}>
-                                <CardHeader className="p-0 relative h-48 sm:h-56 bg-white overflow-hidden">
+                                <CardHeader className="p-0 relative h-72 sm:h-80 bg-white overflow-hidden pointer-events-none">
                                     <img
                                         src={mentor.image}
                                         alt={mentor.name}
                                         className="w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-110"
                                     />
+                                    {/* Seamless Gradient Transition */}
+                                    <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-white via-white/70 to-transparent z-[5]"></div>
+
+                                    <div className="absolute bottom-6 right-4 bg-black/40 backdrop-blur-sm text-[8px] text-white/80 px-1.5 py-0.5 rounded-md uppercase tracking-widest pointer-events-none z-10">
+                                        Source: Unsplash
+                                    </div>
                                     <div className="absolute top-4 right-4 flex items-center gap-2 bg-white/90 backdrop-blur-md px-4 py-2 rounded-2xl text-xs font-black border border-black/5 shadow-lg z-10">
                                         <div className={`w-2 h-2 rounded-full ${mentor.isOnline ? 'bg-emerald-500 animate-pulse' : 'bg-slate-400'}`}></div>
                                         <span className={mentor.isOnline ? 'text-emerald-700' : 'text-slate-500 uppercase'}>
                                             {mentor.isOnline ? t.shared.online : t.shared.offline}
                                         </span>
                                     </div>
-                                    <div className="absolute bottom-4 left-4">
-                                        <div className="bg-white/95 backdrop-blur-md text-primary px-4 py-1.5 rounded-xl text-xs font-bold shadow-lg">
+                                    <div className="absolute bottom-6 left-4 z-10">
+                                        <div className="bg-primary/95 backdrop-blur-md text-white px-4 py-1.5 rounded-xl text-xs font-bold shadow-lg border border-white/10">
                                             {mentor.title}
                                         </div>
                                     </div>
                                 </CardHeader>
-                                
+
                                 <CardContent className="p-8 flex-1 flex flex-col">
                                     <div className="flex justify-between items-start mb-4">
                                         <h3 className="text-2xl font-extrabold text-primary group-hover/card:text-accent transition-colors">
@@ -450,7 +477,7 @@ export default function ExplorePage() {
                                     <p className="text-lg text-muted-foreground leading-relaxed italic line-clamp-2 mb-6">
                                         {mentor.desc}
                                     </p>
-                                    
+
                                     <div className="mt-auto">
                                         <div className="flex items-baseline gap-1">
                                             <span className="text-2xl font-black text-primary">{mentor.price}</span>
@@ -462,11 +489,11 @@ export default function ExplorePage() {
                                 <CardFooter className="p-8 pt-0 flex flex-col gap-3">
                                     <Button asChild variant="outline" className="w-full h-14 border-2 border-primary/10 text-primary hover:bg-primary/5 hover:border-primary/30 rounded-2xl font-bold text-lg transition-all group/info">
                                         <Link href={`/mentor/${mentor.id}`} className="flex items-center justify-center gap-2">
-                                            {t.shared.explore}
+                                            {t.shared.viewProfile}
                                             <ArrowRight size={18} className="group-hover/info:translate-x-1 transition-transform" />
                                         </Link>
                                     </Button>
-                                    <Button 
+                                    <Button
                                         onClick={() => handleOpenModal(mentor)}
                                         disabled={!mentor.isOnline}
                                         className={`w-full h-14 rounded-2xl font-extrabold text-lg transition-all ${mentor.isOnline ? 'bg-accent hover:bg-accent/90 text-white shadow-lg shadow-accent/20 hover:-translate-y-1' : 'bg-slate-100 text-slate-400 border-none cursor-not-allowed'}`}
@@ -485,7 +512,7 @@ export default function ExplorePage() {
                             <p className="text-xl text-muted-foreground max-w-lg mb-8">
                                 {t.explore.noResultsDesc}
                             </p>
-                            <Button 
+                            <Button
                                 onClick={() => { setSelectedCity("All"); setSelectedLang("All"); }}
                                 className="h-14 px-8 bg-primary hover:bg-primary/90 text-white rounded-2xl font-bold text-lg"
                             >
@@ -503,19 +530,24 @@ export default function ExplorePage() {
                         {!isSuccess ? (
                             <div className="flex flex-col">
                                 <div className="p-8 pb-6 text-center relative">
-                                    <button 
+                                    <button
                                         onClick={handleCloseModal}
                                         className="absolute top-6 right-6 text-primary/40 hover:text-primary bg-primary/5 hover:bg-primary/10 rounded-full h-10 w-10 flex items-center justify-center transition-all"
                                     >×</button>
-                                    
-                                    <div className="relative w-28 h-28 mx-auto mb-6">
-                                        <img 
-                                            src={selectedMentor.image} 
+
+                                    <div className="relative w-32 h-32 mx-auto mb-6">
+                                        <img
+                                            src={selectedMentor.image}
                                             alt={selectedMentor.name}
                                             className="w-full h-full rounded-full object-cover border-4 border-white shadow-xl"
                                         />
-                                        <div className="absolute -bottom-1 -right-1 w-8 h-8 bg-emerald-500 rounded-full border-4 border-white flex items-center justify-center">
-                                            <CheckCircle size={14} className="text-white" />
+                                        {/* Soft Blend for circle */}
+                                        <div className="absolute inset-0 rounded-full bg-gradient-to-t from-white/40 to-transparent pointer-events-none" />
+                                        <div className="absolute bottom-1 right-1 bg-black/40 backdrop-blur-sm text-[6px] text-white/80 px-1 py-0.5 rounded-sm uppercase tracking-widest pointer-events-none">
+                                            Source: Unsplash
+                                        </div>
+                                        <div className="absolute -bottom-1 -left-1 w-10 h-10 bg-emerald-500 rounded-full border-4 border-white flex items-center justify-center shadow-lg">
+                                            <CheckCircle size={18} className="text-white" />
                                         </div>
                                     </div>
                                     <h2 className="text-3xl font-black text-primary">{t.mentor.bookingTitle}</h2>
@@ -527,11 +559,11 @@ export default function ExplorePage() {
                                         <label className="text-xs font-black uppercase tracking-wider text-primary/40 ml-1">{t.mentor.selectTime}</label>
                                         <Select value={selectedTime} onValueChange={setSelectedTime}>
                                             <SelectTrigger className="w-full h-14 bg-white border-2 border-primary/5 rounded-2xl px-4 text-lg font-bold text-primary focus:ring-accent transition-all">
-                                                <SelectValue />
+                                                <SelectValue placeholder={t.mentor.selectTime} />
                                             </SelectTrigger>
-                                            <SelectContent className="rounded-2xl border-2 border-primary/5 shadow-xl">
-                                                <SelectItem value="Today1">{t.dashboard.today}, 14:00 - 15:00 WIB</SelectItem>
-                                                <SelectItem value="Today2">{t.dashboard.today}, 16:30 - 17:30 WIB</SelectItem>
+                                            <SelectContent className="bg-white border-2 border-primary/5 rounded-2xl shadow-2xl z-[100] text-primary font-bold">
+                                                <SelectItem value="Today1">{t.dashboard.today}, {getDynamicTimeRange(1)}</SelectItem>
+                                                <SelectItem value="Today2">{t.dashboard.today}, {getDynamicTimeRange(3)}</SelectItem>
                                                 <SelectItem value="Tomorrow1">{t.dashboard.tomorrow}, 10:00 - 11:00 WIB</SelectItem>
                                                 <SelectItem value="Tomorrow2">{t.dashboard.tomorrow}, 13:00 - 14:00 WIB</SelectItem>
                                             </SelectContent>
@@ -556,7 +588,7 @@ export default function ExplorePage() {
                                         </div>
                                     </div>
 
-                                    <Button 
+                                    <Button
                                         onClick={handlePayment}
                                         disabled={isProcessing}
                                         className="w-full h-16 bg-primary hover:bg-primary/90 text-white rounded-2xl text-xl font-black shadow-xl shadow-primary/20 transition-all hover:scale-[1.02] active:scale-95 group"

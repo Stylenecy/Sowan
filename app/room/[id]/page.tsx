@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState, useCallback, use } from 'react';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
 import { useLanguage } from '@/context/LanguageContext';
-import { Mic, MicOff, Video, VideoOff, PhoneOff, Wifi, Clock } from 'lucide-react';
+import { Mic, MicOff, Video, VideoOff, PhoneOff, Wifi, Clock, Volume2, VolumeX } from 'lucide-react';
 
 function formatDuration(s: number) {
     const m = Math.floor(s / 60).toString().padStart(2, '0');
@@ -20,10 +20,12 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
 
     const [isMuted, setIsMuted] = useState(false);
     const [isVideoOff, setIsVideoOff] = useState(false);
+    const [isRemoteMuted, setIsRemoteMuted] = useState(true);
     const [cameraError, setCameraError] = useState(false);
     const [elapsed, setElapsed] = useState(0);
 
     const videoRef = useRef<HTMLVideoElement>(null);
+    const iframeRef = useRef<HTMLIFrameElement>(null);
     const streamRef = useRef<MediaStream | null>(null);
 
     // Session timer
@@ -64,6 +66,20 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
         setIsVideoOff(p => !p);
     }, [isVideoOff]);
 
+    const toggleRemoteMute = useCallback(() => {
+        const nextMuted = !isRemoteMuted;
+        setIsRemoteMuted(nextMuted);
+        if (iframeRef.current?.contentWindow) {
+            iframeRef.current.contentWindow.postMessage(
+                JSON.stringify({
+                    event: 'command',
+                    func: nextMuted ? 'mute' : 'unMute'
+                }),
+                '*'
+            );
+        }
+    }, [isRemoteMuted]);
+
     const isMentor = user?.name === 'Opa Adriel';
     const partnerName = isMentor ? "Imeldya" : "Opa Adriel";
     const partnerLocation = isMentor ? "Jakarta" : "Yogyakarta";
@@ -78,9 +94,10 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
             {/* ── Full-screen remote video ── */}
             <div className="absolute inset-0 z-0">
                 <iframe
-                    src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&disablekb=1&modestbranding=1&playsinline=1`}
+                    ref={iframeRef}
+                    src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&disablekb=1&modestbranding=1&playsinline=1&enablejsapi=1`}
                     allow="autoplay; encrypted-media"
-                    className="absolute top-1/2 left-1/2 w-[350vw] h-[350vh] md:w-[150vw] md:h-[150vw] -translate-x-1/2 -translate-y-1/2 pointer-events-none object-cover"
+                    className="absolute top-1/2 left-1/2 w-[115vw] h-[115vh] md:w-[120vw] md:h-[120vh] -translate-x-1/2 -translate-y-1/2 pointer-events-none object-cover transition-all duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/40 pointer-events-none" />
                 
@@ -98,6 +115,30 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
                             <span className="text-white/40 font-medium">{ytHandle}</span>
                         </div>
                     </a>
+                </div>
+
+                {/* ── Floating Remote Audio Toggle ── */}
+                <div className="absolute top-28 right-6 z-30">
+                    <button 
+                        onClick={toggleRemoteMute}
+                        className={`w-20 h-20 rounded-[32px] flex flex-col items-center justify-center gap-1 transition-all active:scale-90 shadow-2xl border backdrop-blur-xl group
+                            ${isRemoteMuted 
+                                ? 'bg-red-500/20 border-red-500/30 hover:bg-red-500/30' 
+                                : 'bg-emerald-500/20 border-emerald-500/30 hover:bg-emerald-500/30'}`}
+                    >
+                        {isRemoteMuted ? (
+                            <VolumeX className="w-8 h-8 text-red-400 group-hover:scale-110 transition-transform" />
+                        ) : (
+                            <Volume2 className="w-8 h-8 text-emerald-400 group-hover:scale-110 transition-transform" />
+                        )}
+                        <span className={`text-[10px] font-black uppercase tracking-widest 
+                            ${isRemoteMuted ? 'text-red-300' : 'text-emerald-300'}`}>
+                            {isRemoteMuted ? 'Unmute' : 'Mute'}
+                        </span>
+                    </button>
+                    <div className="mt-3 text-center">
+                        <p className="text-[9px] text-white/40 font-black uppercase tracking-[0.2em]">Partner Audio</p>
+                    </div>
                 </div>
             </div>
 

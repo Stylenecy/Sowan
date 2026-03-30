@@ -26,6 +26,7 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
 
     const videoRef = useRef<HTMLVideoElement>(null);
     const iframeRef = useRef<HTMLIFrameElement>(null);
+    const remoteVideoRef = useRef<HTMLVideoElement>(null);
     const streamRef = useRef<MediaStream | null>(null);
 
     // Session timer
@@ -69,6 +70,11 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
     const toggleRemoteMute = useCallback(() => {
         const nextMuted = !isRemoteMuted;
         setIsRemoteMuted(nextMuted);
+        
+        if (remoteVideoRef.current) {
+            remoteVideoRef.current.muted = nextMuted;
+        }
+
         if (iframeRef.current?.contentWindow) {
             iframeRef.current.contentWindow.postMessage(
                 JSON.stringify({
@@ -84,9 +90,10 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
 
     // Determine partner details based on room ID or user role
     let partnerName = isMentor ? "Imeldya" : "Opa Adriel";
-    let videoId = isMentor ? 'xUDcOBBF79o' : '9y3XCrhCbCw';
-    let ytSource = isMentor ? "Bailey Schildbach" : "Bernard Albertson";
-    let ytHandle = isMentor ? "@bailey.schildbach" : "@BernardAlbertson";
+    let videoId = isMentor ? 'xUDcOBBF79o' : '';
+    let ytSource = isMentor ? "Bailey Schildbach" : "";
+    let ytHandle = isMentor ? "@bailey.schildbach" : "";
+    let isLocalVideo = !isMentor;
 
     // Custom overrides for specific female mentors
     if (id === '5') {
@@ -94,16 +101,19 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
         videoId = "N90UIXMuMMU";
         ytSource = "Sandra Hart";
         ytHandle = "@lifewithsandrahart";
+        isLocalVideo = false;
     } else if (id === '8') {
         partnerName = "Ibu Dian";
         videoId = "N90UIXMuMMU";
         ytSource = "Sandra Hart";
         ytHandle = "@lifewithsandrahart";
+        isLocalVideo = false;
     } else if (id === '11') {
         partnerName = "Ibu Ningsih";
         videoId = "N90UIXMuMMU";
         ytSource = "Sandra Hart";
         ytHandle = "@lifewithsandrahart";
+        isLocalVideo = false;
     }
 
     const ytUrl = `https://www.youtube.com/${ytHandle}`;
@@ -113,29 +123,43 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
 
             {/* ── Full-screen remote video ── */}
             <div className="absolute inset-0 z-0">
-                <iframe
-                    ref={iframeRef}
-                    src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&disablekb=1&modestbranding=1&playsinline=1&enablejsapi=1`}
-                    allow="autoplay; encrypted-media"
-                    className="absolute top-1/2 left-1/2 w-[115vw] h-[115vh] md:w-[120vw] md:h-[120vh] -translate-x-1/2 -translate-y-1/2 pointer-events-none object-cover transition-all duration-700"
-                />
+                {isLocalVideo ? (
+                    <video
+                        ref={remoteVideoRef}
+                        src="/video-pak-budi.mp4"
+                        autoPlay
+                        loop
+                        playsInline
+                        muted={isRemoteMuted}
+                        className="absolute top-1/2 left-1/2 w-[115vw] h-[115vh] md:w-[120vw] md:h-[120vh] -translate-x-1/2 -translate-y-1/2 pointer-events-none object-cover transition-all duration-700"
+                    />
+                ) : (
+                    <iframe
+                        ref={iframeRef}
+                        src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&disablekb=1&modestbranding=1&playsinline=1&enablejsapi=1`}
+                        allow="autoplay; encrypted-media"
+                        className="absolute top-1/2 left-1/2 w-[115vw] h-[115vh] md:w-[120vw] md:h-[120vh] -translate-x-1/2 -translate-y-1/2 pointer-events-none object-cover transition-all duration-700"
+                    />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/40 pointer-events-none" />
 
                 {/* ── YouTube Source Credit (Premium Visibility) ── */}
-                <div className="absolute top-28 left-4 sm:left-6 z-30 opacity-60 hover:opacity-100 transition-opacity max-w-[150px] sm:max-w-none">
-                    <a
-                        href={ytUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex flex-col bg-black/40 backdrop-blur-md border border-white/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl sm:rounded-2xl text-[10px] sm:text-sm text-white/80 font-bold hover:text-white hover:bg-black/60 transition-all shadow-lg"
-                    >
-                        <span className="text-[8px] sm:text-[10px] uppercase tracking-widest text-white/40 mb-0.5">Source: YouTube</span>
-                        <div className="flex flex-col sm:flex-row sm:items-center sm:gap-2">
-                            <span className="truncate">{ytSource}</span>
-                            <span className="text-white/40 font-medium truncate hidden sm:inline">{ytHandle}</span>
-                        </div>
-                    </a>
-                </div>
+                {!isLocalVideo && (
+                    <div className="absolute top-28 left-4 sm:left-6 z-30 opacity-60 hover:opacity-100 transition-opacity max-w-[150px] sm:max-w-none">
+                        <a
+                            href={ytUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex flex-col bg-black/40 backdrop-blur-md border border-white/10 px-3 sm:px-4 py-1.5 sm:py-2 rounded-xl sm:rounded-2xl text-[10px] sm:text-sm text-white/80 font-bold hover:text-white hover:bg-black/60 transition-all shadow-lg"
+                        >
+                            <span className="text-[8px] sm:text-[10px] uppercase tracking-widest text-white/40 mb-0.5">Source: YouTube</span>
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:gap-2">
+                                <span className="truncate">{ytSource}</span>
+                                <span className="text-white/40 font-medium truncate hidden sm:inline">{ytHandle}</span>
+                            </div>
+                        </a>
+                    </div>
+                )}
 
                 {/* ── Floating Remote Audio Toggle ── */}
                 <div className="absolute top-28 right-4 sm:right-6 z-30">

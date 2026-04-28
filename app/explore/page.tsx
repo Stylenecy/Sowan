@@ -54,6 +54,10 @@ export default function ExplorePage() {
             price: "Rp 100.000",
             isOnline: true,
             slots: 3,
+            videoId: "xUDcOBBF79o",
+            videoSource: "Bailey Schildbach",
+            videoHandle: "@bailey.schildbach",
+            useLocalVideo: false,
         },
         {
             id: 2,
@@ -69,6 +73,10 @@ export default function ExplorePage() {
             price: "Rp 200.000",
             isOnline: false,
             slots: 0,
+            videoId: "xUDcOBBF79o",
+            videoSource: "Bailey Schildbach",
+            videoHandle: "@bailey.schildbach",
+            useLocalVideo: false,
         },
         {
             id: 3,
@@ -84,6 +92,10 @@ export default function ExplorePage() {
             price: "Rp 350.000",
             isOnline: true,
             slots: 2,
+            videoId: "xUDcOBBF79o",
+            videoSource: "Bailey Schildbach",
+            videoHandle: "@bailey.schildbach",
+            useLocalVideo: false,
         },
         {
             id: 4,
@@ -99,6 +111,10 @@ export default function ExplorePage() {
             price: "Rp 150.000",
             isOnline: false,
             slots: 1,
+            videoId: "xUDcOBBF79o",
+            videoSource: "Bailey Schildbach",
+            videoHandle: "@bailey.schildbach",
+            useLocalVideo: false,
         },
         {
             id: 5,
@@ -114,6 +130,10 @@ export default function ExplorePage() {
             price: "Rp 120.000",
             isOnline: true,
             slots: 4,
+            videoId: "xUDcOBBF79o",
+            videoSource: "Bailey Schildbach",
+            videoHandle: "@bailey.schildbach",
+            useLocalVideo: false,
         },
         {
             id: 6,
@@ -129,6 +149,10 @@ export default function ExplorePage() {
             price: "Rp 80.000",
             isOnline: false,
             slots: 0,
+            videoId: "xUDcOBBF79o",
+            videoSource: "Bailey Schildbach",
+            videoHandle: "@bailey.schildbach",
+            useLocalVideo: false,
         },
         {
             id: 7,
@@ -144,6 +168,10 @@ export default function ExplorePage() {
             price: "Rp 110.000",
             isOnline: false,
             slots: 2,
+            videoId: "xUDcOBBF79o",
+            videoSource: "Bailey Schildbach",
+            videoHandle: "@bailey.schildbach",
+            useLocalVideo: false,
         },
         {
             id: 8,
@@ -159,6 +187,10 @@ export default function ExplorePage() {
             price: "Rp 180.000",
             isOnline: true,
             slots: 1,
+            videoId: "xUDcOBBF79o",
+            videoSource: "Bailey Schildbach",
+            videoHandle: "@bailey.schildbach",
+            useLocalVideo: false,
         },
         {
             id: 9,
@@ -174,6 +206,10 @@ export default function ExplorePage() {
             price: "Rp 90.000",
             isOnline: false,
             slots: 3,
+            videoId: "xUDcOBBF79o",
+            videoSource: "Bailey Schildbach",
+            videoHandle: "@bailey.schildbach",
+            useLocalVideo: false,
         },
         {
             id: 10,
@@ -189,6 +225,10 @@ export default function ExplorePage() {
             price: "Rp 100.000",
             isOnline: false,
             slots: 0,
+            videoId: "xUDcOBBF79o",
+            videoSource: "Bailey Schildbach",
+            videoHandle: "@bailey.schildbach",
+            useLocalVideo: false,
         },
         {
             id: 11,
@@ -204,6 +244,10 @@ export default function ExplorePage() {
             price: "Rp 70.000",
             isOnline: true,
             slots: 2,
+            videoId: "xUDcOBBF79o",
+            videoSource: "Bailey Schildbach",
+            videoHandle: "@bailey.schildbach",
+            useLocalVideo: false,
         },
         {
             id: 12,
@@ -219,6 +263,10 @@ export default function ExplorePage() {
             price: "Rp 160.000",
             isOnline: false,
             slots: 1,
+            videoId: "xUDcOBBF79o",
+            videoSource: "Bailey Schildbach",
+            videoHandle: "@bailey.schildbach",
+            useLocalVideo: false,
         },
         {
             id: 13,
@@ -234,6 +282,10 @@ export default function ExplorePage() {
             price: "Rp 140.000",
             isOnline: false,
             slots: 0,
+            videoId: "xUDcOBBF79o",
+            videoSource: "Bailey Schildbach",
+            videoHandle: "@bailey.schildbach",
+            useLocalVideo: false,
         },
         {
             id: 14,
@@ -249,6 +301,10 @@ export default function ExplorePage() {
             price: "Rp 100.000",
             isOnline: false,
             slots: 2,
+            videoId: "xUDcOBBF79o",
+            videoSource: "Bailey Schildbach",
+            videoHandle: "@bailey.schildbach",
+            useLocalVideo: false,
         }
     ];
 

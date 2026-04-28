@@ -31,6 +31,14 @@ export default function ExplorePage() {
     const [isProcessing, setIsProcessing] = useState(false);
     const [selectedTime, setSelectedTime] = useState("");
 
+    const confettiPieces = useMemo(() =>
+        [...Array(20)].map((_, i) => ({
+            left: `${Math.random() * 100}%`,
+            delay: `${Math.random() * 0.5}s`,
+            color: ['#D97706', '#1A365D', '#10B981', '#F59E0B', '#EF4444'][Math.floor(Math.random() * 5)],
+            isCircle: Math.random() > 0.5
+        })), []);
+
     const mentors = [
         {
             id: 1,
@@ -562,6 +570,24 @@ export default function ExplorePage() {
                                         className="absolute top-6 right-6 text-primary/40 hover:text-primary bg-primary/5 hover:bg-primary/10 rounded-full h-10 w-10 flex items-center justify-center transition-all"
                                     >×</button>
 
+                                    {/* Progress Steps */}
+                                    <div className="flex items-center justify-center gap-2 mb-6">
+                                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent font-bold text-sm">
+                                            <span className="w-6 h-6 rounded-full bg-accent text-white flex items-center justify-center text-xs font-black">1</span>
+                                            {t.payment.step1}
+                                        </div>
+                                        <div className="w-8 h-px bg-primary/20"></div>
+                                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 text-primary/50 font-bold text-sm">
+                                            <span className="w-6 h-6 rounded-full bg-primary/20 text-primary/50 flex items-center justify-center text-xs font-black">2</span>
+                                            {t.payment.step2}
+                                        </div>
+                                        <div className="w-8 h-px bg-primary/20"></div>
+                                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 text-primary/50 font-bold text-sm">
+                                            <span className="w-6 h-6 rounded-full bg-primary/20 text-primary/50 flex items-center justify-center text-xs font-black">3</span>
+                                            {t.payment.step3}
+                                        </div>
+                                    </div>
+
                                     <div className="relative w-32 h-32 mx-auto mb-6">
                                         <img
                                             src={selectedMentor.image}
@@ -622,7 +648,7 @@ export default function ExplorePage() {
                                         {isProcessing ? (
                                             <div className="flex items-center gap-3">
                                                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                                {t.payment.processing}
+                                                Memproses pembayaran aman...
                                             </div>
                                         ) : (
                                             <div className="flex items-center gap-3">
@@ -637,21 +663,49 @@ export default function ExplorePage() {
                                 </div>
                             </div>
                         ) : (
-                            <div className="p-12 text-center flex flex-col items-center">
-                                <div className="w-24 h-24 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-8 animate-bounce transition-transform">
+                            <div className="p-12 text-center flex flex-col items-center relative overflow-hidden">
+                                {/* Confetti */}
+                                <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                                    {confettiPieces.map((piece, i) => (
+                                        <div
+                                            key={i}
+                                            className="absolute animate-confetti"
+                                            style={{
+                                                left: piece.left,
+                                                animationDelay: piece.delay,
+                                                backgroundColor: piece.color,
+                                                width: '8px',
+                                                height: '8px',
+                                                borderRadius: piece.isCircle ? '50%' : '2px'
+                                            }}
+                                        />
+                                    ))}
+                                </div>
+
+                                <div className="relative z-10 w-24 h-24 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-8 animate-bounce transition-transform">
                                     <CheckCircle size={56} />
                                 </div>
-                                <h2 className="text-4xl font-black text-primary mb-4">{t.payment.success}</h2>
-                                <p className="text-xl text-muted-foreground font-medium leading-relaxed">
+                                <h2 className="relative z-10 text-4xl font-black text-primary mb-4">{t.payment.bookingConfirmed}</h2>
+                                <p className="relative z-10 text-xl text-muted-foreground font-medium leading-relaxed">
                                     {t.payment.secured.replace('{name}', selectedMentor.name)}
                                 </p>
-                                <div className="mt-10 flex items-center gap-3 text-primary/40 font-bold italic">
+                                <div className="relative z-10 mt-10 flex items-center gap-3 text-primary/40 font-bold italic">
                                     <div className="w-5 h-5 border-2 border-primary/20 border-t-primary/60 rounded-full animate-spin" />
                                     {t.payment.redirect}
                                 </div>
                             </div>
                         )}
                     </div>
+
+                    <style jsx global>{`
+                        @keyframes confetti {
+                            0% { transform: translateY(-100%) rotate(0deg); opacity: 1; }
+                            100% { transform: translateY(400px) rotate(720deg); opacity: 0; }
+                        }
+                        .animate-confetti {
+                            animation: confetti 1.5s ease-out forwards;
+                        }
+                    `}</style>
                 </div>
             )}
         </div>

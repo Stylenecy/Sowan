@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, use } from "react";
+import React, { useState, use, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -28,6 +28,14 @@ export default function MentorProfilePage({ params }: { params: Promise<{ id: st
     const [isSuccess, setIsSuccess] = useState(false);
     const [isProcessing, setIsProcessing] = useState(false);
     const [selectedTime, setSelectedTime] = useState("Today1");
+
+    const confettiPieces = useMemo(() =>
+        [...Array(20)].map((_, i) => ({
+            left: `${Math.random() * 100}%`,
+            delay: `${Math.random() * 0.5}s`,
+            color: ['#D97706', '#1A365D', '#10B981', '#F59E0B', '#EF4444'][Math.floor(Math.random() * 5)],
+            isCircle: Math.random() > 0.5
+        })), []);
 
     const getDynamicTimeRange = (startOffset: number) => {
         const d = new Date();
@@ -417,7 +425,31 @@ export default function MentorProfilePage({ params }: { params: Promise<{ id: st
                         {!isSuccess ? (
                             <div className="p-0 animate-in fade-in slide-in-from-bottom-5 duration-500">
                                 {/* Modal Header with Visual Image */}
-                                <div className="p-10 text-center space-y-4">
+                                <div className="p-10 text-center space-y-4 relative">
+                                    {/* Close Button */}
+                                    <button
+                                        onClick={() => !isProcessing && setIsModalOpen(false)}
+                                        className="absolute top-6 right-6 text-primary/40 hover:text-primary bg-primary/5 hover:bg-primary/10 rounded-full h-10 w-10 flex items-center justify-center transition-all"
+                                    >×</button>
+
+                                    {/* Progress Steps */}
+                                    <div className="flex items-center justify-center gap-2 mb-4">
+                                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent font-bold text-sm">
+                                            <span className="w-6 h-6 rounded-full bg-accent text-white flex items-center justify-center text-xs font-black">1</span>
+                                            {t.payment.step1}
+                                        </div>
+                                        <div className="w-8 h-px bg-primary/20"></div>
+                                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 text-primary/50 font-bold text-sm">
+                                            <span className="w-6 h-6 rounded-full bg-primary/20 text-primary/50 flex items-center justify-center text-xs font-black">2</span>
+                                            {t.payment.step2}
+                                        </div>
+                                        <div className="w-8 h-px bg-primary/20"></div>
+                                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 text-primary/50 font-bold text-sm">
+                                            <span className="w-6 h-6 rounded-full bg-primary/20 text-primary/50 flex items-center justify-center text-xs font-black">3</span>
+                                            {t.payment.step3}
+                                        </div>
+                                    </div>
+
                                     <div className="relative w-32 h-32 mx-auto rounded-full overflow-hidden border-4 border-white shadow-2xl group">
                                         <img
                                             src={foundMentor.image}
@@ -478,7 +510,7 @@ export default function MentorProfilePage({ params }: { params: Promise<{ id: st
                                         {isProcessing ? (
                                             <div className="flex items-center gap-3">
                                                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                                {t.payment.processing}
+                                                Memproses pembayaran aman...
                                             </div>
                                         ) : (
                                             <span className="flex items-center gap-2">
@@ -490,21 +522,49 @@ export default function MentorProfilePage({ params }: { params: Promise<{ id: st
                                 </div>
                             </div>
                         ) : (
-                            <div className="p-16 text-center animate-in zoom-in duration-500">
-                                <div className="w-32 h-32 bg-emerald-100 text-emerald-600 rounded-[40px] flex items-center justify-center mx-auto mb-10 shadow-2xl animate-bounce">
+                            <div className="p-16 text-center flex flex-col items-center relative overflow-hidden">
+                                {/* Confetti */}
+                                <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                                    {confettiPieces.map((piece, i) => (
+                                        <div
+                                            key={i}
+                                            className="absolute animate-confetti"
+                                            style={{
+                                                left: piece.left,
+                                                animationDelay: piece.delay,
+                                                backgroundColor: piece.color,
+                                                width: '8px',
+                                                height: '8px',
+                                                borderRadius: piece.isCircle ? '50%' : '2px'
+                                            }}
+                                        />
+                                    ))}
+                                </div>
+
+                                <div className="relative z-10 w-32 h-32 bg-emerald-100 text-emerald-600 rounded-[40px] flex items-center justify-center mx-auto mb-10 shadow-2xl animate-bounce">
                                     <CheckCircle size={80} />
                                 </div>
-                                <h2 className="text-5xl font-black text-primary mb-4">{t.payment.success}</h2>
-                                <p className="text-2xl text-muted-foreground font-bold leading-relaxed">
+                                <h2 className="relative z-10 text-5xl font-black text-primary mb-4">{t.payment.bookingConfirmed}</h2>
+                                <p className="relative z-10 text-2xl text-muted-foreground font-bold leading-relaxed">
                                     {t.payment.secured.replace('{name}', foundMentor.name)}
                                 </p>
-                                <div className="mt-12 flex items-center justify-center gap-4 text-primary/30 font-black italic">
+                                <div className="relative z-10 mt-12 flex items-center justify-center gap-4 text-primary/30 font-black italic">
                                     <div className="w-6 h-6 border-4 border-primary/20 border-t-primary rounded-full animate-spin" />
                                     {t.payment.redirect}
                                 </div>
                             </div>
                         )}
                     </div>
+
+                    <style jsx global>{`
+                        @keyframes confetti {
+                            0% { transform: translateY(-100%) rotate(0deg); opacity: 1; }
+                            100% { transform: translateY(400px) rotate(720deg); opacity: 0; }
+                        }
+                        .animate-confetti {
+                            animation: confetti 1.5s ease-out forwards;
+                        }
+                    `}</style>
                 </div>
             )}
         </div>

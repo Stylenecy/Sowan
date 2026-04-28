@@ -103,47 +103,90 @@ export default function CustomerDashboard() {
                         </div>
                         {t.dashboard.activeSession}
                     </h2>
-                    <Card className="rounded-[40px] sm:rounded-[56px] overflow-hidden border-none shadow-2xl bg-white group/session">
+
+                    {/* Booking Ticket Card */}
+                    <div className="bg-white rounded-[32px] sm:rounded-[40px] overflow-hidden border-2 border-dashed border-primary/20 shadow-xl">
                         <div className="flex flex-col lg:flex-row">
-                            <div className="lg:w-[400px] relative h-64 sm:h-80 lg:h-auto overflow-hidden">
+                            {/* Left: Mentor Photo */}
+                            <div className="lg:w-[280px] relative h-48 sm:h-64 lg:h-auto overflow-hidden bg-primary/5">
                                 <img
                                     src={bookedMentor ? bookedMentor.image : "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=400&auto=format&fit=crop"}
                                     alt={bookedMentor ? bookedMentor.name : "Mentor"}
-                                    className="w-full h-full object-cover transition-transform duration-1000 group-hover/session:scale-110"
+                                    className="w-full h-full object-cover"
                                 />
-                                {/* Seamless Gradient Blend */}
-                                <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-primary via-primary/40 to-transparent z-10" />
-                                <div className="absolute bottom-4 right-4 bg-black/40 backdrop-blur-sm text-[8px] text-white/80 px-2 py-1 rounded-md uppercase tracking-widest pointer-events-none z-20">
-                                    Source: Unsplash
-                                </div>
-                                <div className="absolute top-8 left-8 z-20">
-                                    <div className="bg-accent/90 backdrop-blur-md text-white text-xs font-black px-4 py-2 rounded-xl shadow-lg flex items-center gap-2">
-                                        <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
-                                        {bookedMentor ? bookedMentor.name : "Opa Adriel"}
+                                <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent"></div>
+                                <div className="absolute bottom-4 left-4 right-4">
+                                    <div className="bg-white/95 backdrop-blur-sm rounded-xl p-3 text-center">
+                                        <p className="font-black text-primary text-lg">{bookedMentor ? bookedMentor.name : "Opa Adriel"}</p>
+                                        <p className="text-primary/60 text-sm font-medium">{bookedMentor ? bookedMentor.title : "Pakar Sejarah Jawa"}</p>
                                     </div>
                                 </div>
                             </div>
-                            <div className="p-10 lg:p-14 flex-1 flex flex-col justify-between bg-primary text-white">
-                                <div className="space-y-8">
-                                    <div className="space-y-2">
-                                        <p className="text-white/40 font-black uppercase tracking-[0.2em] text-[10px] sm:text-sm italic">{t.dashboard.today}</p>
-                                        <h4 className="text-3xl sm:text-5xl font-black tracking-tight">{bookedTime}</h4>
+
+                            {/* Middle: Booking Details */}
+                            <div className="flex-1 p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
+                                <div className="space-y-6">
+                                    {/* Status Badge */}
+                                    <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-700 px-4 py-2 rounded-full w-fit font-bold text-sm">
+                                        <CheckCircle2 className="w-4 h-4" />
+                                        CONFIRMED ✓
                                     </div>
-                                    <p className="text-lg sm:text-2xl text-white/70 font-bold leading-relaxed italic max-w-2xl">
-                                        {bookedMentor ? bookedMentor.desc : t.dashboard.quoteCustomer}
-                                    </p>
+
+                                    {/* Time & Date */}
+                                    <div className="space-y-2">
+                                        <p className="text-primary/50 font-bold uppercase tracking-wider text-xs">{t.dashboard.today}</p>
+                                        <p className="text-3xl sm:text-4xl font-black text-primary">{bookedTime}</p>
+                                    </div>
+
+                                    {/* Price */}
+                                    <div className="flex items-baseline gap-2">
+                                        <span className="text-2xl font-black text-accent">{bookedMentor ? bookedMentor.price : "Rp 100.000"}</span>
+                                        <span className="text-primary/40 font-medium">/ sesi</span>
+                                    </div>
                                 </div>
-                                <div className="mt-8 sm:mt-12">
-                                    <Button asChild className="h-16 sm:h-20 bg-accent hover:bg-accent/90 text-white rounded-2xl sm:rounded-[28px] px-8 sm:px-12 text-xl sm:text-2xl font-black shadow-2xl shadow-black/20 group/btn transition-all active:scale-95 hover:-translate-y-1 w-full sm:w-auto">
-                                        <Link href={`/room/${bookedMentor?.id ?? 1}`} className="flex items-center justify-center gap-3 sm:gap-4">
+
+                                {/* CTA Button */}
+                                <div className="mt-6">
+                                    <Button asChild className="w-full h-14 sm:h-16 bg-accent hover:bg-accent/90 text-white rounded-2xl sm:rounded-[28px] text-lg sm:text-xl font-black shadow-xl shadow-accent/20 group/btn transition-all active:scale-95 hover:-translate-y-1">
+                                        <Link href={`/room/${bookedMentor?.id ?? 1}`} className="flex items-center justify-center gap-3">
                                             {t.dashboard.roomBtn}
-                                            <ArrowRight className="w-6 h-6 sm:w-8 sm:h-8 group-hover/btn:translate-x-3 transition-transform" />
+                                            <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6 group-hover/btn:translate-x-2 transition-transform" />
                                         </Link>
                                     </Button>
                                 </div>
                             </div>
+
+                            {/* Right: QR/Ticket Stub */}
+                            <div className="hidden lg:flex w-[120px] flex-col items-center justify-center bg-primary/5 p-6 border-l-2 border-dashed border-primary/10">
+                                <div className="w-20 h-20 bg-white rounded-2xl flex items-center justify-center mb-4 shadow-sm">
+                                    <div className="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center">
+                                        <span className="text-3xl">🎫</span>
+                                    </div>
+                                </div>
+                                <p className="text-primary/50 font-bold text-xs uppercase tracking-wider text-center">E-Ticket</p>
+                                <p className="text-primary font-black text-lg text-center">SOWAN</p>
+                            </div>
                         </div>
-                    </Card>
+
+                        {/* Ticket Perforation Line */}
+                        <div className="h-0 w-full border-t-2 border-dashed border-primary/10 -mt-px"></div>
+
+                        {/* Additional Info Row */}
+                        <div className="bg-primary/5 p-4 sm:p-6 flex flex-wrap gap-4 sm:gap-8 text-sm">
+                            <div className="flex items-center gap-2">
+                                <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
+                                <span className="text-primary/60 font-medium">Video Call 1-on-1</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <div className="w-2 h-2 rounded-full bg-amber-500"></div>
+                                <span className="text-primary/60 font-medium">60 Menit</span>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+                                <span className="text-primary/60 font-medium">Escrow Protected</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 {/* ── Secondary Info ── */}

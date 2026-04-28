@@ -97,6 +97,10 @@ interface Translations {
         success: string;
         secured: string;
         redirect: string;
+        step1: string;
+        step2: string;
+        step3: string;
+        bookingConfirmed: string;
     };
     dashboard: {
         customerTitle: string;
@@ -178,7 +182,8 @@ home: {
             exp: "Pengalaman", interests: "Topik Keahlian", about: "Tentang", bookingTitle: "Jadwal Sowan", bookingSubtitle: "Sowan Bersama {name}", bookingDesc: "Pilih waktu yang tepat untuk berbincang santai.", confirmBtn: "Konfirmasi Jadwal", reviews: "ULASAN", selectTime: "Pilih Waktu", quote: "Mari berbagi cerita."
         },
         payment: {
-            confirm: "Konfirmasi Sowan", fee: "Biaya Layanan", appFee: "Biaya Aplikasi", total: "Total", pay: "Bayar Aman", confirmPay: "Konfirmasi & Bayar", processing: "Memproses...", success: "Selesai!", secured: "Jadwal Anda bersama {name} telah berhasil diatur.", redirect: "Mengarahkan ke Dashboard..."
+            confirm: "Konfirmasi Sowan", fee: "Biaya Layanan", appFee: "Biaya Aplikasi", total: "Total", pay: "Bayar Aman", confirmPay: "Konfirmasi & Bayar", processing: "Memproses...", success: "Selesai!", secured: "Jadwal Anda bersama {name} telah berhasil diatur.", redirect: "Mengarahkan ke Dashboard...",
+            step1: "Pilih Waktu", step2: "Review", step3: "Bayar", bookingConfirmed: "Sowan Telah Terjadwal!"
         },
         dashboard: {
             customerTitle: "Dasbor Saya", mentorTitle: "Dasbor Mentor", activeSession: "Sesi Aktif", history: "Riwayat Sowan", points: "Poin Loyalitas", hours: "Jam Belajar", sessions: "Sesi Selesai",
@@ -226,7 +231,8 @@ home: {
             exp: "Experience", interests: "Topics of Expertise", about: "About", bookingTitle: "Sowan Schedule", bookingSubtitle: "Sowan with {name}", bookingDesc: "Choose the perfect time for a casual chat.", confirmBtn: "Confirm Schedule", reviews: "REVIEWS", selectTime: "Select Time", quote: "Let's share stories."
         },
         payment: {
-            confirm: "Confirm Sowan", fee: "Service Fee", appFee: "App Fee", total: "Total", pay: "Secure Payment", confirmPay: "Confirm & Pay", processing: "Processing...", success: "Done!", secured: "Your schedule with {name} has been successfully arranged.", redirect: "Redirecting to Dashboard..."
+            confirm: "Confirm Sowan", fee: "Service Fee", appFee: "App Fee", total: "Total", pay: "Secure Payment", confirmPay: "Confirm & Pay", processing: "Processing...", success: "Done!", secured: "Your schedule with {name} has been successfully arranged.", redirect: "Redirecting to Dashboard...",
+            step1: "Select Time", step2: "Review", step3: "Pay", bookingConfirmed: "Sowan Scheduled!"
         },
         dashboard: {
             customerTitle: "My Dashboard", mentorTitle: "Mentor Dashboard", activeSession: "Active Session", history: "Sowan History", points: "Loyalty Points", hours: "Learning Hours", sessions: "Completed Sessions",
@@ -274,7 +280,8 @@ home: {
             exp: "経験", interests: "専門分野", about: "概要", bookingTitle: "ソワンスケジュール", bookingSubtitle: "{name} とのソワン", bookingDesc: "カジュアルな会話に最適な時間を選んでください。", confirmBtn: "スケジュールを確定する", reviews: "レビュー", selectTime: "時間を選択", quote: "物語を共有しましょう。"
         },
         payment: {
-            confirm: "ソワンを確認する", fee: "サービス料", appFee: "アプリ手数料", total: "合計", pay: "安全に支払う", confirmPay: "確認して支払う", processing: "処理中...", success: "完了！", secured: "{name} とのスケジュールが正常に設定されました。", redirect: "ダッシュボードにリダイレクトしています..."
+            confirm: "ソワンを確認する", fee: "サービス料", appFee: "アプリ手数料", total: "合計", pay: "安全に支払う", confirmPay: "確認して支払う", processing: "処理中...", success: "完了！", secured: "{name} とのスケジュールが正常に設定されました。", redirect: "ダッシュボードにリダイレクトしています...",
+            step1: "時間選択", step2: "確認", step3: "支払い", bookingConfirmed: "ソワン予約完了！"
         },
         dashboard: {
             customerTitle: "マイダッシュボード", mentorTitle: "メンターダッシュボード", activeSession: "アクティブセッション", history: "ソワン履歴", points: "ロイヤリティポイント", hours: "学習時間", sessions: "完了したセッション",
@@ -322,7 +329,8 @@ home: {
             exp: "경험", interests: "전문 분야", about: "소개", bookingTitle: "소완 일정", bookingSubtitle: "{name} 님과의 소완", bookingDesc: "가벼운 대화를 나누기에 완벽한 시간을 선택하세요.", confirmBtn: "일정 확정", reviews: "리뷰", selectTime: "시간 선택", quote: "이야기를 공유합시다."
         },
         payment: {
-            confirm: "소완 확인", fee: "서비스 수수료", appFee: "앱 수수료", total: "합계", pay: "안전하게 결제", confirmPay: "확인 및 결제", processing: "처리 중...", success: "완료!", secured: "{name} 님과의 일정이 성공적으로 예약되었습니다.", redirect: "대시보드로 리다이렉트 중..."
+            confirm: "소완 확인", fee: "서비스 수수료", appFee: "앱 수수료", total: "합계", pay: "안전하게 결제", confirmPay: "확인 및 결제", processing: "처리 중...", success: "완료!", secured: "{name} 님과의 일정이 성공적으로 예약되었습니다.", redirect: "대시보드로 리다이렉트 중...",
+            step1: "시간 선택", step2: "확인", step3: "결제", bookingConfirmed: "소완 예약 완료!"
         },
         dashboard: {
             customerTitle: "내 대시보드", mentorTitle: "멘토 대시보드", activeSession: "활성 세션", history: "소완 이력", points: "로열티 포인트", hours: "학습 시간", sessions: "완료된 세션",
@@ -370,7 +378,8 @@ home: {
             exp: "经验", interests: "专业领域", about: "关于", bookingTitle: "Sowan 日程", bookingSubtitle: "与 {name} 师匠 Sowan", bookingDesc: "选择适合闲聊的完美时间。", confirmBtn: "确认日程", reviews: "评论", selectTime: "选择时间", quote: "让我们分享故事。"
         },
         payment: {
-            confirm: "确认 Sowan", fee: "服务费", appFee: "平台费", total: "总计", pay: "安全支付", confirmPay: "确认并支付", processing: "处理中...", success: "完成！", secured: "您与 {name} 的日程已成功安排。", redirect: "正在跳转到仪表板..."
+            confirm: "确认 Sowan", fee: "服务费", appFee: "平台费", total: "总计", pay: "安全支付", confirmPay: "确认并支付", processing: "处理中...", success: "完成！", secured: "您与 {name} 的日程已成功安排。", redirect: "正在跳转到仪表板...",
+            step1: "选择时间", step2: "确认", step3: "支付", bookingConfirmed: "Sowan预约成功！"
         },
         dashboard: {
             customerTitle: "我的仪表板", mentorTitle: "导师仪表板", activeSession: "活跃疗程", history: "Sowan 历史", points: "忠诚积分", hours: "学习时长", sessions: "完成疗程",

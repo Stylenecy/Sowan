@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -30,6 +30,12 @@ export default function ExplorePage() {
     const [isSuccess, setIsSuccess] = useState(false);
     const [isProcessing, setIsProcessing] = useState(false);
     const [selectedTime, setSelectedTime] = useState("");
+    const [isLoading, setIsLoading] = useState(true);
+
+    React.useEffect(() => {
+        const timer = setTimeout(() => setIsLoading(false), 800);
+        return () => clearTimeout(timer);
+    }, []);
 
     const confettiPieces = useMemo(() =>
         [...Array(20)].map((_, i) => ({
@@ -499,7 +505,26 @@ export default function ExplorePage() {
                 <div
                     className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 pb-20 pt-4"
                 >
-                    {sortedMentors.length > 0 ? (
+                    {isLoading ? (
+                        [...Array(6)].map((_, i) => (
+                            <Card key={i} className="w-full rounded-[24px] sm:rounded-[32px] border-2 border-transparent overflow-hidden flex flex-col">
+                                <CardHeader className="p-0 relative h-64 sm:h-72 bg-slate-100 overflow-hidden animate-pulse">
+                                    <div className="absolute inset-0 bg-gradient-to-r from-slate-100 via-slate-50 to-slate-100 animate-shimmer bg-[length:200%_100%]"></div>
+                                    <div className="absolute top-4 left-4 w-20 h-8 bg-slate-200 rounded-full animate-pulse"></div>
+                                    <div className="absolute bottom-4 right-4 w-16 h-6 bg-slate-200 rounded-full animate-pulse"></div>
+                                </CardHeader>
+                                <CardContent className="p-6 sm:p-8 flex-1 flex flex-col gap-4">
+                                    <div className="h-8 bg-slate-100 rounded-xl animate-pulse w-3/4"></div>
+                                    <div className="h-4 bg-slate-100 rounded-lg animate-pulse w-1/2"></div>
+                                    <div className="h-4 bg-slate-100 rounded-lg animate-pulse w-full"></div>
+                                    <div className="h-4 bg-slate-100 rounded-lg animate-pulse w-2/3"></div>
+                                    <div className="mt-auto pt-4">
+                                        <div className="h-10 bg-slate-100 rounded-xl animate-pulse w-full"></div>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        ))
+                    ) : sortedMentors.length > 0 ? (
                         sortedMentors.map((mentor) => (
                             <Card
                                 key={mentor.id}

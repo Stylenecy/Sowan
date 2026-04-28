@@ -14,6 +14,9 @@ const playfair = Playfair_Display({ subsets: ["latin"], variable: "--font-serif"
 export const metadata: Metadata = {
   title: "Sowan.id - Belajar Langsung dari Ahlinya",
   description: "Platform Sowan untuk menghubungkan generasi muda dengan lansia berpengalaman",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({

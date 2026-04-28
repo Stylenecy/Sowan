@@ -23,6 +23,7 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
     const [isRemoteMuted, setIsRemoteMuted] = useState(true);
     const [cameraError, setCameraError] = useState(false);
     const [elapsed, setElapsed] = useState(0);
+    const [videoDecision, setVideoDecision] = useState({ isLocalVideo: false, videoId: '', ytSource: '', ytHandle: '' });
 
     const videoRef = useRef<HTMLVideoElement>(null);
     const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -35,19 +36,34 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
         return () => clearInterval(t);
     }, []);
 
-    // Read stored mentor data for dynamic content
+    // Read stored mentor data for dynamic content (client-only)
     useEffect(() => {
         const storedMentor = localStorage.getItem("sowan_booked_mentor");
+        let newVideoDecision = { isLocalVideo: false, videoId: 'xUDcOBBF79o', ytSource: 'Bailey Schildbach', ytHandle: '@bailey.schildbach' };
+
         if (storedMentor) {
             try {
                 const mentor = JSON.parse(storedMentor);
-                // This room belongs to this mentor
-                if (String(mentor.id) !== id) {
-                    // Update localStorage if room ID doesn't match
-                    localStorage.setItem("sowan_room_id", id);
-                }
+                newVideoDecision = {
+                    isLocalVideo: mentor.useLocalVideo ?? false,
+                    videoId: mentor.videoId ?? 'xUDcOBBF79o',
+                    ytSource: mentor.videoSource ?? 'Bailey Schildbach',
+                    ytHandle: mentor.videoHandle ?? '@bailey.schildbach'
+                };
             } catch {}
         }
+
+        // Custom overrides for specific female mentors
+        if (id === '5' || id === '8' || id === '11') {
+            newVideoDecision = {
+                isLocalVideo: false,
+                videoId: 'N90UIXMuMMU',
+                ytSource: 'Sandra Hart',
+                ytHandle: '@lifewithsandrahart'
+            };
+        }
+
+        setVideoDecision(newVideoDecision);
     }, [id]);
 
     // Camera
@@ -102,52 +118,15 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
     }, [isRemoteMuted]);
 
     const isMentor = user?.name === 'Opa Adriel';
-
-    // Read mentor data from localStorage
-    const storedMentor = (typeof window !== 'undefined') ? localStorage.getItem("sowan_booked_mentor") : null;
-    let mentorData: { name?: string; videoId?: string; videoSource?: string; videoHandle?: string; useLocalVideo?: boolean } | null = null;
-    if (storedMentor) {
-        try {
-            mentorData = JSON.parse(storedMentor);
-        } catch {}
-    }
-
-    // Determine partner details based on room ID or user role or localStorage
-    let partnerName = mentorData?.name ?? (isMentor ? "Imeldya" : "Opa Adriel");
-    let videoId = mentorData?.videoId ?? (isMentor ? 'xUDcOBBF79o' : '');
-    let ytSource = mentorData?.videoSource ?? (isMentor ? "Bailey Schildbach" : "");
-    let ytHandle = mentorData?.videoHandle ?? (isMentor ? "@bailey.schildbach" : "");
-    let isLocalVideo = mentorData?.useLocalVideo !== undefined ? mentorData.useLocalVideo : !isMentor;
-
-    // Custom overrides for specific female mentors
-    if (id === '5') {
-        partnerName = "Ibu Sri";
-        videoId = "N90UIXMuMMU";
-        ytSource = "Sandra Hart";
-        ytHandle = "@lifewithsandrahart";
-        isLocalVideo = false;
-    } else if (id === '8') {
-        partnerName = "Ibu Dian";
-        videoId = "N90UIXMuMMU";
-        ytSource = "Sandra Hart";
-        ytHandle = "@lifewithsandrahart";
-        isLocalVideo = false;
-    } else if (id === '11') {
-        partnerName = "Ibu Ningsih";
-        videoId = "N90UIXMuMMU";
-        ytSource = "Sandra Hart";
-        ytHandle = "@lifewithsandrahart";
-        isLocalVideo = false;
-    }
-
-    const ytUrl = `https://www.youtube.com/${ytHandle}`;
+    const partnerName = videoDecision.ytSource || (isMentor ? "Imeldya" : "Opa Adriel");
+    const ytUrl = `https://www.youtube.com/${videoDecision.ytHandle}`;
 
     return (
         <main className="fixed inset-0 bg-black flex flex-col overflow-hidden select-none">
 
             {/* ── Full-screen remote video ── */}
             <div className="absolute inset-0 z-0">
-                {isLocalVideo ? (
+                {videoDecision.isLocalVideo ? (
                     <video
                         ref={remoteVideoRef}
                         src="/video-pak-budi.mp4"
@@ -155,20 +134,22 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
                         loop
                         playsInline
                         muted={isRemoteMuted}
+                        suppressHydrationWarning
                         className="absolute top-1/2 left-1/2 w-[115vw] h-[115vh] md:w-[120vw] md:h-[120vh] -translate-x-1/2 -translate-y-1/2 pointer-events-none object-cover transition-all duration-700"
                     />
                 ) : (
                     <iframe
                         ref={iframeRef}
-                        src={`https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0&disablekb=1&modestbranding=1&playsinline=1&enablejsapi=1`}
+                        src={`https://www.youtube.com/embed/${videoDecision.videoId}?autoplay=1&mute=1&loop=1&playlist=${videoDecision.videoId}&controls=0&disablekb=1&modestbranding=1&playsinline=1&enablejsapi=1`}
                         allow="autoplay; encrypted-media"
+                        suppressHydrationWarning
                         className="absolute top-1/2 left-1/2 w-[115vw] h-[115vh] md:w-[120vw] md:h-[120vh] -translate-x-1/2 -translate-y-1/2 pointer-events-none object-cover transition-all duration-700"
                     />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-black/40 pointer-events-none" />
 
                 {/* ── YouTube Source Credit (Premium Visibility) ── */}
-                {!isLocalVideo && (
+                {!videoDecision.isLocalVideo && (
                     <div className="absolute top-28 left-4 sm:left-6 z-30 opacity-60 hover:opacity-100 transition-opacity max-w-[150px] sm:max-w-none">
                         <a
                             href={ytUrl}

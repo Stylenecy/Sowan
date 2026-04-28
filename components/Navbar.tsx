@@ -107,7 +107,7 @@ export default function Navbar() {
                                     <div className="flex flex-col items-start translate-y-[1px]">
                                         <span className="text-[7px] md:text-[9px] uppercase font-black text-muted-foreground/60 leading-none mb-1.5 tracking-[0.15em]">{t.shared.language}</span>
                                         <span className="text-[10px] md:text-sm font-black text-primary leading-none tracking-tight">
-                                            {(LANGUAGES.find(l => l.code === language) || LANGUAGES[0]).label}
+                                            {(LANGUAGES.find(l => l.code === language) || LANGUAGES[0]).flag} <span className="hidden md:inline">{(LANGUAGES.find(l => l.code === language) || LANGUAGES[0]).label}</span>
                                         </span>
                                     </div>
                                     <ChevronDown size={14} className="text-primary/20 transition-transform duration-500 group-hover:rotate-180 group-hover:text-primary/40" />

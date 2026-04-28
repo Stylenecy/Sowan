@@ -60,6 +60,7 @@ interface Translations {
     explore: {
         title: string;
         subtitle: string;
+        searchPlaceholder: string;
         filterLocation: string;
         filterLang: string;
         reset: string;
@@ -68,6 +69,10 @@ interface Translations {
         allLangs: string;
         noResultsTitle: string;
         noResultsDesc: string;
+        slotsAvailable: string;
+        badgeTopRated: string;
+        badgeCulturalExpert: string;
+        badgeNew: string;
     };
     mentor: {
         exp: string;
@@ -164,9 +169,10 @@ home: {
         },
         explore: {
             title: "Jelajahi Kebijaksanaan", subtitle: "Temukan Teman Sowan yang paling cocok untuk berbagi cerita dan pengalaman hidup.",
-            filterLocation: "Asal Kota", filterLang: "Bahasa Pengantar", reset: "Atur Ulang Filter", bookBtn: "Buat Jadwal Sowan",
+            searchPlaceholder: "Cari nama atau topik...", filterLocation: "Asal Kota", filterLang: "Bahasa Pengantar", reset: "Atur Ulang Filter", bookBtn: "Buat Jadwal Sowan",
             allCities: "Semua Kota", allLangs: "Semua Bahasa",
-            noResultsTitle: "Tidak Menemukan Maestro?", noResultsDesc: "Coba ubah filter kota atau bahasa untuk menemukan Teman Sowan lainnya."
+            noResultsTitle: "Maestro-nya Lagi Sowan!", noResultsDesc: "Mungkin lagi istirahat di sawah. Coba filter lain dulu ya!",
+            slotsAvailable: "slot tersedia minggu ini", badgeTopRated: "Top Rated", badgeCulturalExpert: "Ahli Budaya", badgeNew: "Baru"
         },
         mentor: {
             exp: "Pengalaman", interests: "Topik Keahlian", about: "Tentang", bookingTitle: "Jadwal Sowan", bookingSubtitle: "Sowan Bersama {name}", bookingDesc: "Pilih waktu yang tepat untuk berbincang santai.", confirmBtn: "Konfirmasi Jadwal", reviews: "ULASAN", selectTime: "Pilih Waktu", quote: "Mari berbagi cerita."
@@ -211,9 +217,10 @@ home: {
         },
         explore: {
             title: "Explore Wisdom", subtitle: "Find the most suitable Sowan Friend to share life stories and experiences.",
-            filterLocation: "Origin City", filterLang: "Instruction Language", reset: "Reset Filters", bookBtn: "Book a Sowan Session",
+            searchPlaceholder: "Search name or topic...", filterLocation: "Origin City", filterLang: "Instruction Language", reset: "Reset Filters", bookBtn: "Book a Sowan Session",
             allCities: "All Cities", allLangs: "All Languages",
-            noResultsTitle: "No Maestros Found?", noResultsDesc: "Try changing city or language filters to find other Sowan Friends."
+            noResultsTitle: "Maestros Are Sowan-ing!", noResultsDesc: "Maybe they're taking a break in the rice field. Try different filters!",
+            slotsAvailable: "slots available this week", badgeTopRated: "Top Rated", badgeCulturalExpert: "Cultural Expert", badgeNew: "New"
         },
         mentor: {
             exp: "Experience", interests: "Topics of Expertise", about: "About", bookingTitle: "Sowan Schedule", bookingSubtitle: "Sowan with {name}", bookingDesc: "Choose the perfect time for a casual chat.", confirmBtn: "Confirm Schedule", reviews: "REVIEWS", selectTime: "Select Time", quote: "Let's share stories."
@@ -258,9 +265,10 @@ home: {
         },
         explore: {
             title: "知恵を探索する", subtitle: "人生の物語や経験を共有するのに最適なソワン・フレンドを見つけてください。",
-            filterLocation: "出身都市", filterLang: "教授言語", reset: "フィルターをリセット", bookBtn: "セッションを予約する",
+            searchPlaceholder: "名前やトピックを検索...", filterLocation: "出身都市", filterLang: "教授言語", reset: "フィルターをリセット", bookBtn: "セッションを予約する",
             allCities: "すべての都市", allLangs: "すべての言語",
-            noResultsTitle: "マエストロは見つかりませんでしたか？", noResultsDesc: "他のソワン・フレンドを見つけるために、都市や言語のフィルターを変更してみてください。"
+            noResultsTitle: "マエストロはソワン中！", noResultsDesc: "たぶん田んぼで休憩中です。別のフィルターを試してください！",
+            slotsAvailable: "スロット今週利用可", badgeTopRated: "トップレート", badgeCulturalExpert: "文化専門家", badgeNew: "新着"
         },
         mentor: {
             exp: "経験", interests: "専門分野", about: "概要", bookingTitle: "ソワンスケジュール", bookingSubtitle: "{name} とのソワン", bookingDesc: "カジュアルな会話に最適な時間を選んでください。", confirmBtn: "スケジュールを確定する", reviews: "レビュー", selectTime: "時間を選択", quote: "物語を共有しましょう。"
@@ -305,9 +313,10 @@ home: {
         },
         explore: {
             title: "지혜 탐구", subtitle: "인생 이야기와 경험을 나눌 가장 적합한 소완 친구를 찾아보세요.",
-            filterLocation: "출신 도시", filterLang: "교수 언어", reset: "필터 초기화", bookBtn: "세션 예약하기",
+            searchPlaceholder: "이름 또는 주제 검색...", filterLocation: "출신 도시", filterLang: "교수 언어", reset: "필터 초기화", bookBtn: "세션 예약하기",
             allCities: "모든 도시", allLangs: "모든 언어",
-            noResultsTitle: "마에스트로를 찾을 수 없습니까?", noResultsDesc: "다른 소완 친구를 찾으려면 도시 또는 언어 필터를 변경해 보세요."
+            noResultsTitle: "마에스트로가 소완 중!", noResultsDesc: "아마도 벼랑에서 쉬고 있을 겁니다. 다른 필터를试试해 보세요!",
+            slotsAvailable: "이번 주是利用가능", badgeTopRated: "탑레이트", badgeCulturalExpert: "문화전문가", badgeNew: "신규"
         },
         mentor: {
             exp: "경험", interests: "전문 분야", about: "소개", bookingTitle: "소완 일정", bookingSubtitle: "{name} 님과의 소완", bookingDesc: "가벼운 대화를 나누기에 완벽한 시간을 선택하세요.", confirmBtn: "일정 확정", reviews: "리뷰", selectTime: "시간 선택", quote: "이야기를 공유합시다."
@@ -352,9 +361,10 @@ home: {
         },
         explore: {
             title: "探索智慧", subtitle: "寻找最合适的 Sowan 之友来分享生活故事和经验。",
-            filterLocation: "所属城市", filterLang: "教学语言", reset: "重置筛选", bookBtn: "预约疗程",
+            searchPlaceholder: "搜索姓名或主题...", filterLocation: "所属城市", filterLang: "教学语言", reset: "重置筛选", bookBtn: "预约疗程",
             allCities: "所有城市", allLangs: "所有语言",
-            noResultsTitle: "找不到师匠？", noResultsDesc: "尝试更改城市或语言筛选以查找其他 Sowan 之友。"
+            noResultsTitle: "师匠们正在交流中！", noResultsDesc: "也许他们在田里休息。试试其他筛选条件吧！",
+            slotsAvailable: "本周可预约", badgeTopRated: "热门推荐", badgeCulturalExpert: "文化专家", badgeNew: "新加入"
         },
         mentor: {
             exp: "经验", interests: "专业领域", about: "关于", bookingTitle: "Sowan 日程", bookingSubtitle: "与 {name} 师匠 Sowan", bookingDesc: "选择适合闲聊的完美时间。", confirmBtn: "确认日程", reviews: "评论", selectTime: "选择时间", quote: "让我们分享故事。"

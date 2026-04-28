@@ -285,6 +285,7 @@ export default function MentorProfilePage({ params }: { params: Promise<{ id: st
 
         localStorage.setItem("sowan_selected_time", timeLabel);
         localStorage.setItem("sowan_booked_mentor", JSON.stringify(foundMentor));
+        localStorage.setItem("sowan_room_id", String(foundMentor.id));
 
         setTimeout(() => {
             setIsSuccess(true);

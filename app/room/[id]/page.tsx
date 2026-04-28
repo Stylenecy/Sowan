@@ -35,6 +35,21 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
         return () => clearInterval(t);
     }, []);
 
+    // Read stored mentor data for dynamic content
+    useEffect(() => {
+        const storedMentor = localStorage.getItem("sowan_booked_mentor");
+        if (storedMentor) {
+            try {
+                const mentor = JSON.parse(storedMentor);
+                // This room belongs to this mentor
+                if (String(mentor.id) !== id) {
+                    // Update localStorage if room ID doesn't match
+                    localStorage.setItem("sowan_room_id", id);
+                }
+            } catch {}
+        }
+    }, [id]);
+
     // Camera
     useEffect(() => {
         let active = true;
@@ -88,12 +103,21 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
 
     const isMentor = user?.name === 'Opa Adriel';
 
-    // Determine partner details based on room ID or user role
-    let partnerName = isMentor ? "Imeldya" : "Opa Adriel";
-    let videoId = isMentor ? 'xUDcOBBF79o' : '';
-    let ytSource = isMentor ? "Bailey Schildbach" : "";
-    let ytHandle = isMentor ? "@bailey.schildbach" : "";
-    let isLocalVideo = !isMentor;
+    // Read mentor data from localStorage
+    const storedMentor = (typeof window !== 'undefined') ? localStorage.getItem("sowan_booked_mentor") : null;
+    let mentorData: { name?: string; videoId?: string; videoSource?: string; videoHandle?: string; useLocalVideo?: boolean } | null = null;
+    if (storedMentor) {
+        try {
+            mentorData = JSON.parse(storedMentor);
+        } catch {}
+    }
+
+    // Determine partner details based on room ID or user role or localStorage
+    let partnerName = mentorData?.name ?? (isMentor ? "Imeldya" : "Opa Adriel");
+    let videoId = mentorData?.videoId ?? (isMentor ? 'xUDcOBBF79o' : '');
+    let ytSource = mentorData?.videoSource ?? (isMentor ? "Bailey Schildbach" : "");
+    let ytHandle = mentorData?.videoHandle ?? (isMentor ? "@bailey.schildbach" : "");
+    let isLocalVideo = mentorData?.useLocalVideo !== undefined ? mentorData.useLocalVideo : !isMentor;
 
     // Custom overrides for specific female mentors
     if (id === '5') {

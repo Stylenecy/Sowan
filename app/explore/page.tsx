@@ -309,6 +309,7 @@ export default function ExplorePage() {
 
         localStorage.setItem("sowan_selected_time", timeLabel);
         localStorage.setItem("sowan_booked_mentor", JSON.stringify(selectedMentor));
+        localStorage.setItem("sowan_room_id", String(selectedMentor.id));
 
         setTimeout(() => {
             setIsSuccess(true);

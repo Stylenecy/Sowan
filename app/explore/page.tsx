@@ -643,59 +643,56 @@ export default function ExplorePage() {
             {/* ── Checkout Modal ── */}
             {selectedMentor && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-md p-4 animate-in fade-in duration-300">
-                    <div className="bg-white rounded-[40px] shadow-2xl max-w-lg w-full overflow-hidden animate-in zoom-in-95 duration-300">
+                    <div className="bg-white rounded-[24px] shadow-2xl max-w-md w-full overflow-hidden animate-in zoom-in-95 duration-300">
                         {!isSuccess ? (
                             <div className="flex flex-col">
-                                <div className="p-8 pb-6 text-center relative">
+                                <div className="p-6 pb-4 text-center relative">
                                     <button
                                         onClick={handleCloseModal}
-                                        className="absolute top-6 right-6 text-primary/40 hover:text-primary bg-primary/5 hover:bg-primary/10 rounded-full h-10 w-10 flex items-center justify-center transition-all"
+                                        className="absolute top-4 right-4 text-primary/40 hover:text-primary bg-primary/5 hover:bg-primary/10 rounded-full h-8 w-8 flex items-center justify-center transition-all text-lg"
                                     >×</button>
 
                                     {/* Progress Steps */}
-                                    <div className="flex items-center justify-center gap-2 mb-6">
-                                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent font-bold text-sm">
-                                            <span className="w-6 h-6 rounded-full bg-accent text-white flex items-center justify-center text-xs font-black">1</span>
+                                    <div className="flex items-center justify-center gap-1 mb-4">
+                                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent/10 text-accent font-bold text-xs">
+                                            <span className="w-5 h-5 rounded-full bg-accent text-white flex items-center justify-center text-[10px] font-black">1</span>
                                             {t.payment.step1}
                                         </div>
-                                        <div className="w-8 h-px bg-primary/20"></div>
-                                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 text-primary/50 font-bold text-sm">
-                                            <span className="w-6 h-6 rounded-full bg-primary/20 text-primary/50 flex items-center justify-center text-xs font-black">2</span>
+                                        <div className="w-5 h-px bg-primary/20"></div>
+                                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/5 text-primary/50 font-bold text-xs">
+                                            <span className="w-5 h-5 rounded-full bg-primary/20 text-primary/50 flex items-center justify-center text-[10px] font-black">2</span>
                                             {t.payment.step2}
                                         </div>
-                                        <div className="w-8 h-px bg-primary/20"></div>
-                                        <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 text-primary/50 font-bold text-sm">
-                                            <span className="w-6 h-6 rounded-full bg-primary/20 text-primary/50 flex items-center justify-center text-xs font-black">3</span>
+                                        <div className="w-5 h-px bg-primary/20"></div>
+                                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/5 text-primary/50 font-bold text-xs">
+                                            <span className="w-5 h-5 rounded-full bg-primary/20 text-primary/50 flex items-center justify-center text-[10px] font-black">3</span>
                                             {t.payment.step3}
                                         </div>
                                     </div>
 
-                                    <div className="relative w-32 h-32 mx-auto mb-6">
+                                    <div className="relative w-20 h-20 mx-auto mb-4">
                                         <img
                                             src={selectedMentor.image}
                                             alt={selectedMentor.name}
-                                            className="w-full h-full rounded-full object-cover border-4 border-white shadow-xl"
+                                            className="w-full h-full rounded-full object-cover border-3 border-white shadow-xl"
                                         />
                                         <div className="absolute inset-0 rounded-full bg-gradient-to-t from-white/40 to-transparent pointer-events-none" />
-                                        <div className="absolute bottom-1 right-1 bg-black/40 backdrop-blur-sm text-[6px] text-white/80 px-1 py-0.5 rounded-sm uppercase tracking-widest pointer-events-none">
-                                            Source: Unsplash
-                                        </div>
-                                        <div className="absolute -bottom-1 -left-1 w-10 h-10 bg-emerald-500 rounded-full border-4 border-white flex items-center justify-center shadow-lg">
-                                            <CheckCircle size={18} className="text-white" />
+                                        <div className="absolute -bottom-0.5 -right-0.5 w-7 h-7 bg-emerald-500 rounded-full border-3 border-white flex items-center justify-center shadow-lg">
+                                            <CheckCircle size={12} className="text-white" />
                                         </div>
                                     </div>
-                                    <h2 className="text-3xl font-black text-primary">{t.mentor.bookingTitle}</h2>
-                                    <p className="text-muted-foreground font-medium mt-1">{t.mentor.bookingSubtitle.replace('{name}', selectedMentor.name)}</p>
+                                    <h2 className="text-xl font-black text-primary">{t.mentor.bookingTitle}</h2>
+                                    <p className="text-sm text-muted-foreground font-medium mt-0.5">{t.mentor.bookingSubtitle.replace('{name}', selectedMentor.name)}</p>
                                 </div>
 
-                                <div className="px-8 pb-10 space-y-6">
-                                    <div className="space-y-2">
-                                        <label className="text-xs font-black uppercase tracking-wider text-primary/40 ml-1">{t.mentor.selectTime}</label>
+                                <div className="px-6 pb-6 space-y-4">
+                                    <div className="space-y-1.5">
+                                        <label className="text-[10px] font-black uppercase tracking-wider text-primary/40 ml-1">{t.mentor.selectTime}</label>
                                         <Select value={selectedTime} onValueChange={setSelectedTime}>
-                                            <SelectTrigger className="w-full h-14 bg-white border-2 border-primary/5 rounded-2xl px-4 text-lg font-bold text-primary focus:ring-accent transition-all">
+                                            <SelectTrigger className="w-full h-11 bg-white border-2 border-primary/5 rounded-xl px-4 text-base font-bold text-primary focus:ring-accent transition-all">
                                                 <SelectValue placeholder={t.mentor.selectTime} />
                                             </SelectTrigger>
-                                            <SelectContent className="bg-white border-2 border-primary/5 rounded-2xl shadow-2xl z-[100] text-primary font-bold">
+                                            <SelectContent className="bg-white border-2 border-primary/5 rounded-xl shadow-2xl z-[100] text-primary font-bold">
                                                 <SelectItem value="Today1">{t.dashboard.today}, {getDynamicTimeRange(1)}</SelectItem>
                                                 <SelectItem value="Today2">{t.dashboard.today}, {getDynamicTimeRange(3)}</SelectItem>
                                                 <SelectItem value="Tomorrow1">{t.dashboard.tomorrow}, 10:00 - 11:00 WIB</SelectItem>
@@ -704,19 +701,19 @@ export default function ExplorePage() {
                                         </Select>
                                     </div>
 
-                                    <div className="bg-[#FAF9F6] p-6 rounded-3xl space-y-3">
-                                        <div className="flex justify-between items-center text-primary/60 font-bold">
+                                    <div className="bg-[#FAF9F6] p-4 rounded-2xl space-y-2">
+                                        <div className="flex justify-between items-center text-primary/60 font-bold text-sm">
                                             <span>{t.payment.fee}</span>
                                             <span>{selectedMentor.price}</span>
                                         </div>
-                                        <div className="flex justify-between items-center text-primary/60 font-bold">
+                                        <div className="flex justify-between items-center text-primary/60 font-bold text-sm">
                                             <span>{t.payment.appFee}</span>
                                             <span>Rp 5.000</span>
                                         </div>
-                                        <div className="h-px bg-primary/5 my-2"></div>
+                                        <div className="h-px bg-primary/5 my-1"></div>
                                         <div className="flex justify-between items-center">
-                                            <span className="text-xl font-black text-primary">Total</span>
-                                            <span className="text-3xl font-black text-accent">
+                                            <span className="text-base font-black text-primary">Total</span>
+                                            <span className="text-xl font-black text-accent">
                                                 Rp {(parseInt(selectedMentor.price.replace(/\D/g, '')) + 5000).toLocaleString('id-ID')}
                                             </span>
                                         </div>
@@ -725,27 +722,27 @@ export default function ExplorePage() {
                                     <Button
                                         onClick={handlePayment}
                                         disabled={isProcessing}
-                                        className="w-full h-16 bg-primary hover:bg-primary/90 text-white rounded-2xl text-xl font-black shadow-xl shadow-primary/20 transition-all hover:scale-[1.02] active:scale-95 group"
+                                        className="w-full h-12 bg-primary hover:bg-primary/90 text-white rounded-xl text-lg font-black shadow-xl shadow-primary/20 transition-all hover:scale-[1.02] active:scale-95 group"
                                     >
                                         {isProcessing ? (
-                                            <div className="flex items-center gap-3">
-                                                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                                Memproses pembayaran aman...
+                                            <div className="flex items-center gap-2">
+                                                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                                Memproses...
                                             </div>
                                         ) : (
-                                            <div className="flex items-center gap-3">
-                                                <ShieldCheck size={24} className="group-hover:animate-pulse" />
+                                            <div className="flex items-center gap-2">
+                                                <ShieldCheck size={18} className="group-hover:animate-pulse" />
                                                 {t.payment.confirmPay}
                                             </div>
                                         )}
                                     </Button>
-                                    <p className="text-[10px] text-center text-primary/30 font-bold uppercase tracking-widest px-4">
-                                        🛡️ Aman • Transparan • Terpercaya • Sowan Escrow
+                                    <p className="text-[9px] text-center text-primary/30 font-bold uppercase tracking-widest px-2">
+                                        🛡️ Aman • Transparan • Terpercaya
                                     </p>
                                 </div>
                             </div>
                         ) : (
-                            <div className="p-12 text-center flex flex-col items-center relative overflow-hidden">
+                            <div className="p-8 text-center flex flex-col items-center relative overflow-hidden">
                                 {/* Confetti */}
                                 <div className="absolute inset-0 pointer-events-none overflow-hidden">
                                     {confettiPieces.map((piece, i) => (
@@ -764,15 +761,15 @@ export default function ExplorePage() {
                                     ))}
                                 </div>
 
-                                <div className="relative z-10 w-24 h-24 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-8 animate-bounce transition-transform">
-                                    <CheckCircle size={56} />
+                                <div className="relative z-10 w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-4 animate-bounce">
+                                    <CheckCircle size={36} />
                                 </div>
-                                <h2 className="relative z-10 text-4xl font-black text-primary mb-4">{t.payment.bookingConfirmed}</h2>
-                                <p className="relative z-10 text-xl text-muted-foreground font-medium leading-relaxed">
+                                <h2 className="relative z-10 text-2xl font-black text-primary mb-2">{t.payment.bookingConfirmed}</h2>
+                                <p className="relative z-10 text-sm text-muted-foreground font-medium leading-relaxed">
                                     {t.payment.secured.replace('{name}', selectedMentor.name)}
                                 </p>
-                                <div className="relative z-10 mt-10 flex items-center gap-3 text-primary/40 font-bold italic">
-                                    <div className="w-5 h-5 border-2 border-primary/20 border-t-primary/60 rounded-full animate-spin" />
+                                <div className="relative z-10 mt-6 flex items-center gap-2 text-primary/40 font-bold italic text-xs">
+                                    <div className="w-4 h-4 border-2 border-primary/20 border-t-primary/60 rounded-full animate-spin" />
                                     {t.payment.redirect}
                                 </div>
                             </div>

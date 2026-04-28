@@ -132,11 +132,16 @@
     @apply border-border outline-ring/50;
   }
 
+  html {
+    @apply overflow-x-hidden;
+  }
+
   body {
     @apply bg-background text-foreground;
     /* Typography default untuk lansia */
     font-size: 18px;
     line-height: 1.6;
+    @apply overflow-x-hidden;
   }
 
   /* Target sentuh minimal 44px (44x44px minimum) */

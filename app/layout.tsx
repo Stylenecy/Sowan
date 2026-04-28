@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" suppressHydrationWarning className={`${inter.variable} ${playfair.variable}`}>
-      <body className={`font-sans antialiased min-h-screen flex flex-col bg-[#FAF9F6] text-[#1A365D]`}>
+      <body className={`font-sans antialiased min-h-screen flex flex-col bg-[#FAF9F6] text-[#1A365D] overflow-x-hidden`}>
         <LanguageProvider>
           <AuthProvider>
             <Navbar />

@@ -1,19 +1,68 @@
-# PROTOKOL PENGEMBANGAN SOWAN.ID
+# PROTOCOL.md - SOWAN.ID DEVELOPMENT STANDARDS
 
-## 1. Aturan UI/UX Inklusif Lansia (WAJIB)
-- Warna Latar: Soft Cream (#FAF9F6). DILARANG menggunakan putih bersih (#FFFFFF).
-- Warna Teks Utama: Deep Navy Blue (#1A365D) untuk kontras maksimal.
-- Warna Aksen (Tombol): Warm Amber (#D97706) atau Terracotta (#C53030).
-- Elemen Interaktif: Target sentuh minimal 44x44px.
-- Tipografi: Ukuran font minimal 16px (body) dan 20px+ (headers). Gunakan sans-serif bersih.
+> **Status: MVP Complete** | Last Updated: April 27, 2026
 
-## 2. Tech Stack & Standar Coding
-- Framework: Next.js 14+ (App Router), TypeScript, Tailwind CSS.
-- UI Library: Shadcn UI, Lucide React Icons.
-- Database & Auth: Supabase.
-- Video Call: Daily.co / Agora SDK.
-- Deployment Target: Vercel.
+---
 
-## 3. Ketentuan Konten
-- Dilarang menggunakan dummy text (Lorem Ipsum). Gunakan bahasa Indonesia yang sopan dan hangat.
-- Gunakan terminologi "Sowan" untuk menggantikan istilah "Class" atau "Session".
+## ✅ IMPLEMENTED STANDARDS
+
+### Tech Stack
+- [x] Framework: Next.js 15 (App Router)
+- [x] Language: TypeScript
+- [x] Styling: Tailwind CSS v4 + shadcn/ui
+- [x] Icons: Lucide React
+- [x] State: React Context API + localStorage (demo)
+- [x] Deployment: Vercel
+
+### Design System (Geronteknologi)
+- [x] Background: `#FAF9F6` (Soft Cream - NOT pure white)
+- [x] Primary Text: `#1A365D` (Deep Navy Blue)
+- [x] Accent: `#D97706` (Warm Amber)
+- [x] Alert/End Call: `#C53030` (Terracotta)
+- [x] Touch Targets: Minimal 44x44px
+- [x] Font Size: Body ≥16px, Headers ≥20px
+
+---
+
+## 🔴 FUTURE STANDARDS (Not Yet Implemented)
+
+### Backend
+- [ ] Database: Supabase PostgreSQL
+- [ ] Auth: Supabase Auth (replace localStorage mock)
+- [ ] Video: Daily.co / Agora SDK (replace YouTube embed)
+
+### Payment
+- [ ] Stripe Checkout for payments
+- [ ] Midtrans IRIS for payouts
+- [ ] Escrow split: 75% mentor / 5% ambassador / 20% Sowan
+
+### Security
+- [ ] Row Level Security (RLS) on all tables
+- [ ] Server-side session validation
+- [ ] UU PDP compliance for elderly data protection
+
+---
+
+## 📋 CODING CONVENTIONS
+
+1. **No Lorem Ipsum** - Use realistic Indonesian text
+2. **Use "Sowan"** - Not "Class" or "Session"
+3. **Accessibility First** - Elderly-friendly UI always
+4. **Mobile Responsive** - Test on 375px minimum
+
+---
+
+## 📁 FILE ORGANIZATION
+
+```
+sowan-app/
+├── app/                    # Next.js App Router pages
+├── components/ui/          # shadcn/ui components
+├── context/               # React Context (Auth, Language)
+├── lib/                   # Utilities
+└── public/                # Static assets
+```
+
+---
+
+**For questions about implementation details, see WALKTHROUGH.md**

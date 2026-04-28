@@ -27,6 +27,9 @@ interface Translations {
     };
     home: {
         sparkle: string;
+        headline1: string;
+        headline2: string;
+        headline3: string;
         welcome: string;
         welcomeHome: string;
         pagi: string;
@@ -37,6 +40,7 @@ interface Translations {
         findBtn: string;
         scheduleBtn: string;
         friendsJoined: string;
+        trustSignal: string;
         sessions: string;
         bottomQuote: string;
         maestroTitle: string;
@@ -47,6 +51,11 @@ interface Translations {
         aboutDesc: string;
         badgeSecure: string;
         badgeCurated: string;
+        statsUsers: string;
+        statsMaestros: string;
+        statsLanguages: string;
+        testimonialsTitle: string;
+        testimonialsDesc: string;
     };
     explore: {
         title: string;
@@ -140,16 +149,18 @@ const dictionaries: Record<LanguageCode, Translations> = {
             sowan: "Sowan.id", explore: "Jelajahi", schedule: "Jadwal Sowan", login: "Masuk", register: "Daftar Sekarang", logout: "Keluar", hello: "Halo, ", back: "Kembali", city: "Kota", language: "Bahasa", online: "Online", offline: "Offline",
             welcomeModal: "Selamat Datang!", loginDesc: "Masuk ke Sowan.id untuk mulai bersapa", nameLabel: "Siapa nama Anda?", namePlaceholder: "Ketik nama Anda di sini...", viewProfile: "Lihat Profil", demoLabel: "atau coba akun demo"
         },
-        home: {
-            sparkle: "Belajar Langsung dari Para Maestro Lintas Generasi", welcome: "di", welcomeHome: "Selamat Datang", pagi: "Selamat Pagi", siang: "Selamat Siang", sore: "Selamat Sore", malam: "Selamat Malam",
+home: {
+            sparkle: "Belajar Langsung dari Para Maestro Lintas Generasi", headline1: "Belajar budaya.", headline2: "Dari yang pernah", headline3: "hidup di dalamnya.", welcome: "di", welcomeHome: "Selamat Datang", pagi: "Selamat Pagi", siang: "Selamat Siang", sore: "Selamat Sore", malam: "Selamat Malam",
             desc: "Wadah hangat untuk saling sapa, berbagi cerita, dan menyambung tali silaturahmi. Temukan teman baru dan bagikan pengalaman berharga Anda di sini.",
-            findBtn: "Cari Teman Sowan", scheduleBtn: "Lihat Jadwal Saya", friendsJoined: "Teman Bergabung", sessions: "Sesi Sowan", bottomQuote: "Saling Sapa, Saling Bercerita",
-            maestroTitle: "Kenalan dengan Maestro Kami", maestroDesc: "Para lansia berpengalaman dengan ragam cerita, keahlian, dan kearifan lokal yang siap menjadi Teman Sowan Anda.",
+            findBtn: "Cari Teman Sowan", scheduleBtn: "Lihat Jadwal Saya", friendsJoined: "Teman Bergabung", trustSignal: "Dipercaya 500+ pengguna dari 12 negara", sessions: "Sesi Sowan", bottomQuote: "Saling Sapa, Saling Bercerita",
+            maestroTitle: "Kenalan dengan Maestro Kami", maestroDesc: "Para lansia berpengalaman dengan beragam cerita, keahlian, dan kearifan lokal yang siap menjadi Teman Sowan Anda.",
             viewProfile: "Lihat Profil", seeAll: "Lihat Semua Maestro",
             aboutTitle: "Lebih dari Sekadar Panggilan Video.",
             aboutDesc: "SOWAN adalah platform Edutech eksklusif tempat Anda menyewa waktu para Maestro untuk sesi mentoring personal, belajar bahasa daerah, hingga konsultasi bisnis.",
             badgeSecure: "Sistem Escrow Aman 100%",
-            badgeCurated: "Maestro Lulus Kurasi Pedagogi"
+            badgeCurated: "Maestro Lulus Kurasi Pedagogi",
+            statsUsers: "Pengguna Terdaftar", statsMaestros: "Maestro Terkurasi", statsLanguages: "Bahasa Pengantar",
+            testimonialsTitle: "Kata Mereka yang Sudah Sowan", testimonialsDesc: "Cerita nyata dari pengguna yang telah merasakan manfaatnya"
         },
         explore: {
             title: "Jelajahi Kebijaksanaan", subtitle: "Temukan Teman Sowan yang paling cocok untuk berbagi cerita dan pengalaman hidup.",
@@ -186,15 +197,17 @@ const dictionaries: Record<LanguageCode, Translations> = {
             welcomeModal: "Welcome Back!", loginDesc: "Login to Sowan.id to start connecting", nameLabel: "What is your name?", namePlaceholder: "Type your name here...", viewProfile: "View Profile", demoLabel: "or try a demo account"
         },
         home: {
-            sparkle: "Learn Directly from Cross-Generational Maestros", welcome: "to", welcomeHome: "Welcome", pagi: "Good Morning", siang: "Good Afternoon", sore: "Good Evening", malam: "Good Night",
+            sparkle: "Learn Directly from Cross-Generational Maestros", headline1: "Learn culture.", headline2: "From those who have", headline3: "actually lived it.", welcome: "to", welcomeHome: "Welcome", pagi: "Good Morning", siang: "Good Afternoon", sore: "Good Evening", malam: "Good Night",
             desc: "A warm space to greet one another, share stories, and reconnect. Discover new friends and share your valuable experiences here.",
-            findBtn: "Find a Sowan Friend", scheduleBtn: "My Schedule", friendsJoined: "Friends Joined", sessions: "Sowan Sessions", bottomQuote: "Greet Each Other, Share Stories",
+            findBtn: "Find a Sowan Friend", scheduleBtn: "My Schedule", friendsJoined: "Friends Joined", trustSignal: "Trusted by 500+ users from 12 countries", sessions: "Sowan Sessions", bottomQuote: "Greet Each Other, Share Stories",
             maestroTitle: "Meet Our Maestros", maestroDesc: "Experienced elders with diverse stories, skills, and local wisdom ready to be your Sowan Friend.",
             viewProfile: "View Profile", seeAll: "See All Maestros",
             aboutTitle: "More than Just a Video Call.",
             aboutDesc: "SOWAN is an exclusive Edutech platform where you rent the time of Maestros for personal mentoring sessions, learning local languages, to business consultations.",
             badgeSecure: "100% Secure Escrow System",
-            badgeCurated: "Pedagogy-Curated Maestros"
+            badgeCurated: "Pedagogy-Curated Maestros",
+            statsUsers: "Registered Users", statsMaestros: "Curated Maestros", statsLanguages: "Teaching Languages",
+            testimonialsTitle: "What They Say", testimonialsDesc: "Real stories from users who have experienced the benefits"
         },
         explore: {
             title: "Explore Wisdom", subtitle: "Find the most suitable Sowan Friend to share life stories and experiences.",
@@ -230,16 +243,18 @@ const dictionaries: Record<LanguageCode, Translations> = {
             sowan: "Sowan.id", explore: "探索", schedule: "スケジュール", login: "ログイン", register: "今すぐ登録", logout: "ログアウト", hello: "こんにちは、", back: "戻る", city: "都市", language: "言語", online: "オンライン", offline: "オフライン",
             welcomeModal: "おかえりなさい！", loginDesc: "Sowan.idにログインして、つながりを始めましょう", nameLabel: "お名前は何ですか？", namePlaceholder: "ここにお名前を入力してください...", viewProfile: "プロフィールを見る", demoLabel: "またはデモアカウントを試す"
         },
-        home: {
-            sparkle: "経験を共有しましょう", welcome: "へようこそ", welcomeHome: "ようこそ", pagi: "おはようございます", siang: "こんにちは", sore: "こんにちは", malam: "こんばんは",
-            desc: "お互いに挨拶し、物語を共有し、絆を深める温かい場所。ここで新しい友達を見つけ、貴重な経験を共有しましょう。",
-            findBtn: "友達を探す", scheduleBtn: "私のスケジュール", friendsJoined: "参加した友達", sessions: "セッション数", bottomQuote: "挨拶し合い、物語を共有する",
+home: {
+            sparkle: "経験を共有しましょう", headline1: "文化を学ぶ。", headline2: "実際にそれを", headline3: "生きてきた人から。", welcome: "へようこそ", welcomeHome: "ようこそ", pagi: "おはようございます", siang: "こんにちは", sore: "こんばんは", malam: "おやすみなさい",
+            desc: "お互いに挨拶し、物語を共有し、絆を深める温かい場所。在这里结交新朋友，分享您的宝贵经验。",
+            findBtn: "友達を探す", scheduleBtn: "私のスケジュール", friendsJoined: "参加した友達", trustSignal: "12カ国500+ユーザーに信頼されています", sessions: "セッション数", bottomQuote: "挨拶し合い、物語を共有する",
             maestroTitle: "マエストロに会う", maestroDesc: "多様な物語、スキル、そして地域の知恵を持つ経験豊かな高齢者たちが、あなたのソワン・フレンドになる準備ができています。",
-            viewProfile: "プロファイルを見る", seeAll: "すべてのマエストロを見る",
+            viewProfile: "プロフィールを見る", seeAll: "すべてのマエストロを見る",
             aboutTitle: "単なるビデオ通話ではありません。",
             aboutDesc: "SOWANは、個人的なメンタリングセッション、現地語の学習からビジネスコンサルタントまで、マエストロの時間をレンタルできる独占的なエデュテックプラットフォームです。",
             badgeSecure: "100%安全なエスクローシステム",
-            badgeCurated: "教育学的に選ばれたマエストロ"
+            badgeCurated: "教育学的に選ばれたマエストロ",
+            statsUsers: "登録ユーザー", statsMaestros: "厳選マエストロ", statsLanguages: "教授言語",
+            testimonialsTitle: "を経験した人の声", testimonialsDesc: "その利点を実感しているユーザーからの実際のストーリー"
         },
         explore: {
             title: "知恵を探索する", subtitle: "人生の物語や経験を共有するのに最適なソワン・フレンドを見つけてください。",
@@ -276,15 +291,17 @@ const dictionaries: Record<LanguageCode, Translations> = {
             welcomeModal: "환영합니다!", loginDesc: "Sowan.id에 로그인하여 소통을 시작하세요", nameLabel: "이름이 무엇입니까?", namePlaceholder: "여기에 이름을 입력하세요...", viewProfile: "프로필 보기", demoLabel: "또는 데모 계정 시도"
         },
         home: {
-            sparkle: "경험을 공유합시다", welcome: "에 오신 것을 환영합니다", welcomeHome: "환영합니다", pagi: "좋은 아침입니다", siang: "좋은 오후입니다", sore: "좋은 저녁입니다", malam: "안녕히 주무세요",
+            sparkle: "경험을 공유합시다", headline1: "문화를 배운다.", headline2: "실제로 그것을", headline3: "살아본 사람들로부터.", welcome: "에 오신 것을 환영합니다", welcomeHome: "환영합니다", pagi: "좋은 아침입니다", siang: "좋은 오후입니다", sore: "좋은 저녁입니다", malam: "안녕히 주무세요",
             desc: "서로 인사하고, 이야기를 나누며 인연을 맺는 따뜻한 공간. 새로운 친구를 찾고 소중한 경험을 나누세요.",
-            findBtn: "친구 찾기", scheduleBtn: "내 일정", friendsJoined: "가입한 친구", sessions: "소완 세션", bottomQuote: "서로 인사하고 이야기 나누기",
+            findBtn: "친구 찾기", scheduleBtn: "내 일정", friendsJoined: "가입한 친구", trustSignal: "12개국 500+명의 사용자가 신뢰", sessions: "소완 세션", bottomQuote: "서로 인사하고 이야기 나누기",
             maestroTitle: "마에스트로를 만나보세요", maestroDesc: "다양한 이야기와 기술, 지역의 지혜를 가진 경험 많은 어르신들이 여러분의 소완 친구가 될 준비가 되어 있습니다.",
             viewProfile: "프로필 보기", seeAll: "모든 마에스트로 보기",
             aboutTitle: "단순한 화상 통화 그 이상입니다.",
             aboutDesc: "SOWAN은 개인 멘토링 세션, 현지 언어 학습, 비즈니스 상담을 위해 마에스트로의 시간을 대여할 수 있는 독점적인 에듀테크 플랫폼입니다.",
             badgeSecure: "100% 안전한 에스크로 시스템",
-            badgeCurated: "교육학적으로 검증된 마에스트로"
+            badgeCurated: "교육학적으로 검증된 마에스트로",
+            statsUsers: "등록된 사용자", statsMaestros: "검증된 마에스트로", statsLanguages: "교육 언어",
+            testimonialsTitle: "경험자들의 말", testimonialsDesc: "그 利점를 느낀 사용자들의 실제 이야기"
         },
         explore: {
             title: "지혜 탐구", subtitle: "인생 이야기와 경험을 나눌 가장 적합한 소완 친구를 찾아보세요.",
@@ -320,16 +337,18 @@ const dictionaries: Record<LanguageCode, Translations> = {
             sowan: "Sowan.id", explore: "探索", schedule: "日程", login: "登录", register: "立即注册", logout: "登出", hello: "你好, ", back: "返回", city: "城市", language: "语言", online: "离线", offline: "离线",
             welcomeModal: "欢迎回来！", loginDesc: "登录 Sowan.id 开始沟通", nameLabel: "您叫什么名字？", namePlaceholder: "在这里输入您的名字...", viewProfile: "查看详情", demoLabel: "或尝试演示帐户"
         },
-        home: {
-            sparkle: "让我们分享经验", welcome: "欢迎来到", welcomeHome: "欢迎", pagi: "早上好", siang: "下午好", sore: "晚上好", malam: "晚安",
+home: {
+            sparkle: "让我们分享经验", headline1: "学习文化。", headline2: "向那些", headline3: "真正经历过的人学习。", welcome: "欢迎来到", welcomeHome: "欢迎", pagi: "早上好", siang: "下午好", sore: "晚上好", malam: "晚安",
             desc: "一个互相问候、分享故事和交流感情的温馨空间。在这里结交新朋友，分享您的宝贵经验。",
-            findBtn: "寻找朋友", scheduleBtn: "我的日程", friendsJoined: "加入的朋友", sessions: "疗程", bottomQuote: "互相问候，分享故事",
+            findBtn: "寻找朋友", scheduleBtn: "我的日程", friendsJoined: "加入的朋友", trustSignal: "获得12个国家500+用户的信赖", sessions: "疗程", bottomQuote: "互相问候，分享故事",
             maestroTitle: "结识我们的师匠", maestroDesc: "拥有丰富故事、技能和地方智慧的资深长者正等待成为您的 Sowan 之友。",
             viewProfile: "查看详细资料", seeAll: "查看所有师匠",
             aboutTitle: "不仅仅是视频通话。",
-            aboutDesc: "SOWAN 是一个独家的教育科技平台，您可以租用大师的时间进行个人指导、学习当地方言，甚至进行商业咨询。",
+            aboutDesc: "SOWAN 是一个独家的教育科技平台，您可以租用大师的时间进行个人指导，学习当地方言，甚至进行商业咨询。",
             badgeSecure: "100% 安全的担保系统",
-            badgeCurated: "经过教学评估的大师"
+            badgeCurated: "经过教学评估的大师",
+            statsUsers: "注册用户", statsMaestros: "精选师匠", statsLanguages: "教学语言",
+            testimonialsTitle: "用户感言", testimonialsDesc: "来自真实用户的体验分享"
         },
         explore: {
             title: "探索智慧", subtitle: "寻找最合适的 Sowan 之友来分享生活故事和经验。",

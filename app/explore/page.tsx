@@ -38,11 +38,10 @@ export default function ExplorePage() {
     }, []);
 
     const confettiPieces = useMemo(() =>
-        [...Array(20)].map((_, i) => ({
-            left: `${Math.random() * 100}%`,
-            delay: `${Math.random() * 0.5}s`,
-            color: ['#D97706', '#1A365D', '#10B981', '#F59E0B', '#EF4444'][Math.floor(Math.random() * 5)],
-            isCircle: Math.random() > 0.5
+        [...Array(12)].map((_, i) => ({
+            left: `${10 + Math.random() * 80}%`,
+            delay: `${Math.random() * 0.8}s`,
+            size: 20 + Math.random() * 30
         })), []);
 
     const mentors = [
@@ -528,7 +527,7 @@ desc: '"Punya ide bisnis atau sekadar rindu membahas resep masakan tradisional? 
                         sortedMentors.map((mentor) => (
                             <Card
                                 key={mentor.id}
-                                className={`w-full rounded-[24px] sm:rounded-[32px] border-2 border-transparent hover:border-accent/40 hover:shadow-[0_0_30px_rgb(217,119,6,0.15)] hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col group/card ${!mentor.isOnline && 'saturate-[0.7] opacity-75'}`}
+                                className={`w-full rounded-[24px] sm:rounded-[32px] border-2 border-transparent hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(217,119,6,0.35)] hover:-translate-y-2 transition-all duration-300 overflow-hidden flex flex-col group/card ${!mentor.isOnline && 'saturate-[0.7] opacity-75'}`}
                             >
                                 <CardHeader className="p-0 relative h-64 sm:h-72 bg-white overflow-hidden">
                                     <img
@@ -746,16 +745,17 @@ desc: '"Punya ide bisnis atau sekadar rindu membahas resep masakan tradisional? 
                                 {/* Confetti */}
                                 <div className="absolute inset-0 pointer-events-none overflow-hidden">
                                     {confettiPieces.map((piece, i) => (
-                                        <div
+                                        <img
                                             key={i}
-                                            className="absolute animate-confetti"
+                                            src="/logo.png"
+                                            alt=""
+                                            className="absolute animate-confetti object-contain"
                                             style={{
                                                 left: piece.left,
+                                                top: '-20px',
                                                 animationDelay: piece.delay,
-                                                backgroundColor: piece.color,
-                                                width: '8px',
-                                                height: '8px',
-                                                borderRadius: piece.isCircle ? '50%' : '2px'
+                                                width: `${piece.size}px`,
+                                                height: `${piece.size}px`
                                             }}
                                         />
                                     ))}

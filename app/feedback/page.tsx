@@ -23,12 +23,10 @@ export default function FeedbackPage() {
     }, []);
 
     const confettiPieces = useMemo(() =>
-        [...Array(30)].map((_, i) => ({
-            left: `${Math.random() * 100}%`,
+        [...Array(12)].map((_, i) => ({
+            left: `${10 + Math.random() * 80}%`,
             delay: `${Math.random() * 0.8}s`,
-            color: ['#D97706', '#1A365D', '#10B981', '#F59E0B', '#EF4444', '#8B5CF6'][Math.floor(Math.random() * 6)],
-            isCircle: Math.random() > 0.5,
-            size: 6 + Math.random() * 8
+            size: 20 + Math.random() * 30
         })), []);
 
     const handleSubmit = () => {
@@ -125,16 +123,17 @@ export default function FeedbackPage() {
             {submitted && (
                 <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
                     {confettiPieces.map((piece, i) => (
-                        <div
+                        <img
                             key={i}
-                            className="absolute animate-confetti"
+                            src="/logo.png"
+                            alt=""
+                            className="absolute animate-confetti object-contain"
                             style={{
                                 left: piece.left,
+                                top: '-20px',
                                 animationDelay: piece.delay,
-                                backgroundColor: piece.color,
                                 width: `${piece.size}px`,
-                                height: `${piece.size}px`,
-                                borderRadius: piece.isCircle ? '50%' : '2px'
+                                height: `${piece.size}px`
                             }}
                         />
                     ))}

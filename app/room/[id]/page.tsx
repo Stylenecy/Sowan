@@ -124,6 +124,17 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
     return (
         <main className="fixed inset-0 bg-black flex flex-col overflow-hidden select-none">
 
+            {/* ── Connection Pulse Animation ── */}
+            <div className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center">
+                <div className="relative flex items-center justify-center">
+                    <div className="absolute w-40 h-40 rounded-full border-2 border-emerald-400/30 animate-ping opacity-0" style={{ animationDuration: '2s' }} />
+                    <div className="absolute w-32 h-32 rounded-full border-2 border-emerald-400/50 animate-ping opacity-0" style={{ animationDuration: '1.5s', animationDelay: '0.3s' }} />
+                    <div className="w-24 h-24 rounded-full bg-gradient-to-br from-emerald-500/20 to-emerald-400/10 border border-emerald-400/30 flex items-center justify-center backdrop-blur-sm animate-fade-in">
+                        <div className="w-3 h-3 rounded-full bg-emerald-400 animate-pulse" />
+                    </div>
+                </div>
+            </div>
+
             {/* ── Full-screen remote video ── */}
             <div className="absolute inset-0 z-0">
                 {videoDecision.isLocalVideo ? (
@@ -279,6 +290,17 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
 
                 </div>
             </div>
+
+            <style jsx>{`
+                @keyframes fade-in {
+                    0% { opacity: 0; transform: scale(0.8); }
+                    50% { opacity: 1; transform: scale(1.1); }
+                    100% { opacity: 1; transform: scale(1); }
+                }
+                .animate-fade-in {
+                    animation: fade-in 1.5s ease-out forwards;
+                }
+            `}</style>
 
         </main>
     );

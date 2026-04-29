@@ -1,25 +1,28 @@
 'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
 
 const DEMO_STEPS = [
-    { delay: 0, action: () => {}, message: "Memuat demo interaktif Sowan.id..." },
-    { delay: 800, action: () => {}, message: "Meluncur ke halaman eksplorasi..." },
-    { delay: 1600, action: () => {}, message: "Menampilkan mentor tersedia..." },
-    { delay: 2400, action: () => {}, message: "Demo siap! Pilih mentor untuk memulai." },
+    { message: "Memuat demo interaktif Sowan.id..." },
+    { message: "Meluncur ke halaman eksplorasi..." },
+    { message: "Menampilkan mentor tersedia..." },
+    { message: "Demo siap! Pilih mentor untuk memulai." },
 ];
 
 export default function DemoPage() {
     const router = useRouter();
-    const { login } = useAuth();
+    const { login, user } = useAuth();
     const [step, setStep] = useState(0);
     const [message, setMessage] = useState(DEMO_STEPS[0].message);
+    const hasRun = useRef(false);
 
     useEffect(() => {
-        // Auto-login as Dex
+        if (hasRun.current || user) return;
+        hasRun.current = true;
+
         login("Dex");
         setStep(1);
         setMessage(DEMO_STEPS[1].message);
@@ -31,7 +34,7 @@ export default function DemoPage() {
         }, 1500);
 
         return () => clearTimeout(t1);
-    }, [login, router]);
+    }, [user, login, router]);
 
     return (
         <main className="min-h-screen w-full bg-[#FAF9F6] flex items-center justify-center pt-[72px]">

@@ -30,7 +30,7 @@ export default function CustomerDashboard() {
             const startStr = d.getHours().toString().padStart(2, '0') + ":00";
             d.setHours(d.getHours() + 1);
             const endStr = d.getHours().toString().padStart(2, '0') + ":00";
-            setBookedTime(`${t.dashboard.today}, ${startStr} - ${endStr} WIB`);
+            setBookedTime(`${t.dashboard.today}, ${startStr} - ${endStr} ${t.home.timezone}`);
         }
 
         if (storedMentor) {

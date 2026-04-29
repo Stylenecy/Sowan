@@ -336,7 +336,7 @@ desc: '"Punya ide bisnis atau sekadar rindu membahas resep masakan tradisional? 
         const startStr = d.getHours().toString().padStart(2, '0') + ":00";
         d.setHours(d.getHours() + 1);
         const endStr = d.getHours().toString().padStart(2, '0') + ":00";
-        return `${startStr} - ${endStr} WIB`;
+        return `${startStr} - ${endStr} ${t.home.timezone}`;
     };
 
     const handleOpenModal = (mentor: any) => {
@@ -365,8 +365,8 @@ desc: '"Punya ide bisnis atau sekadar rindu membahas resep masakan tradisional? 
         let timeLabel = "";
         if (selectedTime === "Today1") timeLabel = `${t.dashboard.today}, ${getDynamicTimeRange(1)}`;
         else if (selectedTime === "Today2") timeLabel = `${t.dashboard.today}, ${getDynamicTimeRange(3)}`;
-        else if (selectedTime === "Tomorrow1") timeLabel = `${t.dashboard.tomorrow}, 10:00 - 11:00 WIB`;
-        else if (selectedTime === "Tomorrow2") timeLabel = `${t.dashboard.tomorrow}, 13:00 - 14:00 WIB`;
+        else if (selectedTime === "Tomorrow1") timeLabel = `${t.dashboard.tomorrow}, 10:00 - 11:00 ${t.home.timezone}`;
+        else if (selectedTime === "Tomorrow2") timeLabel = `${t.dashboard.tomorrow}, 13:00 - 14:00 ${t.home.timezone}`;
 
         localStorage.setItem("sowan_selected_time", timeLabel);
         localStorage.setItem("sowan_booked_mentor", JSON.stringify(selectedMentor));
@@ -694,8 +694,8 @@ desc: '"Punya ide bisnis atau sekadar rindu membahas resep masakan tradisional? 
                                             <SelectContent className="bg-white border-2 border-primary/5 rounded-xl shadow-2xl z-[100] text-primary font-bold">
                                                 <SelectItem value="Today1">{t.dashboard.today}, {getDynamicTimeRange(1)}</SelectItem>
                                                 <SelectItem value="Today2">{t.dashboard.today}, {getDynamicTimeRange(3)}</SelectItem>
-                                                <SelectItem value="Tomorrow1">{t.dashboard.tomorrow}, 10:00 - 11:00 WIB</SelectItem>
-                                                <SelectItem value="Tomorrow2">{t.dashboard.tomorrow}, 13:00 - 14:00 WIB</SelectItem>
+                                                <SelectItem value="Tomorrow1">{t.dashboard.tomorrow}, 10:00 - 11:00 {t.home.timezone}</SelectItem>
+                                                <SelectItem value="Tomorrow2">{t.dashboard.tomorrow}, 13:00 - 14:00 {t.home.timezone}</SelectItem>
                                             </SelectContent>
                                         </Select>
                                     </div>

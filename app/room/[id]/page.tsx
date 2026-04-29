@@ -74,8 +74,8 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
             newVideoDecision = {
                 isLocalVideo: true,
                 videoId: '/video-pak-budi.mp4',
-                ytSource: 'Sowan.id',
-                ytHandle: ''
+                ytSource: 'Bailey Schildbach',
+                ytHandle: '@bailey.schildbach'
             };
         }
 

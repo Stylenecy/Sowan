@@ -50,8 +50,8 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
             newVideoDecision = {
                 isLocalVideo: false,
                 videoId: 'xUDcOBBF79o',
-                ytSource: 'Student',
-                ytHandle: '@student.demo'
+                ytSource: 'Bailey Schildbach',
+                ytHandle: '@bailey.schildbach'
             };
         }
         // For CUSTOMER viewing: use stored mentor data if ID matches

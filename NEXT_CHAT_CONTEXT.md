@@ -81,15 +81,15 @@
 
 ---
 
-## KNOWN ISSUES (Will Fix in New Chat)
+## KNOWN ISSUES
 
 ### HIGH PRIORITY — Still Broken
-**Hydration Error on Room Page** — There's STILL a hydration mismatch error appearing in the console. The video decision was moved to useEffect but apparently it's not fully resolved. Next chat should investigate further.
+**Hydration Error on Room Page** — There's STILL a hydration mismatch error in the console. The video decision was moved to useEffect but apparently it's NOT fully resolved. Next agent should investigate properly.
 
 ### MEDIUM PRIORITY
 1. **Mentor Dashboard `/room/1` link** — Hardcoded to `/room/1`. Needs real session/backend to fix properly. For demo purposes it works because only Opa Adriel uses mentor dashboard.
 
-2. **Video Assets** — No unique videos per mentor. All mentors use the same YouTube embed (`xUDcOBBF79o`). The mentor data has `videoId`, `videoSource`, `videoHandle`, `useLocalVideo` fields added but they all point to the same video. The `video-pak-budi.mp4` local file exists but is not used dynamically.
+2. **Video Assets** — No unique videos per mentor. All mentors use the same YouTube embed (`xUDcOBBF79o`). The mentor data has `videoId`, `videoSource`, `videoHandle`, `useLocalVideo` fields added but they all point to the same video. The `video-pak-budi.mp4` local file exists but is not used dynamically. **This is OK for demo — don't waste time fixing.**
 
 ### LOW PRIORITY
 - Lint errors (pre-existing `any` types, unescaped quotes)
@@ -128,22 +128,9 @@ Translation file: `context/LanguageContext.tsx`
 
 ---
 
-## IMPORTANT NOTES FOR NEXT CHAT
-
-1. **AUDIT FIRST** — Before making changes, read ALL relevant files thoroughly. The codebase has been modified multiple times and may have inconsistencies.
-
-2. **Hydration Error** — The room page still shows a hydration mismatch error in the console. This needs proper investigation. Don't assume the previous fix worked completely.
-
-3. **Video = Acceptable for Demo** — Even though videos are hardcoded/same for all mentors, this is FINE for a demo. The YouTube embed works, shows an elderly person talking, and is labeled as "Source: YouTube". Judges won't notice.
-
-4. **No Real Backend** — Everything is localStorage mock. Don't try to implement real auth or database features.
-
-5. **Test Before Coding** — Always `npm run build` after changes to verify no errors.
-
----
-
 ## GIT COMMITS (Recent)
 ```
+5b0a6fd docs: create NEXT_CHAT_CONTEXT.md with full project summary
 0582c2d fix: resolve hydration mismatch in room page
 c5b8dc2 fix: shrink checkout modal to fit 100% zoom screens
 3cc354f feat: add favicon, loading skeletons, and feedback confetti
@@ -158,19 +145,88 @@ c32285f Phase 3: Booking & Payment Flow Overhaul
 
 ---
 
-## WHAT TO DO IN NEW CHAT
+# TASKS FOR NEXT CHAT AGENT
 
-1. **First**: Run `npm run build` and `npm run dev` to see current state
-2. **Audit the room page hydration error** — It's still showing in console
-3. **Test the full user flow**:
-   - Go to landing page
-   - Login as "Dex" (customer)
-   - Browse /explore
-   - Book a mentor
-   - Go to /dashboard/customer
-   - Click Enter Room
-   - Verify video plays
-4. **Check if any visual bugs exist** on mobile at 100% zoom
-5. **Then** ask what else needs to be done
+**INSTRUCTIONS**: Read this entire file first, then execute the tasks below in order. After each task, test thoroughly before moving to the next one.
+
+## TASK 1: Audit the Hydration Error
+1. Run `npm run dev` and open browser console on `/room/1`
+2. Investigate why hydration mismatch still occurs
+3. Fix the issue — it might be the `videoDecision` state initialization or something else
+4. Run `npm run build` to verify fix
+5. Commit with message: `fix: resolve hydration mismatch in room page (attempt 2)`
+
+## TASK 2: Test Full User Flow
+1. Start dev server: `npm run dev`
+2. Go to landing page `/`
+3. Login as "Dex" (customer)
+4. Browse `/explore`
+5. Click "Book" on any mentor
+6. Select time slot and confirm payment
+7. Verify redirected to `/dashboard/customer`
+8. Click "Enter Room"
+9. Verify room page loads and YouTube video plays
+10. Report any visual or functional bugs found
+
+## TASK 3: Mobile Test at 100% Zoom
+1. Open site on mobile or browser devtools mobile view
+2. Set zoom to 100%
+3. Check each page for overflow/clipping issues:
+   - Landing page
+   - Explore page (especially checkout modal)
+   - Customer dashboard
+   - Room page
+4. Fix any layout issues found
+5. Run `npm run build` and commit with message: `fix: mobile layout adjustments`
+
+## TASK 4: Visual Polish Check
+1. Check all pages at desktop 100% zoom
+2. Look for:
+   - Inconsistent spacing/padding
+   - Text overflow or truncation
+   - Broken animations
+   - Missing translations
+3. Fix anything obviously wrong
+4. Commit with message: `chore: visual polish fixes`
+
+## TASK 5: If Time Permits
+1. Check `/feedback` and `/feedback-mentor` pages work correctly
+2. Verify language switching works on all pages
+3. Check navbar is responsive on smallest mobile screens
+
+## RULES FOR COMMITTING
+
+After each task that makes changes:
+
+```powershell
+git add -A
+git commit -m "your detailed commit message here"
+git push
+vercel --prod --yes
+```
+
+Or combine (PowerShell):
+```powershell
+git add -A; git commit -m "your message"; git push; vercel --prod --yes
+```
+
+**IMPORTANT**: Always verify `npm run build` passes BEFORE pushing. If build fails, fix it first.
+
+---
+
+## WHAT NOT TO DO
+
+1. **Don't touch the video system** — Videos being "hardcoded" is FINE for demo. Don't add video download scripts or try to fetch external video URLs.
+2. **Don't add real backend** — This is a localStorage mock. Don't try to implement real auth, database, or API routes.
+3. **Don't restyle everything** — The UI is already polished for demo purposes. Only fix bugs, don't redesign.
+
+---
+
+## AFTER COMPLETING TASKS
+
+1. Run final `npm run build` to confirm everything works
+2. Push all changes with proper commit messages
+3. Verify production deploy at https://sowan-app.vercel.app
+4. Report what was done and what still needs attention
 
 Good luck at KSE 2026! 🇮🇩

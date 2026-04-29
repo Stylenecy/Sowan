@@ -159,8 +159,8 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
                         >
                             <span className="text-[8px] sm:text-[10px] uppercase tracking-widest text-white/40 mb-0.5">Source: YouTube</span>
                             <div className="flex flex-col sm:flex-row sm:items-center sm:gap-2">
-                                <span className="truncate">{ytSource}</span>
-                                <span className="text-white/40 font-medium truncate hidden sm:inline">{ytHandle}</span>
+                                <span className="truncate">{videoDecision.ytSource}</span>
+                                <span className="text-white/40 font-medium truncate hidden sm:inline">{videoDecision.ytHandle}</span>
                             </div>
                         </a>
                     </div>

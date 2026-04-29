@@ -62,8 +62,8 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
                     newVideoDecision = {
                         isLocalVideo: mentor.useLocalVideo ?? false,
                         videoId: mentor.videoId ?? 'xUDcOBBF79o',
-                        ytSource: mentor.videoSource ?? 'Bailey Schildbach',
-                        ytHandle: mentor.videoHandle ?? '@bailey.schildbach'
+                        ytSource: mentor.name || 'Mentor',
+                        ytHandle: ''
                     };
                 }
             } catch {}
@@ -74,8 +74,8 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
             newVideoDecision = {
                 isLocalVideo: true,
                 videoId: '/video-pak-budi.mp4',
-                ytSource: 'Bailey Schildbach',
-                ytHandle: '@bailey.schildbach'
+                ytSource: 'Opa Adriel',
+                ytHandle: ''
             };
         }
 

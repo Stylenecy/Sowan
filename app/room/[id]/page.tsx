@@ -129,7 +129,7 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
                 {videoDecision.isLocalVideo ? (
                     <video
                         ref={remoteVideoRef}
-                        src="/video-pak-budi.mp4"
+                        src={videoDecision.videoId}
                         autoPlay
                         loop
                         playsInline

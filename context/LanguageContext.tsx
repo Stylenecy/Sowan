@@ -69,6 +69,8 @@ interface Translations {
         trustEscrow: string;
         trustEscrowSub: string;
         slotsAvailable: string;
+        sourceUnsplash: string;
+        timezone: string;
     };
     explore: {
         title: string;
@@ -189,7 +191,9 @@ home: {
             trustLanguages: "Berbagai Bahasa", trustLanguagesSub: "& Keahlian",
             trustCurated: "Kurasi Maestro", trustCuratedSub: "Ketat & Profesional",
             trustEscrow: "Transaksi Escrow", trustEscrowSub: "100% Aman & Terjamin",
-            slotsAvailable: "slot tersedia minggu ini"
+            slotsAvailable: "slot tersedia minggu ini",
+            sourceUnsplash: "Sumber: Unsplash",
+            timezone: "WIB"
         },
         explore: {
             title: "Jelajahi Kebijaksanaan", subtitle: "Temukan Teman Sowan yang paling cocok untuk berbagi cerita dan pengalaman hidup.",
@@ -245,7 +249,9 @@ home: {
             trustLanguages: "Multiple Languages", trustLanguagesSub: "& Expertise",
             trustCurated: "Maestro Curation", trustCuratedSub: "Strict & Professional",
             trustEscrow: "Escrow Transaction", trustEscrowSub: "100% Safe & Guaranteed",
-            slotsAvailable: "slots available this week"
+            slotsAvailable: "slots available this week",
+            sourceUnsplash: "Source: Unsplash",
+            timezone: " WIB"
         },
         explore: {
             title: "Explore Wisdom", subtitle: "Find the most suitable Sowan Friend to share life stories and experiences.",
@@ -301,7 +307,9 @@ home: {
             trustLanguages: "複数の言語", trustLanguagesSub: "&専門知識",
             trustCurated: " maestロ的教育", trustCuratedSub: "厳格で専門的",
             trustEscrow: "エスクロー取引", trustEscrowSub: "100%安全で保証付き",
-            slotsAvailable: "今週利用可能なスロット"
+            slotsAvailable: "今週利用可能なスロット",
+            sourceUnsplash: "ソース: Unsplash",
+            timezone: " JST"
         },
         explore: {
             title: "知恵を探索する", subtitle: "人生の物語や経験を共有するのに最適なソワン・フレンドを見つけてください。",

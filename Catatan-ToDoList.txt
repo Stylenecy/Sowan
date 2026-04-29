@@ -1,0 +1,12 @@
+Catatan-ToDoList
+1. Masih banyak bagian yang belum ada translate-an ke Bahasa lain.
+Terutama bagian:
+- Profil Mentor juga masih ada banyak bagian yang juga belum diterjemahkan
+- Jadwal juga masih ada bagian yang malah masih Bahasa Inggris yang harusnya merupakan Bahasa translate-an sesuai yang dipilih
+- Landing Page yang bagian informasi dibawah Hero Section, yang "Berbagai Bahasa & Keahlian, Kurasi Mentor Ketat & Profesional, dan Transaksi Escrow" juga belum diterjemahkan
+- Bagian yang "Panggilan Video Eksklusif 1-on-1. Belajar dan bercerita secara privat dan intensif.Jadwal Sangat Fleksibel. Pilih waktu Sowan yang paling pas untuk Anda. Dampak Sosial Nyata. Mengurangi rasa kesepian pada lansia melalui Geronteknologi." juga belum diterjemahkan
+- Bagian Mentor di homepage: status jabatan mereka dan slot tersedia minggu ini juga belum diterjemahkan
+
+2. Untuk masalah visual, aku baru pikir, kalo di perspektif dan bagian user Customer, buat apa manfaatin Geronteknologi, kan Customer akan banyak yang muda-mudi, jadi bisa dong dibuat lebih modern dan tidak harus memaksa tampilan yang luar biasa besar-besar, tapi ini juga berarti rombak-rombakan besar dan revisi total. Jadi visual bagian Customer dibuat lebih modern dan kecil (kecil disini bukan jadi sangat kecil, melainkan tiap komponen tidak perlu terlalu besar), sedangkan bagian Mentor-lah yang harus memanfaatkan ilmu Geronteknologi dengan baik. 
+
+3. Setelah semua button, visual, UI sudah mantap, Sowan dibuat versi Demo nya, maksudku versi Demo disini adalah, jadi dengan membuat URL khusus "https://sowan-app.vercel.app/demo", pokoknya disitu visualnya dibuat seakan ada guide flow demo platform Sowan dari 0 hingga selesai kelas, dan URL demo ini khusus untuk presentasi nanti, pas mau presentasi, kita tinggal buka https://sowan-app.vercel.app/demo. Tapi untuk keperluan umum, bisa dengan URL umum yang: "https://sowan-app.vercel.app/" dan kemudian digunakan sebagaimana mestinya, login dengan akun Dex dan bikin username baru, bisa jadi Customer, kalo sebagai Opa Adriel, nanti jadi Mentor. Soalnya aku ingin platformnya bisa dicoba 2 orang sekaligus dalam waktu bersamaan dan salah satunya bisa berperan sebagai Mentor, dan satunya sebagai Customer, dan kemudian bisa saling video call betulan. Akan sangat seru sih kalo bisa begitu!

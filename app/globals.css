@@ -173,3 +173,27 @@
 .animate-shimmer {
   animation: shimmer 1.5s infinite linear;
 }
+
+/* Geronteknologi Scale System - Customer=0.85, Mentor=1.2 */
+:root {
+  --ui-scale: 1;
+  --scale-btn-h: calc(48px * var(--ui-scale));
+  --scale-text: calc(16px * var(--ui-scale));
+  --scale-text-lg: calc(18px * var(--ui-scale));
+  --scale-text-xl: calc(20px * var(--ui-scale));
+  --scale-text-2xl: calc(24px * var(--ui-scale));
+  --scale-pad: calc(16px * var(--ui-scale));
+  --scale-pad-lg: calc(24px * var(--ui-scale));
+  --scale-gap: calc(16px * var(--ui-scale));
+  --scale-radius: calc(16px * var(--ui-scale));
+  --scale-radius-lg: calc(24px * var(--ui-scale));
+}
+
+/* Scale utility classes */
+.scaled-text { font-size: calc(1rem * var(--ui-scale)); }
+.scaled-text-lg { font-size: calc(1.125rem * var(--ui-scale)); }
+.scaled-text-xl { font-size: calc(1.25rem * var(--ui-scale)); }
+.scaled-text-2xl { font-size: calc(1.5rem * var(--ui-scale)); }
+.scaled-btn { height: var(--scale-btn-h); padding-left: calc(1rem * var(--ui-scale)); padding-right: calc(1rem * var(--ui-scale)); border-radius: var(--scale-radius); font-size: calc(0.875rem * var(--ui-scale)); }
+.scaled-pad { padding: var(--scale-pad); }
+.scaled-gap { gap: var(--scale-gap); }

@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { AuthProvider } from "@/context/AuthContext";
 import { LanguageProvider } from "@/context/LanguageContext";
+import ScaleProvider from "@/components/ScaleProvider";
 
 // Menggunakan Inter yang lebih bersih dan readable untuk lansia
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
@@ -29,10 +30,12 @@ export default function RootLayout({
       <body className={`font-sans antialiased min-h-screen flex flex-col bg-[#FAF9F6] text-[#1A365D] overflow-x-hidden`}>
         <LanguageProvider>
           <AuthProvider>
-            <Navbar />
-            <main className="flex-1">
-              {children}
-            </main>
+            <ScaleProvider>
+              <Navbar />
+              <main className="flex-1">
+                {children}
+              </main>
+            </ScaleProvider>
           </AuthProvider>
         </LanguageProvider>
       </body>

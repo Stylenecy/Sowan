@@ -37,16 +37,28 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
         return () => clearInterval(t);
     }, []);
 
-    // Read stored mentor data for dynamic content (client-only)
+// Read stored mentor data for dynamic content (client-only)
     useEffect(() => {
         const storedMentor = localStorage.getItem("sowan_booked_mentor");
         let newVideoDecision = { isLocalVideo: false, videoId: 'xUDcOBBF79o', ytSource: 'Bailey Schildbach', ytHandle: '@bailey.schildbach' };
 
-        if (storedMentor) {
+        const mentorIdNum = parseInt(id);
+        const maleMentorIds = [1, 3, 4, 6, 7, 10, 12, 13];
+
+        // For MENTOR viewing (Opa Adriel): show student video (different from mentor's own video)
+        if (user?.name === 'Opa Adriel') {
+            newVideoDecision = {
+                isLocalVideo: false,
+                videoId: 'xUDcOBBF79o',
+                ytSource: 'Student',
+                ytHandle: '@student.demo'
+            };
+        }
+        // For CUSTOMER viewing: use stored mentor data if ID matches
+        else if (storedMentor) {
             try {
                 const mentor = JSON.parse(storedMentor);
-                // Only use stored mentor if ID matches room, otherwise use default for this room
-                if (mentor.id === parseInt(id)) {
+                if (mentor.id === mentorIdNum) {
                     newVideoDecision = {
                         isLocalVideo: mentor.useLocalVideo ?? false,
                         videoId: mentor.videoId ?? 'xUDcOBBF79o',
@@ -57,10 +69,8 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
             } catch {}
         }
 
-        // Default video by mentor gender (male IDs: 1,3,4,6,7,10,12,13 = local video)
-        const maleMentorIds = [1, 3, 4, 6, 7, 10, 12, 13];
-        const mentorIdNum = parseInt(id);
-        if (maleMentorIds.includes(mentorIdNum)) {
+        // Default by mentor gender (male mentors use local video)
+        if (maleMentorIds.includes(mentorIdNum) && user?.name !== 'Opa Adriel') {
             newVideoDecision = {
                 isLocalVideo: true,
                 videoId: '/video-pak-budi.mp4',
@@ -69,8 +79,8 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
             };
         }
 
-        // Custom overrides for specific female mentors
-        if (id === '5' || id === '8' || id === '11') {
+        // Custom overrides for female mentors (IDs 5,8,11)
+        if (['5', '8', '11'].includes(id) && user?.name !== 'Opa Adriel') {
             newVideoDecision = {
                 isLocalVideo: false,
                 videoId: 'N90UIXMuMMU',
@@ -81,7 +91,7 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
 
         setVideoDecision(newVideoDecision);
         setTimeout(() => setShowConnectionAnim(false), 1500);
-    }, [id]);
+    }, [id, user?.name]);
 
     // Camera
     useEffect(() => {

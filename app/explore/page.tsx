@@ -41,7 +41,7 @@ export default function ExplorePage() {
         [...Array(12)].map((_, i) => ({
             left: `${10 + Math.random() * 80}%`,
             delay: `${Math.random() * 0.8}s`,
-            size: 20 + Math.random() * 30
+            size: 60 + Math.random() * 40
         })), []);
 
     const mentors = [

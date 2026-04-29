@@ -24,6 +24,7 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
     const [cameraError, setCameraError] = useState(false);
     const [elapsed, setElapsed] = useState(0);
     const [videoDecision, setVideoDecision] = useState({ isLocalVideo: false, videoId: 'xUDcOBBF79o', ytSource: 'Bailey Schildbach', ytHandle: '@bailey.schildbach' });
+    const [showConnectionAnim, setShowConnectionAnim] = useState(true);
 
     const videoRef = useRef<HTMLVideoElement>(null);
     const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -64,6 +65,7 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
         }
 
         setVideoDecision(newVideoDecision);
+        setTimeout(() => setShowConnectionAnim(false), 1500);
     }, [id]);
 
     // Camera
@@ -125,6 +127,7 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
         <main className="fixed inset-0 bg-black flex flex-col overflow-hidden select-none">
 
             {/* ── Connection Pulse Animation ── */}
+            {showConnectionAnim && (
             <div className="absolute inset-0 z-10 pointer-events-none flex items-center justify-center">
                 <div className="relative flex items-center justify-center">
                     <div className="absolute w-40 h-40 rounded-full border-2 border-emerald-400/30 animate-ping opacity-0" style={{ animationDuration: '2s' }} />
@@ -134,6 +137,7 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
                     </div>
                 </div>
             </div>
+            )}
 
             {/* ── Full-screen remote video ── */}
             <div className="absolute inset-0 z-0">

@@ -15,12 +15,12 @@ export default function MentorDashboard() {
 
     return (
         <main className="min-h-screen w-full bg-[#FAF9F6] font-sans text-primary">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16" style={{ padding: 'calc(2.5rem * var(--ui-scale)) calc(1.5rem * var(--ui-scale))' }}>
 
                 {/* ── Greeting Header ── */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
                     <div>
-                        <h1 className="text-4xl lg:text-6xl font-black text-primary mb-2">
+                        <h1 className="text-4xl lg:text-6xl font-black text-primary mb-2 scaled-text-2xl" style={{ fontSize: 'calc(2.5rem * var(--ui-scale))' }}>
                             {t.dashboard.mentorTitle}
                         </h1>
                         <p className="text-2xl text-muted-foreground font-bold italic">
@@ -107,7 +107,7 @@ export default function MentorDashboard() {
                                     </p>
                                 </div>
                                 <div className="mt-12">
-                                    <Button asChild className="h-20 bg-accent hover:bg-accent/90 text-white rounded-[28px] px-12 text-2xl font-black shadow-2xl shadow-black/20 group/btn transition-all active:scale-95 hover:-translate-y-1">
+                                    <Button asChild className="scaled-btn scaled-text-xl bg-accent hover:bg-accent/90 text-white shadow-2xl shadow-black/20 group/btn transition-all active:scale-95" style={{ height: 'calc(80px * var(--ui-scale))', fontSize: 'calc(1.5rem * var(--ui-scale))', paddingLeft: 'calc(3rem * var(--ui-scale))', paddingRight: 'calc(3rem * var(--ui-scale))', borderRadius: 'calc(28px * var(--ui-scale))' }}>
                                         <Link href="/room/1" className="flex items-center gap-4">
                                             {t.dashboard.roomBtn}
                                             <ArrowRight size={32} className="group-hover/btn:translate-x-3 transition-transform" />

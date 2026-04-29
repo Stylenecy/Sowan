@@ -23,7 +23,7 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
     const [isRemoteMuted, setIsRemoteMuted] = useState(true);
     const [cameraError, setCameraError] = useState(false);
     const [elapsed, setElapsed] = useState(0);
-    const [videoDecision, setVideoDecision] = useState({ isLocalVideo: false, videoId: '', ytSource: '', ytHandle: '' });
+    const [videoDecision, setVideoDecision] = useState({ isLocalVideo: false, videoId: 'xUDcOBBF79o', ytSource: 'Bailey Schildbach', ytHandle: '@bailey.schildbach' });
 
     const videoRef = useRef<HTMLVideoElement>(null);
     const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -140,7 +140,7 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
                 ) : (
                     <iframe
                         ref={iframeRef}
-                        src={`https://www.youtube.com/embed/${videoDecision.videoId}?autoplay=1&mute=1&loop=1&playlist=${videoDecision.videoId}&controls=0&disablekb=1&modestbranding=1&playsinline=1&enablejsapi=1`}
+                        src={`https://www.youtube.com/embed/${videoDecision.videoId}?mute=1&loop=1&playlist=${videoDecision.videoId}&controls=0&disablekb=1&modestbranding=1&playsinline=1&enablejsapi=1`}
                         allow="autoplay; encrypted-media"
                         suppressHydrationWarning
                         className="absolute top-1/2 left-1/2 w-[115vw] h-[115vh] md:w-[120vw] md:h-[120vh] -translate-x-1/2 -translate-y-1/2 pointer-events-none object-cover transition-all duration-700"

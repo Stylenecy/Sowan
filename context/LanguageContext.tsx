@@ -56,6 +56,19 @@ interface Translations {
         statsLanguages: string;
         testimonialsTitle: string;
         testimonialsDesc: string;
+        aboutExclusives: string;
+        aboutExclusivesDesc: string;
+        aboutFlexible: string;
+        aboutFlexibleDesc: string;
+        aboutImpact: string;
+        aboutImpactDesc: string;
+        trustLanguages: string;
+        trustLanguagesSub: string;
+        trustCurated: string;
+        trustCuratedSub: string;
+        trustEscrow: string;
+        trustEscrowSub: string;
+        slotsAvailable: string;
     };
     explore: {
         title: string;
@@ -169,7 +182,14 @@ home: {
             badgeSecure: "Sistem Escrow Aman 100%",
             badgeCurated: "Maestro Lulus Kurasi Pedagogi",
             statsUsers: "Pengguna Terdaftar", statsMaestros: "Maestro Terkurasi", statsLanguages: "Bahasa Pengantar",
-            testimonialsTitle: "Kata Mereka yang Sudah Sowan", testimonialsDesc: "Cerita nyata dari pengguna yang telah merasakan manfaatnya"
+            testimonialsTitle: "Kata Mereka yang Sudah Sowan", testimonialsDesc: "Cerita nyata dari pengguna yang telah merasakan manfaatnya",
+            aboutExclusives: "Panggilan Video Eksklusif 1-on-1", aboutExclusivesDesc: "Belajar dan bercerita secara privat dan intensif.",
+            aboutFlexible: "Jadwal Sangat Fleksibel", aboutFlexibleDesc: "Pilih waktu Sowan yang paling pas untuk Anda.",
+            aboutImpact: "Dampak Sosial Nyata", aboutImpactDesc: "Mengurangi rasa kesepian pada lansia melalui Geronteknologi.",
+            trustLanguages: "Berbagai Bahasa", trustLanguagesSub: "& Keahlian",
+            trustCurated: "Kurasi Maestro", trustCuratedSub: "Ketat & Profesional",
+            trustEscrow: "Transaksi Escrow", trustEscrowSub: "100% Aman & Terjamin",
+            slotsAvailable: "slot tersedia minggu ini"
         },
         explore: {
             title: "Jelajahi Kebijaksanaan", subtitle: "Temukan Teman Sowan yang paling cocok untuk berbagi cerita dan pengalaman hidup.",
@@ -218,7 +238,14 @@ home: {
             badgeSecure: "100% Secure Escrow System",
             badgeCurated: "Pedagogy-Curated Maestros",
             statsUsers: "Registered Users", statsMaestros: "Curated Maestros", statsLanguages: "Teaching Languages",
-            testimonialsTitle: "What They Say", testimonialsDesc: "Real stories from users who have experienced the benefits"
+            testimonialsTitle: "What They Say", testimonialsDesc: "Real stories from users who have experienced the benefits",
+            aboutExclusives: "1-on-1 Exclusive Video Call", aboutExclusivesDesc: "Learn and chat privately and intensively.",
+            aboutFlexible: "Highly Flexible Schedule", aboutFlexibleDesc: "Choose the Sowan time that suits you best.",
+            aboutImpact: "Real Social Impact", aboutImpactDesc: "Reducing loneliness in the elderly through Gerontechnology.",
+            trustLanguages: "Multiple Languages", trustLanguagesSub: "& Expertise",
+            trustCurated: "Maestro Curation", trustCuratedSub: "Strict & Professional",
+            trustEscrow: "Escrow Transaction", trustEscrowSub: "100% Safe & Guaranteed",
+            slotsAvailable: "slots available this week"
         },
         explore: {
             title: "Explore Wisdom", subtitle: "Find the most suitable Sowan Friend to share life stories and experiences.",
@@ -267,7 +294,14 @@ home: {
             badgeSecure: "100%安全なエスクローシステム",
             badgeCurated: "教育学的に選ばれたマエストロ",
             statsUsers: "登録ユーザー", statsMaestros: "厳選マエストロ", statsLanguages: "教授言語",
-            testimonialsTitle: "を経験した人の声", testimonialsDesc: "その利点を実感しているユーザーからの実際のストーリー"
+            testimonialsTitle: "を経験した人の声", testimonialsDesc: "その利点を実感しているユーザーからの実際のストーリー",
+            aboutExclusives: "1対1のrictedビデオ通話", aboutExclusivesDesc: "プライベートで集中的に学び、chatおう。",
+            aboutFlexible: "非常に柔軟なスケジュール", aboutFlexibleDesc: "あなたに最適なSowan時間を選んでください。",
+            aboutImpact: "実際の社会的影響", aboutImpactDesc: "老人技術を通じて高齢者の孤独を減らす。",
+            trustLanguages: "複数の言語", trustLanguagesSub: "&専門知識",
+            trustCurated: " maestロ的教育", trustCuratedSub: "厳格で専門的",
+            trustEscrow: "エスクロー取引", trustEscrowSub: "100%安全で保証付き",
+            slotsAvailable: "今週利用可能なスロット"
         },
         explore: {
             title: "知恵を探索する", subtitle: "人生の物語や経験を共有するのに最適なソワン・フレンドを見つけてください。",
@@ -365,7 +399,14 @@ home: {
             badgeSecure: "100% 安全的担保系统",
             badgeCurated: "经过教学评估的大师",
             statsUsers: "注册用户", statsMaestros: "精选师匠", statsLanguages: "教学语言",
-            testimonialsTitle: "用户感言", testimonialsDesc: "来自真实用户的体验分享"
+            testimonialsTitle: "用户感言", testimonialsDesc: "来自真实用户的体验分享",
+            aboutExclusives: "1对1专属视频通话", aboutExclusivesDesc: "私密且专注地学习和交流。",
+            aboutFlexible: "灵活的时间安排", aboutFlexibleDesc: "选择最适合您的时间。",
+            aboutImpact: "真实的社会影响", aboutImpactDesc: "通过老年技术减少老年人的孤独感。",
+            trustLanguages: "多语言", trustLanguagesSub: "与专业知识",
+            trustCurated: "师匠精选", trustCuratedSub: "严格且专业",
+            trustEscrow: "托管交易", trustEscrowSub: "100%安全有保障",
+            slotsAvailable: "本周可预约"
         },
         explore: {
             title: "探索智慧", subtitle: "寻找最合适的 Sowan 之友来分享生活故事和经验。",

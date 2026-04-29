@@ -66,6 +66,7 @@ export default function Home() {
       title: "Pakar Sejarah Jawa",
       quote: "\"Setiap batik punya doa. Itu yang tak bisa diajarkan di sekolah.\"",
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200&auto=format&fit=crop",
+      slots: 3,
     },
     {
       id: 2,
@@ -73,6 +74,7 @@ export default function Home() {
       title: "Mantan Diplomat",
       quote: "\"Diplomasi dimulai dari senyum. Itu modal termurah tapi paling berharga.\"",
       image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=200&auto=format&fit=crop",
+      slots: 0,
     },
     {
       id: 3,
@@ -80,6 +82,7 @@ export default function Home() {
       title: "Pebisnis Kuliner",
       quote: "\"Resep rahasia? Tidak ada. Yang ada hanya cinta yang tak pernah bohong.\"",
       image: "https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?q=80&w=400&auto=format&fit=crop",
+      slots: 2,
     },
     {
       id: 4,
@@ -87,6 +90,7 @@ export default function Home() {
       title: "Musisi Keroncong",
       quote: "\"Musik tak punya batas. Satu lagu bisa menyatukan Benua.\"",
       image: "https://images.unsplash.com/photo-1463453091185-61582044d556?q=80&w=200&auto=format&fit=crop",
+      slots: 1,
     },
     {
       id: 5,
@@ -94,6 +98,7 @@ export default function Home() {
       title: "Pengrajin Batik",
       quote: "\"Kau tidak bisa terburu-buru membuat sesuatu yang bermakna seumur hidup.\"",
       image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=400&auto=format&fit=crop",
+      slots: 4,
     },
     {
       id: 6,
@@ -101,6 +106,7 @@ export default function Home() {
       title: "Pakar Pertanian",
       quote: "\"Tanah tidak pernah mengkhianati mereka yang sabar merawatnya.\"",
       image: "https://images.unsplash.com/photo-1566753323558-f4e0952af115?q=80&w=200&auto=format&fit=crop",
+      slots: 0,
     },
   ];
 
@@ -294,8 +300,8 @@ export default function Home() {
                 <Globe className="w-8 h-8 text-accent" />
               </div>
               <div>
-                <p className="text-white font-extrabold text-lg sm:text-xl tracking-tight leading-tight">Berbagai Bahasa</p>
-                <p className="text-white/60 text-sm font-medium tracking-wide">& Keahlian</p>
+                <p className="text-white font-extrabold text-lg sm:text-xl tracking-tight leading-tight">{t.home.trustLanguages}</p>
+                <p className="text-white/60 text-sm font-medium tracking-wide">{t.home.trustLanguagesSub}</p>
               </div>
             </div>
 
@@ -304,8 +310,8 @@ export default function Home() {
                 <Users className="w-8 h-8 text-accent" />
               </div>
               <div>
-                <p className="text-white font-extrabold text-lg sm:text-xl tracking-tight leading-tight">Kurasi Maestro</p>
-                <p className="text-white/60 text-sm font-medium tracking-wide">Ketat & Profesional</p>
+                <p className="text-white font-extrabold text-lg sm:text-xl tracking-tight leading-tight">{t.home.trustCurated}</p>
+                <p className="text-white/60 text-sm font-medium tracking-wide">{t.home.trustCuratedSub}</p>
               </div>
             </div>
 
@@ -314,8 +320,8 @@ export default function Home() {
                 <ShieldCheck className="w-8 h-8 text-accent" />
               </div>
               <div>
-                <p className="text-white font-extrabold text-lg sm:text-xl tracking-tight leading-tight">Transaksi Escrow</p>
-                <p className="text-white/60 text-sm font-medium tracking-wide">100% Aman & Terjamin</p>
+                <p className="text-white font-extrabold text-lg sm:text-xl tracking-tight leading-tight">{t.home.trustEscrow}</p>
+                <p className="text-white/60 text-sm font-medium tracking-wide">{t.home.trustEscrowSub}</p>
               </div>
             </div>
 
@@ -344,8 +350,8 @@ export default function Home() {
                     <Video className="w-7 h-7 text-accent group-hover:text-white transition-colors" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-bold text-primary mb-1">Panggilan Video Eksklusif 1-on-1</h4>
-                    <p className="text-muted-foreground text-lg leading-snug">Belajar dan bercerita secara privat dan intensif.</p>
+                    <h4 className="text-xl font-bold text-primary mb-1">{t.home.aboutExclusives}</h4>
+                    <p className="text-muted-foreground text-lg leading-snug">{t.home.aboutExclusivesDesc}</p>
                   </div>
                 </div>
 
@@ -354,8 +360,8 @@ export default function Home() {
                     <Calendar className="w-7 h-7 text-accent group-hover:text-white transition-colors" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-bold text-primary mb-1">Jadwal Sangat Fleksibel</h4>
-                    <p className="text-muted-foreground text-lg leading-snug">Pilih waktu Sowan yang paling pas untuk Anda.</p>
+                    <h4 className="text-xl font-bold text-primary mb-1">{t.home.aboutFlexible}</h4>
+                    <p className="text-muted-foreground text-lg leading-snug">{t.home.aboutFlexibleDesc}</p>
                   </div>
                 </div>
 
@@ -364,8 +370,8 @@ export default function Home() {
                     <HeartHandshake className="w-7 h-7 text-accent group-hover:text-white transition-colors" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-bold text-primary mb-1">Dampak Sosial Nyata</h4>
-                    <p className="text-muted-foreground text-lg leading-snug">Mengurangi rasa kesepian pada lansia melalui Geronteknologi.</p>
+                    <h4 className="text-xl font-bold text-primary mb-1">{t.home.aboutImpact}</h4>
+                    <p className="text-muted-foreground text-lg leading-snug">{t.home.aboutImpactDesc}</p>
                   </div>
                 </div>
 
@@ -461,7 +467,7 @@ export default function Home() {
                 {/* Slots Badge */}
                 <div className="flex items-center gap-2 text-xs text-primary/50 font-medium mb-6">
                   <MapPin className="w-3 h-3" />
-                  <span>2 slot tersedia minggu ini</span>
+                  <span>{mentor.slots} {t.home.slotsAvailable}</span>
                 </div>
 
                 <Button

@@ -39,7 +39,7 @@ export default function CustomerDashboard() {
     }, [t.dashboard.today]);
 
     return (
-        <main className="min-h-screen w-full bg-[#FAF9F6] font-sans text-primary">
+        <main className="min-h-screen w-full bg-[#FAF9F6] font-sans text-primary pt-[72px]">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
                 {/* ── Greeting Header ── */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">

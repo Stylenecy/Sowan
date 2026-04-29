@@ -45,13 +45,28 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
         if (storedMentor) {
             try {
                 const mentor = JSON.parse(storedMentor);
-                newVideoDecision = {
-                    isLocalVideo: mentor.useLocalVideo ?? false,
-                    videoId: mentor.videoId ?? 'xUDcOBBF79o',
-                    ytSource: mentor.videoSource ?? 'Bailey Schildbach',
-                    ytHandle: mentor.videoHandle ?? '@bailey.schildbach'
-                };
+                // Only use stored mentor if ID matches room, otherwise use default for this room
+                if (mentor.id === parseInt(id)) {
+                    newVideoDecision = {
+                        isLocalVideo: mentor.useLocalVideo ?? false,
+                        videoId: mentor.videoId ?? 'xUDcOBBF79o',
+                        ytSource: mentor.videoSource ?? 'Bailey Schildbach',
+                        ytHandle: mentor.videoHandle ?? '@bailey.schildbach'
+                    };
+                }
             } catch {}
+        }
+
+        // Default video by mentor gender (male IDs: 1,3,4,6,7,10,12,13 = local video)
+        const maleMentorIds = [1, 3, 4, 6, 7, 10, 12, 13];
+        const mentorIdNum = parseInt(id);
+        if (maleMentorIds.includes(mentorIdNum)) {
+            newVideoDecision = {
+                isLocalVideo: true,
+                videoId: '/video-pak-budi.mp4',
+                ytSource: 'Sowan.id',
+                ytHandle: ''
+            };
         }
 
         // Custom overrides for specific female mentors

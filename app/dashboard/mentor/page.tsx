@@ -14,7 +14,7 @@ export default function MentorDashboard() {
     const displayName = user?.name ?? "Opa Adriel";
 
     return (
-        <main className="min-h-screen w-full bg-[#FAF9F6] font-sans text-primary">
+        <main className="min-h-screen w-full bg-[#FAF9F6] font-sans text-primary pt-[72px]">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16" style={{ padding: 'calc(2.5rem * var(--ui-scale)) calc(1.5rem * var(--ui-scale))' }}>
 
                 {/* ── Greeting Header ── */}

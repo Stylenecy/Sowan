@@ -14,7 +14,7 @@ export default function MentorDashboard() {
     const displayName = user?.name ?? "Opa Adriel";
 
     return (
-        <main className="min-h-screen w-full bg-[#FAF9F6] font-sans text-primary pt-[72px]">
+        <main className="min-h-screen w-full bg-[#FAF9F6] font-sans text-primary pt-[72px]" style={{ fontSize: 'calc(16px * var(--ui-scale))' }}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16" style={{ padding: 'calc(2.5rem * var(--ui-scale)) calc(1.5rem * var(--ui-scale))' }}>
 
                 {/* ── Greeting Header ── */}
@@ -23,7 +23,7 @@ export default function MentorDashboard() {
                         <h1 className="text-4xl lg:text-6xl font-black text-primary mb-2 scaled-text-2xl" style={{ fontSize: 'calc(2.5rem * var(--ui-scale))' }}>
                             {t.dashboard.mentorTitle}
                         </h1>
-                        <p className="text-2xl text-muted-foreground font-bold italic">
+                        <p className="text-2xl text-muted-foreground font-bold italic" style={{ fontSize: 'calc(1.25rem * var(--ui-scale))' }}>
                             {t.shared.hello}{displayName}! 👋
                         </p>
                     </div>

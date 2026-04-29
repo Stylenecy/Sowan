@@ -39,15 +39,15 @@ export default function CustomerDashboard() {
     }, [t.dashboard.today]);
 
     return (
-        <main className="min-h-screen w-full bg-[#FAF9F6] font-sans text-primary pt-[72px]">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
+        <main className="min-h-screen w-full bg-[#FAF9F6] font-sans text-primary pt-[72px]" style={{ fontSize: 'calc(16px * var(--ui-scale))' }}>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16" style={{ padding: 'calc(2.5rem * var(--ui-scale)) calc(1.5rem * var(--ui-scale))' }}>
                 {/* ── Greeting Header ── */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
                     <div>
-                        <h1 className="text-3xl sm:text-4xl lg:text-6xl font-black text-primary mb-2">
+                        <h1 className="text-3xl sm:text-4xl lg:text-6xl font-black text-primary mb-2" style={{ fontSize: 'calc(2.5rem * var(--ui-scale))' }}>
                             {t.dashboard.customerTitle}
                         </h1>
-                        <p className="text-2xl text-muted-foreground font-bold italic">
+                        <p className="text-2xl text-muted-foreground font-bold italic" style={{ fontSize: 'calc(1.25rem * var(--ui-scale))' }}>
                             {t.shared.hello}{displayName}! 👋
                         </p>
                     </div>

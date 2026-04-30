@@ -229,7 +229,7 @@ export default function DemoExplorePage() {
                 )
             )
         ),
-        React.createElement("style", { jsx: true, global: true }, "@keyframes demoBounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-8px); } }")
+        React.createElement("style", null, "@keyframes demoBounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-8px); } }")
     );
 }
 
@@ -341,6 +341,7 @@ function SidePanel(props) {
 }
 
 function RoomModal(props) {
+    var isID = props.isID;
     return React.createElement("div", { className: "fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm" },
         React.createElement("div", { className: "bg-white rounded-3xl p-8 max-w-md w-full mx-4 shadow-2xl" },
             React.createElement("div", { className: "text-center mb-6" },
@@ -364,6 +365,7 @@ function RoomModal(props) {
 }
 
 function FeedbackModal(props) {
+    var isID = props.isID;
     return React.createElement("div", { className: "fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm" },
         React.createElement("div", { className: "bg-white rounded-3xl p-8 max-w-lg w-full mx-4 shadow-2xl" },
             React.createElement("div", { className: "text-center mb-6" },

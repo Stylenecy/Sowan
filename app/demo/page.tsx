@@ -123,6 +123,39 @@ export default function DemoPage() {
                     </div>
                 </div>
 
+                {/* Special Demo Modes */}
+                <div className="mb-12">
+                    <h2 className="text-2xl font-black text-primary mb-6 text-center">🎬 Demo Interaktif dengan Animasi Panduan</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <Link
+                            href="/demo/explore"
+                            className="group bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl p-8 border-2 border-amber-200 hover:border-amber-400 hover:shadow-xl transition-all block text-center"
+                        >
+                            <div className="w-16 h-16 mx-auto rounded-2xl bg-white flex items-center justify-center text-4xl mb-4 shadow-sm group-hover:scale-110 transition-transform">
+                                🔍
+                            </div>
+                            <h3 className="text-xl font-black text-primary mb-2">Demo Jelajahi Mentor</h3>
+                            <p className="text-sm text-primary/70 font-medium">Lihat panduan langkah demi langkah cara mencari dan memilih mentor dengan animasi langsung.</p>
+                            <span className="inline-block mt-4 bg-accent text-white font-bold px-6 py-2 rounded-full group-hover:bg-accent/90 transition-all">
+                                Mulai Demo →
+                            </span>
+                        </Link>
+                        <Link
+                            href="/demo/mentor"
+                            className="group bg-gradient-to-br from-blue-50 to-indigo-50 rounded-3xl p-8 border-2 border-blue-200 hover:border-blue-400 hover:shadow-xl transition-all block text-center"
+                        >
+                            <div className="w-16 h-16 mx-auto rounded-2xl bg-white flex items-center justify-center text-4xl mb-4 shadow-sm group-hover:scale-110 transition-transform">
+                                👴
+                            </div>
+                            <h3 className="text-xl font-black text-primary mb-2">Demo Dashboard Mentor</h3>
+                            <p className="text-sm text-primary/70 font-medium">Ikuti alur lengkap dari Jelajahi, Jadwal, Ruang Sowan, hingga Apresiasi dengan panduan animasi.</p>
+                            <span className="inline-block mt-4 bg-blue-600 text-white font-bold px-6 py-2 rounded-full group-hover:bg-blue-700 transition-all">
+                                Mulai Demo →
+                            </span>
+                        </Link>
+                    </div>
+                </div>
+
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
                     <button
@@ -130,14 +163,14 @@ export default function DemoPage() {
                         className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-white font-black text-xl px-12 py-6 rounded-3xl shadow-xl shadow-accent/20 transition-all active:scale-95 flex items-center justify-center gap-3"
                     >
                         <span>🚀</span>
-                        Mulai Demo sebagai Customer
+                        Langsung ke Explore (Auto-Login Dex)
                     </button>
                     <button
                         onClick={handleStartAsMentor}
                         className="w-full sm:w-auto bg-primary/10 hover:bg-primary/20 text-primary font-black text-xl px-12 py-6 rounded-3xl border-2 border-primary/20 transition-all active:scale-95 flex items-center justify-center gap-3"
                     >
                         <span>👴</span>
-                        Demo sebagai Mentor
+                        Langsung ke Mentor Dashboard (Auto-Login Opa Adriel)
                     </button>
                 </div>
 

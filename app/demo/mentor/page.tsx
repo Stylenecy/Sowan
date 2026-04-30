@@ -4,16 +4,23 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { useLanguage } from "@/context/LanguageContext";
-import { Users, Calendar, Video, Heart, Mic, Camera, MonitorUp, PhoneOff, Star, MapPin, Clock, ArrowRight } from "lucide-react";
+import { Users, Calendar, Video, Heart, Mic, Camera, MonitorUp, PhoneOff, Star, MapPin, Clock, ArrowRight, CheckCircle } from "lucide-react";
 
-const MENTOR_STEPS = [
+const STEPS_ID = [
     { icon: "🔍", title: "Jelajahi", desc: "Profil Anda terlihat oleh customer.", phase: 'explore' },
     { icon: "📅", title: "Jadwal", desc: "Kelola sesi yang sudah dipesan.", phase: 'schedule' },
     { icon: "🎥", title: "Ruang Sowan", desc: "Video call eksklusif 1-on-1.", phase: 'room' },
-    { icon: "💬", title: "Apresiasi", desc: "Lihat testimonial dan rating.", phase: 'feedback' }
+    { icon: "💬", title: "Apresiasi", desc: "Lihat testimonial dan rating.", phase: 'feedback' },
 ];
 
-const PHASE_STEPS = {
+const STEPS_EN = [
+    { icon: "🔍", title: "Explore", desc: "Your profile is visible to customers.", phase: 'explore' },
+    { icon: "📅", title: "Schedule", desc: "Manage booked sessions.", phase: 'schedule' },
+    { icon: "🎥", title: "Sowan Room", desc: "Exclusive 1-on-1 video call.", phase: 'room' },
+    { icon: "💬", title: "Appreciation", desc: "View testimonials and ratings.", phase: 'feedback' },
+];
+
+const PHASE_STEPS_ID = {
     explore: [
         { icon: "👤", title: "Profil Mentor", desc: "Ini yang dilihat customer saat memilih Anda." },
         { icon: "📝", title: "Topik & Harga", desc: "Topik dan harga terlihat di kartu profil." },
@@ -29,7 +36,26 @@ const PHASE_STEPS = {
     feedback: [
         { icon: "⭐", title: "Rating", desc: "Customer memberi rating 4.9." },
         { icon: "🎉", title: "Apresiasi", desc: "Testimonial dari customer." },
-    ]
+    ],
+};
+
+const PHASE_STEPS_EN = {
+    explore: [
+        { icon: "👤", title: "Mentor Profile", desc: "This is what customers see when choosing you." },
+        { icon: "📝", title: "Topics & Price", desc: "Topics and price visible on profile card." },
+    ],
+    schedule: [
+        { icon: "📅", title: "Session List", desc: "All booked sessions from customers." },
+        { icon: "👤", title: "Booking Detail", desc: "Customer name, topic, and time." },
+    ],
+    room: [
+        { icon: "🎥", title: "Join Room", desc: "Click to connect with customer." },
+        { icon: "📹", title: "Video Call", desc: "Video chat begins." },
+    ],
+    feedback: [
+        { icon: "⭐", title: "Rating", desc: "Customer gave 4.9 rating." },
+        { icon: "🎉", title: "Appreciation", desc: "Testimonials from customers." },
+    ],
 };
 
 export default function DemoMentorPage() {
@@ -43,6 +69,8 @@ export default function DemoMentorPage() {
     const [roomState, setRoomState] = useState<'idle' | 'connecting' | 'connected'>('idle');
 
     const isID = language === 'id';
+    const OVERVIEW_STEPS = isID ? STEPS_ID : STEPS_EN;
+    const PHASE_STEPS = isID ? PHASE_STEPS_ID : PHASE_STEPS_EN;
 
     useEffect(() => {
         if (hasRun.current || user) return;
@@ -51,13 +79,13 @@ export default function DemoMentorPage() {
     }, [user, login]);
 
     const getCurrentStepData = () => {
-        if (phase === 'overview') return MENTOR_STEPS[step] || MENTOR_STEPS[0];
+        if (phase === 'overview') return OVERVIEW_STEPS[step] || OVERVIEW_STEPS[0];
         const steps = PHASE_STEPS[phase as keyof typeof PHASE_STEPS] || [];
         return steps[step] || steps[0];
     };
 
     const getTotalSteps = () => {
-        if (phase === 'overview') return MENTOR_STEPS.length;
+        if (phase === 'overview') return OVERVIEW_STEPS.length;
         return (PHASE_STEPS[phase as keyof typeof PHASE_STEPS] || []).length;
     };
 
@@ -65,6 +93,7 @@ export default function DemoMentorPage() {
         setPhase(p);
         setStep(0);
         setIsComplete(false);
+        setRoomState('idle');
     };
 
     const handleNextStep = useCallback(() => {
@@ -75,10 +104,8 @@ export default function DemoMentorPage() {
             setIsComplete(true);
             setTimeout(() => {
                 if (phase === 'overview') {
-                    const nextPhase = MENTOR_STEPS[step]?.phase as typeof phase;
-                    if (nextPhase) {
-                        goToPhase(nextPhase);
-                    }
+                    const next = OVERVIEW_STEPS[step]?.phase as typeof phase;
+                    if (next) goToPhase(next);
                 } else {
                     goToPhase('overview');
                 }
@@ -92,16 +119,15 @@ export default function DemoMentorPage() {
         setStep(0);
         setIsComplete(false);
         setRoomState('idle');
-        login("Opa Adriel");
     };
 
     const handleBookSesi = () => {
-        setStep(1);
         const bubble = document.createElement('div');
-        bubble.className = 'fixed inset-0 z-50 flex items-center justify-center bg-black/30';
-        bubble.innerHTML = '<div class="bg-emerald-500 text-white px-8 py-6 rounded-3xl shadow-2xl text-center"><p class="font-black text-2xl mb-2">✓ Booking Berhasil!</p><p class="text-sm opacity-80">Customer Dex akan segera terhubung</p></div>';
+        bubble.style.cssText = 'position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3)';
+        bubble.innerHTML = `<div style="background:#10b981;color:white;padding:2rem 3rem;border-radius:1.5rem;box-shadow:0 25px 50px rgba(0,0,0,0.25);text-align:center"><p style="font-weight:900;font-size:1.5rem;margin-bottom:0.5rem">✓ ${isID ? 'Booking Berhasil!' : 'Booking Successful!'}</p><p style="opacity:0.8;font-size:0.875rem">${isID ? 'Customer Dex akan segera terhubung' : 'Customer Dex will connect soon'}</p></div>`;
         document.body.appendChild(bubble);
         setTimeout(() => bubble.remove(), 2500);
+        setStep(1);
     };
 
     const handleMasukRuang = () => {
@@ -112,17 +138,17 @@ export default function DemoMentorPage() {
 
     return (
         <main className="min-h-screen w-full bg-[#FAF9F6] pb-48">
-            {/* Top Bar */}
-            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-blue-200 py-4 px-6 sticky top-0 z-50">
+            {/* Sticky Demo Header */}
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-blue-200 py-4 px-6 sticky top-[72px] z-40">
                 <div className="max-w-7xl mx-auto flex items-center justify-between">
                     <div className="flex items-center gap-4">
                         <span className="text-3xl">👴</span>
                         <div>
-                            <h2 className="font-black text-primary">{isID ? "Demo Mode: Dashboard Mentor" : "Demo Mode: Mentor Dashboard"}</h2>
+                            <h2 className="font-black text-primary">{isID ? "Demo: Dashboard Mentor" : "Demo: Mentor Dashboard"}</h2>
                             <p className="text-sm text-muted-foreground">{isID ? "Alur lengkap dari Jelajahi hingga Apresiasi" : "Full flow from Explore to Appreciation"}</p>
                         </div>
                     </div>
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-4">
                         <div className="flex gap-1">
                             {Array.from({ length: getTotalSteps() }).map((_, i) => (
                                 <div key={i} className={`w-3 h-3 rounded-full transition-all ${i <= step ? 'bg-blue-600' : 'bg-primary/20'}`} />
@@ -135,11 +161,11 @@ export default function DemoMentorPage() {
                 </div>
             </div>
 
-            {/* Floating Step Guide - centered, not overlapping bottom buttons */}
-            <div className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ${isComplete ? 'opacity-0 scale-95' : 'opacity-100'}`}
-                style={{ top: '11rem', maxWidth: '90vw' }}>
-                <div className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-5 rounded-3xl shadow-2xl flex items-center gap-4"
-                    style={{ animation: 'bounce 2s ease-in-out infinite' }}>
+            {/* Floating Step Guide — fixed below header, same style as customer demo */}
+            <div className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ${isComplete ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+                style={{ top: 'calc(72px + 4rem)', maxWidth: '90vw' }}>
+                <div className="bg-accent text-white px-8 py-5 rounded-3xl shadow-2xl flex items-center gap-4"
+                    style={{ animation: 'demoBounce 2.5s ease-in-out infinite' }}>
                     <span className="text-3xl shrink-0">{getCurrentStepData().icon}</span>
                     <div className="min-w-0">
                         <p className="font-black text-base whitespace-nowrap">{getCurrentStepData().title}</p>
@@ -148,29 +174,25 @@ export default function DemoMentorPage() {
                 </div>
             </div>
 
-            {/* Bottom-right controls */}
-            <div className="fixed bottom-8 right-8 z-50 flex gap-3">
+            {/* Bottom-right step button */}
+            <div className="fixed bottom-8 right-8 z-50">
                 {!isComplete ? (
-                    <button
-                        onClick={handleNextStep}
-                        className="bg-blue-600 hover:bg-blue-700 text-white font-black px-6 py-3 rounded-2xl shadow-xl transition-all active:scale-95"
-                    >
+                    <button onClick={handleNextStep}
+                        className="bg-accent hover:bg-accent/90 text-white font-black px-6 py-3 rounded-2xl shadow-xl transition-all active:scale-95">
                         {step < getTotalSteps() - 1 ? (isID ? "Langkah Berikutnya →" : "Next Step →") : (isID ? "✓ Lanjut" : "✓ Continue")}
                     </button>
                 ) : (
                     <div className="bg-emerald-500 text-white font-black px-6 py-3 rounded-2xl shadow-xl flex items-center gap-2">
-                        <Star className="w-5 h-5" /> ✓ {isID ? "Selesai" : "Complete"}
+                        <CheckCircle className="w-5 h-5" /> ✓
                     </div>
                 )}
             </div>
 
-            {/* Left-side Reset */}
+            {/* Bottom-left Reset */}
             <div className="fixed bottom-8 left-8 z-50">
-                <button
-                    onClick={handleReset}
-                    className="bg-white hover:bg-slate-50 text-primary font-bold px-5 py-3 rounded-2xl shadow-lg border-2 border-primary/20 transition-all flex items-center gap-2"
-                >
-                    <span>🔄</span> {isID ? "Reset" : "Reset"}
+                <button onClick={handleReset}
+                    className="bg-white hover:bg-slate-50 text-primary font-bold px-5 py-3 rounded-2xl shadow-lg border-2 border-primary/20 transition-all flex items-center gap-2">
+                    🔄 {isID ? "Reset" : "Reset"}
                 </button>
             </div>
 
@@ -179,16 +201,17 @@ export default function DemoMentorPage() {
 
                 {/* Tab Nav */}
                 <div className="flex gap-3 mb-10 flex-wrap">
-                    {(['overview', 'explore', 'schedule', 'room', 'feedback'] as const).map((p) => {
-                        const labels = { overview: '🏠 Overview', explore: '🔍 Jelajahi', schedule: '📅 Jadwal', room: '🎥 Ruang', feedback: '⭐ Apresiasi' };
+                    {(['overview', 'explore', 'schedule', 'room', 'feedback'] as const).map(p => {
+                        const labels = {
+                            overview: isID ? '🏠 Overview' : '🏠 Overview',
+                            explore: '🔍 ' + (isID ? 'Jelajahi' : 'Explore'),
+                            schedule: '📅 ' + (isID ? 'Jadwal' : 'Schedule'),
+                            room: '🎥 ' + (isID ? 'Ruang Sowan' : 'Sowan Room'),
+                            feedback: '⭐ ' + (isID ? 'Apresiasi' : 'Appreciation'),
+                        };
                         return (
-                            <button
-                                key={p}
-                                onClick={() => goToPhase(p)}
-                                className={`px-5 py-3 rounded-2xl font-bold text-sm flex items-center gap-2 transition-all ${
-                                    phase === p ? 'bg-blue-600 text-white shadow-lg' : 'bg-white border-2 border-primary/10 hover:border-blue-300'
-                                }`}
-                            >
+                            <button key={p} onClick={() => goToPhase(p)}
+                                className={`px-5 py-3 rounded-2xl font-bold text-sm flex items-center gap-2 transition-all ${phase === p ? 'bg-blue-600 text-white shadow-lg' : 'bg-white border-2 border-primary/10 hover:border-blue-300'}`}>
                                 {labels[p]}
                             </button>
                         );
@@ -222,16 +245,13 @@ export default function DemoMentorPage() {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
                             {[
-                                { icon: "🔍", label: isID ? "Jelajahi" : "Explore", desc: isID ? "Profil terlihat" : "Profile visible", color: "from-blue-50 to-indigo-50", border: "border-blue-200" },
-                                { icon: "📅", label: isID ? "Jadwal" : "Schedule", desc: "3 sesi booked", color: "from-emerald-50 to-teal-50", border: "border-emerald-200" },
-                                { icon: "🎥", label: isID ? "Ruang Sowan" : "Sowan Room", desc: "1 sesi aktif", color: "from-purple-50 to-violet-50", border: "border-purple-200" },
-                                { icon: "⭐", label: isID ? "Apresiasi" : "Appreciation", desc: "4.9 rating", color: "from-amber-50 to-orange-50", border: "border-amber-200" },
+                                { icon: "🔍", label: isID ? "Jelajahi" : "Explore", desc: isID ? "Profil terlihat" : "Profile visible", color: "from-blue-50 to-indigo-50", border: "border-blue-200", targetPhase: 'explore' as const },
+                                { icon: "📅", label: isID ? "Jadwal" : "Schedule", desc: isID ? "3 sesi booked" : "3 sessions booked", color: "from-emerald-50 to-teal-50", border: "border-emerald-200", targetPhase: 'schedule' as const },
+                                { icon: "🎥", label: isID ? "Ruang Sowan" : "Sowan Room", desc: isID ? "1 sesi aktif" : "1 active session", color: "from-purple-50 to-violet-50", border: "border-purple-200", targetPhase: 'room' as const },
+                                { icon: "⭐", label: isID ? "Apresiasi" : "Appreciation", desc: "4.9 rating", color: "from-amber-50 to-orange-50", border: "border-amber-200", targetPhase: 'feedback' as const },
                             ].map((item, i) => (
-                                <button
-                                    key={i}
-                                    onClick={() => goToPhase(['explore', 'schedule', 'room', 'feedback'][i] as typeof phase)}
-                                    className={`bg-gradient-to-br ${item.color} rounded-2xl p-6 border-2 ${item.border} hover:shadow-xl transition-all text-left group ${step === i ? 'ring-4 ring-blue-500 ring-opacity-50' : ''}`}
-                                >
+                                <button key={i} onClick={() => goToPhase(item.targetPhase)}
+                                    className={`bg-gradient-to-br ${item.color} rounded-2xl p-6 border-2 ${item.border} hover:shadow-xl transition-all text-left group ${step === i && phase === 'overview' ? 'ring-4 ring-blue-500 ring-opacity-50' : ''}`}>
                                     <span className="text-4xl mb-3 block">{item.icon}</span>
                                     <h3 className="font-black text-primary text-lg group-hover:underline">{item.label}</h3>
                                     <p className="text-sm text-muted-foreground font-medium">{item.desc}</p>
@@ -306,10 +326,8 @@ export default function DemoMentorPage() {
                                     </div>
                                     <div className="flex items-center justify-between pt-4 border-t border-primary/10">
                                         <span className="text-2xl font-black text-primary">Rp 100.000</span>
-                                        <button
-                                            onClick={handleBookSesi}
-                                            className="bg-accent hover:bg-accent/90 text-white font-bold px-6 py-3 rounded-xl transition-all active:scale-95 flex items-center gap-2"
-                                        >
+                                        <button onClick={handleBookSesi}
+                                            className="bg-accent hover:bg-accent/90 text-white font-bold px-6 py-3 rounded-xl transition-all active:scale-95 flex items-center gap-2">
                                             📅 {isID ? "Book Sesi" : "Book Session"}
                                         </button>
                                     </div>
@@ -348,10 +366,8 @@ export default function DemoMentorPage() {
                                             </div>
                                         </div>
                                         {s.urgent && (
-                                            <button
-                                                onClick={handleMasukRuang}
-                                                className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-6 py-3 rounded-xl transition-all h-fit flex items-center gap-2 active:scale-95"
-                                            >
+                                            <button onClick={handleMasukRuang}
+                                                className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-6 py-3 rounded-xl transition-all h-fit flex items-center gap-2 active:scale-95">
                                                 🎥 {isID ? "Masuk Ruang →" : "Join Room →"}
                                             </button>
                                         )}
@@ -373,13 +389,11 @@ export default function DemoMentorPage() {
                                 <div className="relative aspect-video bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center">
                                     {roomState === 'idle' && (
                                         <div className="text-center">
-                                            <div className="w-32 h-32 bg-slate-700 rounded-full mx-auto mb-6 flex items-center justify-center text-6xl">{isID ? "👴" : "👴"}</div>
+                                            <div className="w-32 h-32 bg-slate-700 rounded-full mx-auto mb-6 flex items-center justify-center text-6xl">👴</div>
                                             <p className="text-white font-black text-2xl mb-2">Opa Adriel</p>
                                             <p className="text-slate-400 text-sm">{isID ? "Tekan tombol di bawah untuk terhubung" : "Press button below to connect"}</p>
-                                            <button
-                                                onClick={() => { setRoomState('connecting'); setTimeout(() => setRoomState('connected'), 2000); }}
-                                                className="mt-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-8 py-3 rounded-xl transition-all"
-                                            >
+                                            <button onClick={() => { setRoomState('connecting'); setTimeout(() => setRoomState('connected'), 2000); }}
+                                                className="mt-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-8 py-3 rounded-xl transition-all">
                                                 🎥 {isID ? "Mulai Video Call" : "Start Video Call"}
                                             </button>
                                         </div>
@@ -405,7 +419,7 @@ export default function DemoMentorPage() {
                                     )}
                                     <div className="absolute bottom-4 right-4 w-48 h-36 bg-gradient-to-br from-slate-700 to-slate-800 rounded-xl border-2 border-slate-600 flex items-center justify-center">
                                         <div className="text-center">
-                                            <div className="text-2xl mb-1">📹</div>
+                                            <Camera className="w-8 h-8 text-slate-400 mx-auto mb-1" />
                                             <p className="text-slate-400 text-xs font-bold">{isID ? "Video Anda" : "Your Video"}</p>
                                         </div>
                                     </div>
@@ -502,16 +516,11 @@ export default function DemoMentorPage() {
                 <div className="text-center mt-12 border-t border-primary/10 pt-8">
                     <p className="text-sm text-muted-foreground mb-4">{isID ? "Demo ini berjalan otomatis." : "This demo runs automatically."}</p>
                     <div className="flex justify-center gap-4 flex-wrap">
-                        <button
-                            onClick={handleReset}
-                            className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-4 rounded-2xl transition-all"
-                        >
+                        <button onClick={handleReset} className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-4 rounded-2xl transition-all">
                             🔄 Reset Demo
                         </button>
-                        <button
-                            onClick={() => { login("Opa Adriel"); router.push("/dashboard/mentor"); }}
-                            className="bg-accent hover:bg-accent/90 text-white font-bold px-8 py-4 rounded-2xl transition-all"
-                        >
+                        <button onClick={() => { login("Opa Adriel"); router.push("/dashboard/mentor"); }}
+                            className="bg-accent hover:bg-accent/90 text-white font-bold px-8 py-4 rounded-2xl transition-all">
                             🚀 {isID ? "Buka Dashboard Mentor Asli →" : "Open Real Mentor Dashboard →"}
                         </button>
                     </div>
@@ -519,9 +528,9 @@ export default function DemoMentorPage() {
             </div>
 
             <style jsx global>{`
-                @keyframes bounce {
+                @keyframes demoBounce {
                     0%, 100% { transform: translateX(-50%) translateY(0); }
-                    50% { transform: translateX(-50%) translateY(-10px); }
+                    50% { transform: translateX(-50%) translateY(-8px); }
                 }
             `}</style>
         </main>

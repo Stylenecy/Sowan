@@ -197,6 +197,18 @@ export default function Home() {
               </span>
               {t.home.trustSignal}
             </p>
+
+            {/* Demo CTA */}
+            <div className="pt-2">
+              <Link
+                href="/demo"
+                className="inline-flex items-center gap-2 text-sm font-bold text-accent hover:text-accent/80 transition-all group"
+              >
+                <span className="w-6 h-6 rounded-full bg-accent/10 flex items-center justify-center text-xs transition-all group-hover:bg-accent/20">▶</span>
+                {t.home.tryDemo || "Coba Demo Interaktif"}
+                <span className="group-hover:translate-x-1 transition-transform">→</span>
+              </Link>
+            </div>
           </div>
         </div>
 

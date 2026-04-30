@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-import Link from "next/link";
+import { useLanguage } from "@/context/LanguageContext";
 import { Search, MapPin, Star, Calendar, CheckCircle } from "lucide-react";
 
 const STEPS = [
@@ -12,14 +12,14 @@ const STEPS = [
         icon: "🔍",
         title: "Cari Mentor",
         desc: "Ketik nama atau topik yang Anda minati di kolom pencarian.",
-        position: "top"
+        position: "center"
     },
     {
         target: "filter",
         icon: "🏙️",
         title: "Filter Kota",
         desc: "Pilih kota asal mentor yang Anda inginkan.",
-        position: "top"
+        position: "center"
     },
     {
         target: "card",
@@ -33,70 +33,77 @@ const STEPS = [
         icon: "📅",
         title: "Buat Jadwal",
         desc: "Pilih waktu yang tersedia dan konfirmasi booking.",
-        position: "bottom"
+        position: "center"
     }
 ];
 
 export default function DemoExplorePage() {
     const router = useRouter();
     const { login, user } = useAuth();
+    const { language } = useLanguage();
     const hasRun = useRef(false);
+    const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
     const [currentStep, setCurrentStep] = useState(0);
+    const [isComplete, setIsComplete] = useState(false);
+
+    const clearAutoAdvance = useCallback(() => {
+        if (intervalRef.current) {
+            clearInterval(intervalRef.current);
+            intervalRef.current = null;
+        }
+    }, []);
+
+    const advanceStep = useCallback(() => {
+        setCurrentStep(prev => {
+            if (prev >= STEPS.length - 1) {
+                clearAutoAdvance();
+                setIsComplete(true);
+                return prev;
+            }
+            return prev + 1;
+        });
+    }, [clearAutoAdvance]);
 
     useEffect(() => {
         if (hasRun.current || user) return;
         hasRun.current = true;
         login("Dex");
 
-        const interval = setInterval(() => {
+        intervalRef.current = setInterval(() => {
             setCurrentStep(prev => {
                 if (prev >= STEPS.length - 1) {
-                    clearInterval(interval);
+                    if (intervalRef.current) clearInterval(intervalRef.current);
+                    setIsComplete(true);
                     return prev;
                 }
                 return prev + 1;
             });
         }, 3000);
 
-        return () => clearInterval(interval);
-    }, [user, login]);
+        return clearAutoAdvance;
+    }, [user, login, clearAutoAdvance]);
+
+    const handleNextStep = () => {
+        advanceStep();
+    };
 
     const handleGoToExplore = () => {
         router.push("/explore");
     };
 
+    const isID = language === 'id';
+    const stepData = STEPS[currentStep];
+
     return (
         <main className="min-h-screen w-full bg-[#FAF9F6] pt-[72px]">
-            {/* Overlay Guide */}
-            <div className="fixed inset-0 z-50 pointer-events-none">
-                {STEPS.map((step, i) => (
-                    <div
-                        key={i}
-                        className={`absolute transition-all duration-500 ${
-                            i === currentStep ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-                        }`}
-                    >
-                        {i === currentStep && (
-                            <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-accent text-white px-6 py-3 rounded-full shadow-xl flex items-center gap-3 animate-bounce">
-                                <span className="text-2xl">{step.icon}</span>
-                                <div>
-                                    <p className="font-black text-sm">{step.title}</p>
-                                    <p className="text-xs opacity-80">{step.desc}</p>
-                                </div>
-                            </div>
-                        )}
-                    </div>
-                ))}
-            </div>
-
             {/* Demo Header */}
-            <div className="bg-gradient-to-r from-amber-50 to-orange-50 border-b border-amber-200 py-4 px-6">
+            <div className="bg-gradient-to-r from-amber-50 to-orange-50 border-b border-amber-200 py-4 px-6 sticky top-[72px] z-40">
                 <div className="max-w-7xl mx-auto flex items-center justify-between">
                     <div className="flex items-center gap-4">
                         <span className="text-3xl">🔍</span>
                         <div>
-                            <h2 className="font-black text-primary">Demo Mode: Jelajahi Mentor</h2>
-                            <p className="text-sm text-muted-foreground">Ikuti panduan langkah demi langkah</p>
+                            <h2 className="font-black text-primary">{isID ? "Demo Mode: Jelajahi Mentor" : "Demo Mode: Explore Mentor"}</h2>
+                            <p className="text-sm text-muted-foreground">{isID ? "Ikuti panduan langkah demi langkah" : "Follow the step-by-step guide"}</p>
                         </div>
                     </div>
                     <div className="flex items-center gap-4">
@@ -111,10 +118,43 @@ export default function DemoExplorePage() {
                             ))}
                         </div>
                         <span className="text-sm font-bold text-muted-foreground">
-                            Langkah {currentStep + 1} dari {STEPS.length}
+                            {isID ? "Langkah" : "Step"} {currentStep + 1} / {STEPS.length}
                         </span>
                     </div>
                 </div>
+            </div>
+
+            {/* Floating Step Guide - positioned center-bottom, visible on screen */}
+            <div
+                className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ${
+                    isComplete ? 'opacity-0 pointer-events-none' : 'opacity-100'
+                }`}
+                style={{ bottom: '8rem', maxWidth: '90vw' }}
+            >
+                <div className="bg-accent text-white px-8 py-5 rounded-3xl shadow-2xl flex items-center gap-4 animate-bounce"
+                    style={{ animationDuration: '2s' }}>
+                    <span className="text-3xl shrink-0">{stepData.icon}</span>
+                    <div className="min-w-0">
+                        <p className="font-black text-base whitespace-nowrap">{stepData.title}</p>
+                        <p className="text-sm opacity-80 whitespace-nowrap">{stepData.desc}</p>
+                    </div>
+                </div>
+            </div>
+
+            {/* Manual step button - bottom right */}
+            <div className="fixed bottom-8 right-8 z-50 flex gap-3">
+                {!isComplete ? (
+                    <button
+                        onClick={handleNextStep}
+                        className="bg-accent hover:bg-accent/90 text-white font-black px-6 py-3 rounded-2xl shadow-xl transition-all active:scale-95"
+                    >
+                        {currentStep < STEPS.length - 1 ? (isID ? "Langkah Berikutnya →" : "Next Step →") : "✓ Selesai"}
+                    </button>
+                ) : (
+                    <div className="bg-emerald-500 text-white font-black px-6 py-3 rounded-2xl shadow-xl flex items-center gap-2">
+                        <CheckCircle className="w-5 h-5" /> {isID ? "Panduan Selesai" : "Guide Complete"}
+                    </div>
+                )}
             </div>
 
             {/* Mock Explore Content */}
@@ -124,7 +164,7 @@ export default function DemoExplorePage() {
                     <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-primary/40 w-6 h-6" />
                     <input
                         type="text"
-                        placeholder="Cari nama atau topik..."
+                        placeholder={isID ? "Cari nama atau topik..." : "Search name or topic..."}
                         className="w-full h-16 pl-14 pr-6 bg-white border-2 border-transparent hover:border-accent/30 focus:border-accent rounded-2xl text-lg font-medium shadow-lg transition-all"
                     />
                     <div className={`absolute -inset-1 border-4 border-accent/50 rounded-2xl pointer-events-none transition-opacity ${currentStep === 0 ? 'opacity-100 animate-pulse' : 'opacity-0'}`} />
@@ -133,9 +173,9 @@ export default function DemoExplorePage() {
                 {/* Filter Bar */}
                 <div className="flex gap-4 mb-8 overflow-x-auto pb-4" id="filter">
                     <div className={`px-6 py-3 bg-white rounded-full font-bold text-sm border-2 transition-all cursor-pointer ${
-                        currentStep === 1 ? 'border-accent bg-accent/10' : 'border-primary/10 hover:border-primary/30'
+                        currentStep === 1 ? 'border-accent bg-accent/10 shadow-lg shadow-accent/20' : 'border-primary/10 hover:border-primary/30'
                     }`}>
-                        Semua Kota
+                        {isID ? "Semua Kota" : "All Cities"}
                     </div>
                     <div className="px-6 py-3 bg-white rounded-full font-bold text-sm border-2 border-primary/10 hover:border-primary/30 cursor-pointer">
                         Yogyakarta
@@ -151,7 +191,9 @@ export default function DemoExplorePage() {
                 {/* Mentor Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="card">
                     {/* Featured Mentor Card */}
-                    <div className="relative rounded-[32px] overflow-hidden border-4 border-accent/30 bg-white shadow-2xl group">
+                    <div className={`relative rounded-[32px] overflow-hidden border-4 bg-white shadow-2xl group transition-all ${
+                        currentStep === 2 ? 'border-accent shadow-accent/30' : 'border-transparent'
+                    }`}>
                         <div className="relative h-72 bg-gradient-to-br from-amber-50 to-orange-50">
                             <img
                                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=400&auto=format&fit=crop"
@@ -189,7 +231,9 @@ export default function DemoExplorePage() {
                                 <span className="text-xs text-primary/50">3 slot tersedia</span>
                             </div>
                         </div>
-                        <div className={`absolute -inset-1 border-4 border-accent rounded-[36px] pointer-events-none transition-opacity ${currentStep === 2 ? 'opacity-100 animate-pulse' : 'opacity-0'}`} />
+                        {currentStep === 2 && (
+                            <div className="absolute inset-0 bg-accent/5 pointer-events-none" />
+                        )}
                     </div>
 
                     {/* More Cards */}
@@ -197,7 +241,7 @@ export default function DemoExplorePage() {
                         <div key={i} className="rounded-[32px] overflow-hidden border-2 border-primary/10 bg-white shadow-lg opacity-60">
                             <div className="relative h-56 bg-slate-100">
                                 <img
-                                    src={`https://images.unsplash.com/photo-${1500000000000 + i * 1000}-?q=80&w=400`}
+                                    src={`https://images.unsplash.com/photo-1550000000000-${1500000000000 + i * 1000}?q=80&w=400`}
                                     alt="Mentor"
                                     className="w-full h-full object-cover grayscale"
                                 />
@@ -216,11 +260,23 @@ export default function DemoExplorePage() {
                         onClick={handleGoToExplore}
                         className="bg-accent hover:bg-accent/90 text-white font-black text-xl px-12 py-6 rounded-3xl shadow-xl transition-all active:scale-95"
                     >
-                        Mulai Jelajahi Sekarang →
+                        {isID ? "Mulai Jelajahi Sekarang →" : "Start Exploring Now →"}
                     </button>
                     <p className="text-sm text-muted-foreground mt-4">
-                        Tekan untuk masuk ke halaman explore sebenarnya
+                        {isID ? "Tekan untuk masuk ke halaman explore sebenarnya" : "Press to enter the actual explore page"}
                     </p>
+                </div>
+
+                {/* Language Toggle */}
+                <div className="mt-6 text-center">
+                    <button
+                        onClick={() => {
+                            const { toggleLanguage } = useLanguage();
+                        }}
+                        className="text-sm text-muted-foreground underline"
+                    >
+                        {isID ? "Switch to English" : "Ganti ke Bahasa Indonesia"}
+                    </button>
                 </div>
             </div>
         </main>

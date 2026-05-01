@@ -95,7 +95,7 @@ export default function DemoPage() {
                         style={{ animation: 'fadeInUp 0.8s ease-out 0.2s both' }}>
                         {isID ? "Jelajahi" : "Explore"}{" "}
                         <span className="text-accent">Sowan.id</span>
-                        <br />{isID ? "sebelum Anda用它" : "before you use it"}
+                        <br />{isID ? "sebelum Anda menggunakannya" : "before you use it"}
                     </h1>
 
                     <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-10"
@@ -106,7 +106,7 @@ export default function DemoPage() {
                     </p>
 
                     {/* CTA Buttons */}
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20"
                         style={{ animation: 'fadeInUp 0.8s ease-out 0.6s both' }}>
                         <button onClick={handleStartDemo}
                             className="group bg-accent hover:bg-accent/90 text-white font-black text-lg px-10 py-5 rounded-2xl shadow-xl shadow-accent/25 transition-all active:scale-95 flex items-center gap-3 w-full sm:w-auto justify-center">
@@ -122,7 +122,7 @@ export default function DemoPage() {
                     </div>
 
                     {/* Scroll indicator */}
-                    <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce"
+                    <div className="flex flex-col items-center gap-2 animate-bounce"
                         style={{ animation: 'fadeInUp 0.8s ease-out 0.8s both' }}>
                         <span className="text-sm text-muted-foreground font-medium">{isID ? "Scroll untuk panduan" : "Scroll for guide"}</span>
                         <ChevronDown className="w-6 h-6 text-muted-foreground" />

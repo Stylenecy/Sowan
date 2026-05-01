@@ -78,9 +78,9 @@ export default function ExplorePage() {
             price: "Rp 200.000",
             isOnline: false,
             slots: 0,
-            videoId: "xUDcOBBF79o",
-            videoSource: "Bailey Schildbach",
-            videoHandle: "@bailey.schildbach",
+            videoId: "N90UIXMuMMU",
+            videoSource: "Sandra Hart",
+            videoHandle: "@lifewithsandrahart",
             useLocalVideo: false,
         },
         {
@@ -116,10 +116,10 @@ desc: '"Punya ide bisnis atau sekadar rindu membahas resep masakan tradisional? 
             price: "Rp 150.000",
             isOnline: false,
             slots: 1,
-            videoId: "xUDcOBBF79o",
-            videoSource: "Bailey Schildbach",
-            videoHandle: "@bailey.schildbach",
-            useLocalVideo: false,
+            videoId: "/video-pak-budi.mp4",
+            videoSource: "Opa Yohanes",
+            videoHandle: "",
+            useLocalVideo: true,
         },
         {
             id: 5,
@@ -135,9 +135,9 @@ desc: '"Punya ide bisnis atau sekadar rindu membahas resep masakan tradisional? 
             price: "Rp 120.000",
             isOnline: true,
             slots: 4,
-            videoId: "xUDcOBBF79o",
-            videoSource: "Bailey Schildbach",
-            videoHandle: "@bailey.schildbach",
+            videoId: "N90UIXMuMMU",
+            videoSource: "Sandra Hart",
+            videoHandle: "@lifewithsandrahart",
             useLocalVideo: false,
         },
         {
@@ -192,9 +192,9 @@ desc: '"Punya ide bisnis atau sekadar rindu membahas resep masakan tradisional? 
             price: "Rp 180.000",
             isOnline: true,
             slots: 1,
-            videoId: "xUDcOBBF79o",
-            videoSource: "Bailey Schildbach",
-            videoHandle: "@bailey.schildbach",
+            videoId: "N90UIXMuMMU",
+            videoSource: "Sandra Hart",
+            videoHandle: "@lifewithsandrahart",
             useLocalVideo: false,
         },
         {
@@ -211,9 +211,9 @@ desc: '"Punya ide bisnis atau sekadar rindu membahas resep masakan tradisional? 
             price: "Rp 90.000",
             isOnline: false,
             slots: 3,
-            videoId: "xUDcOBBF79o",
-            videoSource: "Bailey Schildbach",
-            videoHandle: "@bailey.schildbach",
+            videoId: "N90UIXMuMMU",
+            videoSource: "Sandra Hart",
+            videoHandle: "@lifewithsandrahart",
             useLocalVideo: false,
         },
         {
@@ -249,9 +249,9 @@ desc: '"Punya ide bisnis atau sekadar rindu membahas resep masakan tradisional? 
             price: "Rp 70.000",
             isOnline: true,
             slots: 2,
-            videoId: "xUDcOBBF79o",
-            videoSource: "Bailey Schildbach",
-            videoHandle: "@bailey.schildbach",
+            videoId: "N90UIXMuMMU",
+            videoSource: "Sandra Hart",
+            videoHandle: "@lifewithsandrahart",
             useLocalVideo: false,
         },
         {
@@ -287,10 +287,10 @@ desc: '"Punya ide bisnis atau sekadar rindu membahas resep masakan tradisional? 
             price: "Rp 140.000",
             isOnline: false,
             slots: 0,
-            videoId: "xUDcOBBF79o",
-            videoSource: "Bailey Schildbach",
-            videoHandle: "@bailey.schildbach",
-            useLocalVideo: false,
+            videoId: "/video-pak-budi.mp4",
+            videoSource: "Bapak Eko",
+            videoHandle: "",
+            useLocalVideo: true,
         },
         {
             id: 14,
@@ -306,9 +306,9 @@ desc: '"Punya ide bisnis atau sekadar rindu membahas resep masakan tradisional? 
             price: "Rp 100.000",
             isOnline: false,
             slots: 2,
-            videoId: "xUDcOBBF79o",
-            videoSource: "Bailey Schildbach",
-            videoHandle: "@bailey.schildbach",
+            videoId: "N90UIXMuMMU",
+            videoSource: "Sandra Hart",
+            videoHandle: "@lifewithsandrahart",
             useLocalVideo: false,
         }
     ];
@@ -405,14 +405,39 @@ desc: '"Punya ide bisnis atau sekadar rindu membahas resep masakan tradisional? 
     return (
         <div className="min-h-screen bg-[#FAF9F6]">
             {/* ── Header Section ── */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 md:pt-20 pb-16">
-                <div className="max-w-3xl">
-                    <h1 className="text-4xl md:text-6xl font-extrabold text-primary mb-6 tracking-tight">
-                        {t.explore.title}
-                    </h1>
-                    <p className="text-xl text-muted-foreground leading-relaxed">
-                        {t.explore.subtitle}
-                    </p>
+            <div className="relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50" />
+                <div className="absolute inset-0 opacity-30">
+                    <div className="absolute top-20 left-10 w-72 h-72 bg-amber-200 rounded-full blur-[100px]" />
+                    <div className="absolute top-40 right-20 w-96 h-96 bg-orange-200 rounded-full blur-[120px]" />
+                    <div className="absolute bottom-10 left-1/3 w-80 h-80 bg-rose-200 rounded-full blur-[100px]" />
+                </div>
+                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 md:pt-24 pb-20">
+                    <div className="max-w-3xl">
+                        <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm border border-amber-200 rounded-full px-4 py-2 mb-6 shadow-sm">
+                            <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+                            <span className="text-sm font-bold text-primary">{t.shared.online} 5 Maestro</span>
+                        </div>
+                        <h1 className="text-5xl md:text-7xl font-black text-primary mb-6 tracking-tight">
+                            {t.explore.title}
+                        </h1>
+                        <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed max-w-2xl">
+                            {t.explore.subtitle}
+                        </p>
+                        <div className="flex items-center gap-6 mt-8">
+                            <div className="flex -space-x-3">
+                                {["👴", "👵", "👴", "👵"].map((emoji, i) => (
+                                    <div key={i} className="w-12 h-12 bg-white rounded-full border-4 border-[#FAF9F6] flex items-center justify-center text-2xl shadow-lg">
+                                        {emoji}
+                                    </div>
+                                ))}
+                            </div>
+                            <div>
+                                <p className="font-black text-primary text-lg">500+ {isLoading ? '' : t.home.trustSignal.split(' ')[0]}</p>
+                                <p className="text-sm text-muted-foreground font-medium">telah menemukan teman Sowan</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 

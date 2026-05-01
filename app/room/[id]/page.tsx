@@ -23,7 +23,7 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
     const [isRemoteMuted, setIsRemoteMuted] = useState(true);
     const [cameraError, setCameraError] = useState(false);
     const [elapsed, setElapsed] = useState(0);
-    const [videoDecision, setVideoDecision] = useState({ isLocalVideo: false, videoId: 'xUDcOBBF79o', ytSource: 'Bailey Schildbach', ytHandle: '@bailey.schildbach' });
+    const [videoDecision, setVideoDecision] = useState({ isLocalVideo: false, videoId: 'N90UIXMuMMU', ytSource: 'Sandra Hart', ytHandle: '@lifewithsandrahart' });
     const [showConnectionAnim, setShowConnectionAnim] = useState(true);
 
     const videoRef = useRef<HTMLVideoElement>(null);
@@ -40,7 +40,7 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
 // Read stored mentor data for dynamic content (client-only)
     useEffect(() => {
         const storedMentor = localStorage.getItem("sowan_booked_mentor");
-        let newVideoDecision = { isLocalVideo: false, videoId: 'xUDcOBBF79o', ytSource: 'Bailey Schildbach', ytHandle: '@bailey.schildbach' };
+        let newVideoDecision = { isLocalVideo: false, videoId: 'N90UIXMuMMU', ytSource: 'Sandra Hart', ytHandle: '@lifewithsandrahart' };
 
         const mentorIdNum = parseInt(id);
         const maleMentorIds = [1, 3, 4, 6, 7, 10, 12, 13];
@@ -49,9 +49,9 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
         if (user?.name === 'Opa Adriel') {
             newVideoDecision = {
                 isLocalVideo: false,
-                videoId: 'xUDcOBBF79o',
-                ytSource: 'Bailey Schildbach',
-                ytHandle: '@bailey.schildbach'
+                videoId: 'N90UIXMuMMU',
+                ytSource: 'Sandra Hart',
+                ytHandle: '@lifewithsandrahart'
             };
         }
         // For CUSTOMER viewing: use stored mentor data if ID matches
@@ -61,7 +61,7 @@ export default function RoomPage({ params }: { params: Promise<{ id: string }> }
                 if (mentor.id === mentorIdNum) {
                     newVideoDecision = {
                         isLocalVideo: mentor.useLocalVideo ?? false,
-                        videoId: mentor.videoId ?? 'xUDcOBBF79o',
+                        videoId: mentor.videoId ?? 'N90UIXMuMMU',
                         ytSource: mentor.name || 'Mentor',
                         ytHandle: ''
                     };

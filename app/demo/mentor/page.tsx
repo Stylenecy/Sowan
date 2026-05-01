@@ -1,76 +1,51 @@
 'use client';
 
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { useLanguage } from "@/context/LanguageContext";
-import { Users, Calendar, Video, Heart, Mic, Camera, MonitorUp, PhoneOff, Star, MapPin, Clock, ArrowRight, CheckCircle } from "lucide-react";
+import { Calendar, Video, Mic, Camera, MonitorUp, PhoneOff, Star, MapPin, Clock, ArrowRight, CheckCircle, Users } from "lucide-react";
 
-const STEPS_ID = [
-    { icon: "🔍", title: "Jelajahi", desc: "Profil Anda terlihat oleh customer.", phase: 'explore' },
-    { icon: "📅", title: "Jadwal", desc: "Kelola sesi yang sudah dipesan.", phase: 'schedule' },
-    { icon: "🎥", title: "Ruang Sowan", desc: "Video call eksklusif 1-on-1.", phase: 'room' },
-    { icon: "💬", title: "Apresiasi", desc: "Lihat testimonial dan rating.", phase: 'feedback' },
+const TUTORIAL_STEPS_ID = [
+    { icon: "🔍", title: "Jelajahi", desc: "Lihat profil mentor dan booked sessions.", phase: 'overview' },
+    { icon: "📅", title: "Jelajahi", desc: "Klik kartu 'Jelajahi' untuk lihat profil.", phase: 'explore' },
+    { icon: "📝", title: "Topik & Harga", desc: "Lihat harga dan topik yang ditawarkan.", phase: 'explore' },
+    { icon: "📅", title: "Jadwal", desc: "Kelola jadwal sesi yang dipesan.", phase: 'schedule' },
+    { icon: "📅", title: "Detail Booking", desc: "Lihat detail sesi Dex - Sejarah Jawa.", phase: 'schedule' },
+    { icon: "🎥", title: "Ruang Sowan", desc: "Gunakan video call untuk sesi.", phase: 'room' },
+    { icon: "📹", title: "Video Call", desc: "Terhubung dengan Dex untuk sesi.", phase: 'room' },
+    { icon: "⭐", title: "Apresiasi", desc: "Lihat rating dan testimonial.", phase: 'feedback' },
+    { icon: "🎉", title: "Selesai", desc: "Demo lengkap! logout dan kembali.", phase: 'logout' },
 ];
 
-const STEPS_EN = [
-    { icon: "🔍", title: "Explore", desc: "Your profile is visible to customers.", phase: 'explore' },
-    { icon: "📅", title: "Schedule", desc: "Manage booked sessions.", phase: 'schedule' },
-    { icon: "🎥", title: "Sowan Room", desc: "Exclusive 1-on-1 video call.", phase: 'room' },
-    { icon: "💬", title: "Appreciation", desc: "View testimonials and ratings.", phase: 'feedback' },
+const TUTORIAL_STEPS_EN = [
+    { icon: "🔍", title: "Explore", desc: "View mentor profile and booked sessions.", phase: 'overview' },
+    { icon: "📅", title: "Explore", desc: "Click 'Explore' card to view profile.", phase: 'explore' },
+    { icon: "📝", title: "Topics & Price", desc: "View price and topics offered.", phase: 'explore' },
+    { icon: "📅", title: "Schedule", desc: "Manage scheduled sessions.", phase: 'schedule' },
+    { icon: "📅", title: "Booking Detail", desc: "View Dex's session details.", phase: 'schedule' },
+    { icon: "🎥", title: "Sowan Room", desc: "Use video call for session.", phase: 'room' },
+    { icon: "📹", title: "Video Call", desc: "Connect with Dex for session.", phase: 'room' },
+    { icon: "⭐", title: "Appreciation", desc: "View ratings and testimonials.", phase: 'feedback' },
+    { icon: "🎉", title: "Done", desc: "Demo complete! Logout and return.", phase: 'logout' },
 ];
-
-const PHASE_STEPS_ID = {
-    explore: [
-        { icon: "👤", title: "Profil Mentor", desc: "Ini yang dilihat customer saat memilih Anda." },
-        { icon: "📝", title: "Topik & Harga", desc: "Topik dan harga terlihat di kartu profil." },
-    ],
-    schedule: [
-        { icon: "📅", title: "Daftar Sesi", desc: "Semua sesi booked dari customer." },
-        { icon: "👤", title: "Detail Booking", desc: "Nama, topik, dan waktu sesi." },
-    ],
-    room: [
-        { icon: "🎥", title: "Masuk Ruang", desc: "Klik untuk terhubung dengan customer." },
-        { icon: "📹", title: "Video Call", desc: "Obrolan video dimulai." },
-    ],
-    feedback: [
-        { icon: "⭐", title: "Rating", desc: "Customer memberi rating 4.9." },
-        { icon: "🎉", title: "Apresiasi", desc: "Testimonial dari customer." },
-    ],
-};
-
-const PHASE_STEPS_EN = {
-    explore: [
-        { icon: "👤", title: "Mentor Profile", desc: "This is what customers see when choosing you." },
-        { icon: "📝", title: "Topics & Price", desc: "Topics and price visible on profile card." },
-    ],
-    schedule: [
-        { icon: "📅", title: "Session List", desc: "All booked sessions from customers." },
-        { icon: "👤", title: "Booking Detail", desc: "Customer name, topic, and time." },
-    ],
-    room: [
-        { icon: "🎥", title: "Join Room", desc: "Click to connect with customer." },
-        { icon: "📹", title: "Video Call", desc: "Video chat begins." },
-    ],
-    feedback: [
-        { icon: "⭐", title: "Rating", desc: "Customer gave 4.9 rating." },
-        { icon: "🎉", title: "Appreciation", desc: "Testimonials from customers." },
-    ],
-};
 
 export default function DemoMentorPage() {
     const router = useRouter();
-    const { login, user } = useAuth();
+    const { login, logout, user } = useAuth();
     const { language } = useLanguage();
     const hasRun = useRef(false);
-    const [phase, setPhase] = useState<'overview' | 'explore' | 'schedule' | 'room' | 'feedback'>('overview');
-    const [step, setStep] = useState(0);
-    const [isComplete, setIsComplete] = useState(false);
-    const [roomState, setRoomState] = useState<'idle' | 'connecting' | 'connected'>('idle');
 
     const isID = language === 'id';
-    const OVERVIEW_STEPS = isID ? STEPS_ID : STEPS_EN;
-    const PHASE_STEPS = isID ? PHASE_STEPS_ID : PHASE_STEPS_EN;
+    const TUTORIAL_STEPS = isID ? TUTORIAL_STEPS_ID : TUTORIAL_STEPS_EN;
+
+    const [tutorialStep, setTutorialStep] = useState(0);
+    const [phase, setPhase] = useState<'overview' | 'explore' | 'schedule' | 'room' | 'feedback'>('overview');
+    const [subStep, setSubStep] = useState(0);
+    const [roomState, setRoomState] = useState<'idle' | 'connecting' | 'connected'>('idle');
+    const [showLogout, setShowLogout] = useState(false);
+    const [toastMessage, setToastMessage] = useState('');
+    const [showCongrats, setShowCongrats] = useState(false);
 
     useEffect(() => {
         if (hasRun.current || user) return;
@@ -78,66 +53,135 @@ export default function DemoMentorPage() {
         login("Opa Adriel");
     }, [user, login]);
 
-    const getCurrentStepData = () => {
-        if (phase === 'overview') return OVERVIEW_STEPS[step] || OVERVIEW_STEPS[0];
-        const steps = PHASE_STEPS[phase as keyof typeof PHASE_STEPS] || [];
-        return steps[step] || steps[0];
-    };
+    const currentStep = TUTORIAL_STEPS[tutorialStep] || TUTORIAL_STEPS[0];
 
-    const getTotalSteps = () => {
-        if (phase === 'overview') return OVERVIEW_STEPS.length;
-        return (PHASE_STEPS[phase as keyof typeof PHASE_STEPS] || []).length;
-    };
+    function showToast(msg) {
+        setToastMessage(msg);
+        setTimeout(() => setToastMessage(''), 2500);
+    }
 
-    const goToPhase = (p: typeof phase) => {
+    function goToPhase(p) {
         setPhase(p);
-        setStep(0);
-        setIsComplete(false);
-        setRoomState('idle');
-    };
+        setSubStep(0);
+    }
 
-    const handleNextStep = useCallback(() => {
-        const total = getTotalSteps();
-        if (step < total - 1) {
-            setStep(prev => prev + 1);
-        } else {
-            setIsComplete(true);
-            setTimeout(() => {
-                if (phase === 'overview') {
-                    const next = OVERVIEW_STEPS[step]?.phase as typeof phase;
-                    if (next) goToPhase(next);
-                } else {
-                    goToPhase('overview');
-                }
-                setIsComplete(false);
-            }, 1500);
+    function handleNextStep() {
+        var step = tutorialStep;
+
+        if (step === 0) {
+            setTutorialStep(1);
+            goToPhase('explore');
+            return;
         }
-    }, [step, phase]);
+        if (step === 1) {
+            setTutorialStep(2);
+            setSubStep(1);
+            return;
+        }
+        if (step === 2) {
+            setTutorialStep(3);
+            goToPhase('schedule');
+            return;
+        }
+        if (step === 3) {
+            setTutorialStep(4);
+            setSubStep(1);
+            return;
+        }
+        if (step === 4) {
+            setTutorialStep(5);
+            goToPhase('room');
+            return;
+        }
+        if (step === 5) {
+            setRoomState('connecting');
+            setTutorialStep(6);
+            setTimeout(() => setRoomState('connected'), 2000);
+            return;
+        }
+        if (step === 6) {
+            setTutorialStep(7);
+            goToPhase('feedback');
+            return;
+        }
+        if (step === 7) {
+            setShowCongrats(true);
+            return;
+        }
+    }
 
-    const handleReset = () => {
+    function handleReset() {
+        setTutorialStep(0);
         setPhase('overview');
-        setStep(0);
-        setIsComplete(false);
+        setSubStep(0);
         setRoomState('idle');
-    };
+        setShowLogout(false);
+    }
 
-    const handleBookSesi = () => {
-        const bubble = document.createElement('div');
-        bubble.style.cssText = 'position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.3)';
-        bubble.innerHTML = `<div style="background:#10b981;color:white;padding:2rem 3rem;border-radius:1.5rem;box-shadow:0 25px 50px rgba(0,0,0,0.25);text-align:center"><p style="font-weight:900;font-size:1.5rem;margin-bottom:0.5rem">✓ ${isID ? 'Booking Berhasil!' : 'Booking Successful!'}</p><p style="opacity:0.8;font-size:0.875rem">${isID ? 'Customer Dex akan segera terhubung' : 'Customer Dex will connect soon'}</p></div>`;
-        document.body.appendChild(bubble);
-        setTimeout(() => bubble.remove(), 2500);
-        setStep(1);
-    };
+    function handleBookSesi() {
+        showToast(isID ? '✓ Booking Berhasil! Customer Dex akan segera terhubung' : '✓ Booking Successful! Customer Dex will connect soon');
+    }
 
-    const handleMasukRuang = () => {
-        goToPhase('room');
-        setRoomState('connecting');
-        setTimeout(() => setRoomState('connected'), 2000);
-    };
+    function getBubbleTitle() {
+        if (phase === 'overview') return currentStep.title;
+        if (phase === 'explore') return subStep === 0 ? (isID ? 'Profil Mentor' : 'Mentor Profile') : (isID ? 'Topik & Harga' : 'Topics & Price');
+        if (phase === 'schedule') return subStep === 0 ? (isID ? 'Daftar Sesi' : 'Session List') : (isID ? 'Detail Booking' : 'Booking Detail');
+        if (phase === 'room') return roomState === 'connected' ? (isID ? 'Video Call Aktif' : 'Video Call Active') : (isID ? 'Ruang Sowan' : 'Sowan Room');
+        if (phase === 'feedback') return currentStep.title;
+        return currentStep.title;
+    }
+
+    function getBubbleDesc() {
+        if (phase === 'overview') return currentStep.desc;
+        if (phase === 'explore') return subStep === 0 ? (isID ? 'Ini yang dilihat customer saat memilih Anda' : 'This is what customers see when choosing you') : (isID ? 'Topik dan harga terlihat di kartu profil' : 'Topics and price visible on profile card');
+        if (phase === 'schedule') return subStep === 0 ? (isID ? 'Semua sesi booked dari customer' : 'All booked sessions from customers') : (isID ? 'Nama, topik, dan waktu sesi Dex' : 'Customer name, topic, and Dex\'s session time');
+        if (phase === 'room') {
+            if (roomState === 'connecting') return isID ? 'Menghubungkan...' : 'Connecting...';
+            if (roomState === 'connected') return isID ? 'Terhubung dengan Dex - Sejarah Jawa' : 'Connected with Dex - Javanese History';
+            return currentStep.desc;
+        }
+        if (phase === 'feedback') return currentStep.desc;
+        return currentStep.desc;
+    }
 
     return (
         <main className="min-h-screen w-full bg-[#FAF9F6] pb-48">
+            {/* Toast */}
+            {toastMessage && (
+                <div className="fixed inset-0 z-[200] flex items-center justify-center pointer-events-none">
+                    <div className="bg-emerald-500 text-white px-8 py-6 rounded-2xl shadow-2xl text-center pointer-events-auto">
+                        <p className="font-black text-xl">{toastMessage}</p>
+                    </div>
+                </div>
+            )}
+
+            {/* Congratulation Modal */}
+            {showCongrats && (
+                <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/40 backdrop-blur-sm">
+                    <div className="bg-white rounded-3xl p-10 max-w-lg w-full mx-4 shadow-2xl text-center">
+                        <div className="text-7xl mb-4">🎉</div>
+                        <h2 className="text-3xl font-black text-primary mb-2">
+                            {isID ? "Selamat!" : "Congratulations!"}
+                        </h2>
+                        <p className="text-muted-foreground text-lg mb-6">
+                            {isID
+                                ? "Anda telah menyelesaikan demo Dashboard Mentor!"
+                                : "You have completed the Mentor Dashboard demo!"}
+                        </p>
+                        <div className="flex flex-col gap-3">
+                            <button onClick={() => { setShowCongrats(false); localStorage.removeItem("sowan_user"); logout(); router.push('/'); }}
+                                className="w-full bg-accent hover:bg-accent/90 text-white font-black py-4 rounded-2xl transition-all shadow-lg">
+                                {isID ? "Logout & Kembali ke Home" : "Logout & Return to Home"}
+                            </button>
+                            <button onClick={() => { setShowCongrats(false); handleReset(); }}
+                                className="w-full bg-slate-100 hover:bg-slate-200 text-primary font-bold py-4 rounded-2xl transition-all">
+                                🔄 {isID ? "Mulai Ulang Demo" : "Restart Demo"}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             {/* Sticky Demo Header */}
             <div className="bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-blue-200 py-4 px-6 sticky top-[72px] z-40">
                 <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -145,78 +189,83 @@ export default function DemoMentorPage() {
                         <span className="text-3xl">👴</span>
                         <div>
                             <h2 className="font-black text-primary">{isID ? "Demo: Dashboard Mentor" : "Demo: Mentor Dashboard"}</h2>
-                            <p className="text-sm text-muted-foreground">{isID ? "Alur lengkap dari Jelajahi hingga Apresiasi" : "Full flow from Explore to Appreciation"}</p>
+                            <p className="text-sm text-muted-foreground">{isID ? "Ikuti panduan langkah demi langkah" : "Follow step by step guide"}</p>
                         </div>
                     </div>
                     <div className="flex items-center gap-4">
                         <div className="flex gap-1">
-                            {Array.from({ length: getTotalSteps() }).map((_, i) => (
-                                <div key={i} className={`w-3 h-3 rounded-full transition-all ${i <= step ? 'bg-blue-600' : 'bg-primary/20'}`} />
+                            {TUTORIAL_STEPS.map((_, i) => (
+                                <div key={i} className={`w-3 h-3 rounded-full transition-all ${i <= tutorialStep ? 'bg-blue-600' : 'bg-primary/20'}`} />
                             ))}
                         </div>
                         <span className="text-sm font-bold text-muted-foreground">
-                            {phase === 'overview' ? `${isID ? 'Langkah' : 'Step'} ${step + 1}` : `${isID ? 'Detail' : 'Detail'} ${step + 1}`} / {getTotalSteps()}
+                            {isID ? 'Langkah' : 'Step'} {tutorialStep + 1} / {TUTORIAL_STEPS.length}
                         </span>
                     </div>
                 </div>
             </div>
 
-            {/* Floating Step Guide — fixed below header, same style as customer demo */}
-            <div className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ${isComplete ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
+            {/* Floating Step Guide */}
+            <div className="fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500"
                 style={{ top: 'calc(72px + 4rem)', maxWidth: '90vw' }}>
                 <div className="bg-accent text-white px-8 py-5 rounded-3xl shadow-2xl flex items-center gap-4"
                     style={{ animation: 'demoBounce 2.5s ease-in-out infinite' }}>
-                    <span className="text-3xl shrink-0">{getCurrentStepData().icon}</span>
+                    <span className="text-3xl shrink-0">{currentStep.icon}</span>
                     <div className="min-w-0">
-                        <p className="font-black text-base whitespace-nowrap">{getCurrentStepData().title}</p>
-                        <p className="text-sm opacity-80 whitespace-nowrap">{getCurrentStepData().desc}</p>
+                        <p className="font-black text-base whitespace-nowrap">{getBubbleTitle()}</p>
+                        <p className="text-sm opacity-80 whitespace-nowrap">{getBubbleDesc()}</p>
                     </div>
                 </div>
             </div>
 
-            {/* Bottom-right step button */}
+            {/* Bottom-right Next Step button */}
             <div className="fixed bottom-8 right-8 z-50">
-                {!isComplete ? (
-                    <button onClick={handleNextStep}
-                        className="bg-accent hover:bg-accent/90 text-white font-black px-6 py-3 rounded-2xl shadow-xl transition-all active:scale-95">
-                        {step < getTotalSteps() - 1 ? (isID ? "Langkah Berikutnya →" : "Next Step →") : (isID ? "✓ Lanjut" : "✓ Continue")}
-                    </button>
-                ) : (
-                    <div className="bg-emerald-500 text-white font-black px-6 py-3 rounded-2xl shadow-xl flex items-center gap-2">
-                        <CheckCircle className="w-5 h-5" /> ✓
-                    </div>
-                )}
+                <button onClick={handleNextStep}
+                    className="bg-accent hover:bg-accent/90 text-white font-black px-6 py-3 rounded-2xl shadow-xl transition-all active:scale-95">
+                    {tutorialStep < TUTORIAL_STEPS.length - 1 ? (isID ? "Langkah Berikutnya" : "Next Step") : (isID ? "Selesai" : "Done")}
+                </button>
             </div>
 
             {/* Bottom-left Reset */}
-            <div className="fixed bottom-8 left-8 z-50">
-                <button onClick={handleReset}
-                    className="bg-white hover:bg-slate-50 text-primary font-bold px-5 py-3 rounded-2xl shadow-lg border-2 border-primary/20 transition-all flex items-center gap-2">
-                    🔄 {isID ? "Reset" : "Reset"}
-                </button>
-            </div>
+            {showLogout ? (
+                <div className="fixed bottom-8 left-8 z-50">
+                    <button onClick={handleReset}
+                        className="bg-white hover:bg-slate-50 text-primary font-bold px-5 py-3 rounded-2xl shadow-lg border-2 border-primary/20 transition-all flex items-center gap-2">
+                        🔄 {isID ? "Reset" : "Reset"}
+                    </button>
+                </div>
+            ) : (
+                <div className="fixed bottom-8 left-8 z-50">
+                    <button onClick={handleReset}
+                        className="bg-white hover:bg-slate-50 text-primary font-bold px-5 py-3 rounded-2xl shadow-lg border-2 border-primary/20 transition-all flex items-center gap-2">
+                        🔄 {isID ? "Reset" : "Reset"}
+                    </button>
+                </div>
+            )}
 
             {/* Main Content */}
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-                {/* Tab Nav */}
-                <div className="flex gap-3 mb-10 flex-wrap">
-                    {(['overview', 'explore', 'schedule', 'room', 'feedback'] as const).map(p => {
-                        const labels = {
-                            overview: isID ? '🏠 Overview' : '🏠 Overview',
-                            explore: '🔍 ' + (isID ? 'Jelajahi' : 'Explore'),
-                            schedule: '📅 ' + (isID ? 'Jadwal' : 'Schedule'),
-                            room: '🎥 ' + (isID ? 'Ruang Sowan' : 'Sowan Room'),
-                            feedback: '⭐ ' + (isID ? 'Apresiasi' : 'Appreciation'),
-                        };
-                        return (
-                            <button key={p} onClick={() => goToPhase(p)}
-                                className={`px-5 py-3 rounded-2xl font-bold text-sm flex items-center gap-2 transition-all ${phase === p ? 'bg-blue-600 text-white shadow-lg' : 'bg-white border-2 border-primary/10 hover:border-blue-300'}`}>
-                                {labels[p]}
-                            </button>
-                        );
-                    })}
-                </div>
+                {/* Tab Nav - only show when relevant to current step */}
+                {(phase === 'overview' || phase === 'explore' || phase === 'schedule' || phase === 'room' || phase === 'feedback') && (
+                    <div className="flex gap-3 mb-10 flex-wrap">
+                        {(['overview', 'explore', 'schedule', 'room', 'feedback'] as const).map(p => {
+                            const labels = {
+                                overview: isID ? '🏠 Overview' : '🏠 Overview',
+                                explore: '🔍 ' + (isID ? 'Jelajahi' : 'Explore'),
+                                schedule: '📅 ' + (isID ? 'Jadwal' : 'Schedule'),
+                                room: '🎥 ' + (isID ? 'Ruang Sowan' : 'Sowan Room'),
+                                feedback: '⭐ ' + (isID ? 'Apresiasi' : 'Appreciation'),
+                            };
+                            return (
+                                <button key={p} onClick={() => goToPhase(p)}
+                                    className={`px-5 py-3 rounded-2xl font-bold text-sm flex items-center gap-2 transition-all ${phase === p ? 'bg-blue-600 text-white shadow-lg' : 'bg-white border-2 border-primary/10 hover:border-blue-300'}`}>
+                                    {labels[p]}
+                                </button>
+                            );
+                        })}
+                    </div>
+                )}
 
                 {/* === OVERVIEW === */}
                 {phase === 'overview' && (
@@ -251,7 +300,7 @@ export default function DemoMentorPage() {
                                 { icon: "⭐", label: isID ? "Apresiasi" : "Appreciation", desc: "4.9 rating", color: "from-amber-50 to-orange-50", border: "border-amber-200", targetPhase: 'feedback' as const },
                             ].map((item, i) => (
                                 <button key={i} onClick={() => goToPhase(item.targetPhase)}
-                                    className={`bg-gradient-to-br ${item.color} rounded-2xl p-6 border-2 ${item.border} hover:shadow-xl transition-all text-left group ${step === i && phase === 'overview' ? 'ring-4 ring-blue-500 ring-opacity-50' : ''}`}>
+                                    className={`bg-gradient-to-br ${item.color} rounded-2xl p-6 border-2 ${item.border} hover:shadow-xl transition-all text-left group`}>
                                     <span className="text-4xl mb-3 block">{item.icon}</span>
                                     <h3 className="font-black text-primary text-lg group-hover:underline">{item.label}</h3>
                                     <p className="text-sm text-muted-foreground font-medium">{item.desc}</p>
@@ -294,7 +343,7 @@ export default function DemoMentorPage() {
                             <p className="font-bold text-amber-700">📍 {isID ? "Mode Demo: Begini customer melihat profil Anda" : "Demo: This is how customers see your profile"}</p>
                         </div>
                         <div className="max-w-2xl mx-auto">
-                            <div className={`bg-white rounded-[32px] overflow-hidden shadow-2xl border-4 ${step === 0 ? 'border-accent' : 'border-amber-300'}`}>
+                            <div className={`bg-white rounded-[32px] overflow-hidden shadow-2xl border-4 ${subStep === 0 ? 'border-accent' : 'border-amber-300'}`}>
                                 <div className="relative h-72 bg-gradient-to-br from-amber-50 to-orange-50">
                                     <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=400&auto=format&fit=crop"
                                         alt="Opa Adriel" className="w-full h-full object-cover" />
@@ -366,7 +415,7 @@ export default function DemoMentorPage() {
                                             </div>
                                         </div>
                                         {s.urgent && (
-                                            <button onClick={handleMasukRuang}
+                                            <button onClick={() => { goToPhase('room'); setRoomState('connecting'); setTimeout(() => setRoomState('connected'), 2000); }}
                                                 className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-6 py-3 rounded-xl transition-all h-fit flex items-center gap-2 active:scale-95">
                                                 🎥 {isID ? "Masuk Ruang →" : "Join Room →"}
                                             </button>
@@ -511,23 +560,9 @@ export default function DemoMentorPage() {
                         </button>
                     </div>
                 )}
-
-                {/* Bottom CTA */}
-                <div className="text-center mt-12 border-t border-primary/10 pt-8">
-                    <p className="text-sm text-muted-foreground mb-4">{isID ? "Demo ini berjalan otomatis." : "This demo runs automatically."}</p>
-                    <div className="flex justify-center gap-4 flex-wrap">
-                        <button onClick={handleReset} className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-4 rounded-2xl transition-all">
-                            🔄 Reset Demo
-                        </button>
-                        <button onClick={() => { login("Opa Adriel"); router.push("/dashboard/mentor"); }}
-                            className="bg-accent hover:bg-accent/90 text-white font-bold px-8 py-4 rounded-2xl transition-all">
-                            🚀 {isID ? "Buka Dashboard Mentor Asli →" : "Open Real Mentor Dashboard →"}
-                        </button>
-                    </div>
-                </div>
             </div>
 
-            <style jsx global>{`
+            <style>{`
                 @keyframes demoBounce {
                     0%, 100% { transform: translateX(-50%) translateY(0); }
                     50% { transform: translateX(-50%) translateY(-8px); }

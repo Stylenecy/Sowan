@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { useLanguage } from "@/context/LanguageContext";
-import { Search, MapPin, Star, Calendar, X, Clock, Video } from "lucide-react";
+import { Search, MapPin, Star, Calendar, X, Clock, Video, CheckCircle } from "lucide-react";
 
 var MENTORS = [
     { id: 1, name: "Opa Adriel", title: "Pakar Sejarah Jawa", city: "Yogyakarta", rating: "4.9", sessions: "24", price: "Rp 100.000", topics: ["Sejarah Jawa", "Bahasa Jawa"], bio: "Mari ngobrol santai soal sejarah, pengalaman hidup, atau sekadar berlatih bahasa Jawa.", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=400&auto=format&fit=crop", online: true },
@@ -16,38 +16,67 @@ var TIME_SLOTS = ["09:00", "10:00", "11:00", "14:00", "15:00", "16:00"];
 
 export default function DemoExplorePage() {
     var router = useRouter();
-    var login = useAuth().login;
-    var user = useAuth().user;
+    var auth = useAuth();
+    var login = auth.login;
+    var logout = auth.logout;
+    var user = auth.user;
     var language = useLanguage().language;
     var hasRun = useRef(false);
-    var ref_currentStep = useState(0)[0];
-    var ref_setCurrentStep = useState(0)[1];
-    const [currentStep, setCurrentStep] = useState(0);
-    const [activeFilter, setActiveFilter] = useState("all");
-    const [searchQuery, setSearchQuery] = useState("");
-    const [selectedMentor, setSelectedMentor] = useState(null);
-    const [bookingStep, setBookingStep] = useState("time");
-    const [selectedTime, setSelectedTime] = useState(null);
-    const [showSidePanel, setShowSidePanel] = useState(false);
-    const [showRoomEntry, setShowRoomEntry] = useState(false);
-    const [showFeedback, setShowFeedback] = useState(false);
 
-    var isID = language === "id";
     var STEPS_ID = [
-        { icon: "1", title: "Cari Mentor", desc: "Ketik nama atau topik yang Anda minati." },
-        { icon: "2", title: "Filter Kota", desc: "Pilih kota asal mentor." },
-        { icon: "3", title: "Pilih Mentor", desc: "Klik kartu mentor untuk profil." },
-        { icon: "4", title: "Buat Jadwal", desc: "Pilih waktu dan konfirmasi." },
-        { icon: "5", title: "Masuk Ruang", desc: "Gunakan kode booking." },
+        { icon: "1", title: "Cari Mentor", desc: "Ketik nama mentor di pencarian." },
+        { icon: "2", title: "Filter Kota", desc: "Pilih kota untuk filter hasil." },
+        { icon: "3", title: "Pilih Mentor", desc: "Klik kartu mentor untuk lihat profil." },
+        { icon: "4", title: "Booking", desc: "Pilih waktu dan konfirmasi." },
+        { icon: "5", title: "Ruang Sowan", desc: "Masuk ke ruang video call." },
+        { icon: "6", title: "Apresiasi", desc: "Beri rating dan testimonial." },
     ];
     var STEPS_EN = [
-        { icon: "1", title: "Search Mentor", desc: "Type name or topic." },
-        { icon: "2", title: "Filter City", desc: "Select mentor city." },
-        { icon: "3", title: "Choose Mentor", desc: "Click mentor card." },
-        { icon: "4", title: "Book Schedule", desc: "Select time and confirm." },
-        { icon: "5", title: "Join Room", desc: "Use booking code." },
+        { icon: "1", title: "Search Mentor", desc: "Type mentor name in search." },
+        { icon: "2", title: "Filter City", desc: "Select city to filter results." },
+        { icon: "3", title: "Choose Mentor", desc: "Click mentor card to view profile." },
+        { icon: "4", title: "Book", desc: "Select time and confirm." },
+        { icon: "5", title: "Sowan Room", desc: "Enter the video call room." },
+        { icon: "6", title: "Appreciation", desc: "Give rating and testimonial." },
     ];
+
+    var isID = language === "id";
     var STEPS = isID ? STEPS_ID : STEPS_EN;
+
+    var _useState = useState(0);
+    var currentStep = _useState[0];
+    var setCurrentStep = _useState[1];
+    var _useState2 = useState("all");
+    var activeFilter = _useState2[0];
+    var setActiveFilter = _useState2[1];
+    var _useState3 = useState("");
+    var searchQuery = _useState3[0];
+    var setSearchQuery = _useState3[1];
+    var _useState4 = useState(null);
+    var selectedMentor = _useState4[0];
+    var setSelectedMentor = _useState4[1];
+    var _useState5 = useState("time");
+    var bookingStep = _useState5[0];
+    var setBookingStep = _useState5[1];
+    var _useState6 = useState(null);
+    var selectedTime = _useState6[0];
+    var setSelectedTime = _useState6[1];
+    var _useState7 = useState(false);
+    var showSidePanel = _useState7[0];
+    var setShowSidePanel = _useState7[1];
+    var _useState8 = useState(false);
+    var showRoomEntry = _useState8[0];
+    var setShowRoomEntry = _useState8[1];
+    var _useState9 = useState(false);
+    var showFeedback = _useState9[0];
+    var setShowFeedback = _useState9[1];
+    var _useState10 = useState(false);
+    var showLogout = _useState10[0];
+    var setShowLogout = _useState10[1];
+    var _useState11 = useState(false);
+    var showCongrats = _useState11[0];
+    var setShowCongrats = _useState11[1];
+
     var stepData = STEPS[currentStep] || STEPS[0];
 
     useEffect(function() {
@@ -67,9 +96,6 @@ export default function DemoExplorePage() {
 
     function handleFilterClick(city) {
         setActiveFilter(city);
-        if (currentStep === 1) {
-            setTimeout(function() { setCurrentStep(2); }, 500);
-        }
     }
 
     function handleCardClick(mentor) {
@@ -83,18 +109,10 @@ export default function DemoExplorePage() {
     function handleTimeSelect(time) {
         setSelectedTime(time);
         setBookingStep("confirm");
-        setCurrentStep(4);
     }
 
     function handleConfirmBooking() {
         setBookingStep("success");
-        setTimeout(function() {}, 3000);
-    }
-
-    function handleNextStep() {
-        if (currentStep < STEPS.length - 1) {
-            setCurrentStep(currentStep + 1);
-        }
     }
 
     function handleClosePanel() {
@@ -104,15 +122,80 @@ export default function DemoExplorePage() {
         setSelectedTime(null);
     }
 
-    var bubbleText = stepData.desc;
-    var bubbleIcon = stepData.icon;
+    function handleResetExplore() {
+        setCurrentStep(0);
+        setActiveFilter("all");
+        setSearchQuery("");
+        setSelectedMentor(null);
+        setBookingStep("time");
+        setSelectedTime(null);
+        setShowSidePanel(false);
+        setShowRoomEntry(false);
+        setShowFeedback(false);
+        setShowLogout(false);
+        setShowCongrats(false);
+    }
 
-    if (showSidePanel && bookingStep === "success") {
-        bubbleText = isID ? "Booking berhasil!" : "Booking confirmed!";
-        bubbleIcon = "OK";
-    } else if (showSidePanel) {
-        bubbleText = bookingStep === "time" ? (isID ? "Pilih waktu" : "Select time") : (isID ? "Konfirmasi" : "Confirm");
-        bubbleIcon = ">";
+    function handleNextStep() {
+        if (currentStep === 0) {
+            setSearchQuery("Opa Adriel");
+            setCurrentStep(1);
+            return;
+        }
+        if (currentStep === 1) {
+            setCurrentStep(2);
+            return;
+        }
+        if (currentStep === 2) {
+            handleCardClick(MENTORS[0]);
+            return;
+        }
+        if (currentStep === 3 && bookingStep === "success") {
+            setShowSidePanel(false);
+            setShowRoomEntry(true);
+            setCurrentStep(4);
+            return;
+        }
+        if (currentStep === 4) {
+            setShowRoomEntry(false);
+            setShowFeedback(true);
+            setCurrentStep(5);
+            return;
+        }
+        if (currentStep === 5) {
+            setShowFeedback(false);
+            setShowLogout(true);
+            setCurrentStep(6);
+            return;
+        }
+        if (currentStep === 6) {
+            logout();
+            router.push("/");
+            return;
+        }
+    }
+
+    function getBubbleText() {
+        if (showSidePanel && bookingStep === "time") return isID ? "Pilih waktu sesi" : "Select session time";
+        if (showSidePanel && bookingStep === "confirm") return isID ? "Konfirmasi booking Anda" : "Confirm your booking";
+        if (showSidePanel && bookingStep === "success") return isID ? "Booking berhasil! Masuk ke ruang." : "Booking confirmed! Enter the room.";
+        if (showRoomEntry) return isID ? "Masukkan kode booking" : "Enter booking code";
+        if (showFeedback) return isID ? "Beri apresiasi untuk mentor" : "Give appreciation to mentor";
+        return stepData.desc;
+    }
+
+    function getBubbleTitle() {
+        if (showSidePanel) return isID ? "Booking" : "Book";
+        if (showRoomEntry) return isID ? "Ruang Sowan" : "Sowan Room";
+        if (showFeedback) return isID ? "Apresiasi" : "Appreciation";
+        return stepData.title;
+    }
+
+    function getBubbleIcon() {
+        if (showSidePanel) return "4";
+        if (showRoomEntry) return "5";
+        if (showFeedback) return "6";
+        return stepData.icon;
     }
 
     return React.createElement("main", { className: "min-h-screen w-full bg-[#FAF9F6] pt-[72px]" },
@@ -122,7 +205,7 @@ export default function DemoExplorePage() {
                     React.createElement("span", { className: "text-3xl" }, "Opa Adriel"),
                     React.createElement("div", null,
                         React.createElement("h2", { className: "font-black text-primary" }, isID ? "Demo: Jelajahi Mentor" : "Demo: Explore Mentor"),
-                        React.createElement("p", { className: "text-sm text-muted-foreground" }, isID ? "Ikuti panduan" : "Follow guide")
+                        React.createElement("p", { className: "text-sm text-muted-foreground" }, isID ? "Ikuti panduan langkah demi langkah" : "Follow step by step guide")
                     )
                 ),
                 React.createElement("div", { className: "flex items-center gap-4" },
@@ -139,25 +222,70 @@ export default function DemoExplorePage() {
         ),
         React.createElement("div", { className: "fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500", style: { top: "calc(72px + 4rem)", maxWidth: "90vw" } },
             React.createElement("div", { className: "bg-accent text-white px-8 py-5 rounded-3xl shadow-2xl flex items-center gap-4", style: { animation: "demoBounce 2.5s ease-in-out infinite" } },
-                React.createElement("span", { className: "text-3xl shrink-0" }, bubbleIcon),
+                React.createElement("span", { className: "text-3xl shrink-0" }, getBubbleIcon()),
                 React.createElement("div", { className: "min-w-0" },
-                    React.createElement("p", { className: "font-black text-base whitespace-nowrap" }, stepData.title),
-                    React.createElement("p", { className: "text-sm opacity-80 whitespace-nowrap" }, bubbleText)
+                    React.createElement("p", { className: "font-black text-base whitespace-nowrap" }, getBubbleTitle()),
+                    React.createElement("p", { className: "text-sm opacity-80 whitespace-nowrap" }, getBubbleText())
                 )
             )
         ),
         React.createElement("div", { className: "fixed bottom-8 right-8 z-50" },
-            React.createElement("button", { onClick: handleNextStep, className: "bg-accent hover:bg-accent/90 text-white font-black px-6 py-3 rounded-2xl shadow-xl transition-all active:scale-95" },
-                currentStep < STEPS.length - 1 ? (isID ? "Langkah Berikutnya" : "Next Step") : "OK"
+            React.createElement("button", {
+                onClick: handleNextStep,
+                className: "bg-accent hover:bg-accent/90 text-white font-black px-6 py-3 rounded-2xl shadow-xl transition-all active:scale-95 " + (currentStep === 3 && bookingStep !== "success" ? "opacity-50 cursor-not-allowed" : ""),
+                disabled: currentStep === 3 && bookingStep !== "success"
+            },
+                currentStep === 6 ? (isID ? "Logout & Kembali" : "Logout & Return") : (isID ? "Langkah Berikutnya" : "Next Step")
             )
         ),
-        showSidePanel && selectedMentor ? React.createElement(SidePanel, { mentor: selectedMentor, bookingStep: bookingStep, selectedTime: selectedTime, isID: isID, onTimeSelect: handleTimeSelect, onConfirm: handleConfirmBooking, onClose: handleClosePanel, onEnterRoom: function() { handleClosePanel(); setShowRoomEntry(true); setCurrentStep(4); }, setBookingStep: setBookingStep }) : null,
-        showRoomEntry ? React.createElement(RoomModal, { isID: isID, code: "SW-284751", onJoin: function() { setShowRoomEntry(false); setShowFeedback(true); }, onClose: function() { setShowRoomEntry(false); } }) : null,
-        showFeedback ? React.createElement(FeedbackModal, { isID: isID, onClose: function() { setShowFeedback(false); }, onSubmit: function() { setShowFeedback(false); setCurrentStep(5); } }) : null,
+        showSidePanel && selectedMentor ? React.createElement(SidePanel, {
+            mentor: selectedMentor,
+            bookingStep: bookingStep,
+            selectedTime: selectedTime,
+            isID: isID,
+            onTimeSelect: handleTimeSelect,
+            onConfirm: handleConfirmBooking,
+            onClose: handleClosePanel,
+            onEnterRoom: function() { setShowSidePanel(false); setShowRoomEntry(true); setCurrentStep(4); },
+            setBookingStep: setBookingStep
+        }) : null,
+        showRoomEntry ? React.createElement(RoomModal, {
+            isID: isID,
+            code: "SW-284751",
+            onJoin: function() { setShowRoomEntry(false); setShowFeedback(true); setCurrentStep(5); },
+            onClose: function() { setShowRoomEntry(false); setCurrentStep(4); }
+        }) : null,
+        showFeedback ? React.createElement(FeedbackModal, {
+            isID: isID,
+            onClose: function() { setShowFeedback(false); setShowCongrats(true); },
+            onSubmit: function() { setShowFeedback(false); setShowCongrats(true); }
+        }) : null,
+        showLogout ? React.createElement("div", { className: "fixed bottom-8 left-8 z-50" },
+            React.createElement("button", { onClick: function() { logout(); router.push("/"); }, className: "bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-6 py-3 rounded-2xl shadow-lg transition-all active:scale-95" },
+                isID ? "Logout & Kembali" : "Logout & Return"
+            )
+        ) : null,
+        showCongrats ? React.createElement("div", { className: "fixed inset-0 z-[200] flex items-center justify-center bg-black/40 backdrop-blur-sm" },
+            React.createElement("div", { className: "bg-white rounded-3xl p-10 max-w-lg w-full mx-4 shadow-2xl text-center" },
+                React.createElement("div", { className: "text-7xl mb-4" }, "🎉"),
+                React.createElement("h2", { className: "text-3xl font-black text-primary mb-2" }, isID ? "Selamat!" : "Congratulations!"),
+                React.createElement("p", { className: "text-muted-foreground text-lg mb-6" },
+                    isID ? "Anda telah menyelesaikan demo Jelajahi Mentor!" : "You have completed the Explore Mentor demo!"
+                ),
+                React.createElement("div", { className: "flex flex-col gap-3" },
+                    React.createElement("button", { onClick: function() { logout(); router.push("/"); }, className: "w-full bg-accent hover:bg-accent/90 text-white font-black py-4 rounded-2xl transition-all shadow-lg" },
+                        isID ? "Logout & Kembali ke Home" : "Logout & Return to Home"
+                    ),
+                    React.createElement("button", { onClick: function() { setShowCongrats(false); handleResetExplore(); }, className: "w-full bg-slate-100 hover:bg-slate-200 text-primary font-bold py-4 rounded-2xl transition-all" },
+                        "🔄 " + (isID ? "Mulai Ulang Demo" : "Restart Demo")
+                    )
+                )
+            )
+        ) : null,
         React.createElement("div", { className: "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" },
             React.createElement("div", { className: "relative mb-8" },
                 React.createElement(Search, { className: "absolute left-5 top-1/2 -translate-y-1/2 text-primary/40 w-6 h-6" }),
-                React.createElement("input", { type: "text", value: searchQuery, onChange: function(e) { setSearchQuery(e.target.value); if (currentStep === 0 && e.target.value.length > 0) { setTimeout(function() { setCurrentStep(1); }, 500); } }, placeholder: isID ? "Cari nama, topik, atau kota..." : "Search name, topic, or city...", className: "w-full h-16 pl-14 pr-6 bg-white border-2 border-transparent hover:border-accent/30 focus:border-accent rounded-2xl text-lg font-medium shadow-lg transition-all" }),
+                React.createElement("input", { type: "text", value: searchQuery, onChange: function(e) { setSearchQuery(e.target.value); }, placeholder: isID ? "Cari nama, topik, atau kota..." : "Search name, topic, or city...", className: "w-full h-16 pl-14 pr-6 bg-white border-2 border-transparent hover:border-accent/30 focus:border-accent rounded-2xl text-lg font-medium shadow-lg transition-all" }),
                 searchQuery ? React.createElement("button", { onClick: function() { setSearchQuery(""); }, className: "absolute right-5 top-1/2 -translate-y-1/2 text-primary/40 hover:text-primary" },
                     React.createElement(X, { className: "w-5 h-5" })
                 ) : null
@@ -213,12 +341,6 @@ export default function DemoExplorePage() {
                             )
                         );
                     })
-            ),
-            React.createElement("div", { className: "mt-12 text-center" },
-                React.createElement("button", { onClick: function() { if (selectedMentor) { setShowSidePanel(true); } else { handleCardClick(MENTORS[0]); } }, className: "bg-accent hover:bg-accent/90 text-white font-black text-xl px-12 py-6 rounded-3xl shadow-xl transition-all active:scale-95" },
-                    isID ? "Jelajahi & Booking Sekarang" : "Explore & Book Now"
-                ),
-                React.createElement("p", { className: "text-sm text-muted-foreground mt-4" }, isID ? "Klik kartu mentor untuk profil dan booking" : "Click mentor card to view profile and book")
             ),
             React.createElement("div", { className: "text-center mt-8 flex justify-center gap-6" },
                 React.createElement("button", { onClick: function() { login("Opa Adriel"); router.push("/demo/mentor"); }, className: "text-sm text-blue-600 hover:underline font-medium" },
@@ -319,7 +441,9 @@ function SidePanel(props) {
                     ) : null,
                 bookingStep === "success" ?
                     React.createElement("div", { className: "space-y-4 text-center" },
-                        React.createElement("div", { className: "w-20 h-20 bg-emerald-100 rounded-full mx-auto flex items-center justify-center text-4xl" }, "OK"),
+                        React.createElement("div", { className: "w-20 h-20 bg-emerald-100 rounded-full mx-auto flex items-center justify-center text-4xl" },
+                            React.createElement(CheckCircle, { className: "w-10 h-10 text-emerald-500" })
+                        ),
                         React.createElement("div", null,
                             React.createElement("p", { className: "font-black text-xl text-emerald-600" }, isID ? "Booking Berhasil!" : "Booking Confirmed!"),
                             React.createElement("p", { className: "text-sm text-muted-foreground mt-1" },
@@ -345,7 +469,7 @@ function RoomModal(props) {
     return React.createElement("div", { className: "fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm" },
         React.createElement("div", { className: "bg-white rounded-3xl p-8 max-w-md w-full mx-4 shadow-2xl" },
             React.createElement("div", { className: "text-center mb-6" },
-                React.createElement("div", { className: "w-20 h-20 bg-purple-100 rounded-full mx-auto flex items-center justify-center text-4xl mb-4" }, "V"),
+                React.createElement("div", { className: "w-20 h-20 bg-purple-100 rounded-full mx-auto flex items-center justify-center text-4xl mb-4"}, "V"),
                 React.createElement("h3", { className: "font-black text-2xl text-primary" }, isID ? "Ruang Sowan" : "Sowan Room"),
                 React.createElement("p", { className: "text-muted-foreground text-sm mt-2" }, isID ? "Masukkan kode booking untuk bergabung" : "Enter booking code to join")
             ),
@@ -366,6 +490,9 @@ function RoomModal(props) {
 
 function FeedbackModal(props) {
     var isID = props.isID;
+    var _useState11 = useState(0);
+    var selectedStars = _useState11[0];
+    var setSelectedStars = _useState11[1];
     return React.createElement("div", { className: "fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm" },
         React.createElement("div", { className: "bg-white rounded-3xl p-8 max-w-lg w-full mx-4 shadow-2xl" },
             React.createElement("div", { className: "text-center mb-6" },
@@ -375,7 +502,7 @@ function FeedbackModal(props) {
             ),
             React.createElement("div", { className: "flex justify-center gap-2 mb-6" },
                 [1, 2, 3, 4, 5].map(function(i) {
-                    return React.createElement("button", { key: i, className: "text-4xl hover:scale-110 transition-transform text-amber-400" }, "*");
+                    return React.createElement("button", { key: i, onClick: function() { setSelectedStars(i); }, className: "text-4xl hover:scale-110 transition-transform " + (i <= selectedStars ? "text-amber-500" : "text-amber-300") }, "*");
                 })
             ),
             React.createElement("textarea", { className: "w-full p-4 border-2 border-primary/20 rounded-2xl text-sm mb-4 resize-none", rows: 3, placeholder: isID ? "Tulis testimonial Anda..." : "Write your testimonial..." }),

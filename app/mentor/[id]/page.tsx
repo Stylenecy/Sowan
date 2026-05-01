@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/select";
 import { useAuth } from "@/context/AuthContext";
 import { useLanguage } from "@/context/LanguageContext";
-import { MapPin, Globe, Star, Clock, Heart, ArrowLeft, Calendar, ShieldCheck, CheckCircle, User2, MessageCircle } from "lucide-react";
+import { MapPin, Globe, Star, Clock, Heart, ArrowLeft, Calendar, ShieldCheck, CheckCircle, User2, MessageCircle, Video } from "lucide-react";
 import Link from "next/link";
 
 export default function MentorProfilePage({ params }: { params: Promise<{ id: string }> }) {
@@ -68,7 +68,7 @@ experiences: ["40 Tahun Guru Sejarah", "Penulis Buku Budaya", "Pemandu Wisata Se
             videoHandle: "",
             useLocalVideo: true,
         },
-        {
+{
             id: 2,
             name: "Ibu Ratna",
             age: 62,
@@ -76,15 +76,15 @@ experiences: ["40 Tahun Guru Sejarah", "Penulis Buku Budaya", "Pemandu Wisata Se
             image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop",
             location: "Jakarta",
             language: "Inggris, Mandarin",
-            about: "Setelah puluhan tahun bertugas di berbagai negara, saya ingin membagikan perspektif saya tentang dunia, diplomasi, dan bagaimana menjaga hubungan baik dengan sesama. Sesi saya cocok untuk Anda yang ingin belajar etiket internasional atau sekadar mendengar cerita unik dari balik layar meja perundingan global.",
+            about: "Setelah puluhan tahun bertugas di berbagai negara, saya ingin membagikan perspektif saya tentang dunia, diplomasi, dan bagaimana menjaga hubungan baik dengan sesama. Sesi saya cocok untuk Anda yang ingin belajar etiket internasional atau sekadar mendengar cerita unik dari balik meja perundingan global.",
             experiences: ["30 Tahun Diplomat", "Atase Kebudayaan di Beijing", "Konsultan Hubungan Internasional"],
             interests: ["Politik Dunia", "Budaya Global", "Bahasa Mandarin"],
             price: "Rp 250.000",
             rating: 4.8,
             reviewsCount: 95,
-            videoId: "xUDcOBBF79o",
-            videoSource: "Bailey Schildbach",
-            videoHandle: "@bailey.schildbach",
+            videoId: "N90UIXMuMMU",
+            videoSource: "Sandra Hart",
+            videoHandle: "@lifewithsandrahart",
             useLocalVideo: false,
         },
         {
@@ -106,11 +106,11 @@ interests: ["Wirausaha", "Masakan Sunda", "Musik Kecapi"],
             videoHandle: "",
             useLocalVideo: true,
         },
-        {
+{
             id: 4,
             name: "Opa Yohanes",
             age: 70,
-            title: "Musisi Kerocong",
+            title: "Musisi Keroncong",
             image: "https://images.unsplash.com/photo-1463453091185-61582044d556?q=80&w=600&auto=format&fit=crop",
             location: "Surabaya",
             language: "Jawa, Indonesia",
@@ -120,10 +120,10 @@ interests: ["Wirausaha", "Masakan Sunda", "Musik Kecapi"],
             price: "Rp 150.000",
             rating: 5.0,
             reviewsCount: 42,
-            videoId: "xUDcOBBF79o",
-            videoSource: "Bailey Schildbach",
-            videoHandle: "@bailey.schildbach",
-            useLocalVideo: false,
+            videoId: "/video-pak-budi.mp4",
+            videoSource: "Opa Yohanes",
+            videoHandle: "",
+            useLocalVideo: true,
         },
         {
             id: 5,
@@ -139,9 +139,9 @@ interests: ["Wirausaha", "Masakan Sunda", "Musik Kecapi"],
             price: "Rp 120.000",
             rating: 4.9,
             reviewsCount: 64,
-            videoId: "xUDcOBBF79o",
-            videoSource: "Bailey Schildbach",
-            videoHandle: "@bailey.schildbach",
+            videoId: "N90UIXMuMMU",
+            videoSource: "Sandra Hart",
+            videoHandle: "@lifewithsandrahart",
             useLocalVideo: false,
         },
         {
@@ -196,9 +196,9 @@ interests: ["Wirausaha", "Masakan Sunda", "Musik Kecapi"],
             price: "Rp 180.000",
             rating: 4.9,
             reviewsCount: 76,
-            videoId: "xUDcOBBF79o",
-            videoSource: "Bailey Schildbach",
-            videoHandle: "@bailey.schildbach",
+            videoId: "N90UIXMuMMU",
+            videoSource: "Sandra Hart",
+            videoHandle: "@lifewithsandrahart",
             useLocalVideo: false,
         },
         {
@@ -215,9 +215,9 @@ interests: ["Wirausaha", "Masakan Sunda", "Musik Kecapi"],
             price: "Rp 90.000",
             rating: 5.0,
             reviewsCount: 110,
-            videoId: "xUDcOBBF79o",
-            videoSource: "Bailey Schildbach",
-            videoHandle: "@bailey.schildbach",
+            videoId: "N90UIXMuMMU",
+            videoSource: "Sandra Hart",
+            videoHandle: "@lifewithsandrahart",
             useLocalVideo: false,
         },
         {
@@ -253,9 +253,9 @@ interests: ["Wirausaha", "Masakan Sunda", "Musik Kecapi"],
             price: "Rp 70.000",
             rating: 4.6,
             reviewsCount: 130,
-            videoId: "xUDcOBBF79o",
-            videoSource: "Bailey Schildbach",
-            videoHandle: "@bailey.schildbach",
+            videoId: "N90UIXMuMMU",
+            videoSource: "Sandra Hart",
+            videoHandle: "@lifewithsandrahart",
             useLocalVideo: false,
         },
         {
@@ -310,9 +310,9 @@ interests: ["Wirausaha", "Masakan Sunda", "Musik Kecapi"],
             price: "Rp 100.000",
             rating: 4.8,
             reviewsCount: 65,
-            videoId: "xUDcOBBF79o",
-            videoSource: "Bailey Schildbach",
-            videoHandle: "@bailey.schildbach",
+            videoId: "N90UIXMuMMU",
+            videoSource: "Sandra Hart",
+            videoHandle: "@lifewithsandrahart",
             useLocalVideo: false,
         },
     ];
@@ -320,10 +320,6 @@ interests: ["Wirausaha", "Masakan Sunda", "Musik Kecapi"],
     const foundMentor = mentors.find(m => m.id === mentorId) || mentors[0];
 
     const handleOpenModal = () => {
-        if (!user) {
-            setShowLoginModal(true);
-            return;
-        }
         setIsModalOpen(true);
         setIsSuccess(false);
         setIsProcessing(false);
@@ -350,127 +346,164 @@ interests: ["Wirausaha", "Masakan Sunda", "Musik Kecapi"],
     };
 
     return (
-        <div className="min-h-screen bg-[#FAF9F6] text-foreground pb-20">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-16">
-                <button
-                    onClick={() => router.back()}
-                    className="group mb-8 lg:mb-12 flex items-center gap-2 sm:gap-3 text-primary/60 hover:text-primary font-bold transition-all text-lg sm:text-xl"
-                >
-                    <ArrowLeft size={24} className="sm:w-7 sm:h-7 group-hover:-translate-x-2 transition-transform" />
-                    {t.shared.back}
-                </button>
+        <div className="min-h-screen bg-[#FAF9F6] text-foreground pt-[72px] pb-20">
+            {/* Hero gradient header */}
+            <div className="relative overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50">
+                <div className="absolute inset-0 opacity-40">
+                    <div className="absolute top-0 right-0 w-96 h-96 bg-amber-200 rounded-full blur-[120px]" />
+                    <div className="absolute bottom-0 left-0 w-80 h-80 bg-orange-200 rounded-full blur-[100px]" />
+                </div>
+                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12">
+                    <button
+                        onClick={() => router.back()}
+                        className="group mb-6 lg:mb-8 flex items-center gap-2 sm:gap-3 text-primary/60 hover:text-primary font-bold transition-all text-lg sm:text-xl bg-white/80 backdrop-blur-sm rounded-2xl px-4 py-2 shadow-sm"
+                    >
+                        <ArrowLeft size={24} className="sm:w-7 sm:h-7 group-hover:-translate-x-2 transition-transform" />
+                        {t.shared.back}
+                    </button>
 
-                <div className="flex flex-col lg:flex-row gap-12 lg:gap-16">
-                    {/* LEFTSIDE: Profile Overview */}
-                    <div className="w-full lg:w-[450px]">
-                        <div className="bg-white rounded-[32px] md:rounded-[48px] p-6 sm:p-10 border border-black/5 shadow-xl shadow-primary/5 flex flex-col items-center text-center">
-                            <div className="relative w-48 h-48 sm:w-64 sm:h-64 mb-6 sm:mb-10 rounded-[32px] sm:rounded-[40px] overflow-hidden border-4 sm:border-8 border-[#FAF9F6] shadow-2xl">
-                                <Image
-                                    src={foundMentor.image}
-                                    alt={foundMentor.name}
-                                    fill
-                                    className="object-cover"
-                                    sizes="256px"
-                                    priority
-                                />
-                                {/* Deep Seamless Gradient Blend */}
-                                <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white via-white/70 to-transparent z-10"></div>
-                                <div className="absolute bottom-4 right-4 bg-black/40 backdrop-blur-sm text-[8px] text-white/80 px-2 py-1 rounded-md uppercase tracking-widest pointer-events-none z-20">
-                                    Source: Unsplash
+                    <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-center">
+                        {/* LEFT: Profile Photo */}
+                        <div className="relative w-full lg:w-[450px] flex-shrink-0">
+                            <div className="bg-white rounded-[40px] md:rounded-[56px] p-6 sm:p-10 border border-black/5 shadow-2xl shadow-primary/5 flex flex-col items-center text-center">
+                                <div className="relative w-48 h-48 sm:w-64 sm:h-64 mb-6 sm:mb-10 rounded-[32px] sm:rounded-[40px] overflow-hidden border-4 sm:border-8 border-[#FAF9F6] shadow-2xl">
+                                    <Image
+                                        src={foundMentor.image}
+                                        alt={foundMentor.name}
+                                        fill
+                                        className="object-cover"
+                                        sizes="256px"
+                                        priority
+                                    />
+                                    <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white via-white/70 to-transparent z-10"></div>
+                                    <div className="absolute bottom-4 right-4 bg-black/40 backdrop-blur-sm text-[8px] text-white/80 px-2 py-1 rounded-md uppercase tracking-widest pointer-events-none z-20">
+                                        Source: Unsplash
+                                    </div>
                                 </div>
-                            </div>
 
-                            <h1 className="text-3xl sm:text-4xl font-black text-primary mb-2">{foundMentor.name}, {foundMentor.age}</h1>
-                            <p className="text-lg sm:text-xl text-muted-foreground font-bold mb-6 sm:mb-8">{foundMentor.title}</p>
+                                <h1 className="text-3xl sm:text-4xl font-black text-primary mb-2">{foundMentor.name}, {foundMentor.age}</h1>
+                                <p className="text-lg sm:text-xl text-muted-foreground font-bold mb-6 sm:mb-8">{foundMentor.title}</p>
 
-                            <div className="grid grid-cols-1 gap-4 w-full text-left">
-                                <div className="flex items-center gap-4 bg-[#FAF9F6] p-4 rounded-3xl border border-black/5">
-                                    <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-accent shadow-sm">
-                                        <MapPin size={24} />
+                                <div className="grid grid-cols-1 gap-4 w-full text-left">
+                                    <div className="flex items-center gap-4 bg-[#FAF9F6] p-4 rounded-3xl border border-black/5">
+                                        <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-accent shadow-sm">
+                                            <MapPin size={24} />
+                                        </div>
+                                        <span className="text-lg font-bold text-primary">{foundMentor.location}</span>
                                     </div>
-                                    <span className="text-lg font-bold text-primary">{foundMentor.location}</span>
-                                </div>
-                                <div className="flex items-center gap-4 bg-[#FAF9F6] p-4 rounded-3xl border border-black/5">
-                                    <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-accent shadow-sm">
-                                        <Globe size={24} />
+                                    <div className="flex items-center gap-4 bg-[#FAF9F6] p-4 rounded-3xl border border-black/5">
+                                        <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-accent shadow-sm">
+                                            <Globe size={24} />
+                                        </div>
+                                        <span className="text-lg font-bold text-primary">{foundMentor.language}</span>
                                     </div>
-                                    <span className="text-lg font-bold text-primary">{foundMentor.language}</span>
-                                </div>
-                                <div className="flex items-center gap-4 bg-amber-50 p-4 rounded-3xl border border-amber-100">
-                                    <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-amber-500 shadow-sm">
-                                        <Star size={24} fill="currentColor" />
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <span className="text-lg font-black text-amber-700">{foundMentor.rating} / 5.0</span>
-                                        <span className="text-sm font-bold text-amber-600/60 uppercase tracking-tighter">{foundMentor.reviewsCount} {t.mentor.reviews}</span>
+                                    <div className="flex items-center gap-4 bg-amber-50 p-4 rounded-3xl border border-amber-100">
+                                        <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-amber-500 shadow-sm">
+                                            <Star size={24} fill="currentColor" />
+                                        </div>
+                                        <div className="flex flex-col">
+                                            <span className="text-lg font-black text-amber-700">{foundMentor.rating} / 5.0</span>
+                                            <span className="text-sm font-bold text-amber-600/60 uppercase tracking-tighter">{foundMentor.reviewsCount} {t.mentor.reviews}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    {/* RIGHTSIDE: Content & Layout */}
-                    <div className="flex-1 space-y-12">
-                        {/* About Section */}
-                        <div className="bg-white rounded-[32px] md:rounded-[48px] p-6 sm:p-12 border border-black/5 shadow-sm">
-                            <h2 className="text-2xl sm:text-3xl font-black text-primary mb-6 sm:mb-8 flex items-center gap-3 sm:gap-4">
-                                <ShieldCheck className="w-7 h-7 sm:w-9 sm:h-9 text-accent" />
-                                {t.mentor.about}
-                            </h2>
-                            <p className="text-lg sm:text-2xl text-muted-foreground leading-relaxed font-medium">
-                                {foundMentor.about}
-                            </p>
-                        </div>
+                        {/* RIGHT: Content */}
+                        <div className="flex-1 space-y-8 w-full">
+                            {/* About */}
+                            <div className="bg-white rounded-[32px] p-8 border border-black/5 shadow-sm">
+                                <h2 className="text-2xl font-black text-primary mb-5 flex items-center gap-3">
+                                    <ShieldCheck className="w-7 h-7 text-accent" />
+                                    {t.mentor.about}
+                                </h2>
+                                <p className="text-lg text-muted-foreground leading-relaxed font-medium">
+                                    {foundMentor.about}
+                                </p>
+                            </div>
 
-                        {/* Experience and Interests Grid */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-                            <div className="bg-white rounded-[32px] md:rounded-[48px] p-6 sm:p-10 border border-black/5 shadow-sm">
-                                <h3 className="text-xl sm:text-2xl font-black text-primary mb-6 sm:mb-8 flex items-center gap-3 sm:gap-4">
-                                    <Clock className="w-6 h-6 sm:w-7 sm:h-7 text-accent" />
+                            {/* Experiences */}
+                            <div className="bg-white rounded-[32px] p-8 border border-black/5 shadow-sm">
+                                <h3 className="text-xl font-black text-primary mb-6 flex items-center gap-3">
+                                    <Clock className="w-6 h-6 text-accent" />
                                     {t.mentor.exp}
                                 </h3>
-                                <ul className="space-y-4 sm:space-y-6">
+                                <ul className="space-y-4">
                                     {foundMentor.experiences.map((exp: string, i: number) => (
-                                        <li key={i} className="flex gap-3 sm:gap-4">
-                                            <div className="w-2.5 h-2.5 rounded-full bg-accent mt-2 sm:mt-3 shrink-0" />
-                                            <p className="text-lg sm:text-xl text-primary/80 font-bold">{exp}</p>
+                                        <li key={i} className="flex gap-3">
+                                            <div className="w-2.5 h-2.5 rounded-full bg-accent mt-2.5 shrink-0" />
+                                            <p className="text-lg text-primary/80 font-bold">{exp}</p>
                                         </li>
                                     ))}
                                 </ul>
                             </div>
-                            <div className="bg-white rounded-[32px] md:rounded-[48px] p-6 sm:p-10 border border-black/5 shadow-sm">
-                                <h3 className="text-xl sm:text-2xl font-black text-primary mb-6 sm:mb-8 flex items-center gap-3 sm:gap-4">
-                                    <Heart className="w-6 h-6 sm:w-7 sm:h-7 text-accent" />
+
+                            {/* Interests */}
+                            <div className="bg-white rounded-[32px] p-8 border border-black/5 shadow-sm">
+                                <h3 className="text-xl font-black text-primary mb-5 flex items-center gap-3">
+                                    <Heart className="w-6 h-6 text-accent" />
                                     {t.mentor.interests}
                                 </h3>
-                                <div className="flex flex-wrap gap-3 sm:gap-4">
+                                <div className="flex flex-wrap gap-3">
                                     {foundMentor.interests.map((tag: string) => (
-                                        <span key={tag} className="px-4 sm:px-6 py-2 sm:py-3 bg-[#FAF9F6] border-2 border-primary/5 rounded-xl sm:rounded-2xl text-base sm:text-lg font-bold text-primary hover:border-accent hover:text-accent transition-all cursor-default">
+                                        <span key={tag} className="px-5 py-2.5 bg-[#FAF9F6] border-2 border-primary/5 rounded-xl text-base font-bold text-primary hover:border-accent hover:text-accent transition-all cursor-default">
                                             {tag}
                                         </span>
                                     ))}
                                 </div>
                             </div>
-                        </div>
 
-                        <div className="bg-primary rounded-[32px] md:rounded-[48px] p-8 md:p-14 text-white shadow-2xl shadow-primary/30 flex flex-col md:flex-row items-center justify-between gap-8 transform hover:scale-[1.01] transition-transform text-center md:text-left">
-                            <div>
-                                <h3 className="text-2xl sm:text-3xl font-black mb-2">{t.mentor.bookingTitle}</h3>
-                                <p className="text-lg sm:text-xl text-white/60 font-bold italic">{t.mentor.bookingDesc}</p>
-                            </div>
-                            <div className="flex flex-col items-center md:items-end w-full md:w-auto">
-                                <div className="flex items-baseline gap-2 mb-6">
-                                    <span className="text-4xl sm:text-5xl font-black">{foundMentor.price}</span>
-                                    <span className="text-lg sm:text-xl text-white/40 font-bold italic">/ {t.home.sessions}</span>
+                            {/* Video Preview */}
+                            <div className="bg-white rounded-[32px] overflow-hidden border-2 border-primary/20 shadow-sm">
+                                {foundMentor.useLocalVideo ? (
+                                    <div className="aspect-video bg-gradient-to-br from-slate-800 to-slate-900 relative">
+                                        <video
+                                            src={foundMentor.videoId}
+                                            className="w-full h-full object-cover"
+                                            controls
+                                            playsInline
+                                            muted
+                                        />
+                                    </div>
+                                ) : (
+                                    <div className="aspect-video bg-gradient-to-br from-slate-800 to-slate-900 relative">
+                                        <iframe
+                                            src={`https://www.youtube.com/embed/${foundMentor.videoId}?autoplay=0&mute=1`}
+                                            title="Mentor Video"
+                                            className="w-full h-full"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowFullScreen
+                                        />
+                                    </div>
+                                )}
+                                <div className="p-4 bg-gradient-to-r from-amber-50 to-orange-50 border-t border-amber-200">
+                                    <p className="font-black text-primary text-sm">
+                                        {foundMentor.useLocalVideo ? 'Video Preview: ' + foundMentor.name : foundMentor.videoSource + ' • ' + foundMentor.videoHandle}
+                                    </p>
                                 </div>
-                                <Button
-                                    onClick={handleOpenModal}
-                                    className="h-16 sm:h-20 w-full sm:w-auto px-12 rounded-2xl sm:rounded-[28px] bg-accent hover:bg-accent/90 text-white font-black text-xl sm:text-2xl shadow-xl shadow-black/20 transition-all hover:-translate-y-2 active:translate-y-0"
-                                >
-                                    {t.mentor.confirmBtn}
-                                </Button>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                {/* CTA Banner */}
+                <div className="relative z-10 bg-primary rounded-[32px] p-8 md:p-14 text-white shadow-2xl shadow-primary/30 flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left mt-12">
+                    <div>
+                        <h3 className="text-2xl sm:text-3xl font-black mb-2">{t.mentor.bookingTitle}</h3>
+                        <p className="text-lg sm:text-xl text-white/60 font-bold italic">{t.mentor.bookingDesc}</p>
+                    </div>
+                    <div className="flex flex-col items-center md:items-end w-full md:w-auto">
+                        <div className="flex items-baseline gap-2 mb-6">
+                            <span className="text-4xl sm:text-5xl font-black">{foundMentor.price}</span>
+                            <span className="text-lg sm:text-xl text-white/40 font-bold italic">/ {t.home.sessions}</span>
+                        </div>
+                        <button
+                            onClick={handleOpenModal}
+                            className="h-16 sm:h-20 w-full sm:w-auto px-12 rounded-2xl sm:rounded-[28px] bg-accent hover:bg-accent/90 text-white font-black text-xl sm:text-2xl shadow-xl shadow-black/20 transition-all hover:-translate-y-2 active:translate-y-0 cursor-pointer"
+                        >
+                            {t.mentor.confirmBtn}
+                        </button>
                     </div>
                 </div>
             </div>

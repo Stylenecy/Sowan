@@ -1,55 +1,54 @@
-# 🏆 KSE 2026 — CHAMPION
+# 🏆 KSE JUARA 2026 — CHAMPION
 
 ## SOWAN.ID Wins 1st Place!
 
 ---
 
-**Competition:** KSE 2026 Business Plan Competition
-**Organizer:** Komunitas Sosialis Ekuilibrium (KSE), Universitas Sumatera Utara (USU)
+**Competition:** KSE Juara 2026
+**Category:** Business Plan Competition (BPC)
+**Organizer:** Karya Salemba Empat (KSE) — Minat dan Bakat (MnB) Division
+**Institution:** Universitas Sumatera Utara (USU)
 **Date:** May 2026
-**Placement:** 🥇 **1ST PLACE**
+**Result:** 🥇 **1ST PLACE**
 
 ---
 
-## 🏅 Final Rankings
+## 📋 About KSE Juara 2026
 
-| Rank | Team | University |
-|------|------|------------|
-| 🥇 **1st** | **Trio Capybara Gaje** | — |
-| 🥈 2nd | — | Universitas Brawijaya |
-| 🥉 3rd | — | Universitas Airlangga |
+**KSE Juara** is a **national-level scientific competition** organized by **Karya Salemba Empat (KSE)** through the *Minat dan Bakat (MnB)* division of **Universitas Sumatera Utara**.
 
----
+**Theme:** *"Empowering Youth Action: Strengthening Indonesia's Resilience and Competitiveness"*
 
-## 📝 Presentation Summary
+**Competition Categories:**
+- Poster Competition
+- Scientific Essay Competition
+- **Business Plan Competition (BPC)**
 
-- **Presentation Time:** Under 10 minutes (Clean & efficient)
-- **Q&A Session:** 20 minutes (Judges were highly engaged)
-- **Demo:** Interactive SOWAN.id platform demo
+**Format:** Participants who qualify as finalists present their scientific works or innovative ideas during the peak event of KSE Juara 2026.
 
 ---
 
-## 👥 Our Team
+## 🎤 Judge Feedback
+
+### Senior Judge (USU Lecturer)
+- Seemed highly satisfied throughout the presentation
+- Asked simple clarifying questions after giving extensive compliments
+- Showed strong interest in the social impact angle
+
+### Junior Judge (USU Fresh Graduate Alumni)
+- Asked questions extending beyond competition scope
+- Provided real-world tips and suggestions
+- Showed genuine interest in the business model
+
+---
+
+## 👥 Our Team — Trio Capybara Gaje
 
 | Name | Role |
 |------|------|
 | **Imeldya** | CEO — Chief Executive Officer |
 | **Dex Bennett** | CTO — Chief Technology Officer |
 | **Adriel** | CFO — Chief Financial Officer |
-
----
-
-## 🎤 Judge Feedback
-
-### Judge 1 (Senior Lecturer, USU)
-- Seemed highly satisfied throughout the presentation
-- Asked simple clarifying questions after giving extensive compliments
-- Showed strong interest in the social impact angle
-
-### Judge 2 (Fresh Graduate, USU Alumni)
-- Asked questions that extended beyond competition scope
-- Provided real-world tips and suggestions
-- Showed genuine interest in the business model
 
 ---
 
@@ -65,9 +64,12 @@
 
 ## 📸 Documentation
 
-- Competition presentation: `BPC_Markosan_SOWAN_PPT.pdf`
-- Scripts: `Adriel-Script.txt`, `Imel-Script.txt`
-- Business deck: [SOWAN_Business_Deck.md](./SOWAN_Business_Deck.md)
+| File | Description |
+|------|-------------|
+| `BPC_Markosan_SOWAN_PPT.pdf` | Competition presentation deck |
+| `Adriel-Script.txt` | Adriel's presentation script |
+| `Imel-Script.txt` | Imeldya's presentation script |
+| `[SOWAN-Business-Deck.md](./SOWAN-Business-Deck.md)` | Complete business documentation |
 
 ---
 
@@ -87,17 +89,17 @@ The demo showcases:
 
 <div align="center">
 
-## 🇮🇩 SOWAN.ID x KSE 2026 = 🏆 CHAMPION 🏆
+## 🇮🇩 SOWAN.ID x KSE JUARA 2026 = 🏆 CHAMPION 🏆
 
-*"Where Language Learning Meets Life Experience"*
-
-**Bahasa不只是 Bahasa, Belajar dari yang Sudah Hidup**
+*"Belajar budaya. Dari yang pernah hidup di dalamnya."*
 
 *Learning language through culture, from those who lived it.*
+
+**Karya Salemba Empat Universitas Sumatera Utara**
 
 </div>
 
 ---
 
-*This document commemorates the KSE 2026 victory by Trio Capybara Gaje*
+*This document commemorates the KSE Juara 2026 victory by Trio Capybara Gaje*
 *May 2026*

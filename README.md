@@ -1,9 +1,9 @@
-# 🇮🇩 SOWAN.ID — KSE 2026 Champion
+# 🇮🇩 SOWAN.ID — KSE JUARA 2026 Champion
 
 > **"Where Language Learning Meets Life Experience"**
 >
-> 🏆 **KSE 2026 Business Plan Competition — 1ST PLACE**
-> *Beating Universitas Airlangga (3rd) & Universitas Brawijaya (2nd)*
+> 🏆 **KSE Juara 2026 Business Plan Competition — 1ST PLACE**
+> *Karya Salemba Empat (KSE) Universitas Sumatera Utara*
 
 [![Deployed on Vercel](https://img.shields.io/badge/Vercel-Ready-brightgreen?style=flat-square&logo=vercel)](https://sowan-app.vercel.app)
 [![Next.js](https://img.shields.io/badge/Next.js-16.1.6-black?style=flat-square&logo=next.js)](https://nextjs.org/)
@@ -36,16 +36,16 @@ Users don't just learn language — they learn **communication**, **cultural con
 
 ---
 
-## 🏆 Competition Win
+## 🏆 KSE Juara 2026 — Champion
 
-**KSE 2026 Business Plan Competition**
-Organized by **Komunitas Sosialis Ekuilibrium**, Universitas Sumatera Utara
+**KSE Juara 2026** is a national-level scientific competition organized by **Karya Salemba Empat (KSE)** through the *Minat dan Bakat (MnB)* division of **Universitas Sumatera Utara**.
 
-| Placement | University |
-|----------|------------|
-| 🥇 **1st Place** | **Trio Capybara Gaje** (Our Team!) |
-| 🥈 2nd Place | Universitas Brawijaya |
-| 🥉 3rd Place | Universitas Airlangga |
+**Theme:** *"Empowering Youth Action: Strengthening Indonesia's Resilience and Competitiveness"*
+
+**Competition Categories:**
+- Poster Competition
+- Scientific Essay Competition
+- **Business Plan Competition (BPC)** — *Where SOWAN competed*
 
 **Team Members:**
 - **Imeldya** — CEO
@@ -126,8 +126,10 @@ sowan-app/
 ├── public/
 │   ├── video-pak-budi.mp4        # Male mentor video
 │   └── wanita_cover_tua.png      # Hero image
-├── SOWAN_Business_Deck.md         # Full business documentation
-└── NEXT_TO_DO_LIST.md            # Development roadmap
+├── archive-2024-to-2025-progress/  # Development journey files
+├── SOWAN-Business-Deck.md          # Full business documentation
+├── NEXT_TO_DO_LIST.md             # Development roadmap
+└── KSE2026_WIN.md                 # Victory documentation
 ```
 
 ---
@@ -175,10 +177,11 @@ sowan-app/
 
 ## 📖 Documentation
 
-For detailed business planning, technical documentation, and project roadmap:
-
-- **[SOWAN Business Deck](./SOWAN_Business_Deck.md)** — Complete business documentation
-- **[Next To-Do List](./NEXT_TO_DO_LIST.md)** — Development roadmap
+| Document | Description |
+|----------|-------------|
+| **[SOWAN-Business-Deck](./SOWAN-Business-Deck.md)** | Complete business documentation with market analysis, revenue model, unit economics |
+| **[KSE2026_WIN](./KSE2026_WIN.md)** | Victory commemoration and judge feedback |
+| **[NEXT_TO_DO_LIST](./NEXT_TO_DO_LIST.md)** | Development roadmap |
 
 ---
 
@@ -188,7 +191,7 @@ For detailed business planning, technical documentation, and project roadmap:
 |----------|------|
 | Live Demo | [sowan-app.vercel.app](https://sowan-app.vercel.app) |
 | GitHub Repo | [github.com/Stylenecy/Sowan](https://github.com/Stylenecy/Sowan) |
-| Competition | [KSE 2026 — USU](https://usu.ac.id) |
+| KSE Info | [Karya Salemba Empat USU](https://usu.ac.id) |
 
 ---
 
@@ -213,12 +216,14 @@ npm run build
 
 <div align="center">
 
-**SOWAN — Bahasa不只是 Bahasa, Belajar dari yang Sudah Hidup** 🇮🇩
+**SOWAN — Belajar budaya. Dari yang pernah hidup di dalamnya.**
 
 *Learning language through culture, from those who lived it.*
 
 ---
 
-🏆 *KSE 2026 Business Plan Competition — 1st Place Champion* 🏆
+🏆 *KSE Juara 2026 Business Plan Competition — 1st Place Champion* 🏆
+
+*Karya Salemba Empat Universitas Sumatera Utara*
 
 </div>

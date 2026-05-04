@@ -1,9 +1,10 @@
-# SOWAN.ID — Master Walkthrough
+# SOWAN.ID — Business Deck
 
 > **Last Updated:** May 2026
-> **Competition:** KSE 2026 Business Plan Competition
+> **Competition:** KSE Juara 2026 Business Plan Competition
+> **Organizer:** Karya Salemba Empat (KSE) Universitas Sumatera Utara
 > **Team:** Trio Capybara Gaje, Medan
-> **Institution:** Universitas Sumatera Utara
+> **Result:** 🥇 1st Place Champion
 > **Document Version:** 2.0 (Revised based on investor-readiness audit)
 
 ---
@@ -91,11 +92,20 @@ SOWAN connects learners with elderly Indonesian mentors ("sesepuh") for 1-on-1 v
 
 ## 2. COMPETITION OVERVIEW
 
-### 2.1 KSE 2026 Business Plan Competition
+### 2.1 KSE Juara 2026
 
-**KSE (Komunitas Sosialis Ekuilibrium)** is an annual business plan competition organized by **Universitas Sumatera Utara (USU)**, one of Indonesia's most prestigious universities located in Medan, North Sumatra.
+**KSE Juara 2026** is a **national-level scientific competition** organized by **Karya Salemba Empat (KSE)** through the *Minat dan Bakat (MnB)* division of **Universitas Sumatera Utara (USU)**.
 
-**Competition Theme:** Innovation for Social Impact — challenging students to develop business solutions that address real societal problems while maintaining commercial viability.
+**Theme:** *"Empowering Youth Action: Strengthening Indonesia's Resilience and Competitiveness"*
+
+**Competition Categories:**
+- Poster Competition
+- Scientific Essay Competition
+- **Business Plan Competition (BPC)** — *Where SOWAN competed*
+
+**Format:** Participants who qualify as finalists present their scientific works or innovative ideas during the peak event of KSE Juara 2026.
+
+**Our Result:** 🥇 **1st Place** in Business Plan Competition
 
 **Why This Matters:**
 - Indonesia has 183,000+ foreign workers needing cultural integration support

@@ -2,7 +2,7 @@
 
 > **Last Updated:** May 2026
 > **Project:** SOWAN.id Interactive Demo Platform
-> **Competition:** KSE 2026 Business Plan Competition
+> **Competition:** KSE Juara 2026 Business Plan Competition (Karya Salemba Empat Universitas Sumatera Utara)
 
 ---
 
@@ -296,7 +296,7 @@ All 14 mentors have:
 
 ### 8.3 Pre-Competition Testing Checklist
 
-**Must Test Before KSE 2026:**
+**Must Test Before KSE Juara 2026:**
 
 | Test | Status |
 |------|--------|
@@ -507,7 +507,7 @@ Latest deployment: `3839f23` (Master Walkthrough v2.0)
 
 ## FINAL CHECKLIST — PRE-COMPETITION
 
-Before heading to KSE 2026 competition:
+Before heading to KSE Juara 2026 competition:
 
 ### Must Verify ✅
 - [ ] Build passes (`npm run build`)
@@ -536,4 +536,4 @@ Before heading to KSE 2026 competition:
 **End of To-Do List**
 
 *Last comprehensive review: May 2026*
-*Platform status: 85% Complete — Ready for KSE 2026 Competition*
+*Platform status: 85% Complete — Ready for KSE Juara 2026 Competition*

@@ -3,6 +3,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
+import { useLanguage } from "@/context/LanguageContext";
 import {
   Handshake, History, School, UserCircle, Calendar, Clock,
   ArrowRight, RotateCcw, Loader2, Plus, X, Check, UserCog,
@@ -38,6 +39,7 @@ const BADGE: Record<string, { label: string; color: string }> = {
 };
 
 export default function AgentsPage() {
+  const { t } = useLanguage();
   const { user, isLoading: authLoading, setShowLoginModal } = useAuth();
   const router = useRouter();
   const [tab, setTab] = useState<Tab>("sowan");
@@ -78,7 +80,7 @@ export default function AgentsPage() {
 
   const handleBooking = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!bookDate || !bookTime) { showToast("Pilih tanggal dan jam dulu", "#dc2626"); return; }
+    if (!bookDate || !bookTime) { showToast(t.agents.noDateTime, "#dc2626"); return; }
     setLoading(true);
     try {
       const r = await fetch("/api/agents/book", {
@@ -89,15 +91,15 @@ export default function AgentsPage() {
       const result = await r.json();
       if (result.state) saveLocal(result.state);
       showToast(
-        result.status === "accepted" ? "Pintu dibuka!" : result.status === "countered" ? "Alternatif ditawarkan" : "Belum cocok",
+        result.status === "accepted" ? t.agents.accepted : result.status === "countered" ? t.agents.countered : t.agents.fail,
         result.status === "accepted" ? "#16a34a" : result.status === "countered" ? "#b8863c" : "#dc2626"
       );
-    } catch { showToast("Gagal", "#dc2626"); }
+    } catch { showToast(t.agents.fail, "#dc2626"); }
     setLoading(false);
   };
 
   const handleAddSlot = async () => {
-    if (!newSlotDate || !newSlotTime) { showToast("Pilih tanggal dan jam", "#dc2626"); return; }
+      if (!newSlotDate || !newSlotTime) { showToast(t.agents.noDateTime, "#dc2626"); return; }
     try {
       const r = await fetch("/api/agents/slots", {
         method: "POST",
@@ -106,8 +108,8 @@ export default function AgentsPage() {
       });
       const result = await r.json();
       if (result.state) saveLocal(result.state);
-      showToast("Slot ditambahkan", "#16a34a");
-    } catch { showToast("Gagal", "#dc2626"); }
+      showToast(t.agents.slotAdded, "#16a34a");
+    } catch { showToast(t.agents.fail, "#dc2626"); }
   };
 
   const handleRemoveSlot = async (date: string, time: string) => {
@@ -119,8 +121,8 @@ export default function AgentsPage() {
       });
       const result = await r.json();
       if (result.state) saveLocal(result.state);
-      showToast("Slot dihapus", "#1a1c1a");
-    } catch { showToast("Gagal", "#dc2626"); }
+      showToast(t.agents.slotRemoved, "#1a1c1a");
+    } catch { showToast(t.agents.fail, "#dc2626"); }
   };
 
   const handleBookingAction = async (id: string, action: "complete" | "cancel") => {
@@ -132,15 +134,15 @@ export default function AgentsPage() {
       });
       const result = await r.json();
       if (result.state) saveLocal(result.state);
-      showToast(action === "complete" ? "Sesi selesai" : "Booking dibatalkan", action === "complete" ? "#16a34a" : "#dc2626");
-    } catch { showToast("Gagal", "#dc2626"); }
+      showToast(action === "complete" ? t.agents.sessionDone : t.agents.bookingCancelled, action === "complete" ? "#16a34a" : "#dc2626");
+    } catch { showToast(t.agents.fail, "#dc2626"); }
   };
 
   const handleReset = async () => {
     await fetch("/api/agents/reset", { method: "POST" });
     try { localStorage.removeItem(LS_KEY); } catch {}
     await fetchState();
-    showToast("Pendopo direset", "#504538");
+    showToast(t.agents.resetDone, "#504538");
   };
 
   const slots = state?.elder?.available_slots || [];
@@ -166,20 +168,20 @@ export default function AgentsPage() {
       <div className="max-w-7xl mx-auto px-4 md:px-8 py-10 md:py-14 space-y-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
-            <p className="eyebrow mb-2"><Sparkles size={12} className="inline mr-1.5" />AI DIGNITY GUARD</p>
-            <h1 className="text-display-sm">Pendopo<span className="text-accent italic"> Digital</span></h1>
+            <p className="eyebrow mb-2"><Sparkles size={12} className="inline mr-1.5" />{t.agents.badge}</p>
+            <h1 className="text-display-sm">{t.agents.title}</h1>
           </div>
           <p className="text-muted-foreground text-sm max-w-xs md:text-right leading-relaxed">
-            Dua sisi pendopo — pembelajar dan sesepuh, dijembatani oleh ElderAgent.
+            {t.agents.subtitle}
           </p>
         </div>
 
         <div className="flex gap-1 p-1 rounded-2xl bg-muted/60 border border-border/30 w-fit">
           <button onClick={() => setTab("sowan")} className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-medium transition-all ${tab === "sowan" ? "bg-background text-foreground shadow-sm border border-border/30" : "text-muted-foreground hover:text-foreground"}`}>
-            <BookOpen size={16} /> Sowan — Saya Tamu
+            <BookOpen size={16} /> {t.agents.tabCustomer}
           </button>
           <button onClick={() => setTab("elder")} className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-medium transition-all ${tab === "elder" ? "bg-background text-foreground shadow-sm border border-border/30" : "text-muted-foreground hover:text-foreground"}`}>
-            <UserCog size={16} /> Kelola — Saya Sesepuh
+            <UserCog size={16} /> {t.agents.tabElder}
           </button>
         </div>
 
@@ -190,14 +192,14 @@ export default function AgentsPage() {
             <div className="rounded-2xl border border-border/50 bg-card/80 backdrop-blur-sm p-6 md:p-8">
               <div className="flex items-center gap-3 mb-1">
                 <Calendar className="text-accent" size={24} />
-                <h2 className="text-xl font-serif font-bold">Slot Tersedia</h2>
+                <h2 className="text-xl font-serif font-bold">{t.agents.slotsTitle}</h2>
               </div>
               <p className="text-sm text-muted-foreground mb-6 ml-11">
-                Klik slot untuk memilih. ElderAgent akan cek energi {state?.elder?.name || "Mbah Karto"}.
+                {t.agents.slotsDesc.replace("{name}", state?.elder?.name || "Mbah Karto")}
               </p>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-                {slots.length === 0 ? (
-                  <p className="text-sm text-muted-foreground col-span-full py-4">Belum ada slot tersedia.</p>
+                  {slots.length === 0 ? (
+                  <p className="text-sm text-muted-foreground col-span-full py-4">{t.agents.noSlots}</p>
                 ) : (
                   slots.map((s, i) => {
                     const active = bookDate === s.date && bookTime === s.start_time;
@@ -209,7 +211,7 @@ export default function AgentsPage() {
                         <p className="text-xs text-muted-foreground">{fmtDate(s.date)}</p>
                         <p className="font-semibold mt-0.5">{s.start_time} - {s.end_time}</p>
                         <p className="text-[10px] text-accent uppercase tracking-wider mt-1">{s.label}</p>
-                        {active && <p className="text-[10px] text-accent font-bold mt-1">✓ Terpilih</p>}
+                        {active && <p className="text-[10px] text-accent font-bold mt-1">{t.agents.selected}</p>}
                       </button>
                     );
                   })
@@ -221,29 +223,29 @@ export default function AgentsPage() {
             <div className="rounded-2xl border border-border/50 bg-card/80 backdrop-blur-sm p-6 md:p-8">
               <div className="flex items-center gap-3 mb-1">
                 <Handshake className="text-accent" size={24} />
-                <h2 className="text-xl font-serif font-bold">Sampaikan Niat Sowan</h2>
+                <h2 className="text-xl font-serif font-bold">{t.agents.bookingTitle}</h2>
               </div>
               <p className="text-sm text-muted-foreground mb-6 ml-11">
-                ElderAgent akan cek energi {state?.elder?.name || "Mbah Karto"} dan merespon.
+                {t.agents.bookingDesc.replace("{name}", state?.elder?.name || "Mbah Karto")}
               </p>
               <form onSubmit={handleBooking} className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-muted-foreground mb-1.5">Namamu</label>
+                  <label className="block text-xs font-medium text-muted-foreground mb-1.5">{t.agents.nameLabel}</label>
                   <input type="text" value={learnerName} onChange={e => setLearnerName(e.target.value)}
                     className="w-full px-4 py-2.5 rounded-xl bg-background border border-input text-sm focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent transition-colors" />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-muted-foreground mb-1.5">Ingin belajar</label>
+                  <label className="block text-xs font-medium text-muted-foreground mb-1.5">{t.agents.topicLabel}</label>
                   <input type="text" value={topic} onChange={e => setTopic(e.target.value)}
                     className="w-full px-4 py-2.5 rounded-xl bg-background border border-input text-sm focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent transition-colors" />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-muted-foreground mb-1.5">Tanggal {bookDate && bookTime ? <span className="text-accent font-bold">({fmtDate(bookDate)}, {bookTime})</span> : ""}</label>
+                  <label className="block text-xs font-medium text-muted-foreground mb-1.5">{t.agents.dateLabel} {bookDate && bookTime ? <span className="text-accent font-bold">({fmtDate(bookDate)}, {bookTime})</span> : ""}</label>
                   <input type="date" value={bookDate} onChange={e => setBookDate(e.target.value)}
                     className="w-full px-4 py-2.5 rounded-xl bg-background border border-input text-sm focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent transition-colors" />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-muted-foreground mb-1.5">Jam</label>
+                  <label className="block text-xs font-medium text-muted-foreground mb-1.5">{t.agents.timeLabel}</label>
                   <input type="time" value={bookTime} onChange={e => setBookTime(e.target.value)}
                     className="w-full px-4 py-2.5 rounded-xl bg-background border border-input text-sm focus:outline-none focus:ring-1 focus:ring-accent focus:border-accent transition-colors" />
                 </div>
@@ -251,11 +253,11 @@ export default function AgentsPage() {
                   <button type="submit" disabled={loading || !bookDate || !bookTime}
                     className="inline-flex items-center gap-2 px-8 py-2.5 rounded-xl font-semibold text-sm text-white transition-all hover:-translate-y-0.5 disabled:opacity-40 disabled:cursor-not-allowed shadow-lg"
                     style={{ background: "linear-gradient(135deg, #c79a55 0%, #b8863c 100%)", boxShadow: "0 4px 12px rgba(184,134,60,0.3)" }}>
-                    {loading ? <><Loader2 className="animate-spin" size={16} />Mengirim...</> : <><Sparkles size={16} />Kirim Niat <ArrowRight size={16} /></>}
+                    {loading ? <><Loader2 className="animate-spin" size={16} />{t.agents.sendingBtn}</> : <><Sparkles size={16} />{t.agents.submitBtn} <ArrowRight size={16} /></>}
                   </button>
                   <button type="button" onClick={handleReset}
                     className="inline-flex items-center gap-2 px-8 py-2.5 rounded-xl border border-border text-sm font-medium text-muted-foreground hover:bg-muted/50 transition-colors">
-                    <RotateCcw size={16} />Reset
+                    <RotateCcw size={16} />{t.agents.resetBtn}
                   </button>
                 </div>
               </form>
@@ -266,7 +268,7 @@ export default function AgentsPage() {
               <div className="rounded-2xl border border-border/50 bg-card/80 backdrop-blur-sm p-6 md:p-8">
                 <div className="flex items-center gap-3 mb-6">
                   <BookOpen className="text-accent" size={24} />
-                  <h2 className="text-xl font-serif font-bold">Sowan Saya</h2>
+                  <h2 className="text-xl font-serif font-bold">{t.agents.myBookings}</h2>
                 </div>
                 <div className="space-y-4">
                   {bookings.slice().reverse().map((b) => {
@@ -297,7 +299,7 @@ export default function AgentsPage() {
                             <div className="flex items-start gap-2">
                               <MessageSquare size={16} className="text-accent mt-0.5 shrink-0" />
                               <div>
-                                <p className="text-[10px] text-accent font-semibold uppercase tracking-wider mb-1">Respon ElderAgent:</p>
+                                <p className="text-[10px] text-accent font-semibold uppercase tracking-wider mb-1">{t.agents.responseLabel}</p>
                                 <p className="text-xs text-muted-foreground leading-relaxed whitespace-pre-line">{b.elderReply}</p>
                               </div>
                             </div>
@@ -305,22 +307,22 @@ export default function AgentsPage() {
                         )}
                         {b.status === "countered" && (
                           <div className="bg-amber-50 border border-amber-200 rounded-xl p-3">
-                            <p className="text-xs text-amber-800 font-medium">💡 Alternatif slot ditawarkan — cek slot tersedia dan kirim ulang niat.</p>
+                            <p className="text-xs text-amber-800 font-medium">{t.agents.counteredHint}</p>
                           </div>
                         )}
                         {b.status === "cancelled" ? (
                           <div className="bg-red-50 border border-red-200 rounded-xl p-3">
-                            <p className="text-xs text-red-700 font-medium">✋ Sesi ditutup — pilih slot lain dan coba lagi.</p>
+                            <p className="text-xs text-red-700 font-medium">{t.agents.cancelledHint}</p>
                           </div>
                         ) : null}
                         {(b.status === "accepted" || b.status === "confirmed") && (
                           <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3">
-                            <p className="text-xs text-emerald-700 font-medium">✅ Sesi diterima! Datang sesuai jadwal ya.</p>
+                            <p className="text-xs text-emerald-700 font-medium">{t.agents.acceptedHint}</p>
                           </div>
                         )}
                         {b.status === "completed" && (
                           <div className="bg-violet-50 border border-violet-200 rounded-xl p-3">
-                            <p className="text-xs text-violet-700 font-medium">🎉 Sesi selesai! Terima kasih sudah sowan.</p>
+                            <p className="text-xs text-violet-700 font-medium">{t.agents.completedHint}</p>
                           </div>
                         )}
                       </div>
@@ -335,17 +337,17 @@ export default function AgentsPage() {
               <div className="rounded-2xl border border-border/50 bg-card/80 backdrop-blur-sm p-6 md:p-8">
                 <div className="flex items-center gap-3 mb-6">
                   <History className="text-accent" size={24} />
-                  <h2 className="text-xl font-serif font-bold">Riwayat Sowan</h2>
+                  <h2 className="text-xl font-serif font-bold">{t.agents.historyTitle}</h2>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full text-sm">
                     <thead>
                       <tr className="border-b border-border/30">
-                        <th className="text-left py-3 px-2 font-medium text-muted-foreground text-xs uppercase">ID</th>
-                        <th className="text-left py-3 px-2 font-medium text-muted-foreground text-xs uppercase">Waktu</th>
-                        <th className="text-left py-3 px-2 font-medium text-muted-foreground text-xs uppercase">Dari</th>
-                        <th className="text-left py-3 px-2 font-medium text-muted-foreground text-xs uppercase">Status</th>
-                        <th className="text-left py-3 px-2 font-medium text-muted-foreground text-xs uppercase">Pesan</th>
+                        <th className="text-left py-3 px-2 font-medium text-muted-foreground text-xs uppercase">{t.agents.historyId}</th>
+                        <th className="text-left py-3 px-2 font-medium text-muted-foreground text-xs uppercase">{t.agents.historyTime}</th>
+                        <th className="text-left py-3 px-2 font-medium text-muted-foreground text-xs uppercase">{t.agents.historyFrom}</th>
+                        <th className="text-left py-3 px-2 font-medium text-muted-foreground text-xs uppercase">{t.agents.historyStatus}</th>
+                        <th className="text-left py-3 px-2 font-medium text-muted-foreground text-xs uppercase">{t.agents.historyMsg}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -390,16 +392,16 @@ export default function AgentsPage() {
             <div className="rounded-2xl border border-border/50 bg-card/80 backdrop-blur-sm p-6">
               <div className="flex items-center gap-3 mb-1">
                 <UserCog className="text-accent" size={24} />
-                <h2 className="text-xl font-serif font-bold">Profil Sesepuh</h2>
+                <h2 className="text-xl font-serif font-bold">{t.agents.profileTitle}</h2>
               </div>
-              <p className="text-sm text-muted-foreground mb-6 ml-11">Identitas yang muncul di Pendopo Digital.</p>
+              <p className="text-sm text-muted-foreground mb-6 ml-11">{t.agents.profileDesc}</p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl">
                 <div>
-                  <label className="block text-xs font-medium text-muted-foreground mb-1.5">Nama</label>
+                  <label className="block text-xs font-medium text-muted-foreground mb-1.5">{t.agents.nameField}</label>
                   <input type="text" value={elderName} onChange={e => setElderName(e.target.value)} className="w-full px-4 py-2.5 rounded-xl bg-background border border-input text-sm focus:outline-none focus:ring-1 focus:ring-accent" />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-muted-foreground mb-1.5">Bio</label>
+                  <label className="block text-xs font-medium text-muted-foreground mb-1.5">{t.agents.bioField}</label>
                   <input type="text" value={elderBio} onChange={e => setElderBio(e.target.value)} className="w-full px-4 py-2.5 rounded-xl bg-background border border-input text-sm focus:outline-none focus:ring-1 focus:ring-accent" />
                 </div>
               </div>
@@ -409,9 +411,9 @@ export default function AgentsPage() {
             <div className="rounded-2xl border border-border/50 bg-card/80 backdrop-blur-sm p-6">
               <div className="flex items-center gap-3 mb-1">
                 <Calendar className="text-accent" size={24} />
-                <h2 className="text-xl font-serif font-bold">Atur Jadwal</h2>
+                <h2 className="text-xl font-serif font-bold">{t.agents.scheduleTitle}</h2>
               </div>
-              <p className="text-sm text-muted-foreground mb-6 ml-11">Isi tanggal, jam, label → klik Tambah Slot.</p>
+              <p className="text-sm text-muted-foreground mb-6 ml-11">{t.agents.scheduleDesc}</p>
 
               <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 max-w-3xl mb-8">
                 <div>
@@ -425,26 +427,26 @@ export default function AgentsPage() {
                     className="w-full px-4 py-2.5 rounded-xl bg-background border border-input text-sm focus:outline-none focus:ring-1 focus:ring-accent" />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-muted-foreground mb-1.5">Label Waktu</label>
+                  <label className="block text-xs font-medium text-muted-foreground mb-1.5">{t.agents.labelSlot}</label>
                   <select value={newSlotLabel} onChange={e => setNewSlotLabel(e.target.value)}
                     className="w-full px-4 py-2.5 rounded-xl bg-background border border-input text-sm focus:outline-none focus:ring-1 focus:ring-accent cursor-pointer">
-                    <option>Pagi</option>
-                    <option>Siang</option>
-                    <option>Sore</option>
+                    <option>{t.agents.labelPagi}</option>
+                    <option>{t.agents.labelSiang}</option>
+                    <option>{t.agents.labelSore}</option>
                   </select>
                 </div>
                 <div className="flex items-end">
                   <button type="button" onClick={handleAddSlot} disabled={!newSlotDate || !newSlotTime}
                     className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-accent text-white text-sm font-semibold hover:bg-accent/90 transition-colors shadow-lg disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer">
-                    <Plus size={16} />Tambah Slot
+                    <Plus size={16} />{t.agents.addSlot}
                   </button>
                 </div>
               </div>
 
-              <p className="text-xs text-muted-foreground mb-3 font-medium">Slot saat ini — arahkan kursor ke slot untuk menghapus:</p>
+              <p className="text-xs text-muted-foreground mb-3 font-medium">{t.agents.currentSlots}</p>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
                 {slots.length === 0 ? (
-                  <p className="text-sm text-muted-foreground col-span-full py-4">Belum ada slot. Isi form di atas lalu klik Tambah Slot.</p>
+                  <p className="text-sm text-muted-foreground col-span-full py-4">{t.agents.noSlotsElder}</p>
                 ) : (
                   slots.map((s, i) => (
                     <div key={i} className="relative group p-3 rounded-xl border border-border/40 bg-muted/30 hover:border-accent/30 transition-colors">
@@ -466,10 +468,10 @@ export default function AgentsPage() {
             <div className="rounded-2xl border border-border/50 bg-card/80 backdrop-blur-sm p-6">
               <div className="flex items-center gap-3 mb-6">
                 <BookOpen className="text-accent" size={24} />
-                <h2 className="text-xl font-serif font-bold">Semua Booking</h2>
+                <h2 className="text-xl font-serif font-bold">{t.agents.allBookings}</h2>
               </div>
               {bookings.length === 0 ? (
-                <div className="text-center text-sm text-muted-foreground py-12 text-balance">Belum ada yang sowan. Customer bisa booking lewat tab "Sowan — Saya Tamu".</div>
+                <div className="text-center text-sm text-muted-foreground py-12 text-balance">{t.agents.noBookingsElder}</div>
               ) : (
                 <div className="space-y-4">
                   {bookings.slice().reverse().map((b) => {
@@ -499,7 +501,7 @@ export default function AgentsPage() {
                         </div>
                         {b.elderReply && (
                           <div className="bg-accent/5 border border-accent/10 rounded-xl p-4">
-                            <p className="text-[10px] text-accent font-semibold uppercase tracking-wider mb-1">Respon ElderAgent ke {b.learnerName}:</p>
+                            <p className="text-[10px] text-accent font-semibold uppercase tracking-wider mb-1">{t.agents.responseLabel} {b.learnerName}:</p>
                             <p className="text-xs text-muted-foreground leading-relaxed whitespace-pre-line">{b.elderReply}</p>
                           </div>
                         )}
@@ -507,13 +509,13 @@ export default function AgentsPage() {
                           {canComplete && (
                             <button type="button" onClick={() => handleBookingAction(b.id, "complete")}
                               className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-emerald-600/10 text-emerald-700 text-xs font-medium hover:bg-emerald-600/20 transition-colors border border-emerald-600/20 cursor-pointer">
-                              <Check size={14} />Tandai Selesai
+                              <Check size={14} />{t.agents.markDone}
                             </button>
                           )}
                           {canCancel && (
                             <button type="button" onClick={() => handleBookingAction(b.id, "cancel")}
                               className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-destructive/10 text-destructive text-xs font-medium hover:bg-destructive/20 transition-colors border border-destructive/20 cursor-pointer">
-                              <X size={14} />Batalkan
+                              <X size={14} />{t.agents.cancel}
                             </button>
                           )}
                         </div>
@@ -529,10 +531,10 @@ export default function AgentsPage() {
         {/* Stats Footer */}
         {state && (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-border/30">
-            <div className="text-center"><p className="text-2xl font-serif font-bold text-accent">{slots.length}</p><p className="text-[10px] text-muted-foreground uppercase tracking-wider mt-1">Slot Tersedia</p></div>
-            <div className="text-center"><p className="text-2xl font-serif font-bold text-accent">{bookings.length}</p><p className="text-[10px] text-muted-foreground uppercase tracking-wider mt-1">Total Sowan</p></div>
-            <div className="text-center"><p className="text-2xl font-serif font-bold text-accent">{bookings.filter(b => b.status === "completed").length}</p><p className="text-[10px] text-muted-foreground uppercase tracking-wider mt-1">Selesai</p></div>
-            <div className="text-center"><p className="text-2xl font-serif font-bold text-accent">{bookings.filter(b => b.status !== "completed" && b.status !== "cancelled").length}</p><p className="text-[10px] text-muted-foreground uppercase tracking-wider mt-1">Aktif</p></div>
+            <div className="text-center"><p className="text-2xl font-serif font-bold text-accent">{slots.length}</p><p className="text-[10px] text-muted-foreground uppercase tracking-wider mt-1">{t.agents.statsSlots}</p></div>
+            <div className="text-center"><p className="text-2xl font-serif font-bold text-accent">{bookings.length}</p><p className="text-[10px] text-muted-foreground uppercase tracking-wider mt-1">{t.agents.statsTotal}</p></div>
+            <div className="text-center"><p className="text-2xl font-serif font-bold text-accent">{bookings.filter(b => b.status === "completed").length}</p><p className="text-[10px] text-muted-foreground uppercase tracking-wider mt-1">{t.agents.statsDone}</p></div>
+            <div className="text-center"><p className="text-2xl font-serif font-bold text-accent">{bookings.filter(b => b.status !== "completed" && b.status !== "cancelled").length}</p><p className="text-[10px] text-muted-foreground uppercase tracking-wider mt-1">{t.agents.statsActive}</p></div>
           </div>
         )}
       </div>

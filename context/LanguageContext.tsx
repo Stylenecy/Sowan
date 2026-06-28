@@ -166,6 +166,35 @@ interface Translations {
         backHome: string;
         placeholder: string;
     };
+    agents: {
+        badge: string; title: string; subtitle: string;
+        tabCustomer: string; tabElder: string;
+        slotsTitle: string; slotsDesc: string; noSlots: string; selected: string;
+        bookingTitle: string; bookingDesc: string;
+        nameLabel: string; topicLabel: string; dateLabel: string; timeLabel: string;
+        submitBtn: string; sendingBtn: string; resetBtn: string;
+        myBookings: string; responseLabel: string;
+        historyTitle: string; historyId: string; historyTime: string; historyFrom: string; historyStatus: string; historyMsg: string;
+        profileTitle: string; profileDesc: string; nameField: string; bioField: string;
+        scheduleTitle: string; scheduleDesc: string; labelSlot: string; labelPagi: string; labelSiang: string; labelSore: string;
+        addSlot: string; currentSlots: string; noSlotsElder: string;
+        allBookings: string; markDone: string; cancel: string;
+        counteredHint: string; cancelledHint: string; acceptedHint: string; completedHint: string;
+        noDateTime: string; accepted: string; countered: string; resetDone: string; fail: string;
+        slotAdded: string; slotRemoved: string; sessionDone: string; bookingCancelled: string;
+        statsSlots: string; statsTotal: string; statsDone: string; statsActive: string;
+        noBookingsElder: string;
+    };
+    admin: {
+        badge: string; title: string; refresh: string; agentsLink: string;
+        totalSlot: string; activeBooking: string; completed: string; totalSowan: string;
+        usersTitle: string; customer: string; mentor: string; adminPlatform: string;
+        allBookings: string; id: string; learner: string; topic: string; date: string; time: string; status: string;
+        noBookings: string;
+        agentsStatus: string; elderAgent: string; asiOne: string; pendopo: string;
+        slotAvailable: string; booking: string;
+        dignityGuardDesc: string; pendopoDesc: string;
+    };
 }
 
 const dictionaries: Record<LanguageCode, Translations> = {
@@ -226,6 +255,39 @@ home: {
         },
         feedback: {
             title: "Sesi Selesai", desc: "Terima kasih telah berbagi cerita hari ini.", rate: "Berikan Rating", gratitude: "Terima Kasih Banyak", gratitudeFrom: "Apresiasi dari {name}", gratitudeMsg: "Mbah, terima kasih banyak ya atas ceritanya. Sangat membantu tugas akhir saya!", earnings: "Pendapatan Sesi", duration: "Durasi Belajar", durationValue: "60 Menit", backHome: "Kembali ke Dasbor", placeholder: "Tulis pesan apresiasi untuk Mbah..."
+        },
+        agents: {
+            badge: "AI DIGNITY GUARD", title: "Pendopo Digital", subtitle: "Dua sisi pendopo — pembelajar dan sesepuh, dijembatani oleh ElderAgent.",
+            tabCustomer: "Sowan — Saya Tamu", tabElder: "Kelola — Saya Sesepuh",
+            slotsTitle: "Slot Tersedia", slotsDesc: "Klik slot untuk memilih. ElderAgent akan cek energi {name}.", noSlots: "Belum ada slot tersedia.", selected: "✓ Terpilih",
+            bookingTitle: "Sampaikan Niat Sowan", bookingDesc: "ElderAgent akan cek energi {name} dan merespon.",
+            nameLabel: "Namamu", topicLabel: "Ingin belajar", dateLabel: "Tanggal", timeLabel: "Jam",
+            submitBtn: "Kirim Niat", sendingBtn: "Mengirim...", resetBtn: "Reset",
+            myBookings: "Sowan Saya", responseLabel: "Respon ElderAgent:",
+            historyTitle: "Riwayat Sowan", historyId: "ID", historyTime: "Waktu", historyFrom: "Dari", historyStatus: "Status", historyMsg: "Pesan",
+            profileTitle: "Profil Sesepuh", profileDesc: "Identitas yang muncul di Pendopo Digital.", nameField: "Nama", bioField: "Bio",
+            scheduleTitle: "Atur Jadwal", scheduleDesc: "Isi tanggal, jam, label → klik Tambah Slot.", labelSlot: "Label Waktu",
+            labelPagi: "Pagi", labelSiang: "Siang", labelSore: "Sore",
+            addSlot: "Tambah Slot", currentSlots: "Slot saat ini — arahkan kursor ke slot untuk menghapus:", noSlotsElder: "Belum ada slot. Isi form di atas lalu klik Tambah Slot.",
+            allBookings: "Semua Booking", markDone: "Tandai Selesai", cancel: "Batalkan",
+            counteredHint: "💡 Alternatif slot ditawarkan — cek slot tersedia dan kirim ulang niat.", cancelledHint: "✋ Sesi ditutup — pilih slot lain dan coba lagi.",
+            acceptedHint: "✅ Sesi diterima! Datang sesuai jadwal ya.", completedHint: "🎉 Sesi selesai! Terima kasih sudah sowan.",
+            noDateTime: "Pilih tanggal dan jam dulu", accepted: "Pintu dibuka!", countered: "Alternatif ditawarkan",
+            resetDone: "Pendopo direset", fail: "Gagal", slotAdded: "Slot ditambahkan", slotRemoved: "Slot dihapus",
+            sessionDone: "Sesi selesai", bookingCancelled: "Booking dibatalkan",
+            statsSlots: "Slot Tersedia", statsTotal: "Total Sowan", statsDone: "Selesai", statsActive: "Aktif",
+            noBookingsElder: 'Belum ada yang sowan. Customer bisa booking lewat tab "Sowan — Saya Tamu".'
+        },
+        admin: {
+            badge: "ADMIN PANEL", title: "Platform Overview", refresh: "Refresh", agentsLink: "AI Agents",
+            totalSlot: "Total Slot", activeBooking: "Booking Aktif", completed: "Selesai", totalSowan: "Total Sowan",
+            usersTitle: "Users", customer: "Customer", mentor: "Mentor Lansia", adminPlatform: "Admin Platform",
+            allBookings: "All Bookings", id: "ID", learner: "Learner", topic: "Topic", date: "Date", time: "Time", status: "Status",
+            noBookings: "Belum ada booking. Customer bisa booking melalui AI Agents.",
+            agentsStatus: "AI Agents Status", elderAgent: "ElderAgent", asiOne: "ASI:ONE", pendopo: "Pendopo Digital",
+            slotAvailable: "slot tersedia", booking: "booking",
+            dignityGuardDesc: "Dignity Guard — energy-aware negotiation, Bahasa Indonesia",
+            pendopoDesc: "/agents — customer booking + elder management"
         }
     },
     en: {
@@ -285,6 +347,39 @@ home: {
         },
         feedback: {
             title: "Session Finished", desc: "Thank you for sharing stories today.", rate: "Give Rating", gratitude: "Thank You So Much", gratitudeFrom: "Appreciation from {name}", gratitudeMsg: "Maestro, thank you very much for the stories. It really helped my final project!", earnings: "Session Earnings", duration: "Learning Duration", durationValue: "60 Minutes", backHome: "Back to Dashboard", placeholder: "Write an appreciation message for the Elder..."
+        },
+        agents: {
+            badge: "AI DIGNITY GUARD", title: "Digital Pendopo", subtitle: "Two sides of the pendopo — learner and elder, bridged by ElderAgent.",
+            tabCustomer: "Sowan — I'm a Guest", tabElder: "Manage — I'm an Elder",
+            slotsTitle: "Available Slots", slotsDesc: "Click a slot to select. ElderAgent will check {name}'s energy.", noSlots: "No slots available yet.", selected: "✓ Selected",
+            bookingTitle: "Submit Your Sowan Intent", bookingDesc: "ElderAgent will check {name}'s energy and respond.",
+            nameLabel: "Your Name", topicLabel: "Want to learn", dateLabel: "Date", timeLabel: "Time",
+            submitBtn: "Send Intent", sendingBtn: "Sending...", resetBtn: "Reset",
+            myBookings: "My Sowan", responseLabel: "ElderAgent Response:",
+            historyTitle: "Sowan History", historyId: "ID", historyTime: "Time", historyFrom: "From", historyStatus: "Status", historyMsg: "Message",
+            profileTitle: "Elder Profile", profileDesc: "Identity shown on the Digital Pendopo.", nameField: "Name", bioField: "Bio",
+            scheduleTitle: "Manage Schedule", scheduleDesc: "Enter date, time, label → click Add Slot.", labelSlot: "Time Label",
+            labelPagi: "Morning", labelSiang: "Afternoon", labelSore: "Evening",
+            addSlot: "Add Slot", currentSlots: "Current slots — hover over a slot to delete:", noSlotsElder: "No slots yet. Fill the form above and click Add Slot.",
+            allBookings: "All Bookings", markDone: "Mark Complete", cancel: "Cancel",
+            counteredHint: "💡 Alternative slot offered — check available slots and resubmit.", cancelledHint: "✋ Session closed — pick another slot and try again.",
+            acceptedHint: "✅ Session accepted! See you on schedule.", completedHint: "🎉 Session completed! Thank you for sowan.",
+            noDateTime: "Select date and time first", accepted: "Door opened!", countered: "Alternative offered",
+            resetDone: "Pendopo reset", fail: "Failed", slotAdded: "Slot added", slotRemoved: "Slot removed",
+            sessionDone: "Session completed", bookingCancelled: "Booking cancelled",
+            statsSlots: "Available Slots", statsTotal: "Total Sowan", statsDone: "Completed", statsActive: "Active",
+            noBookingsElder: 'No sowan yet. Customers can book via the "Sowan — I\'m a Guest" tab.'
+        },
+        admin: {
+            badge: "ADMIN PANEL", title: "Platform Overview", refresh: "Refresh", agentsLink: "AI Agents",
+            totalSlot: "Total Slots", activeBooking: "Active Bookings", completed: "Completed", totalSowan: "Total Sowan",
+            usersTitle: "Users", customer: "Customer", mentor: "Elder Mentor", adminPlatform: "Admin Platform",
+            allBookings: "All Bookings", id: "ID", learner: "Learner", topic: "Topic", date: "Date", time: "Time", status: "Status",
+            noBookings: "No bookings yet. Customers can book via AI Agents.",
+            agentsStatus: "AI Agents Status", elderAgent: "ElderAgent", asiOne: "ASI:ONE", pendopo: "Digital Pendopo",
+            slotAvailable: "slots available", booking: "bookings",
+            dignityGuardDesc: "Dignity Guard — energy-aware negotiation, Bahasa Indonesia",
+            pendopoDesc: "/agents — customer booking + elder management"
         }
     },
     ja: {
@@ -344,6 +439,39 @@ home: {
         },
         feedback: {
             title: "セッション終了", desc: "今日は物語を共有してくれてありがとう。", rate: "評価する", gratitude: "本当にありがとうございました", gratitudeFrom: "{name} からの感謝", gratitudeMsg: "マエストロ、お話を聞かせていただきありがとうございました。私の卒業制作に本当に役立ちました！", earnings: "セッション収益", duration: "学習時間", durationValue: "60 分", backHome: "ダッシュボードに戻る", placeholder: "高齢者への感謝のメッセージを書いてください..."
+        },
+        agents: {
+            badge: "AI DIGNITY GUARD", title: "デジタル Pendopo", subtitle: "Pendopoの両側 — 学習者と長老、ElderAgentが橋渡し。",
+            tabCustomer: "Sowan — ゲスト", tabElder: "管理 — 私は長老",
+            slotsTitle: "利用可能スロット", slotsDesc: "スロットをクリックして選択。ElderAgentが{name}のエネルギーを確認します。", noSlots: "まだ利用可能なスロットはありません。", selected: "✓ 選択済み",
+            bookingTitle: "Sowanの意向を送信", bookingDesc: "ElderAgentが{name}のエネルギーをチェックして応答します。",
+            nameLabel: "あなたの名前", topicLabel: "学びたいこと", dateLabel: "日付", timeLabel: "時間",
+            submitBtn: "意向を送信", sendingBtn: "送信中...", resetBtn: "リセット",
+            myBookings: "マイSowan", responseLabel: "ElderAgentの応答:",
+            historyTitle: "Sowan履歴", historyId: "ID", historyTime: "時間", historyFrom: "から", historyStatus: "ステータス", historyMsg: "メッセージ",
+            profileTitle: "長老プロフィール", profileDesc: "デジタルPendopoに表示されるアイデンティティ。", nameField: "名前", bioField: "経歴",
+            scheduleTitle: "スケジュール管理", scheduleDesc: "日付、時間、ラベルを入力 → スロット追加をクリック。", labelSlot: "時間ラベル",
+            labelPagi: "朝", labelSiang: "午後", labelSore: "夕方",
+            addSlot: "スロット追加", currentSlots: "現在のスロット — スロットにホバーして削除:", noSlotsElder: "まだスロットがありません。上のフォームに入力してスロット追加をクリック。",
+            allBookings: "すべての予約", markDone: "完了", cancel: "キャンセル",
+            counteredHint: "💡 代替スロットが提案されました — 利用可能なスロットを確認して再送信。", cancelledHint: "✋ セッション終了 — 別のスロットを選んで再試行。",
+            acceptedHint: "✅ セッション受理！予定通りにお越しください。", completedHint: "🎉 セッション完了！Sowanありがとうございました。",
+            noDateTime: "日付と時間を選択してください", accepted: "扉が開きました！", countered: "代替案を提案",
+            resetDone: "Pendopoをリセット", fail: "失敗", slotAdded: "スロットを追加", slotRemoved: "スロットを削除",
+            sessionDone: "セッション完了", bookingCancelled: "予約キャンセル",
+            statsSlots: "利用可能スロット", statsTotal: "総Sowan", statsDone: "完了", statsActive: "アクティブ",
+            noBookingsElder: '"Sowan — ゲスト"タブから予約できます。'
+        },
+        admin: {
+            badge: "管理パネル", title: "プラットフォーム概要", refresh: "更新", agentsLink: "AIエージェント",
+            totalSlot: "総スロット数", activeBooking: "アクティブ予約", completed: "完了", totalSowan: "総Sowan数",
+            usersTitle: "ユーザー", customer: "カスタマー", mentor: "エルダーメンター", adminPlatform: "管理プラットフォーム",
+            allBookings: "全予約", id: "ID", learner: "学習者", topic: "トピック", date: "日付", time: "時間", status: "ステータス",
+            noBookings: "まだ予約はありません。AIエージェントから予約できます。",
+            agentsStatus: "AIエージェントステータス", elderAgent: "ElderAgent", asiOne: "ASI:ONE", pendopo: "デジタルPendopo",
+            slotAvailable: "利用可能スロット", booking: "予約",
+            dignityGuardDesc: "Dignity Guard — エネルギー認識交渉、インドネシア語",
+            pendopoDesc: "/agents — カスタマー予約・長老管理"
         }
     },
     ko: {
@@ -403,6 +531,39 @@ home: {
         },
         feedback: {
             title: "세션 종료", desc: "오늘 이야기를 나눠주셔서 감사합니다.", rate: "별점 주기", gratitude: "정말 감사합니다", gratitudeFrom: "{name} 님의 감사 인사", gratitudeMsg: "마에스트로님, 이야기를 들려주셔서 정말 감사합니다. 제 졸업 작품에 큰 도움이 되었습니다!", earnings: "세션 수익", duration: "학습 시간", durationValue: "60 분", backHome: "대시보드로 돌아가기", placeholder: "어르신께 감사의 메시지를 작성해주세요..."
+        },
+        agents: {
+            badge: "AI DIGNITY GUARD", title: "디지털 Pendopo", subtitle: "Pendopo의 양면 — 학습자와 어르신, ElderAgent가 연결합니다.",
+            tabCustomer: "Sowan — 게스트", tabElder: "관리 — 어르신",
+            slotsTitle: "이용 가능 슬롯", slotsDesc: "슬롯을 클릭하여 선택하세요. ElderAgent가 {name}의 에너지를 확인합니다.", noSlots: "아직 이용 가능한 슬롯이 없습니다.", selected: "✓ 선택됨",
+            bookingTitle: "Sowan 의향 제출", bookingDesc: "ElderAgent가 {name}의 에너지를 확인하고 응답합니다.",
+            nameLabel: "이름", topicLabel: "배우고 싶은 것", dateLabel: "날짜", timeLabel: "시간",
+            submitBtn: "의향 보내기", sendingBtn: "보내는 중...", resetBtn: "초기화",
+            myBookings: "내 Sowan", responseLabel: "ElderAgent 응답:",
+            historyTitle: "Sowan 기록", historyId: "ID", historyTime: "시간", historyFrom: "발신자", historyStatus: "상태", historyMsg: "메시지",
+            profileTitle: "어르신 프로필", profileDesc: "디지털 Pendopo에 표시되는 신원 정보입니다.", nameField: "이름", bioField: "소개",
+            scheduleTitle: "일정 관리", scheduleDesc: "날짜, 시간, 라벨 입력 → 슬롯 추가 클릭.", labelSlot: "시간 라벨",
+            labelPagi: "아침", labelSiang: "오후", labelSore: "저녁",
+            addSlot: "슬롯 추가", currentSlots: "현재 슬롯 — 슬롯 위에 마우스를 올리면 삭제:", noSlotsElder: "아직 슬롯이 없습니다. 위 양식을 작성하고 슬롯 추가를 클릭하세요.",
+            allBookings: "모든 예약", markDone: "완료 표시", cancel: "취소",
+            counteredHint: "💡 대체 슬롯 제안됨 — 이용 가능한 슬롯을 확인하고 다시 제출하세요.", cancelledHint: "✋ 세션 종료 — 다른 슬롯을 선택하고 다시 시도하세요.",
+            acceptedHint: "✅ 세션 수락됨! 일정에 맞춰 방문해 주세요.", completedHint: "🎉 세션 완료! Sowan해 주셔서 감사합니다.",
+            noDateTime: "날짜와 시간을 먼저 선택하세요", accepted: "문이 열렸습니다!", countered: "대안 제안됨",
+            resetDone: "Pendopo 초기화됨", fail: "실패", slotAdded: "슬롯 추가됨", slotRemoved: "슬롯 제거됨",
+            sessionDone: "세션 완료", bookingCancelled: "예약 취소됨",
+            statsSlots: "이용 가능 슬롯", statsTotal: "총 Sowan", statsDone: "완료", statsActive: "활성",
+            noBookingsElder: '"Sowan — 게스트" 탭에서 고객이 예약할 수 있습니다.'
+        },
+        admin: {
+            badge: "관리 패널", title: "플랫폼 개요", refresh: "새로고침", agentsLink: "AI 에이전트",
+            totalSlot: "총 슬롯", activeBooking: "활성 예약", completed: "완료", totalSowan: "총 Sowan",
+            usersTitle: "사용자", customer: "고객", mentor: "어르신 멘토", adminPlatform: "관리 플랫폼",
+            allBookings: "모든 예약", id: "ID", learner: "학습자", topic: "주제", date: "날짜", time: "시간", status: "상태",
+            noBookings: "아직 예약이 없습니다. AI 에이전트를 통해 예약할 수 있습니다.",
+            agentsStatus: "AI 에이전트 상태", elderAgent: "ElderAgent", asiOne: "ASI:ONE", pendopo: "디지털 Pendopo",
+            slotAvailable: "슬롯 가능", booking: "예약",
+            dignityGuardDesc: "Dignity Guard — 에너지 인식 협상, 인도네시아어",
+            pendopoDesc: "/agents — 고객 예약 및 어르신 관리"
         }
     },
     zh: {
@@ -462,6 +623,39 @@ home: {
         },
         feedback: {
             title: "课程结束", desc: "感谢您今天的分享。", rate: "给出评分", gratitude: "非常感谢", gratitudeFrom: "来自 {name} 的感谢", gratitudeMsg: "师匠，非常感谢您的分享。这对我毕业项目很有帮助！", earnings: "本次收入", duration: "课程时长", durationValue: "60 分钟", backHome: "回到首页", placeholder: "给长者写一段感谢的话..."
+        },
+        agents: {
+            badge: "AI DIGNITY GUARD", title: "数字 Pendopo", subtitle: "Pendopo的两面 — 学习者和长者，由 ElderAgent 连接。",
+            tabCustomer: "Sowan — 我是访客", tabElder: "管理 — 我是长者",
+            slotsTitle: "可用时段", slotsDesc: "点击时段选择。ElderAgent会检查{name}的能量状态。", noSlots: "暂无可用时段。", selected: "✓ 已选择",
+            bookingTitle: "提交Sowan意向", bookingDesc: "ElderAgent会检查{name}的能量并回复。",
+            nameLabel: "您的姓名", topicLabel: "想学习", dateLabel: "日期", timeLabel: "时间",
+            submitBtn: "发送意向", sendingBtn: "发送中...", resetBtn: "重置",
+            myBookings: "我的Sowan", responseLabel: "ElderAgent回复：",
+            historyTitle: "Sowan记录", historyId: "ID", historyTime: "时间", historyFrom: "来自", historyStatus: "状态", historyMsg: "消息",
+            profileTitle: "长者资料", profileDesc: "在数字Pendopo上显示的身份信息。", nameField: "姓名", bioField: "简介",
+            scheduleTitle: "管理日程", scheduleDesc: "输入日期、时间、标签 → 点击添加时段。", labelSlot: "时段标签",
+            labelPagi: "早上", labelSiang: "下午", labelSore: "傍晚",
+            addSlot: "添加时段", currentSlots: "当前时段 — 悬停时段可删除：", noSlotsElder: "暂无时段。请填写上方表单并点击添加时段。",
+            allBookings: "所有预约", markDone: "标记完成", cancel: "取消",
+            counteredHint: "💡 已提供替代时段 — 查看可用时段并重新提交。", cancelledHint: "✋ 会话已关闭 — 选择其他时段重试。",
+            acceptedHint: "✅ 会话已接受！按时赴约。", completedHint: "🎉 会话已完成！感谢您的Sowan。",
+            noDateTime: "请先选择日期和时间", accepted: "门已打开！", countered: "已提供替代方案",
+            resetDone: "Pendopo已重置", fail: "失败", slotAdded: "时段已添加", slotRemoved: "时段已移除",
+            sessionDone: "会话已完成", bookingCancelled: "预约已取消",
+            statsSlots: "可用时段", statsTotal: "总Sowan", statsDone: "已完成", statsActive: "进行中",
+            noBookingsElder: '客户可通过"Sowan — 我是访客"标签进行预约。'
+        },
+        admin: {
+            badge: "管理面板", title: "平台概览", refresh: "刷新", agentsLink: "AI Agents",
+            totalSlot: "总时段数", activeBooking: "活跃预约", completed: "已完成", totalSowan: "总Sowan数",
+            usersTitle: "用户", customer: "客户", mentor: "长者导师", adminPlatform: "管理平台",
+            allBookings: "所有预约", id: "ID", learner: "学习者", topic: "主题", date: "日期", time: "时间", status: "状态",
+            noBookings: "暂无预约。客户可通过AI Agents进行预约。",
+            agentsStatus: "AI Agents状态", elderAgent: "ElderAgent", asiOne: "ASI:ONE", pendopo: "数字Pendopo",
+            slotAvailable: "可用时段", booking: "预约",
+            dignityGuardDesc: "Dignity Guard — 能量感知协商，印尼语",
+            pendopoDesc: "/agents — 客户预约与长者管理"
         }
     }
 };

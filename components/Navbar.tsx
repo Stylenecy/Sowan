@@ -153,10 +153,12 @@ export default function Navbar() {
                                     </Link>
                                 </>
                             )}
-                            <Link href="/agents" className="text-foreground hover:text-accent font-semibold transition-colors px-3 py-2 text-xl flex items-center gap-1.5">
-                                <Sparkles size={16} className="text-accent" />
-                                AI Agents
-                            </Link>
+                            {!user && (
+                                <Link href="/agents" className="text-foreground hover:text-accent font-semibold transition-colors px-3 py-2 text-xl flex items-center gap-1.5">
+                                    <Sparkles size={16} className="text-accent" />
+                                    AI Agents
+                                </Link>
+                            )}
                         </div>
 
                         {/* Actions */}

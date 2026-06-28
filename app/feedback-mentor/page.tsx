@@ -11,7 +11,7 @@ export default function MentorFeedbackPage() {
     const { t } = useLanguage();
 
     return (
-        <main className="min-h-screen bg-[#FAF9F6] flex items-center justify-center py-20 px-4">
+        <main className="min-h-screen bg-background flex items-center justify-center py-20 px-4">
             <Card className="max-w-2xl w-full rounded-[60px] p-12 text-center border-none shadow-2xl bg-white shadow-primary/5">
                 <div className="w-24 h-24 bg-accent/10 text-accent rounded-[35px] flex items-center justify-center mx-auto mb-10 shadow-xl animate-bounce">
                     <CheckCircle size={56} />
@@ -23,14 +23,14 @@ export default function MentorFeedbackPage() {
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 text-left">
-                    <div className="bg-[#FAF9F6] p-8 rounded-[40px] border border-black/5 flex flex-col items-center justify-center text-center">
+                    <div className="bg-background p-8 rounded-[40px] border border-black/5 flex flex-col items-center justify-center text-center">
                         <div className="w-16 h-16 rounded-2xl bg-white text-accent flex items-center justify-center mb-4 shadow-sm">
                             <Wallet size={32} />
                         </div>
                         <p className="text-primary/40 font-black uppercase tracking-widest text-xs mb-1">{t.feedback.earnings}</p>
                         <h3 className="text-3xl font-black text-primary">Rp 100.000</h3>
                     </div>
-                    <div className="bg-[#FAF9F6] p-8 rounded-[40px] border border-black/5 flex flex-col items-center justify-center text-center">
+                    <div className="bg-background p-8 rounded-[40px] border border-black/5 flex flex-col items-center justify-center text-center">
                         <div className="w-16 h-16 rounded-2xl bg-white text-emerald-600 flex items-center justify-center mb-4 shadow-sm">
                             <Clock size={32} />
                         </div>

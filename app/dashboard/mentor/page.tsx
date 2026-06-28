@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import Link from "next/link";
 import { useAuth } from "@/context/AuthContext";
 import { useLanguage } from "@/context/LanguageContext";
@@ -12,9 +12,17 @@ export default function MentorDashboard() {
     const { user } = useAuth();
     const { t } = useLanguage();
     const displayName = user?.name ?? "Opa Adriel";
+    const [roomId, setRoomId] = useState<number>(1);
+
+    useEffect(() => {
+        const stored = localStorage.getItem('sowan_room_id');
+        if (stored && !isNaN(parseInt(stored))) {
+            setRoomId(parseInt(stored));
+        }
+    }, []);
 
     return (
-        <main className="min-h-screen w-full bg-[#FAF9F6] font-sans text-primary pt-[72px]" style={{ fontSize: 'calc(16px * var(--ui-scale))' }}>
+        <main className="elderly-mode min-h-screen w-full bg-background font-sans text-primary pt-[72px]" style={{ ['--ui-scale' as string]: 1.2, fontSize: 'calc(16px * var(--ui-scale))' } as React.CSSProperties}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16" style={{ padding: 'calc(2.5rem * var(--ui-scale)) calc(1.5rem * var(--ui-scale))' }}>
 
                 {/* ── Greeting Header ── */}
@@ -108,7 +116,7 @@ export default function MentorDashboard() {
                                 </div>
                                 <div className="mt-12">
                                     <Button asChild className="scaled-btn scaled-text-xl bg-accent hover:bg-accent/90 text-white shadow-2xl shadow-black/20 group/btn transition-all active:scale-95" style={{ height: 'calc(80px * var(--ui-scale))', fontSize: 'calc(1.5rem * var(--ui-scale))', paddingLeft: 'calc(3rem * var(--ui-scale))', paddingRight: 'calc(3rem * var(--ui-scale))', borderRadius: 'calc(28px * var(--ui-scale))' }}>
-                                        <Link href="/room/1" className="flex items-center gap-4">
+                                        <Link href={`/room/${roomId}`} className="flex items-center gap-4">
                                             {t.dashboard.roomBtn}
                                             <ArrowRight size={32} className="group-hover/btn:translate-x-3 transition-transform" />
                                         </Link>
@@ -127,7 +135,7 @@ export default function MentorDashboard() {
                             {t.dashboard.pendingDiscussion}
                         </h3>
                         <div className="space-y-6">
-                            <div className="flex gap-4 p-4 rounded-3xl bg-[#FAF9F6] border border-black/5">
+                            <div className="flex gap-4 p-4 rounded-3xl bg-background border border-black/5">
                                 <div className="w-14 h-14 rounded-2xl bg-white border border-black/5 flex items-center justify-center text-2xl">👩‍🎓</div>
                                 <div>
                                     <p className="font-black text-primary">Imeldya</p>

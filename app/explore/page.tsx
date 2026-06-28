@@ -403,7 +403,7 @@ desc: '"Punya ide bisnis atau sekadar rindu membahas resep masakan tradisional? 
     };
 
     return (
-        <div className="min-h-screen bg-[#FAF9F6]">
+        <div className="min-h-screen bg-background">
             {/* ── Header Section ── */}
             <div className="relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50" />
@@ -453,7 +453,7 @@ desc: '"Punya ide bisnis atau sekadar rindu membahas resep masakan tradisional? 
                                 placeholder={t.explore.searchPlaceholder}
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                className="w-full h-14 pl-14 pr-6 bg-[#FAF9F6] border-2 border-transparent hover:border-accent/30 focus:border-accent rounded-2xl text-lg text-primary placeholder:text-primary/40 font-medium transition-all outline-none"
+                                className="w-full h-14 pl-14 pr-6 bg-background border-2 border-transparent hover:border-accent/30 focus:border-accent rounded-2xl text-lg text-primary placeholder:text-primary/40 font-medium transition-all outline-none"
                             />
                             {searchQuery && (
                                 <button
@@ -472,7 +472,7 @@ desc: '"Punya ide bisnis atau sekadar rindu membahas resep masakan tradisional? 
                                 <div className="relative flex-1 sm:flex-none min-w-[200px]">
                                     <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 text-primary w-5 h-5 pointer-events-none" />
                                     <Select value={selectedCity} onValueChange={setSelectedCity}>
-                                        <SelectTrigger className="w-full pl-12 h-12 sm:h-14 bg-[#FAF9F6] border-2 border-transparent hover:border-accent rounded-xl sm:rounded-2xl text-base sm:text-lg font-bold text-primary transition-all">
+                                        <SelectTrigger className="w-full pl-12 h-12 sm:h-14 bg-background border-2 border-transparent hover:border-accent rounded-xl sm:rounded-2xl text-base sm:text-lg font-bold text-primary transition-all">
                                             <SelectValue placeholder={t.explore.filterLocation} />
                                         </SelectTrigger>
                                         <SelectContent className="bg-white border-2 border-primary/5 rounded-2xl shadow-2xl z-[100] text-primary">
@@ -494,7 +494,7 @@ desc: '"Punya ide bisnis atau sekadar rindu membahas resep masakan tradisional? 
                                 <div className="relative flex-1 sm:flex-none min-w-[200px]">
                                     <Globe className="absolute left-4 top-1/2 -translate-y-1/2 text-primary w-5 h-5 pointer-events-none" />
                                     <Select value={selectedLang} onValueChange={setSelectedLang}>
-                                        <SelectTrigger className="w-full pl-12 h-12 sm:h-14 bg-[#FAF9F6] border-2 border-transparent hover:border-accent rounded-xl sm:rounded-2xl text-base sm:text-lg font-bold text-primary transition-all">
+                                        <SelectTrigger className="w-full pl-12 h-12 sm:h-14 bg-background border-2 border-transparent hover:border-accent rounded-xl sm:rounded-2xl text-base sm:text-lg font-bold text-primary transition-all">
                                             <SelectValue placeholder={t.explore.filterLang} />
                                         </SelectTrigger>
                                         <SelectContent className="bg-white border-2 border-primary/5 rounded-2xl shadow-2xl z-[100] text-primary">
@@ -725,7 +725,7 @@ desc: '"Punya ide bisnis atau sekadar rindu membahas resep masakan tradisional? 
                                         </Select>
                                     </div>
 
-                                    <div className="bg-[#FAF9F6] p-4 rounded-2xl space-y-2">
+                                    <div className="bg-background p-4 rounded-2xl space-y-2">
                                         <div className="flex justify-between items-center text-primary/60 font-bold text-sm">
                                             <span>{t.payment.fee}</span>
                                             <span>{selectedMentor.price}</span>

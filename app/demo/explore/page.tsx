@@ -94,11 +94,11 @@ export default function DemoExplorePage() {
         });
     }, [activeFilter, searchQuery]);
 
-    function handleFilterClick(city) {
+    function handleFilterClick(city: string) {
         setActiveFilter(city);
     }
 
-    function handleCardClick(mentor) {
+    function handleCardClick(mentor: any) {
         setSelectedMentor(mentor);
         setShowSidePanel(true);
         setBookingStep("time");
@@ -106,7 +106,7 @@ export default function DemoExplorePage() {
         setCurrentStep(3);
     }
 
-    function handleTimeSelect(time) {
+    function handleTimeSelect(time: any) {
         setSelectedTime(time);
         setBookingStep("confirm");
     }
@@ -198,7 +198,7 @@ export default function DemoExplorePage() {
         return stepData.icon;
     }
 
-    return React.createElement("main", { className: "min-h-screen w-full bg-[#FAF9F6] pt-[72px]" },
+    return React.createElement("main", { className: "min-h-screen w-full bg-background pt-[72px]" },
         React.createElement("div", { className: "bg-gradient-to-r from-amber-50 to-orange-50 border-b border-amber-200 py-4 px-6 sticky top-[72px] z-40" },
             React.createElement("div", { className: "max-w-7xl mx-auto flex items-center justify-between" },
                 React.createElement("div", { className: "flex items-center gap-4" },
@@ -355,7 +355,7 @@ export default function DemoExplorePage() {
     );
 }
 
-function SidePanel(props) {
+function SidePanel(props: any) {
     var mentor = props.mentor;
     var isID = props.isID;
     var bookingStep = props.bookingStep;
@@ -395,7 +395,7 @@ function SidePanel(props) {
                 ),
                 React.createElement("p", { className: "text-sm text-muted-foreground" }, '"' + mentor.bio + '"'),
                 React.createElement("div", { className: "flex gap-2 flex-wrap" },
-                    mentor.topics.map(function(t) {
+                    mentor.topics.map(function(t: string) {
                         return React.createElement("span", { key: t, className: "bg-amber-100 text-amber-700 px-3 py-1 rounded-full text-xs font-bold" }, t);
                     })
                 ),
@@ -464,7 +464,7 @@ function SidePanel(props) {
     );
 }
 
-function RoomModal(props) {
+function RoomModal(props: any) {
     var isID = props.isID;
     return React.createElement("div", { className: "fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm" },
         React.createElement("div", { className: "bg-white rounded-3xl p-8 max-w-md w-full mx-4 shadow-2xl" },
@@ -488,7 +488,7 @@ function RoomModal(props) {
     );
 }
 
-function FeedbackModal(props) {
+function FeedbackModal(props: any) {
     var isID = props.isID;
     var _useState11 = useState(0);
     var selectedStars = _useState11[0];

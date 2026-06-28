@@ -33,7 +33,7 @@ export default function MentorProfilePage({ params }: { params: Promise<{ id: st
         [...Array(20)].map((_, i) => ({
             left: `${Math.random() * 100}%`,
             delay: `${Math.random() * 0.5}s`,
-            color: ['#D97706', '#1A365D', '#10B981', '#F59E0B', '#EF4444'][Math.floor(Math.random() * 5)],
+            color: ['#B8863C', '#1C1C1A', '#10B981', '#F59E0B', '#EF4444'][Math.floor(Math.random() * 5)],
             isCircle: Math.random() > 0.5
         })), []);
 
@@ -346,7 +346,7 @@ interests: ["Wirausaha", "Masakan Sunda", "Musik Kecapi"],
     };
 
     return (
-        <div className="min-h-screen bg-[#FAF9F6] text-foreground pt-[72px] pb-20">
+        <div className="min-h-screen bg-background text-foreground pt-[72px] pb-20">
             {/* Hero gradient header */}
             <div className="relative overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50">
                 <div className="absolute inset-0 opacity-40">
@@ -385,13 +385,13 @@ interests: ["Wirausaha", "Masakan Sunda", "Musik Kecapi"],
                                 <p className="text-lg sm:text-xl text-muted-foreground font-bold mb-6 sm:mb-8">{foundMentor.title}</p>
 
                                 <div className="grid grid-cols-1 gap-4 w-full text-left">
-                                    <div className="flex items-center gap-4 bg-[#FAF9F6] p-4 rounded-3xl border border-black/5">
+                                    <div className="flex items-center gap-4 bg-background p-4 rounded-3xl border border-black/5">
                                         <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-accent shadow-sm">
                                             <MapPin size={24} />
                                         </div>
                                         <span className="text-lg font-bold text-primary">{foundMentor.location}</span>
                                     </div>
-                                    <div className="flex items-center gap-4 bg-[#FAF9F6] p-4 rounded-3xl border border-black/5">
+                                    <div className="flex items-center gap-4 bg-background p-4 rounded-3xl border border-black/5">
                                         <div className="w-12 h-12 rounded-2xl bg-white flex items-center justify-center text-accent shadow-sm">
                                             <Globe size={24} />
                                         </div>
@@ -447,7 +447,7 @@ interests: ["Wirausaha", "Masakan Sunda", "Musik Kecapi"],
                                 </h3>
                                 <div className="flex flex-wrap gap-3">
                                     {foundMentor.interests.map((tag: string) => (
-                                        <span key={tag} className="px-5 py-2.5 bg-[#FAF9F6] border-2 border-primary/5 rounded-xl text-base font-bold text-primary hover:border-accent hover:text-accent transition-all cursor-default">
+                                        <span key={tag} className="px-5 py-2.5 bg-background border-2 border-primary/5 rounded-xl text-base font-bold text-primary hover:border-accent hover:text-accent transition-all cursor-default">
                                             {tag}
                                         </span>
                                     ))}
@@ -456,7 +456,7 @@ interests: ["Wirausaha", "Masakan Sunda", "Musik Kecapi"],
 
                             {/* Video Preview */}
                             <div className="bg-white rounded-[32px] overflow-hidden border-2 border-primary/20 shadow-sm">
-                                {foundMentor.useLocalVideo ? (
+                                {(foundMentor.useLocalVideo || foundMentor.videoId?.startsWith('/')) ? (
                                     <div className="aspect-video bg-gradient-to-br from-slate-800 to-slate-900 relative">
                                         <video
                                             src={foundMentor.videoId}
@@ -574,7 +574,7 @@ interests: ["Wirausaha", "Masakan Sunda", "Musik Kecapi"],
                                         </Select>
                                     </div>
 
-                                    <div className="bg-[#FAF9F6] p-6 rounded-3xl space-y-3">
+                                    <div className="bg-background p-6 rounded-3xl space-y-3">
                                         <div className="flex justify-between items-center text-primary/60 font-bold">
                                             <span>{t.payment.fee}</span>
                                             <span>{foundMentor.price}</span>

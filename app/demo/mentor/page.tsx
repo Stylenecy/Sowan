@@ -55,12 +55,12 @@ export default function DemoMentorPage() {
 
     const currentStep = TUTORIAL_STEPS[tutorialStep] || TUTORIAL_STEPS[0];
 
-    function showToast(msg) {
+    function showToast(msg: string) {
         setToastMessage(msg);
         setTimeout(() => setToastMessage(''), 2500);
     }
 
-    function goToPhase(p) {
+    function goToPhase(p: "overview" | "explore" | "schedule" | "room" | "feedback") {
         setPhase(p);
         setSubStep(0);
     }
@@ -145,7 +145,7 @@ export default function DemoMentorPage() {
     }
 
     return (
-        <main className="min-h-screen w-full bg-[#FAF9F6] pb-48">
+        <main className="min-h-screen w-full bg-background pb-48">
             {/* Toast */}
             {toastMessage && (
                 <div className="fixed inset-0 z-[200] flex items-center justify-center pointer-events-none">

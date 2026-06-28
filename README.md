@@ -14,7 +14,7 @@
 
 ## 🎯 What is SOWAN?
 
-**SOWAN** (Indonesian: *to visit / to seek wisdom from an elder*) is an **edutech marketplace platform** connecting Indonesian youth and international learners with elderly mentors ("sesepuh") for meaningful 1-on-1 video call sessions.
+**SOWAN** (Indonesian: *to visit / to seek wisdom from an elwuidnawadfkak*) is an **edutech marketplace platform** connecting Indonesian youth and international learners with elderly mentors ("sesepuh") for meaningful 1-on-1 video call sessions.
 
 Users don't just learn language — they learn **communication**, **cultural context**, and **life wisdom** from people who have lived it.
 

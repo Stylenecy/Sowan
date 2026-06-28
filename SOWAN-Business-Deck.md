@@ -1380,6 +1380,88 @@ Logout → Return to Demo Hub
 
 ---
 
+### Appendix D: UKRIDA 2026 Pivot — Sowan: Bahasa Mama Edition
+
+> **Added:** 2026-05-24
+> **Competition Target:** UKRIDA Solve-It Challenge 2026
+> **Status:** Approved & in submission preparation
+> **Full submission material:** `D:\AT Kuliah\All of SOWAN Business Plan\Competition-UKRIDA\docs\03-Lean-Canvas-Sowan-Bahasa-Mama.md`
+
+#### D.1 Konteks Pivot
+
+Sowan dalam versi KSE (Juara 1) memenangkan kompetisi dengan positioning **dual-impact broad**: foreign workers + Gen Z + lansia. UKRIDA Solve-It Challenge mempunyai kriteria penilaian eksplisit yang menghadiahi **specificity** ("spesifik vs umum") — sehingga rebrand strategis dibutuhkan untuk:
+
+1. **Mengatasi kelemahan target broad** yang menjadi catatan EURECA
+2. **Memenuhi klausul orisinalitas UKRIDA** ("belum pernah diikutsertakan di lomba lain")
+3. **Memperluas portfolio Sowan** dengan segment baru yang defensible
+
+#### D.2 Keputusan Pivot
+
+| Aspek | Versi KSE (Original) | Versi UKRIDA (Pivot) |
+|---|---|---|
+| **Sub-brand** | Sowan | **Sowan: Bahasa Mama** |
+| **Primary Segment** | Foreign workers + Gen Z (broad) | **Diaspora Indonesia Gen 2/3** (Belanda + AU + US) |
+| **Early Adopter** | Generic urban professionals | **Gen 2 diaspora Belanda, 22-40, sarjana, opa-oma penutur asli** |
+| **Tagline** | "Belajar budaya. Dari yang pernah hidup di dalamnya." | **"Pulang ke Bahasa Mama. Lewat suara yang masih hidup."** |
+| **Problem Framing** | AI fatigue + cultural integration | **Hilangnya bahasa Mama akibat asimilasi diaspora** |
+| **Fitur Baru** | - | **Heritage Journal** (auto-transcribed session as legacy archive) |
+| **Pricing** | Rp 66-350K/jam | **EUR 12-50 / USD 15-60 per sesi 60 menit** (kurs premium) |
+
+#### D.3 Data Validasi Customer Segment Baru
+
+**Total Addressable Market: ~2,2 juta diaspora premium-capable**
+
+| Negara | Populasi Keturunan | Karakteristik Ekonomi |
+|---|---|---|
+| 🇳🇱 Belanda | ~1.700.000 | Akar kolonial, gen 2 menyusut akibat pernikahan campuran (CBS 2022 data) |
+| 🇦🇺 Australia | ~120.000 | Median household AUD 2.066/minggu, 48,6% sarjana+ (ABS 2021) |
+| 🇺🇸 Amerika Serikat | ~147.000 | Median household USD 90.000/tahun, 55% sarjana+ (Pew Research 2023) |
+| 🇸🇬 Singapura | ~250.000 WNI | Profesional & mahasiswa urban (premium subset, bukan PMI domestik) |
+
+**Sumber lengkap:** `Competition-UKRIDA/docs/04-Riset-Diaspora-Indonesia.md`
+
+#### D.4 Heritage Journal — Fitur Baru Differentiator
+
+Fitur yang membedakan secara substantif dari versi KSE:
+
+- **Auto-transcription** setiap sesi → tersimpan sebagai jurnal warisan
+- **Ringkasan kosakata** otomatis untuk review pasca-sesi
+- **Foto/aset visual** yang dibagikan mentor terdokumentasi
+- **Export-shareable** ke anggota keluarga lain (anak/cucu)
+
+**Revenue model implication:** Subscription premium EUR 5/bulan untuk Heritage Journal access (Rp 17,5 juta proyeksi/bulan dengan 200 subscriber).
+
+#### D.5 Channel Diaspora yang Sudah Validasi
+
+1. **IDN Netherlands** (Indonesian Diaspora Network) — aktif sejak 2012, advokasi resmi
+2. **KBRI/KJRI** sebagai amplifier resmi (Den Haag, Canberra, Washington D.C., San Francisco)
+3. **KMILN** (Kartu Masyarakat Indonesia di Luar Negeri) — ~50.000 holder terdaftar
+4. **Gereja Diaspora & Komunitas Pengajian** Indonesia di luar negeri
+
+#### D.6 Scoring Self-Audit (UKRIDA Criteria)
+
+| Kriteria | Bobot | Self-Score |
+|---|---|---|
+| Problem–Solution Fit | 20% | 9.5/10 |
+| Customer Segment & Early Adopter | 15% | 9.5/10 |
+| Value Proposition | 15% | 9/10 |
+| Channels | 10% | 9/10 |
+| Revenue Streams | 10% | 9/10 |
+| Cost Structure | 10% | 8.5/10 |
+| Key Metrics | 5% | 9/10 |
+| Unfair Advantage | 5% | 9/10 |
+| Dampak & Feasibility | 10% | 9.5/10 |
+| **WEIGHTED ESTIMATE** | **100%** | **~9.2 / 10** |
+
+#### D.7 Strategi Long-Term Pasca-UKRIDA
+
+- Jika menang/finalis UKRIDA → tiga panggung nasional berturut-turut (KSE → EURECA → UKRIDA) = leverage validasi kuat untuk seed round Rp 620 juta
+- Validasi MVP "Heritage Journal" dengan 5-10 diaspora Belanda Q3 2026
+- Kemitraan resmi dengan IDN Netherlands Q4 2026
+- HAKI Sowan rampung via LPPM UKDW
+
+---
+
 > **Note:** This is a prototype/demo platform. All payment processing, authentication, and video calling are simulated using localStorage and mock data. No real backend services are implemented.
 
 ---

@@ -33,6 +33,13 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 
+# secrets — never commit
+db-password.txt
+*-secret*.txt
+
+# test/debug scripts
+/scripts/
+
 # vercel
 .vercel
 
@@ -41,3 +48,12 @@ yarn-error.log*
 next-env.d.ts
 
 .vercel
+
+# local state files
+.agent/
+.antigravitycli/
+archive-2024-to-2025-progress/
+last-progress_26-Mei_07-12.md
+NEXT_CHAT_CONTEXT.md
+SESSION_CHANGELOG_2026-06-21.md
+PROJECT_MASTER.md

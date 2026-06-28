@@ -39,7 +39,7 @@ export default function CustomerDashboard() {
     }, [t.dashboard.today]);
 
     return (
-        <main className="min-h-screen w-full bg-[#FAF9F6] font-sans text-primary pt-[72px]" style={{ fontSize: 'calc(16px * var(--ui-scale))' }}>
+        <main className="min-h-screen w-full bg-background font-sans text-primary pt-[72px]" style={{ fontSize: 'calc(16px * var(--ui-scale))' }}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16" style={{ padding: 'calc(2.5rem * var(--ui-scale)) calc(1.5rem * var(--ui-scale))' }}>
                 {/* ── Greeting Header ── */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
@@ -197,7 +197,7 @@ export default function CustomerDashboard() {
                             {t.dashboard.lastMessage}
                         </h3>
                         <div className="space-y-6">
-                            <div className="flex gap-4 p-4 rounded-3xl bg-[#FAF9F6] border border-black/5">
+                            <div className="flex gap-4 p-4 rounded-3xl bg-background border border-black/5">
                                 <div className="w-14 h-14 rounded-2xl bg-white border border-black/5 flex items-center justify-center text-2xl">👴</div>
                                 <div>
                                     <p className="font-black text-primary">Opa Adriel</p>

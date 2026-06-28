@@ -36,7 +36,7 @@ export default function FeedbackPage() {
     };
 
     return (
-        <main className="min-h-screen bg-[#FAF9F6] relative overflow-hidden">
+        <main className="min-h-screen bg-background relative overflow-hidden">
             {/* Background gradient orbs */}
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute top-0 left-1/4 w-96 h-96 bg-emerald-100 rounded-full blur-[120px] opacity-60" />

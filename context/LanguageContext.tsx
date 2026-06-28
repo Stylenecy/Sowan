@@ -71,6 +71,7 @@ interface Translations {
         slotsAvailable: string;
         sourceUnsplash: string;
         timezone: string;
+        tryDemo?: string;
     };
     explore: {
         title: string;
@@ -193,7 +194,8 @@ home: {
             trustEscrow: "Transaksi Escrow", trustEscrowSub: "100% Aman & Terjamin",
             slotsAvailable: "slot tersedia minggu ini",
             sourceUnsplash: "Sumber: Unsplash",
-            timezone: "WIB"
+            timezone: "WIB",
+            tryDemo: "Coba Demo Interaktif"
         },
         explore: {
             title: "Jelajahi Kebijaksanaan", subtitle: "Temukan Teman Sowan yang paling cocok untuk berbagi cerita dan pengalaman hidup.",
@@ -251,7 +253,8 @@ home: {
             trustEscrow: "Escrow Transaction", trustEscrowSub: "100% Safe & Guaranteed",
             slotsAvailable: "slots available this week",
             sourceUnsplash: "Source: Unsplash",
-            timezone: " WIB"
+            timezone: " WIB",
+            tryDemo: "Try Interactive Demo"
         },
         explore: {
             title: "Explore Wisdom", subtitle: "Find the most suitable Sowan Friend to share life stories and experiences.",
@@ -301,15 +304,16 @@ home: {
             badgeCurated: "教育学的に選ばれたマエストロ",
             statsUsers: "登録ユーザー", statsMaestros: "厳選マエストロ", statsLanguages: "教授言語",
             testimonialsTitle: "を経験した人の声", testimonialsDesc: "その利点を実感しているユーザーからの実際のストーリー",
-            aboutExclusives: "1対1のrictedビデオ通話", aboutExclusivesDesc: "プライベートで集中的に学び、chatおう。",
+            aboutExclusives: "1対1の限定ビデオ通話", aboutExclusivesDesc: "プライベートで集中的に学び、話しましょう。",
             aboutFlexible: "非常に柔軟なスケジュール", aboutFlexibleDesc: "あなたに最適なSowan時間を選んでください。",
             aboutImpact: "実際の社会的影響", aboutImpactDesc: "老人技術を通じて高齢者の孤独を減らす。",
             trustLanguages: "複数の言語", trustLanguagesSub: "&専門知識",
-            trustCurated: " maestロ的教育", trustCuratedSub: "厳格で専門的",
+            trustCurated: "マエストロ精選", trustCuratedSub: "厳格で専門的",
             trustEscrow: "エスクロー取引", trustEscrowSub: "100%安全で保証付き",
             slotsAvailable: "今週利用可能なスロット",
             sourceUnsplash: "ソース: Unsplash",
-            timezone: " JST"
+            timezone: " JST",
+            tryDemo: "インタラクティブデモを試す"
         },
         explore: {
             title: "知恵を探索する", subtitle: "人生の物語や経験を共有するのに最適なソワン・フレンドを見つけてください。",
@@ -358,14 +362,24 @@ home: {
             badgeSecure: "100% 안전한 에스크로 시스템",
             badgeCurated: "교육학적으로 검증된 마에스트로",
             statsUsers: "등록된 사용자", statsMaestros: "검증된 마에스트로", statsLanguages: "교육 언어",
-            testimonialsTitle: "경험자들의 말", testimonialsDesc: "그 利점를 느낀 사용자들의 실제 이야기"
+            testimonialsTitle: "경험자들의 말", testimonialsDesc: "그 장점을 느낀 사용자들의 실제 이야기",
+            aboutExclusives: "1대1 전용 화상 통화", aboutExclusivesDesc: "개인적이고 집중적으로 배우고 대화합니다.",
+            aboutFlexible: "매우 유연한 일정", aboutFlexibleDesc: "귀하에게 가장 적합한 소완 시간을 선택하세요.",
+            aboutImpact: "실질적인 사회적 영향", aboutImpactDesc: "노인 기술을 통해 노인의 외로움을 줄입니다.",
+            trustLanguages: "다양한 언어", trustLanguagesSub: "및 전문 지식",
+            trustCurated: "마에스트로 선별", trustCuratedSub: "엄격하고 전문적",
+            trustEscrow: "에스크로 거래", trustEscrowSub: "100% 안전 보장",
+            slotsAvailable: "이번 주 이용 가능",
+            sourceUnsplash: "출처: Unsplash",
+            timezone: " WIB",
+            tryDemo: "인터랙티브 데모 체험"
         },
         explore: {
             title: "지혜 탐구", subtitle: "인생 이야기와 경험을 나눌 가장 적합한 소완 친구를 찾아보세요.",
             searchPlaceholder: "이름 또는 주제 검색...", filterLocation: "출신 도시", filterLang: "교수 언어", reset: "필터 초기화", bookBtn: "세션 예약하기",
             allCities: "모든 도시", allLangs: "모든 언어",
-            noResultsTitle: "마에스트로가 소완 중!", noResultsDesc: "아마도 벼랑에서 쉬고 있을 겁니다. 다른 필터를试试해 보세요!",
-            slotsAvailable: "이번 주是利用가능", badgeTopRated: "탑레이트", badgeCulturalExpert: "문화전문가", badgeNew: "신규"
+            noResultsTitle: "마에스트로가 소완 중!", noResultsDesc: "아마도 들에서 쉬고 있을 겁니다. 다른 필터를 시도해 보세요!",
+            slotsAvailable: "이번 주 이용 가능", badgeTopRated: "Top Rated", badgeCulturalExpert: "문화 전문가", badgeNew: "신규"
         },
         mentor: {
             exp: "경험", interests: "전문 분야", about: "소개", bookingTitle: "소완 일정", bookingSubtitle: "{name} 님과의 소완", bookingDesc: "가벼운 대화를 나누기에 완벽한 시간을 선택하세요.", confirmBtn: "일정 확정", reviews: "리뷰", selectTime: "시간 선택", quote: "이야기를 공유합시다."
@@ -393,7 +407,7 @@ home: {
     },
     zh: {
         shared: {
-            sowan: "Sowan.id", explore: "探索", schedule: "日程", login: "登录", register: "立即注册", logout: "登出", hello: "你好, ", back: "返回", city: "城市", language: "语言", online: "离线", offline: "离线",
+            sowan: "Sowan.id", explore: "探索", schedule: "日程", login: "登录", register: "立即注册", logout: "登出", hello: "你好, ", back: "返回", city: "城市", language: "语言", online: "在线", offline: "离线",
             welcomeModal: "欢迎回来！", loginDesc: "登录 Sowan.id 开始沟通", nameLabel: "您叫什么名字？", namePlaceholder: "在这里输入您的名字...", viewProfile: "查看详情", demoLabel: "或尝试演示帐户"
         },
 home: {
@@ -414,7 +428,10 @@ home: {
             trustLanguages: "多语言", trustLanguagesSub: "与专业知识",
             trustCurated: "师匠精选", trustCuratedSub: "严格且专业",
             trustEscrow: "托管交易", trustEscrowSub: "100%安全有保障",
-            slotsAvailable: "本周可预约"
+            slotsAvailable: "本周可预约",
+            sourceUnsplash: "来源：Unsplash",
+            timezone: " WIB",
+            tryDemo: "体验互动演示"
         },
         explore: {
             title: "探索智慧", subtitle: "寻找最合适的 Sowan 之友来分享生活故事和经验。",

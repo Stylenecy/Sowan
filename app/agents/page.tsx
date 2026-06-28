@@ -308,7 +308,7 @@ export default function AgentsPage() {
                             <p className="text-xs text-amber-800 font-medium">💡 Alternatif slot ditawarkan — cek slot tersedia dan kirim ulang niat.</p>
                           </div>
                         )}
-                        {b.status === "declined" || b.status === "cancelled" ? (
+                        {b.status === "cancelled" ? (
                           <div className="bg-red-50 border border-red-200 rounded-xl p-3">
                             <p className="text-xs text-red-700 font-medium">✋ Sesi ditutup — pilih slot lain dan coba lagi.</p>
                           </div>
